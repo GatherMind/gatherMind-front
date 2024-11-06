@@ -1,46 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/MemberTab.css";
 
-const MembersTab = ({ members, rank }) => {
-  const renderRankList = () => (
-    <div className="rank-list">
-      <h3>지각 랭킹</h3>
-      {rank.map((member, index) => (
-        <div key={member.memberId} className="rank-item">
-          <div>{index + 1} 위 </div>
-          <div>{member.nickname}</div>
-          <div>지각 횟수 : {member.lateCount} 회</div>
-          <div>총 지각 시간 : {member.lateTime} 분</div>
+const MembersTab = ({ members, boards }) => {
+  // 상태값으로 목록이 열렸는지 닫혔는지를 관리
+  const [isOpen, setIsOpen] = useState(false);
+
+  // 화살표 버튼을 클릭할 때 상태 변경
+  const toggleList = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const renderMemberList = () => (
+    <div className="member-list">
+      <div
+        className="member-list-header"
+        onClick={toggleList}
+        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+      >
+        <h3>멤버 목록</h3>
+        <span
+          style={{
+            marginLeft: "auto",
+            transform: isOpen ? "rotate(180deg)" : "rotate(0)",
+            transition: "transform 0.3s",
+          }}
+        >
+          ▼
+        </span>
+      </div>
+      {isOpen && (
+        <ul>
+          {members.map((member) => (
+            <li key={member.memberId} className="member-item">
+              {member.nickname} ({member.status})
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+
+  const renderBoardList = () => (
+    <div className="board-list">
+      <h3>게시판 목록</h3>
+      {boards.map((board, index) => (
+        <div key={board.questionId} className="board-item">
+          <div>{index + 1} </div>
+          <div>
+            [{board.option}] {board.title}
+          </div>
+          <div>{board.createdAt}</div>
         </div>
       ))}
     </div>
   );
 
-  const renderMemberList = () => (
-    <div className="member-list">
-      <h3>멤버 목록</h3>
-      <ul>
-        {members.map((member) => (
-          <li key={member.memberId} className="member-item">
-            {member.nickname}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
   return (
     <div className="members">
       {members && members.length > 0 ? (
         <div>
-          {/* 지각 랭킹 */}
-          {rank && rank.length > 0 ? (
-            renderRankList()
-          ) : (
-            <div className="no-rank"> 지각하는 멤버가 없습니다!</div>
-          )}
-
           {/* 멤버 리스트 */}
           {renderMemberList()}
+
+          {/* 지각 랭킹 */}
+          {boards && boards.length > 0 ? (
+            renderBoardList()
+          ) : (
+            <div className="no-board"> 지각하는 멤버가 없습니다!</div>
+          )}
         </div>
       ) : (
         <div>현재 그룹에 멤버가 없습니다. 멤버를 초대해 보세요!</div>

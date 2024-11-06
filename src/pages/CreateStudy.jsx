@@ -4,21 +4,21 @@ import MeetingForm from "../components/MeetingForm";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/CreateMeeting.css";
 import { useUser } from "../context/UserContext";
-import { createMeeting } from "../services/apiService";
+import { createStudy } from "../services/apiService";
 
-const CreateMeeting = () => {
+const CreateStudy = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { setUserId } = useUser();
 
-  const handleGroupCreate = async (meetingData) => {
+  const handleGroupCreate = async (studyData) => {
     try {
-      const response = await createMeeting(meetingData);
+      const response = await createStudy(studyData);
 
       // 201 created
       setUserId(id);
       alert("성공적으로 그룹이 생성됐습니다.");
-      navigate(`/meeting-info/${response.meetingId}`);
+      navigate(`/study-info/${response.studyId}`);
     } catch (error) {
       if (error.response) {
         // 서버에서 반환한 에러 응답이 있는 경우
@@ -38,7 +38,7 @@ const CreateMeeting = () => {
   return (
     <div className="container">
       <h1>새로운 그룹 생성</h1>
-      <div className="meeting-form">
+      <div className="study-form">
         <MeetingForm
           onSubmit={handleGroupCreate}
           meetingCreatedId={id}
@@ -48,4 +48,4 @@ const CreateMeeting = () => {
   );
 };
 
-export default CreateMeeting;
+export default CreateStudy;

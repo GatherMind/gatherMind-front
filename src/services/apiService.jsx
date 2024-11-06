@@ -7,9 +7,9 @@ if (!API_URL) {
 }
 
 // 그룹 생성
-export const createMeeting = async (meetingData) => {
+export const createStudy = async (studyData) => {
   try {
-    const response = await axios.post(`${API_URL}/meeting`, meetingData);
+    const response = await axios.post(`${API_URL}/study`, studyData);
 
     return response.data;
   } catch (error) {
@@ -19,10 +19,10 @@ export const createMeeting = async (meetingData) => {
 };
 
 // 그룹생성, 그룹 멤버, 그룹 랭킹 조회
-export const getMeetingWithMember = async (id) => {
+export const getStudyWithMember = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/meeting/${id}`);
-
+    const response = await axios.get(`${API_URL}/study/${id}`);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Meeting data fetch error : ", error);
@@ -30,13 +30,13 @@ export const getMeetingWithMember = async (id) => {
   }
 };
 
-// 그룹 멤버, 랭킹 조회
-export const getMeetingMembers = async (id, pageNumber) => {
+// 그룹 멤버, 게시판 조회
+export const getStudyMembers = async (id, pageNumber) => {
   try {
-    const response = await axios.get(`${API_URL}/meeting/${id}/member`, {
-      params: { page: pageNumber, size: 10 },
-    });
-
+    // const response = await axios.get(`${API_URL}/meeting/${id}/member`, {
+    //   params: { page: pageNumber, size: 10 },
+    // });
+    const response = await axios.get(`${API_URL}/study/${id}/member`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting members: ", error);
