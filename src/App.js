@@ -9,6 +9,7 @@ import CreateMeeting from "./pages/CreateMeeting";
 import MeetingInfo from "./pages/MeetingInfo";
 import { UserProvider } from "./context/UserContext";
 import Header from "./components/Header";
+import CreateSchedule from "./pages/CreateSchedule";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                   path="/meeting-info/:id"
                   element={<MeetingInfo />}
                 ></Route>
+                <Route path="/create-schedule" element={<CreateSchedule />}/>
               </Routes>
             </main>
           </div>
