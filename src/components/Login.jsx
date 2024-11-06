@@ -1,0 +1,106 @@
+import React, { useState } from "react";
+import axios from "axios";
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+
+const Login = () => {
+  const navigate = useNavigate();
+
+  const [memberId, setMemberId] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState(null);
+
+  // 유효성 검사 함수
+  const validate = () => {
+    const newErrors = {};
+
+    // memberId 유효성 검사
+    if (!memberId) {
+      newErrors.memberId = "아이디는 필수 입력 항목입니다.";
+    } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
+      newErrors.memberId =
+        "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
+    }
+
+    // password 유효성 검사
+    if (!password) {
+      newErrors.password = "비밀번호는 필수 입력 항목입니다.";
+    } else if (password.length < 8 || password.length > 255) {
+      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
+    } else if (/\s/.test(password)) {
+      newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // memberId를 소문자로 변환하는 함수
+  const handleMemberIdChange = (e) => {
+    const lowercaseValue = e.target.value.toLowerCase();
+    setMemberId(lowercaseValue);
+  };
+
+  // 로그인 요청 함수
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validate()) return;
+
+    try {
+      const response = await axios.post("/api/members/login", {
+        memberId,
+        password,
+      });
+      localStorage.setItem("token", response.data.token); // 토큰 저장
+      window.location.href = "/dashboard"; // 로그인 후 리다이렉트할 페이지
+    } catch (error) {
+      setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <header>
+        <Header />
+      </header>
+      <main>
+        <h2>로그인</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>아이디</label>
+            <input
+              type="text"
+              value={memberId}
+              onChange={handleMemberIdChange}
+              autoComplete="off"
+            />
+            {errors.memberId && (
+              <p className="error-message">{errors.memberId}</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label>비밀번호</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+            />
+            {errors.password && (
+              <p className="error-message">{errors.password}</p>
+            )}
+          </div>
+          {loginError && <p className="error-message">{loginError}</p>}
+          <button type="submit">로그인</button>
+        </form>
+      </main>
+      <footer>
+        <p>GATHER MIND가 처음이신가요?</p>
+        <p><button onClick={() => navigate("/signup")}>여기</button>를 눌러 다양한 스터디를 둘러보세요!</p>
+      </footer>
+    </div>
+  );
+};
+
+export default Login;
