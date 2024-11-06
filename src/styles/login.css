@@ -1,0 +1,85 @@
+.loginWrap {
+  max-width: 480px;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: rgb(2, 136, 180);
+  font-size: 5em;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginId,
+.loginPw {
+  margin-bottom: 15px;
+}
+
+h2 {
+  text-align: left;
+  margin-left: 4vh;
+}
+
+.loginForm label {
+  font-weight: bold;
+  margin-top: 5vh;
+}
+
+.loginForm input {
+  padding: 10px;
+  border: 1px solid rgb(2, 136, 180);
+  border-radius: 4px;
+  font-size: 16px;
+  width: 80%;
+}
+
+.loginForm input:focus {
+  border-color: rgb(2, 136, 180);
+  outline: 2px solid rgb(2, 136, 180);
+}
+
+.loginBtn {
+  padding: 10px;
+  background-color: rgb(2, 136, 180);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10vh;
+}
+
+.loginBtn:hover {
+  background-color: rgba(2, 136, 180, 0.8);
+}
+
+#toSignup {
+  border-style: none;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-weight: bold;
+  color: rgb(2, 136, 180);
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.toSignup p {
+  margin: 5px 0;
+}
