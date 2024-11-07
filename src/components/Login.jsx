@@ -53,7 +53,7 @@ const Login = () => {
         password,
       });
       localStorage.setItem("token", response.data.token); // 토큰 저장
-      window.location.href = "/dashboard"; // 로그인 후 리다이렉트할 페이지
+      navigate("/mypage"); // 로그인 후 마이페이지로 이동
     } catch (error) {
       setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
     }
