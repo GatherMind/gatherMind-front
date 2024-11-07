@@ -1,3 +1,11 @@
+# 작업내용 241107
+
+> 오늘 작업 내용
+>   > Login ~ Delete 기능 구현 (프론트엔드 작업 및 백엔드 작업, 스타일 및 배포 X)
+
+> 오류 설정
+>   > 동일한 폼 내에 다른 기능을 하는 여러 button의 혼선(conflict)을 막기 위해 각 버튼이 수행할 메서드 인수를 받아 .preventDefault(); 코드를 삽입함.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

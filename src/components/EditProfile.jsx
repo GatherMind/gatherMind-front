@@ -71,7 +71,8 @@ const EditProfile = () => {
     return isValid;
   };
 
-  const checkNicknameUniqueness = async () => {
+  const checkNicknameUniqueness = async (event) => {
+    event.preventDefault();
     if (!newNickname) {
       setNicknameErrors("닉네임을 입력해주세요.");
       return;
@@ -96,38 +97,69 @@ const EditProfile = () => {
     if (!validate()) return;
 
     const originalNickname = memberInfo.nickname;
-    let successMessage = "";
+    let successMessage;
 
     if (!newNickname && !newPassword) {
       alert("수정된 내용이 없습니다.");
       return navigate("/mypage");
     }
-  
+
     try {
       // 닉네임 변경 요청
       if (newNickname && newNickname !== originalNickname && isNicknameUnique) {
         await axios.put(
           "/api/members/update",
           { nickname: newNickname },
-          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
-        successMessage += `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
+        successMessage = `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
       }
-  
+
       // 비밀번호 변경 요청
       if (newPassword) {
         await axios.put(
           "/api/members/update",
           { password: newPassword },
-          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
-        successMessage += `${newNickname || originalNickname}님의 비밀번호가 안전하게 변경되었습니다.\n`;
+        successMessage = `${
+          newNickname || originalNickname
+        }님의 비밀번호가 안전하게 변경되었습니다.\n`;
       }
-  
+
       alert(successMessage.trim());
       navigate("/mypage");
     } catch (error) {
       setFormError("정보 변경에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  // 회원 탈퇴 요청
+  const handleDeleteAccount = async (event) => {
+    event.preventDefault();
+    const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
+    if (confirmDelete) {
+      try {
+        const token = localStorage.getItem("token");
+        await axios.delete("/api/members/delete-account", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        alert("회원 탈퇴가 완료되었습니다.");
+        localStorage.removeItem("token"); // 로그아웃 처리
+        navigate("/goodbye");
+      } catch (error) {
+        alert("회원 탈퇴에 실패했습니다.");
+      }
+    } else {
+      navigate("/serious");
     }
   };
 
@@ -204,7 +236,9 @@ const EditProfile = () => {
 
           {formError && <p className="error-message">{formError}</p>}
           <button type="submit">수정하기</button>
+          <button type="button" onClick={handleDeleteAccount}>회원 탈퇴</button>
         </form>
+        
       </main>
     </div>
   );

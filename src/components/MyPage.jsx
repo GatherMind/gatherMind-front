@@ -39,31 +39,14 @@ const Mypage = () => {
     navigate("/editprofile"); // 정보 수정 페이지로 이동
   };
 
-  const handleDeleteAccount = async () => {
-    const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-    if (confirmDelete) {
-      try {
-        const token = localStorage.getItem("token");
-        await axios.delete("/api/members/delete-account", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("회원 탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token"); // 로그아웃 처리
-        navigate("/goodbye");
-      } catch (error) {
-        alert("회원 탈퇴에 실패했습니다.");
-      }
-    }
-  };
-
   return (
     <div className="mypage-container">
       <header>
         <Header />
-        <ol>
+        <ul>
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
           <li onClick={() => navigate("/mypage/act")}>활동 보기</li>
-        </ol>
+        </ul>
       </header>
       <h2>마이 페이지</h2>
 
@@ -80,7 +63,6 @@ const Mypage = () => {
         </p>
       </div>
       <button onClick={handleEditInfo}>정보 수정</button>
-      <button onClick={handleDeleteAccount}>회원 탈퇴</button>
     </div>
   );
 };

@@ -57,10 +57,10 @@ const MypageAct = () => {
     <div className="mypage-container">
       <header>
         <Header />
-        <ol>
+        <ul>
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
           <li onClick={() => navigate("/mypage/act")}>활동 보기</li>
-        </ol>
+        </ul>
       </header>
       <h2>활동 정보</h2>
 

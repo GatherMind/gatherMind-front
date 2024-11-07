@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       <h1 onClick={() => navigate("/")}>GATHER MIND</h1>
-      <button>로그아웃</button>
+      <button type="button">로그아웃</button>
     </header>
     
   );

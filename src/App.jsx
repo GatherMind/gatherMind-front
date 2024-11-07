@@ -8,6 +8,7 @@ import MypageAct from "./components/MypageAct";
 import Goodbye from "./components/Goodbye";
 import EditProfile from "./components/EditProfile";
 import PrivateRoute from "./PrivateRoute";
+import Serious from "./components/Serous";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/mypage/act" element={<MypageAct />} />
           <Route path="/goodbye" element={<Goodbye />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/serious" element={<Serious />} />
         </Routes>
       </Router>
     </>
