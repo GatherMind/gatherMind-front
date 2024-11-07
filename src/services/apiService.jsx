@@ -6,9 +6,10 @@ if (!API_URL) {
   throw new Error("API URI: is not defined.");
 }
 
-// 그룹 생성
+// 스터디 생성
 export const createStudy = async (studyData) => {
   try {
+    console.log(studyData);
     const response = await axios.post(`${API_URL}/study`, studyData);
 
     return response.data;
@@ -18,11 +19,23 @@ export const createStudy = async (studyData) => {
   }
 };
 
-// 그룹생성, 그룹 멤버, 그룹 랭킹 조회
+// 스터디 수정
+export const updateStudy = async (studyId, studyData) => {
+  try {
+    const response = await axios.put(`${API_URL}/study/${studyId}`, studyData);
+
+    return response.data;
+  } catch (error) {
+    console.log("그룹 생성 에러 : ", error);
+    throw error;
+  }
+};
+
+// 스터디 정보, 멤버 조회
 export const getStudyWithMember = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/study/${id}`);
-    console.log(response);
+    const response = await axios.get(`${API_URL}/study/${id}/members`);
+
     return response.data;
   } catch (error) {
     console.error("Meeting data fetch error : ", error);
@@ -30,13 +43,10 @@ export const getStudyWithMember = async (id) => {
   }
 };
 
-// 그룹 멤버, 게시판 조회
+// 스터디 멤버, 게시판 조회
 export const getStudyMembers = async (id, pageNumber) => {
   try {
-    // const response = await axios.get(`${API_URL}/meeting/${id}/member`, {
-    //   params: { page: pageNumber, size: 10 },
-    // });
-    const response = await axios.get(`${API_URL}/study/${id}/member`);
+    const response = await axios.get(`${API_URL}/study/${id}/members/boards`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting members: ", error);
@@ -44,15 +54,10 @@ export const getStudyMembers = async (id, pageNumber) => {
   }
 };
 
-// 그룹 약속 조회
-export const getMeetingAppointment = async (id, userId, pageNumber) => {
+// 스터디 약속 조회
+export const getStudySchedule = async (studyId) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/meeting/${id}/appointment/${userId}`,
-      {
-        params: { page: pageNumber, size: 5 },
-      }
-    );
+    const response = await axios.get(`${API_URL}/study/${studyId}/schedules`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting appointments: ", error);
@@ -79,49 +84,26 @@ export const getMember = async (id) => {
   }
 };
 
-// 그룹에 멤버 초대(멤버쉽 생성)
-export const createMembership = async (membershipData) => {
+// 스터디 아이디로 스터디 조회
+export const getStudyById = async (studyId) => {
   try {
-    const response = await axios.post(
-      `${API_URL}/membership/member`,
-      membershipData
-    );
-
+    const response = await axios.get(`${API_URL}/study/${studyId}`);
     return response.data;
   } catch (error) {
-    console.error("Failed to create membership: ", error);
-    throw new Error("Failed to create membership.");
+    console.error("Failed to fetch study info: ", error);
+    throw new Error("Failed to fetch study info.");
   }
 };
 
-// 참석 버튼
-export const attendAppointment = async (data) => {
+// 현재 아이디 정보 조회
+export const getMyInfoById = async (memberId, studyId) => {
   try {
-    const response = await axios.post(
-      `${API_URL}/membership/appointment`,
-      data
+    const response = await axios.get(
+      `${API_URL}/member/role?memberId=${memberId}&studyId=${studyId}`
     );
     return response.data;
   } catch (error) {
-    console.error("Failed to attend appointment: ", error);
-    throw new Error("Failed to attend appointment.");
-  }
-};
-
-// 아이디, 닉네임 중복 체크
-export const checkDuplicate = async (field, value) => {
-  try {
-    const endpoint =
-      field === "signupId" ? "/api/check-id" : "/api/check-nickname";
-    const response = await axios.get(`${endpoint}?${field}=${value}`, {
-      params: { [field]: value },
-    });
-
-    return response.data.isDuplicate
-      ? `이미 사용 중인 ${field === "signupId" ? "아이디" : "닉네임"}입니다.`
-      : `사용 가능한 ${field === "signupId" ? "아이디" : "닉네임"}입니다.`;
-  } catch (error) {
-    console.error("Duplicate check error: ", error);
-    throw new Error("Failed to check duplicate.");
+    console.error("Failed to fetch my Info: ", error);
+    throw new Error("Failed to fetch my Info.");
   }
 };

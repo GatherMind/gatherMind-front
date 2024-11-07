@@ -12,21 +12,9 @@ const MembersTab = ({ members, boards }) => {
 
   const renderMemberList = () => (
     <div className="member-list">
-      <div
-        className="member-list-header"
-        onClick={toggleList}
-        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
-      >
+      <div className="member-list-header" onClick={toggleList}>
         <h3>멤버 목록</h3>
-        <span
-          style={{
-            marginLeft: "auto",
-            transform: isOpen ? "rotate(180deg)" : "rotate(0)",
-            transition: "transform 0.3s",
-          }}
-        >
-          ▼
-        </span>
+        <span className={`arrow ${isOpen ? "open" : ""}`}>▼</span>
       </div>
       {isOpen && (
         <ul>
@@ -45,7 +33,7 @@ const MembersTab = ({ members, boards }) => {
       <h3>게시판 목록</h3>
       {boards.map((board, index) => (
         <div key={board.questionId} className="board-item">
-          <div>{index + 1} </div>
+          <div>{boards.length - index} </div>
           <div>
             [{board.option}] {board.title}
           </div>
@@ -58,19 +46,19 @@ const MembersTab = ({ members, boards }) => {
   return (
     <div className="members">
       {members && members.length > 0 ? (
-        <div>
+        <>
           {/* 멤버 리스트 */}
           {renderMemberList()}
 
-          {/* 지각 랭킹 */}
+          {/* 게시판 목록 */}
           {boards && boards.length > 0 ? (
             renderBoardList()
           ) : (
-            <div className="no-board"> 지각하는 멤버가 없습니다!</div>
+            <div className="no-board"> 존재하는 게시판이 없습니다!</div>
           )}
-        </div>
+        </>
       ) : (
-        <div>현재 그룹에 멤버가 없습니다. 멤버를 초대해 보세요!</div>
+        <div>현재 그룹에 멤버가 없습니다!</div>
       )}
     </div>
   );

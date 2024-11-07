@@ -1,26 +1,26 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import CreateStudy from "./pages/CreateStudy";
 
 import { UserProvider } from "./context/UserContext";
 import StudyInfo from "./pages/StudyInfo";
+import StudyFormPage from "./pages/StudyFormPage";
 
 function App() {
   return (
     <>
       <UserProvider>
         <Router>
-          <div className="app-container">
-            <main className="content">
-              <Routes>
-                <Route
-                  path="/create-study/:id"
-                  element={<CreateStudy />}
-                ></Route>
-                <Route path="/study-info/:id" element={<StudyInfo />}></Route>
-              </Routes>
-            </main>
-          </div>
+          <Routes>
+            <Route
+              path="/create-study/:memberId"
+              element={<StudyFormPage mode="create" />}
+            />
+            <Route
+              path="/edit-study/:studyId"
+              element={<StudyFormPage mode="edit" />}
+            />
+            <Route path="/study-info/:studyId" element={<StudyInfo />} />
+          </Routes>
         </Router>
       </UserProvider>
     </>

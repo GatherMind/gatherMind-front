@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Popup.css";
-import { createMembership, getMember } from "../services/apiService";
+import { getMember } from "../services/apiService";
 
 const Popup = ({ isOpen, onClose, meetingId, onMemberAdded }) => {
   const [searchResult, setSearchResult] = useState(""); // 검색 결과 메시지
@@ -53,23 +53,23 @@ const Popup = ({ isOpen, onClose, meetingId, onMemberAdded }) => {
     }
   };
 
-  // 그룹에 멤버 추가
-  const handleConfirm = async () => {
-    setIsLoading(true);
-    try {
-      const response = await createMembership(formData);
-      onMemberAdded(response);
-      alert("추가가 완료되었습니다.");
-      setIsConfirmationModalOpen(false);
-      setSearchResult("");
-      onClose();
-    } catch (error) {
-      console.error("멤버 추가 실패 : ", error.message);
-    } finally {
-      setIsLoading(false);
-      setIsConfirmationModalOpen(false);
-    }
-  };
+  // // 그룹에 멤버 추가
+  // const handleConfirm = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await createMembership(formData);
+  //     onMemberAdded(response);
+  //     alert("추가가 완료되었습니다.");
+  //     setIsConfirmationModalOpen(false);
+  //     setSearchResult("");
+  //     onClose();
+  //   } catch (error) {
+  //     console.error("멤버 추가 실패 : ", error.message);
+  //   } finally {
+  //     setIsLoading(false);
+  //     setIsConfirmationModalOpen(false);
+  //   }
+  // };
 
   const handleCancel = () => {
     setSearchResult("");
@@ -114,7 +114,7 @@ const Popup = ({ isOpen, onClose, meetingId, onMemberAdded }) => {
         {isConfirmationModalOpen && (
           <div className="confirmation-modal">
             <p>{searchResult}</p>
-            <button onClick={handleConfirm} disabled={isLoading}>
+            <button onClick={alert()} disabled={isLoading}>
               {isLoading ? "추가 중..." : "확인"}
             </button>
             <button onClick={handleCancel}>취소</button>

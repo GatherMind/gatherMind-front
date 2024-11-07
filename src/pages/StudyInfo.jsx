@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MeetingInfo.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getStudyWithMember, getStudyMembers } from "../services/apiService";
+import {
+  getStudyWithMember,
+  getStudyMembers,
+  getMyInfoById,
+} from "../services/apiService";
 import MembersTab from "../components/MembersTab";
-import AppointmentTab from "../components/AppointmentTab";
 import Popup from "../components/Popup";
 import { useUser } from "../context/UserContext";
+import ScheduleTab from "../components/ScheduleTab";
+import { FaCog } from "react-icons/fa";
 
 const StudyInfo = () => {
   // 임시
+  const userId = "member1";
   const { setUserId } = useUser();
-  setUserId("member1");
 
   const [activeTab, setActiveTab] = useState("members");
-  const { id } = useParams();
+  const { studyId } = useParams();
   const navigate = useNavigate();
 
   const [study, setStudy] = useState(null);
@@ -28,31 +33,40 @@ const StudyInfo = () => {
   const openPopup = () => setIsPopupOpen(true);
   const closePopup = () => setIsPopupOpen(false);
 
+  // 톱니바퀴 버튼
+  const [showMenu, setShowMenu] = useState(false);
+
+  const [role, setRole] = useState("Member");
+
   // 그룹 정보/멤버 가져오기
   useEffect(() => {
+    setUserId(userId);
     const fetchMeetingInfo = async () => {
       try {
-        const meetingData = await getStudyWithMember(id);
+        const [memberInfo, meetingData] = await Promise.all([
+          getMyInfoById(userId, studyId),
+          getStudyWithMember(studyId),
+        ]);
+
+        setRole(memberInfo.role);
         setStudy(meetingData);
         setMembers(meetingData.members);
         setBoards(meetingData.questions);
-      } catch (err) {
-        console.error("그룹 정보 불러오기 실패", err);
-        setError("그룹 정보를 찾을 수 없습니다.");
-        alert("error");
-        // navigate("/");
+      } catch (error) {
+        console.error("데이터 불러오기 실패", error);
+        setError("정보를 찾을 수 없습니다.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchMeetingInfo();
-  }, [id, navigate]);
+  }, [studyId, userId]);
 
   // 그룹 멤버 가져오기
   const handleFetchMembers = async () => {
     try {
-      const membersData = await getStudyMembers(id);
+      const membersData = await getStudyMembers(studyId);
       setMembers(membersData.members);
       setBoards(membersData.questions);
     } catch (err) {
@@ -74,7 +88,7 @@ const StudyInfo = () => {
       openPopup();
     } else {
       // 약속 생성 페이지로 이동
-      // navigate();
+      navigate(`/schedule-create/${studyId}`);
     }
   };
 
@@ -82,14 +96,36 @@ const StudyInfo = () => {
     setMembers((prev) => [...prev, response]);
   };
 
+  const toggleMenu = () => setShowMenu((prevShowMenu) => !prevShowMenu);
+
   if (loading) return <div>Loading...</div>;
 
+  //   if (loading) return <Loading />;
+  // if (error) return <Error message={error} />;
+
   return (
-    <div className="meeting-info">
+    <div className="study-info">
       {/* 그룹 정보 */}
-      <div className="meeting-intro">
+      <div className="study-intro">
         <h2>{study.title}</h2>
         <p>{study.description} </p>
+        <div className="settings-icon" onClick={toggleMenu}>
+          {role === "Leader" && (
+            <>
+              <FaCog />
+              {showMenu && (
+                <div className="menu">
+                  <button
+                    onClick={() => navigate(`/edit-study/${study.studyId}`)}
+                  >
+                    수정
+                  </button>
+                  <button onClick={() => console.log("삭제")}>삭제</button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
 
       {error && <div className="error">{error}</div>}
@@ -106,11 +142,9 @@ const StudyInfo = () => {
           멤버
         </button>
         <button
-          className={`tab-button ${
-            activeTab === "appointments" ? "active" : ""
-          }`}
+          className={`tab-button ${activeTab === "schedules" ? "active" : ""}`}
           onClick={() => {
-            handleTabClick("appointments");
+            handleTabClick("schedules");
           }}
         >
           약속
@@ -122,11 +156,11 @@ const StudyInfo = () => {
         {/* 멤버탭 콘텐츠 */}
 
         {activeTab === "members" && (
-          <MembersTab members={members} meetingId={id} boards={boards} />
+          <MembersTab members={members} meetingId={studyId} boards={boards} />
         )}
 
-        {/* 약속탭 콘텐츠 */}
-        {activeTab === "appointments" && <AppointmentTab meetingId={id} />}
+        {/* 일정탭 콘텐츠 */}
+        {activeTab === "schedules" && <ScheduleTab studyId={studyId} />}
       </div>
 
       {/* 하단 고정 버튼 */}
@@ -140,7 +174,7 @@ const StudyInfo = () => {
       <Popup
         isOpen={isPopupOpen}
         onClose={closePopup}
-        meetingId={id}
+        studyId={studyId}
         onMemberAdded={handleAddMember}
       />
     </div>
