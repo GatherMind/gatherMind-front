@@ -10,6 +10,8 @@ import MeetingInfo from "./pages/MeetingInfo";
 import { UserProvider } from "./context/UserContext";
 import Header from "./components/Header";
 import CreateSchedule from "./pages/CreateSchedule";
+import QuestionDetail from "./pages/QuestionDetail";
+import QuestionFormPage from "./pages/QuestionFormPage";
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
                   element={<MeetingInfo />}
                 ></Route>
                 <Route path="/create-schedule" element={<CreateSchedule />}/>
+                <Route path="/create-question" element={<QuestionFormPage isModify={false} />}/>
+                <Route path="/edit-question/:id" element={<QuestionFormPage isModify={true} />}/>
+                <Route path="/question-detail/:id" element={<QuestionDetail />}/>
               </Routes>
             </main>
           </div>

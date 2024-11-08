@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DaumPostcode from "react-daum-postcode";
@@ -11,6 +11,7 @@ import "../styles/CreateSchedule.css"
 const CreateSchedule = () => {
 
     const navigate = useNavigate();
+    const {studyId} = useLocation(); // StudyInfo 페이지에서 StudyId 값 받아오기
     
     const [title, setTitle] = useState("");
     const [dateTime, setDateTime] = useState(new Date());
@@ -48,20 +49,22 @@ const CreateSchedule = () => {
         e.preventDefault();
 
         console.log("일정 생성");
-        console.log("title : ", title, ", time : ", dateTime, ", location : ", location);
+        console.log("study_id : ", studyId, "title : ", title, ", time : ", dateTime, ", location : ", location);
     
         try {
-            const response = await axios.post('', {
+            const response = await axios.post('http://localhost:8080/api/schedule', {
+                studyId : 1, // test용
                 title,
                 dateTime : new Date(new Date(dateTime).getTime() + 540*60*1000),
-                location
+                location,
+                description
             });
             console.log("일정 생성 완료 ", response);
         } catch (error) {
             console.log("일정 생성 실패");
         }
 
-        navigate('/'); // 그룹 페이지로 이동하도록 수정
+        navigate('./'); // 그룹 페이지로 이동하도록 수정
     };
 
 

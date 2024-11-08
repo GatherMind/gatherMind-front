@@ -1,0 +1,96 @@
+.option {
+    font-size: 0.9rem;
+    color: #888;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.nickname {
+    font-weight: bold;
+}
+
+.createdAt {
+    font-style: italic;
+}
+
+.content {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.edit-button,
+.delete-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: lightgray;
+    color: #fff;
+}
+
+.delete-button {
+    background-color: lightgray;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: darkgray;
+}
+
+.delete-button:hover {
+    background-color: darkgray;
+}
+
+.answer-count {
+    font-size: 1rem;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.answer-input-section {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.answer-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.answer-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.answer-button:hover {
+    background-color: #0056b3;
+}
