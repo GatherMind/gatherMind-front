@@ -5,23 +5,40 @@ import Header from "./Header";
 
 const MypageAct = () => {
   const [joinedGroups, setJoinedGroups] = useState([]);
-  const [recentPosts, setRecentPosts] = useState([]);
+  const [recentQuestions, setRecentQuestions] = useState([]);
   const [recentAnswers, setRecentAnswers] = useState([]);
+  const [memberInfo, setMemberInfo] = useState({
+    nickname: "Undefined",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchActivityData = async () => {
       try {
-        const groupResponse = await axios.get("/api/members/joined-groups");
-        const postsResponse = await axios.get("/api/members/recent-posts");
-        const answersResponse = await axios.get("/api/members/recent-answers");
+        const token = localStorage.getItem("token");
+
+        const groupResponse = await axios.get("/api/members/joined-groups", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const questionsResponse = await axios.get(
+          "/api/members/recent-questions",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const answersResponse = await axios.get("/api/members/recent-answers", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const response = await axios.get("/api/members/me", {
+          headers: { Authorization: `Bearer ${token}` }, // 헤더에 토큰 추가
+        });
+        setMemberInfo(response.data || {});
 
         setJoinedGroups(groupResponse.data);
-        setRecentPosts(postsResponse.data.slice(0, 3));
+        setRecentQuestions(questionsResponse.data.slice(0, 3));
         setRecentAnswers(answersResponse.data.slice(0, 3));
-      } catch (error) {
-        console.error("활동 정보를 가져오는 중 오류가 발생했습니다.", error);
-      }
+      } catch (error) {}
     };
 
     fetchActivityData();
@@ -29,7 +46,14 @@ const MypageAct = () => {
 
   const handleWithdrawFromStudy = async (studyId) => {
     try {
-      await axios.post(`/api/studies/${studyId}/withdraw`);
+      const token = localStorage.getItem("token");
+      await axios.post(
+        `/api/studies/${studyId}/withdraw`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setJoinedGroups(joinedGroups.filter((group) => group.id !== studyId));
       alert("스터디 탈퇴가 완료되었습니다.");
     } catch (error) {
@@ -37,15 +61,20 @@ const MypageAct = () => {
     }
   };
 
-  const handleEditPost = (postId) => {
-    navigate(`/edit-post/${postId}`);
+  const handleEditQuestion = (questionId) => {
+    navigate(`/edit-question/${questionId}`);
   };
 
-  const handleDeletePost = async (postId) => {
+  const handleDeleteQuestion = async (questionId) => {
     if (window.confirm("정말로 게시글을 삭제하시겠습니까?")) {
       try {
-        await axios.delete(`/api/posts/${postId}`);
-        setRecentPosts(recentPosts.filter((post) => post.id !== postId));
+        const token = localStorage.getItem("token");
+        await axios.delete(`/api/questions/${questionId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setRecentQuestions(
+          recentQuestions.filter((question) => question.id !== questionId)
+        );
         alert("게시글이 삭제되었습니다.");
       } catch (error) {
         alert("게시글 삭제에 실패했습니다.");
@@ -62,14 +91,14 @@ const MypageAct = () => {
           <li onClick={() => navigate("/mypage/act")}>활동 보기</li>
         </ul>
       </header>
-      <h2>활동 정보</h2>
+      <h2>{memberInfo.nickname || "Undefined"}님의 활동 정보</h2>
 
       <h3>스터디</h3>
       {joinedGroups.length > 0 ? (
         joinedGroups.map((group) => (
           <div key={group.id}>
             <p>
-              {group.name}{" "}
+              {group.title}{" "}
               <button onClick={() => handleWithdrawFromStudy(group.id)}>
                 탈퇴
               </button>
@@ -80,21 +109,26 @@ const MypageAct = () => {
         <p>스터디에 가입하세요!</p>
       )}
 
-      <h3>작성한 게시글 현황</h3>
+      <h3>작성한 질문 현황</h3>
       {joinedGroups.length === 0 ? (
         <p>스터디에 가입하세요!</p>
-      ) : recentPosts.length > 0 ? (
-        recentPosts.map((post) => (
-          <div key={post.id}>
+      ) : recentQuestions.length > 0 ? (
+        recentQuestions.map((question) => (
+          <div key={question.id}>
             <p>
-              {post.studyName} - {post.title}{" "}
-              <button onClick={() => handleEditPost(post.id)}>수정</button>{" "}
-              <button onClick={() => handleDeletePost(post.id)}>삭제</button>
+              {question.studyTitle} - {question.title}
             </p>
+            <p>{question.content}</p> {/* Question content 표시 */}
+            <button onClick={() => handleEditQuestion(question.id)}>
+              수정
+            </button>{" "}
+            <button onClick={() => handleDeleteQuestion(question.id)}>
+              삭제
+            </button>
           </div>
         ))
       ) : (
-        <p>스터디에 글을 남겨 정보를 공유하세요</p>
+        <p>스터디에 질문을 남겨 정보를 공유하세요</p>
       )}
 
       <h3>작성한 답변 현황</h3>
@@ -104,14 +138,15 @@ const MypageAct = () => {
         recentAnswers.map((answer) => (
           <div key={answer.id}>
             <p>
-              {answer.studyName} - {answer.postTitle}{" "}
-              <button onClick={() => handleEditPost(answer.postId)}>
-                수정
-              </button>{" "}
-              <button onClick={() => handleDeletePost(answer.postId)}>
-                삭제
-              </button>
+              {answer.studyTitle} - {answer.questionTitle}
             </p>
+            <p>{answer.content}</p> {/* Answer content 표시 */}
+            <button onClick={() => handleEditQuestion(answer.questionId)}>
+              수정
+            </button>{" "}
+            <button onClick={() => handleDeleteQuestion(answer.questionId)}>
+              삭제
+            </button>
           </div>
         ))
       ) : (
@@ -119,6 +154,6 @@ const MypageAct = () => {
       )}
     </div>
   );
-}
+};
 
 export default MypageAct;

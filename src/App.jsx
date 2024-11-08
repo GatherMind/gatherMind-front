@@ -8,7 +8,7 @@ import MypageAct from "./components/MypageAct";
 import Goodbye from "./components/Goodbye";
 import EditProfile from "./components/EditProfile";
 import PrivateRoute from "./PrivateRoute";
-import Serious from "./components/Serous";
+import Serious from "./components/Serious";
 
 function App() {
   return (

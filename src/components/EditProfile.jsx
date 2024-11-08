@@ -33,7 +33,7 @@ const EditProfile = () => {
           email: response.data.email || "정보 없음",
           nickname: response.data.nickname || "",
         });
-        setNewNickname(response.data.nickname || "");
+        // 기존 setNewNickname 호출을 제거하여 인풋 필드에 닉네임이 보이지 않도록 합니다.
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류 발생:", error);
       }
@@ -236,9 +236,10 @@ const EditProfile = () => {
 
           {formError && <p className="error-message">{formError}</p>}
           <button type="submit">수정하기</button>
-          <button type="button" onClick={handleDeleteAccount}>회원 탈퇴</button>
+          <button type="button" onClick={handleDeleteAccount}>
+            회원 탈퇴
+          </button>
         </form>
-        
       </main>
     </div>
   );
