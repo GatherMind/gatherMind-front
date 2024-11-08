@@ -1,0 +1,56 @@
+{
+  "groups": [
+    {
+      "id": 1,
+      "name": "[IOS] 사이드프로젝트 IOS개발자 구합니다!",
+      "status" : false
+    },
+    {
+      "id": 2,
+      "name": "[React/Java/Spring 등] 프로젝트형 스터디로 포트폴리오 강화!",
+    "status" : false
+    },
+    {
+      "id": 3,
+      "name": "UI/UX 디자인의 모든 것! 포트폴리오 완성 스터디 모집",
+      "status" : true
+    },
+    {
+      "id": 4,
+      "name": "[Figma/Sketch/XD] 툴 마스터하기! 디자인 스터디원 구함",
+      "status" : false
+    },
+    {
+      "id": 5,
+      "name": "자격증 완전 정복! [자격증명] 스터디원 모집합니다",
+      "status" : true
+    },
+    {
+      "id": 6,
+      "name": "합격까지 달린다! [자격증명] 대비 스터디 그룹",
+      "status" : false
+    },
+    {
+      "id": 7,
+      "name": "업무에서 실전처럼 배우는 풀스택 개발 스터디원 모집",
+      "status" : false
+    },
+    {
+      "id": 8,
+      "name": "사용자 경험을 연구하는 디자이너 스터디, 함께 해요!",
+      "status" : false
+    },
+    {
+      "id": 9,
+      "name": "디자인 이력서와 포트폴리오 함께 완성하기! 스터디 모집",
+      "status" : false
+    },
+    {
+      "id": 10,
+      "name": "웹/앱 디자인 초보를 위한 실전 디자인 스터디",
+      "status" : true
+    }
+   
+   
+  ]
+}
