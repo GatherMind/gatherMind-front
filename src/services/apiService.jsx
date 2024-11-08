@@ -31,8 +31,8 @@ export const updateStudy = async (studyId, studyData) => {
   }
 };
 
-// 스터디 정보, 멤버 조회
-export const getStudyWithMember = async (id) => {
+// 스터디 정보, 멤버 조회, 게시판 조회
+export const getStudyInfoAndMembersAndBoards = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/study/${id}/members`);
 
@@ -44,9 +44,32 @@ export const getStudyWithMember = async (id) => {
 };
 
 // 스터디 멤버, 게시판 조회
-export const getStudyMembers = async (id, pageNumber) => {
+export const getStudyMembersAndBoards = async (id, pageNumber) => {
+  console.log("id", id);
+  console.log("pageNumber", pageNumber);
   try {
-    const response = await axios.get(`${API_URL}/study/${id}/members/boards`);
+    const response = await axios.get(`${API_URL}/study/${id}/members/boards`, {
+      params: { page: pageNumber, size: 5 },
+    });
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch meeting members: ", error);
+    throw new Error("Failed to fetch meeting members.");
+  }
+};
+
+// 스터디 멤버, 게시판 조회
+export const getBoards = async (id, pageNumber) => {
+  console.log("id", id);
+  console.log("pageNumber", pageNumber);
+  try {
+    const response = await axios.get(`${API_URL}/study/${id}/boards`, {
+      params: { page: pageNumber, size: 5 },
+    });
+    console.log(response);
+
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting members: ", error);

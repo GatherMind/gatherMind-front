@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../styles/MeetingInfo.css";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getStudyWithMember,
-  getStudyMembers,
   getMyInfoById,
+  getStudyMembersAndBoards,
+  getStudyInfoAndMembersAndBoards,
+  getBoards,
 } from "../services/apiService";
 import MembersTab from "../components/MembersTab";
 import Popup from "../components/Popup";
@@ -28,6 +29,11 @@ const StudyInfo = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // boards page
+  const [boardsPage, setBoardsPage] = useState(0);
+  const [boardsTotalPages, setBoardsTotalPages] = useState(1);
+  const [boardsTotalElements, setBoardsTotalElements] = useState(0);
+
   // 팝업 관련
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const openPopup = () => setIsPopupOpen(true);
@@ -43,15 +49,18 @@ const StudyInfo = () => {
     setUserId(userId);
     const fetchMeetingInfo = async () => {
       try {
-        const [memberInfo, meetingData] = await Promise.all([
+        const [memberInfo, studyData] = await Promise.all([
           getMyInfoById(userId, studyId),
-          getStudyWithMember(studyId),
+          getStudyInfoAndMembersAndBoards(studyId, 0, 5),
         ]);
 
         setRole(memberInfo.role);
-        setStudy(meetingData);
-        setMembers(meetingData.members);
-        setBoards(meetingData.questions);
+        setStudy(studyData);
+        setMembers(studyData.members);
+        setBoards(studyData.questions.content);
+        setBoardsPage(studyData.questions.pageable.pageNumber);
+        setBoardsTotalPages(studyData.questions.totalPages);
+        setBoardsTotalElements(studyData.questions.totalElements);
       } catch (error) {
         console.error("데이터 불러오기 실패", error);
         setError("정보를 찾을 수 없습니다.");
@@ -63,12 +72,29 @@ const StudyInfo = () => {
     fetchMeetingInfo();
   }, [studyId, userId]);
 
+  // 페이지 변경 함수
+  const handlePageChange = async (newPage) => {
+    try {
+      const response = await getBoards(studyId, newPage); // API 호출
+      setBoards(response.content);
+      setBoardsPage(response.pageable.pageNumber);
+      setBoardsTotalPages(response.totalPages);
+      setBoardsTotalElements(response.totalElements);
+    } catch (error) {
+      console.error("게시판 목록을 불러오지 못했습니다.", error);
+      setError("게시판 목록을 불러오지 못했습니다.");
+    }
+  };
+
   // 그룹 멤버 가져오기
   const handleFetchMembers = async () => {
     try {
-      const membersData = await getStudyMembers(studyId);
+      const membersData = await getStudyMembersAndBoards(studyId);
       setMembers(membersData.members);
-      setBoards(membersData.questions);
+      setBoards(membersData.questions.content);
+      setBoardsPage(membersData.questions.pageable.pageNumber);
+      setBoardsTotalPages(membersData.questions.totalPages);
+      setBoardsTotalElements(membersData.questions.totalElements);
     } catch (err) {
       setError("멤버 정보를 가져오지 못했습니다.");
     }
@@ -156,7 +182,14 @@ const StudyInfo = () => {
         {/* 멤버탭 콘텐츠 */}
 
         {activeTab === "members" && (
-          <MembersTab members={members} meetingId={studyId} boards={boards} />
+          <MembersTab
+            members={members}
+            boards={boards}
+            boardsPage={boardsPage}
+            boardsTotalPages={boardsTotalPages}
+            boardsTotalElements={boardsTotalElements}
+            onPageChange={handlePageChange}
+          />
         )}
 
         {/* 일정탭 콘텐츠 */}
