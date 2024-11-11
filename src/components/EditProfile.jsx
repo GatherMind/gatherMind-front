@@ -73,22 +73,30 @@ const EditProfile = () => {
 
   const checkNicknameUniqueness = async (event) => {
     event.preventDefault();
+    setNicknameErrors(""); // 기존 오류 메시지 초기화
+  
     if (!newNickname) {
       setNicknameErrors("닉네임을 입력해주세요.");
       return;
     }
+  
     try {
       const response = await axios.post("/api/members/check-nickname", {
         nickname: newNickname,
       });
-      setIsNicknameUnique(response.data.isUnique);
-      if (!response.data.isUnique) {
+  
+      const isUnique = response.data.isUnique;
+      setIsNicknameUnique(isUnique);
+  
+      if (!isUnique) {
         setNicknameErrors("이미 사용 중인 닉네임입니다.");
       } else {
-        setNicknameErrors("");
+        setNicknameErrors(""); // 중복이 아닌 경우 오류 메시지 삭제
+        // 필요 시 중복 확인 성공 메시지 표시
       }
     } catch (error) {
       console.error("닉네임 중복 확인 오류:", error);
+      setNicknameErrors("닉네임 중복 확인 중 오류가 발생했습니다."); // 추가 오류 메시지
     }
   };
 
