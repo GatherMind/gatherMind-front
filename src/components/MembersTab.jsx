@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MemberTab.css";
+import { useNavigate } from "react-router-dom";
 
 const MembersTab = ({
   members,
@@ -9,6 +10,8 @@ const MembersTab = ({
   boardsTotalElements,
   onPageChange,
 }) => {
+  const navigate = useNavigate();
+
   // 상태값으로 목록이 열렸는지 닫혔는지를 관리
   const [isOpen, setIsOpen] = useState(false);
   const size = 5;
@@ -16,6 +19,10 @@ const MembersTab = ({
   // 화살표 버튼을 클릭할 때 상태 변경
   const toggleList = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleClick = (questionId) => {
+    navigate(`/question-detail/${questionId}`);
   };
 
   const renderMemberList = () => (
@@ -44,7 +51,11 @@ const MembersTab = ({
         const boardNumber = boardsTotalElements - boardsPage * size - index;
 
         return (
-          <div key={board.questionId} className="board-item">
+          <div
+            key={board.questionId}
+            className="board-item"
+            onClick={() => handleClick(board.questionId)}
+          >
             <div>{boardNumber}</div>
             <div>
               [{board.option}] {board.title}

@@ -111,10 +111,10 @@ const StudyInfo = () => {
   // fixed 버튼 클릭시
   const handleButtonClick = () => {
     if (activeTab === "members") {
-      openPopup();
+      navigate(`/create-question`, { state: { studyId } });
     } else {
-      // 약속 생성 페이지로 이동
-      navigate(`/schedule-create/${studyId}`);
+      // 일정 생성 페이지로 이동
+      navigate(`/create-schedule`, { state: { studyId } });
     }
   };
 

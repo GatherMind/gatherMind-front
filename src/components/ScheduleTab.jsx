@@ -36,7 +36,7 @@ const ScheduleTab = ({ studyId }) => {
                 </div>
                 <div className="schedule-detail">
                   <strong>시간:</strong>{" "}
-                  {new Date(schedule.scheduleTime).toLocaleString()}
+                  {new Date(schedule.dateTime).toLocaleString()}
                 </div>
                 <div className="schedule-detail">
                   <strong>장소:</strong> {schedule.location}
