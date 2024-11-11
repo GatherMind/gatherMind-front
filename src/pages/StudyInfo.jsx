@@ -8,7 +8,6 @@ import {
   getBoards,
 } from "../services/apiService";
 import MembersTab from "../components/MembersTab";
-import Popup from "../components/Popup";
 import { useUser } from "../context/UserContext";
 import ScheduleTab from "../components/ScheduleTab";
 import { FaCog } from "react-icons/fa";
@@ -202,14 +201,6 @@ const StudyInfo = () => {
           {activeTab === "members" ? "글쓰기" : "일정 추가"}
         </button>
       </div>
-
-      {/* popup 컴포넌트 */}
-      <Popup
-        isOpen={isPopupOpen}
-        onClose={closePopup}
-        studyId={studyId}
-        onMemberAdded={handleAddMember}
-      />
     </div>
   );
 };
