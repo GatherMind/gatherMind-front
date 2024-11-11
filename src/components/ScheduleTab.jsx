@@ -29,7 +29,7 @@ const ScheduleTab = ({ studyId }) => {
       ) : schedules && schedules.length > 0 ? (
         <>
           {schedules.map((schedule) => (
-            <div className="schedule-item" key={schedule.scheduleId}>
+            <div className="schedule-item" key={schedule.dateTime}>
               <div className="schedule-details">
                 <div className="schedule-detail">
                   <strong>약속 이름:</strong> {schedule.title}
