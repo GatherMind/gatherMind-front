@@ -127,6 +127,7 @@ const StudyInfo = () => {
 
   //   if (loading) return <Loading />;
   // if (error) return <Error message={error} />;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="study-info">
