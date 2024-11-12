@@ -34,15 +34,6 @@
     margin-bottom: 20px;
 }
 
-.edit-button,
-.delete-button {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 .edit-button {
     background-color: lightgray;
     color: #fff;
@@ -93,4 +84,40 @@
 
 .answer-button:hover {
     background-color: #0056b3;
+}
+
+/* 답변 스타일 */
+.answer-list {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.answer-nickname {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.answer-content {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.answer-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.createdAt {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.edit-button,
+.delete-button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
