@@ -1,0 +1,42 @@
+/* Tabs.css */
+.tabs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tab-button {
+  padding: 12px 20px;
+  flex: 1;
+  cursor: pointer;
+  border: none;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-speed);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.tab-button.active {
+  font-weight: bold;
+  background-color: var(--primary-color);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .tab-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}

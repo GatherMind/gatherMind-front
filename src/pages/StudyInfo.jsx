@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles/MeetingInfo.css";
+import "../styles/global/Container.css";
+import "../styles/global/Tabs.css";
+import "../styles/global/FixedButton.css";
+import "../styles/global/DropdownMenu.css";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   getMyInfoById,
@@ -11,6 +15,8 @@ import MembersTab from "../components/MembersTab";
 import { useUser } from "../context/UserContext";
 import ScheduleTab from "../components/ScheduleTab";
 import { FaCog } from "react-icons/fa";
+import Loading from "./../components/Feedback/Loading";
+import ErrorMessage from "../components/Feedback/ErrorMessage";
 
 const StudyInfo = () => {
   // 임시
@@ -33,26 +39,24 @@ const StudyInfo = () => {
   const [boardsTotalPages, setBoardsTotalPages] = useState(1);
   const [boardsTotalElements, setBoardsTotalElements] = useState(0);
 
-  // 팝업 관련
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const openPopup = () => setIsPopupOpen(true);
-  const closePopup = () => setIsPopupOpen(false);
-
   // 톱니바퀴 버튼
   const [showMenu, setShowMenu] = useState(false);
 
   const [role, setRole] = useState("Member");
 
   // 그룹 정보/멤버 가져오기
-  useEffect(() => {
-    setUserId(userId);
-    const fetchMeetingInfo = async () => {
-      try {
-        const [memberInfo, studyData] = await Promise.all([
-          getMyInfoById(userId, studyId),
-          getStudyInfoAndMembersAndBoards(studyId, 0, 5),
-        ]);
 
+  const fetchMeetingInfo = async () => {
+    setError(null);
+    setLoading(true);
+    let isMounted = true;
+    try {
+      const [memberInfo, studyData] = await Promise.all([
+        getMyInfoById(userId, studyId),
+        getStudyInfoAndMembersAndBoards(studyId, 0, 5),
+      ]);
+
+      if (isMounted) {
         setRole(memberInfo.role);
         setStudy(studyData);
         setMembers(studyData.members);
@@ -60,16 +64,24 @@ const StudyInfo = () => {
         setBoardsPage(studyData.questions.pageable.pageNumber);
         setBoardsTotalPages(studyData.questions.totalPages);
         setBoardsTotalElements(studyData.questions.totalElements);
-      } catch (error) {
+      }
+    } catch (error) {
+      if (isMounted) {
         console.error("데이터 불러오기 실패", error);
         setError("정보를 찾을 수 없습니다.");
-      } finally {
-        setLoading(false);
       }
-    };
+    } finally {
+      if (isMounted) setLoading(false);
+    }
 
+    return () => {
+      isMounted = false;
+    };
+  };
+
+  useEffect(() => {
     fetchMeetingInfo();
-  }, [studyId, userId]);
+  }, []);
 
   // 페이지 변경 함수
   const handlePageChange = async (newPage) => {
@@ -117,20 +129,14 @@ const StudyInfo = () => {
     }
   };
 
-  const handleAddMember = (response) => {
-    setMembers((prev) => [...prev, response]);
-  };
-
   const toggleMenu = () => setShowMenu((prevShowMenu) => !prevShowMenu);
 
-  if (loading) return <div>Loading...</div>;
-
-  //   if (loading) return <Loading />;
-  // if (error) return <Error message={error} />;
-  if (error) return <div>{error}</div>;
+  if (loading) return <Loading />;
+  if (error) return <ErrorMessage message={error} onRetry={fetchMeetingInfo} />;
 
   return (
-    <div className="study-info">
+    // <div className="study-info">
+    <div className="container">
       {/* 그룹 정보 */}
       <div className="study-intro">
         <h2>{study.title}</h2>
@@ -153,8 +159,6 @@ const StudyInfo = () => {
           )}
         </div>
       </div>
-
-      {error && <div className="error">{error}</div>}
 
       {/* 멤버 / 약속 탭 */}
       <div className="tabs">

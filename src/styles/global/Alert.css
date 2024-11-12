@@ -1,0 +1,7 @@
+/* Alert.css */
+
+.alert {
+  color: var(--alert-color);
+  font-size: 0.875rem;
+  margin-top: 10px;
+}

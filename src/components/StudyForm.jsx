@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/MeetingForm.css";
+import "../styles/global/FormContainer.css";
 
 const StudyForm = ({ onSubmit, initialData }) => {
   const [title, setTitle] = useState("");
