@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./header.css";
 
 const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header>
+    <div>
       <h1 onClick={() => navigate("/")}>GATHER MIND</h1>
-    </header>
+    </div>
     
   );
 };

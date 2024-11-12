@@ -132,6 +132,7 @@ const MypageAct = () => {
       )}
 
       <h3>작성한 답변 현황</h3>
+      <p>원 게시물 삭재시 기재한 댓글들이 삭제됩니다.</p>
       {joinedGroups.length === 0 ? (
         <p>스터디에 가입하세요!</p>
       ) : recentAnswers.length > 0 ? (

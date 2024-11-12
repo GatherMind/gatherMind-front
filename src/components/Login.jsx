@@ -1,11 +1,12 @@
+// src/components/Login.js
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api"; // 생성한 Axios 인스턴스 import
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import "./login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -15,15 +16,12 @@ const Login = () => {
   const validate = () => {
     const newErrors = {};
 
-    // memberId 유효성 검사
     if (!memberId) {
       newErrors.memberId = "아이디는 필수 입력 항목입니다.";
     } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
-      newErrors.memberId =
-        "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
+      newErrors.memberId = "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
     }
 
-    // password 유효성 검사
     if (!password) {
       newErrors.password = "비밀번호는 필수 입력 항목입니다.";
     } else if (password.length < 8 || password.length > 255) {
@@ -38,24 +36,31 @@ const Login = () => {
 
   // memberId를 소문자로 변환하는 함수
   const handleMemberIdChange = (e) => {
-    const lowercaseValue = e.target.value.toLowerCase();
-    setMemberId(lowercaseValue);
+    setMemberId(e.target.value.toLowerCase());
   };
 
   // 로그인 요청 함수
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoginError(null); // 새로운 로그인 시도 시 이전 오류 메시지 초기화
+
     if (!validate()) return;
 
     try {
-      const response = await axios.post("/api/members/login", {
+      const response = await api.post("/api/members/login", {
         memberId,
         password,
       });
       localStorage.setItem("token", response.data.token); // 토큰 저장
       navigate("/mypage"); // 로그인 후 마이페이지로 이동
     } catch (error) {
-      setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+      console.error("로그인 실패:", error); // 디버깅용 콘솔 로그 추가
+
+      // 오류 메시지 설정
+      const message =
+        error.response?.data?.message ||
+        "로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.";
+      setLoginError(message);
     }
   };
 
@@ -75,9 +80,7 @@ const Login = () => {
               onChange={handleMemberIdChange}
               autoComplete="off"
             />
-            {errors.memberId && (
-              <p className="error-message">{errors.memberId}</p>
-            )}
+            {errors.memberId && <p className="error-message">{errors.memberId}</p>}
           </div>
           <div className="form-group">
             <label>비밀번호</label>
@@ -87,9 +90,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
             />
-            {errors.password && (
-              <p className="error-message">{errors.password}</p>
-            )}
+            {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
           {loginError && <p className="error-message">{loginError}</p>}
           <button type="submit">로그인</button>
@@ -97,7 +98,10 @@ const Login = () => {
       </main>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
-        <p><button onClick={() => navigate("/signup")}>여기</button>를 눌러 다양한 스터디를 둘러보세요!</p>
+        <p>
+          <button onClick={() => navigate("/signup")}>여기</button>를 눌러
+          다양한 스터디를 둘러보세요!
+        </p>
       </footer>
     </div>
   );

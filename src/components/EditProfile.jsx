@@ -33,7 +33,6 @@ const EditProfile = () => {
           email: response.data.email || "정보 없음",
           nickname: response.data.nickname || "",
         });
-        // 기존 setNewNickname 호출을 제거하여 인풋 필드에 닉네임이 보이지 않도록 합니다.
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류 발생:", error);
       }
@@ -41,26 +40,37 @@ const EditProfile = () => {
     fetchCurrentUserInfo();
   }, []);
 
+  // 공백 문자 또는 전각 공백을 포함하는지 확인하는 함수
+  const containsWhitespace = (value) => /\s|　/.test(value);
+
+  // 유효성 검사 함수
   const validate = () => {
     let isValid = true;
     setNicknameErrors("");
     setPasswordErrors("");
     setConfirmPasswordError("");
 
-    if (newNickname && (newNickname.length < 2 || newNickname.length > 20)) {
-      setNicknameErrors("닉네임은 2자에서 20자 사이여야 합니다.");
-      isValid = false;
-    } else if (isNicknameUnique === false) {
-      setNicknameErrors("이미 사용 중인 닉네임입니다.");
-      isValid = false;
+    if (newNickname) {
+      if (containsWhitespace(newNickname)) {
+        setNicknameErrors("닉네임에는 공백을 포함할 수 없습니다.");
+        isValid = false;
+      } else if (newNickname.length < 2 || newNickname.length > 20) {
+        setNicknameErrors("닉네임은 2자에서 20자 사이여야 합니다.");
+        isValid = false;
+      } else if (isNicknameUnique === false) {
+        setNicknameErrors("이미 사용 중인 닉네임입니다.");
+        isValid = false;
+      }
     }
 
-    if (newPassword && (newPassword.length < 8 || newPassword.length > 255)) {
-      setPasswordErrors("비밀번호는 8자 이상 255자 이하로 입력해야 합니다.");
-      isValid = false;
-    } else if (/\s/.test(newPassword)) {
-      setPasswordErrors("비밀번호에는 공백을 사용할 수 없습니다.");
-      isValid = false;
+    if (newPassword) {
+      if (containsWhitespace(newPassword)) {
+        setPasswordErrors("비밀번호에는 공백을 포함할 수 없습니다.");
+        isValid = false;
+      } else if (newPassword.length < 8 || newPassword.length > 255) {
+        setPasswordErrors("비밀번호는 8자 이상 255자 이하로 입력해야 합니다.");
+        isValid = false;
+      }
     }
 
     if (confirmPassword && confirmPassword !== newPassword) {
@@ -73,30 +83,29 @@ const EditProfile = () => {
 
   const checkNicknameUniqueness = async (event) => {
     event.preventDefault();
-    setNicknameErrors(""); // 기존 오류 메시지 초기화
-  
+    setNicknameErrors("");
+
     if (!newNickname) {
       setNicknameErrors("닉네임을 입력해주세요.");
       return;
     }
-  
+
     try {
       const response = await axios.post("/api/members/check-nickname", {
         nickname: newNickname,
       });
-  
+
       const isUnique = response.data.isUnique;
       setIsNicknameUnique(isUnique);
-  
+
       if (!isUnique) {
         setNicknameErrors("이미 사용 중인 닉네임입니다.");
       } else {
-        setNicknameErrors(""); // 중복이 아닌 경우 오류 메시지 삭제
-        // 필요 시 중복 확인 성공 메시지 표시
+        setNicknameErrors("");
       }
     } catch (error) {
       console.error("닉네임 중복 확인 오류:", error);
-      setNicknameErrors("닉네임 중복 확인 중 오류가 발생했습니다."); // 추가 오류 메시지
+      setNicknameErrors("닉네임 중복 확인 중 오류가 발생했습니다.");
     }
   };
 
@@ -147,27 +156,6 @@ const EditProfile = () => {
       navigate("/mypage");
     } catch (error) {
       setFormError("정보 변경에 실패했습니다. 다시 시도해주세요.");
-    }
-  };
-
-  // 회원 탈퇴 요청
-  const handleDeleteAccount = async (event) => {
-    event.preventDefault();
-    const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-    if (confirmDelete) {
-      try {
-        const token = localStorage.getItem("token");
-        await axios.delete("/api/members/delete-account", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        alert("회원 탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token"); // 로그아웃 처리
-        navigate("/goodbye");
-      } catch (error) {
-        alert("회원 탈퇴에 실패했습니다.");
-      }
-    } else {
-      navigate("/serious");
     }
   };
 
@@ -244,9 +232,6 @@ const EditProfile = () => {
 
           {formError && <p className="error-message">{formError}</p>}
           <button type="submit">수정하기</button>
-          <button type="button" onClick={handleDeleteAccount}>
-            회원 탈퇴
-          </button>
         </form>
       </main>
     </div>
