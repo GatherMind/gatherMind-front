@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
+import Answer from "./Answer";
 
-const AnswerList = (props) => {
+const AnswerList = ({answers, fetch}) => {
 
-    const {answers} = props;
+    const answerRefs = useRef([]);
 
     return (
         <div>
-            {answers && answers.map((answer) => {
-                return (
-                    <div className="answer-list" key={answer.answerId}>
-                        {answer.content}
-                    </div>
-                );
-            })}
+            <p className="answer-count">댓글 {answers?.length || 0}</p>
+            {answers && answers.map((answer, index) => (
+                <div className="answer-list" key={answer.answerId} ref={(el) => (answerRefs.current[index] = el)}>
+                    <Answer answer={answer} fetch={fetch} scrollToRef={() => answerRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' })} />
+                </div>
+            ))}
         </div>
     );
 };
