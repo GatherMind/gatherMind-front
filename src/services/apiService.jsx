@@ -130,3 +130,112 @@ export const getMyInfoById = async (memberId, studyId) => {
     throw new Error("Failed to fetch my Info.");
   }
 };
+
+// 게시글 조회
+export const getQuestion = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/question/${id}`);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 조회 실패: ", error);
+    throw error;
+  }
+};
+
+// 게시글 생성
+export const createQuestion = async (memberId, studyId, questionData) => {
+  try {
+    const response = await axios.post(`${API_URL}/question?memberId=${memberId}&studyId=${studyId}`, questionData);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 생성 실패: ", error);
+    throw error;
+  }
+};
+
+// 게시글 수정
+export const updateQuestion = async (id, questionData) => {
+  try {
+    const response = await axios.put(`${API_URL}/question/${id}`, questionData); 
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 수정 실패: ", error);
+    throw error;
+  }
+};
+
+// 게시글 삭제
+export const deleteQuestion = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/question/${id}`); 
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 삭제 실패: ", error);
+    throw error;
+  }
+};
+
+// 댓글 생성
+export const createAnswer = async (answerData) => {
+  try {
+    const response = await axios.post(`${API_URL}/answer`, answerData);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("댓글 생성 실패: ", error);
+    throw error;
+  }
+};
+
+// 댓글 수정
+export const updateAnswer = async (id, content) => {
+  try {
+    const response = await axios.put(`${API_URL}/answer/${id}`,
+        content, 
+        {
+            headers: { "Content-Type": "text/plain" }
+        }
+    );
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("댓글 수정 실패: ", error);
+    throw error;
+  }
+};
+
+// 댓글 삭제
+export const deleteAnswer = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/answer/${id}`); 
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("댓글 삭제 실패: ", error);
+    throw error;
+  }
+};
+
+// 일정 생성
+export const createSchedule = async (scheduleData) => {
+  try {
+    const response = await axios.post(`${API_URL}/schedule`, scheduleData);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("일정 생성 실패: ", error);
+    throw error;
+  }
+};

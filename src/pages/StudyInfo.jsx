@@ -10,7 +10,7 @@ import {
 import MembersTab from "../components/MembersTab";
 import { useUser } from "../context/UserContext";
 import ScheduleTab from "../components/ScheduleTab";
-import { FaCog } from "react-icons/fa";
+// import { FaCog } from "react-icons/fa";
 
 const StudyInfo = () => {
   // 임시
@@ -138,7 +138,7 @@ const StudyInfo = () => {
         <div className="settings-icon" onClick={toggleMenu}>
           {role === "Leader" && (
             <>
-              <FaCog />
+              {/* <FaCog /> */}
               {showMenu && (
                 <div className="menu">
                   <button

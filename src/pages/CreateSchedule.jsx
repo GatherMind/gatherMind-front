@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -7,6 +6,7 @@ import DaumPostcode from "react-daum-postcode";
 import { subDays } from "date-fns";
 import "../styles/MeetingForm.css";
 import "../styles/CreateSchedule.css";
+import { createSchedule } from "../services/apiService";
 
 const CreateSchedule = () => {
   const navigate = useNavigate();
@@ -39,9 +39,7 @@ const CreateSchedule = () => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
-    console.log(data);
     console.log(fullAddress);
-    console.log(data.zonecode);
 
     setLocation(fullAddress);
   };
@@ -53,21 +51,8 @@ const CreateSchedule = () => {
   // 데이터 전송
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("일정 생성");
-    console.log(
-      "study_id : ",
-      studyId,
-      "title : ",
-      title,
-      ", time : ",
-      dateTime,
-      ", location : ",
-      location
-    );
-
     try {
-      const response = await axios.post("http://localhost:8080/api/schedule", {
+      const response = await createSchedule({
         studyId: 1, // test용
         title,
         dateTime: new Date(new Date(dateTime).getTime() + 540 * 60 * 1000),
@@ -76,10 +61,9 @@ const CreateSchedule = () => {
       });
       console.log("일정 생성 완료 ", response);
     } catch (error) {
-      console.log("일정 생성 실패");
+      console.log("일정 생성 실패", error);
     }
-
-    navigate("./"); // 그룹 페이지로 이동하도록 수정
+    navigate(`/study-info/${studyId}`);
   };
 
   return (
