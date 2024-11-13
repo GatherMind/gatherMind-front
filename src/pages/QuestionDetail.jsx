@@ -50,6 +50,10 @@ const QuestionDetail = () => {
     }
     
     const onSubmit = async () => {
+        if (answer === "") {
+            alert("내용을 입력해주세요.");
+            return;
+        }
         try {
             const response = await createAnswer({
                 content : answer, 
@@ -96,9 +100,9 @@ const QuestionDetail = () => {
             <hr />
 
             <AnswerList answers={question?.answers} fetch={fetchQuestion} />
-            <div id="answer-input" className="answer-input-section" ref={scrollRef}>
-                <input type="text" placeholder="댓글을 남겨보세요" className="answer-input" value={answer} onChange={(e) => setAnswer(e.target.value)}/>
-                <button onClick={onSubmit}>등록</button>
+            <div className="answer-input-section" ref={scrollRef}>
+                <textarea placeholder="댓글을 남겨보세요" className="answer-input" value={answer} onChange={(e) => setAnswer(e.target.value)}/>
+                <button onClick={onSubmit} className="submit-button">등록</button>
             </div>
         </div>
     );

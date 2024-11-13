@@ -1,3 +1,4 @@
+/* 게시글 */
 .option {
     font-size: 0.9rem;
     color: #888;
@@ -34,6 +35,7 @@
     margin-bottom: 20px;
 }
 
+/* 수정/삭제 버튼 */
 .edit-button {
     background-color: lightgray;
     color: #fff;
@@ -52,15 +54,11 @@
     background-color: darkgray;
 }
 
-.answer-count {
-    font-size: 1rem;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
+/* 댓글 작성 */
 .answer-input-section {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    gap: 10px;
     margin-top: 20px;
 }
 
@@ -73,20 +71,13 @@
     margin-right: 10px;
 }
 
-.answer-button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* 댓글 리스트 */
+.answer-count {
+    font-size: 1rem;
+    margin-top: 20px;
+    font-weight: bold;
 }
 
-.answer-button:hover {
-    background-color: #0056b3;
-}
-
-/* 답변 스타일 */
 .answer-list {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
@@ -100,6 +91,7 @@
 .answer-content {
     font-size: 1rem;
     margin-bottom: 10px;
+    white-space: pre-wrap;
 }
 
 .answer-meta {
@@ -120,4 +112,45 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+/* 댓글 수정 모드 */
+.edit-mode {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.save-button, .cancel-button {
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: lightgray;
+    color: #fff;
+}
+
+.cancel-button:hover {
+    background-color: darkgray;
 }

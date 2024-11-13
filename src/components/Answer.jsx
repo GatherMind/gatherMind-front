@@ -8,6 +8,7 @@ const Answer = ({answer, fetch, scrollToRef}) => {
     const [editedContent, setEditedContent] = useState(answer.content);
 
     const handleEdit = () => {
+        if (isEditing) setEditedContent(answer.content); // 수정 취소 시 원래 데이터로 돌아감
         setIsEditing(!isEditing);
     }
 
@@ -42,14 +43,15 @@ const Answer = ({answer, fetch, scrollToRef}) => {
             {isEditing ? (
                 // 수정 모드
                 <div className="edit-mode">
-                    <input
-                        type="text"
+                    <textarea
                         value={editedContent}
                         onChange={(e) => setEditedContent(e.target.value)}
                         className="edit-input"
                     />
-                    <button onClick={handleSave} className="save-button">저장</button>
-                    <button onClick={handleEdit} className="cancel-button">취소</button>
+                    <div className="edit-buttons">
+                        <button onClick={handleSave} className="save-button">저장</button>
+                        <button onClick={handleEdit} className="cancel-button">취소</button>
+                    </div>
                 </div>
             ) : (
                 // 수정 모드가 아닐 때
