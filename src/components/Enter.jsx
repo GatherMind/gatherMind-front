@@ -1,5 +1,6 @@
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import FileUpload from "./FileUpload";
 
 const Enter = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Enter = () => {
         <Header />
         <main>
           <div> GATHER MIND에 오신 모든 여러분 환영합니다.</div>
+
+          <FileUpload />
         </main>
 
         <footer>

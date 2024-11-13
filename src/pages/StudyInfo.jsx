@@ -67,6 +67,7 @@ const StudyInfo = () => {
       }
     } catch (error) {
       if (isMounted) {
+        console.log(error);
         console.error("데이터 불러오기 실패", error);
         setError("정보를 찾을 수 없습니다.");
       }

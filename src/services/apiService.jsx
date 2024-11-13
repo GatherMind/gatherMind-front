@@ -9,12 +9,11 @@ if (!API_URL) {
 // 스터디 생성
 export const createStudy = async (studyData) => {
   try {
-    console.log(studyData);
     const response = await axios.post(`${API_URL}/study`, studyData);
 
     return response.data;
   } catch (error) {
-    console.log("그룹 생성 에러 : ", error);
+    console.error("그룹 생성 에러 : ", error);
     throw error;
   }
 };
@@ -26,7 +25,7 @@ export const updateStudy = async (studyId, studyData) => {
 
     return response.data;
   } catch (error) {
-    console.log("그룹 생성 에러 : ", error);
+    console.error("그룹 생성 에러 : ", error);
     throw error;
   }
 };
@@ -45,13 +44,10 @@ export const getStudyInfoAndMembersAndBoards = async (id) => {
 
 // 스터디 멤버, 게시판 조회
 export const getStudyMembersAndBoards = async (id, pageNumber) => {
-  console.log("id", id);
-  console.log("pageNumber", pageNumber);
   try {
     const response = await axios.get(`${API_URL}/study/${id}/members/boards`, {
       params: { page: pageNumber, size: 5 },
     });
-    console.log(response);
 
     return response.data;
   } catch (error) {
