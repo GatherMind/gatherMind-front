@@ -4,7 +4,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="pagination">
       <button
-        className="button"
+        className="button btn-left"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 0}
       >
@@ -20,13 +20,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
             disabled={currentPage === pageNumber}
-            className={`${currentPage === pageNumber ? "active" : ""} button`}
+            className={`${
+              currentPage === pageNumber ? "active" : ""
+            } button no-radius`}
           >
             {pageNumber + 1}
           </button>
         ))}
       <button
-        className="button"
+        className="button btn-right"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages - 1}
       >

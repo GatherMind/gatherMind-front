@@ -73,10 +73,11 @@ export const getBoards = async (id, pageNumber) => {
   }
 };
 
-// 스터디 약속 조회
+// 스터디 일정 조회
 export const getStudySchedule = async (studyId) => {
   try {
     const response = await axios.get(`${API_URL}/study/${studyId}/schedules`);
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting appointments: ", error);
@@ -124,5 +125,16 @@ export const getMyInfoById = async (memberId, studyId) => {
   } catch (error) {
     console.error("Failed to fetch my Info: ", error);
     throw new Error("Failed to fetch my Info.");
+  }
+};
+
+// 일정 정보 조회
+export const deleteSchedule = async (scheduleId) => {
+  try {
+    const response = await axios.delete(`${API_URL}/schedule/${scheduleId}`);
+    // return response.data;
+  } catch (error) {
+    console.error("Failed to delete Schedule: ", error);
+    throw new Error("Failed to delete Schedule.");
   }
 };
