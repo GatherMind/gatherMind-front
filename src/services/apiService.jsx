@@ -134,7 +134,7 @@ export const getMyInfoById = async (memberId, studyId) => {
 // 게시글 조회
 export const getQuestion = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/question/${id}`);
+    const response = await axios.get(`${API_URL}/question/detail/${id}`);
     console.log(response);
 
     return response.data;
@@ -146,6 +146,7 @@ export const getQuestion = async (id) => {
 
 // 게시글 생성
 export const createQuestion = async (memberId, studyId, questionData) => {
+  console.log(questionData);
   try {
     const response = await axios.post(`${API_URL}/question?memberId=${memberId}&studyId=${studyId}`, questionData);
     console.log(response);
@@ -227,6 +228,19 @@ export const deleteAnswer = async (id) => {
   }
 };
 
+// 일정 조회
+export const getSchedule = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/schedule/${id}`);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("일정 조회 실패: ", error);
+    throw error;
+  }
+};
+
 // 일정 생성
 export const createSchedule = async (scheduleData) => {
   try {
@@ -236,6 +250,32 @@ export const createSchedule = async (scheduleData) => {
     return response.data;
   } catch (error) {
     console.error("일정 생성 실패: ", error);
+    throw error;
+  }
+};
+
+// 일정 수정
+export const updateSchedule = async (id, scheduleData) => {
+  try {
+    const response = await axios.put(`${API_URL}/schedule/${id}`, scheduleData);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("일정 수정 실패: ", error);
+    throw error;
+  }
+};
+
+// 일정 삭제
+export const deleteSchedule = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/schedule/${id}`); 
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("일정 삭제 실패: ", error);
     throw error;
   }
 };

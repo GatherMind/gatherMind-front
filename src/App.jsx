@@ -34,7 +34,11 @@ function App() {
             <Route path="/editprofile" element={<EditProfile />} />
             <Route path="/serious" element={<Serious />} />
 
-            <Route path="/create-schedule" element={<CreateSchedule />} />
+            {/* schedule */}
+            <Route path="/create-schedule" element={<CreateSchedule isModify={false} />} />
+            <Route path="/edit-schedule/:id" element={<CreateSchedule isModify={true} />} />
+            
+            {/* question */}
             <Route
               path="/create-question"
               element={<QuestionFormPage isModify={false} />}

@@ -1,123 +1,61 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import DaumPostcode from "react-daum-postcode";
-import { subDays } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { createSchedule, getSchedule, updateSchedule } from "../services/apiService";
+import ScheduleForm from "../components/ScheduleForm";
 import "../styles/MeetingForm.css";
 import "../styles/CreateSchedule.css";
-import { createSchedule } from "../services/apiService";
 
-const CreateSchedule = () => {
+const CreateSchedule = ({ isModify }) => {
   const navigate = useNavigate();
   // const {studyId} = useLocation(); // StudyInfo 페이지에서 StudyId 값 받아오기
 
   // StudyInfo 페이지에서 StudyId 값 받아오기
   // 24.11.11 suhwan
   const LocationDom = useLocation();
+  const {id} = useParams();
   const { studyId } = LocationDom.state || {};
 
-  const [title, setTitle] = useState("");
-  const [dateTime, setDateTime] = useState(new Date());
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-
-  // 주소 값 가져오기
-  const [popup, setPopup] = useState(false);
-  const handleInput = (data) => {
-    let fullAddress = data.address; // 기본 주소
-    let extraAddress = ""; // 참고항목
-
-    if (data.addressType === "R") {
-      // 도로명 주소 값 입력
-      if (data.bname !== "") {
-        extraAddress += data.bname;
+  const [scheduleInitData, setScheduleInitData] = useState(null);
+    
+  useEffect(() => {
+      if (isModify) { // 수정 모드일 때 데이터 불러옴
+          const fetchSchedule = async () => {
+              try {
+                  const scheduleInitData = await getSchedule(id);
+                  console.log("일정 정보 조회 성공", scheduleInitData);
+                  
+                  setScheduleInitData(scheduleInitData);
+              } catch (error) {
+                  console.log("일정 정보를 불러오지 못했습니다.", error);
+              }
+          };
+          fetchSchedule();
       }
-      if (data.buildingName !== "") {
-        extraAddress +=
-          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-    }
-    console.log(fullAddress);
-
-    setLocation(fullAddress);
-  };
-  const handleComplete = (e) => {
-    e.preventDefault();
-    setPopup(!popup);
-  };
+  }, [isModify, id]);
 
   // 데이터 전송
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSaveSchedule = async (scheduleData) => {
     try {
-      const response = await createSchedule({
-        studyId: 1, // test용
-        title,
-        dateTime: new Date(new Date(dateTime).getTime() + 540 * 60 * 1000),
-        location,
-        description,
-      });
-      console.log("일정 생성 완료 ", response);
+      var response = null;
+      if (isModify) {
+        response = await updateSchedule(id, scheduleData);
+        console.log("일정 수정 완료");
+      } else {
+        response = await createSchedule(scheduleData);
+        console.log("일정 생성 완료");
+      }
     } catch (error) {
-      console.log("일정 생성 실패", error);
+      console.log(`일정 ${isModify ? "수정" : "생성"} 실패`, error);
     }
-    navigate(`/study-info/${studyId}`);
+    // navigate(`/study-info/${studyId}`);
+    navigate(``);
   };
 
   return (
     <div className="container">
-      <h1>새로운 일정 생성</h1>
-      <form onSubmit={handleSubmit} className="form-container">
-        <div className="form-group">
-          <label>일정 이름 : </label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="일정 이름"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>날짜/시간 : </label>
-          <div>
-            <DatePicker
-              selected={dateTime}
-              onChange={(date) => setDateTime(date)}
-              minDate={subDays(new Date(), 0)}
-              timeInputLabel="Time:"
-              dateFormat="yyyy.MM.dd h:mm aa"
-              showTimeInput
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label>위치 : </label>
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="모이는 위치"
-            required
-          />
-          <button onClick={handleComplete}>주소 검색</button>
-          {popup && (
-            <span>
-              <DaumPostcode autoClose onComplete={handleInput} />
-            </span>
-          )}
-        </div>
-        <div className="form-group">
-          <label>설명 추가 :</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <button type="submit">저장</button>
-      </form>
+      <h1>{isModify ? "일정 수정하기" : "새로운 일정 생성"}</h1>
+      {/* <ScheduleForm onSubmit={handleSaveSchedule} studyId={studyId} scheduleData={scheduleInitData} /> */}
+      <ScheduleForm onSubmit={handleSaveSchedule} studyId={1} scheduleData={scheduleInitData} />
     </div>
   );
 };
