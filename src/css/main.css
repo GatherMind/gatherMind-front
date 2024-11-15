@@ -278,6 +278,35 @@
   text-decoration: none;
 }
 
+.studymakediv{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  padding: 10px;
+  margin: 5px;
+}
+
+.studymakebtn{
+
+  padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 20px;
+      border: none;
+      background-color: #ff6b6b;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+
+}
+
+.studymakebtn:hover {
+  background-color: #ff4c4c;
+  transform: translateY(-4px);
+}
+
 
 .modal {
   text-align: center;
@@ -311,6 +340,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 10px;
+    position: relative;
    
     
     
@@ -319,30 +349,36 @@
   }
   
   .group-card {
-    flex-grow:1;
-    flex: 1 1 calc(100% / 4); 
+    flex: 1 1 25%;
     box-sizing: border-box;
     
-   
-    max-width: 24%;
+    overflow: hidden;
+    min-width: 150px;  /* 최소 너비 200px */
+    max-width: 24%; 
+    min-height: 100px; 
     
     
   }
   
   .btn-component {
-  
+        
     border-radius: 10px;
-    padding: 10px;
+    padding: 0px;
     width: 100%;
     height: 100%;
+    position: relative;
+    
+
     
   }
 
 
 
 .status.false{
-  position: relative;
-  display: block; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
   padding-left: 5px;
   border: 1px solid rgb(10, 238, 105);
   border-radius: 10px;
@@ -356,8 +392,10 @@
 }
 
 .status.true{
-  position: relative;  
-  display: block; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
   border: 1px solid rgb(246, 17, 4);
   border-radius: 10px;
   font-size: 11px;  
@@ -369,7 +407,18 @@
   
 }
 
+.btn-name {
+
+  position: relative;
+  margin-top: 10px;
+} 
+
   
 
 
 }
+
+
+
+
+
