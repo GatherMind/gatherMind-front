@@ -13,16 +13,16 @@ import {
 
 import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
-import { useUser } from "../context/UserContext";
 import ScheduleTab from "../components/ScheduleTab";
 import { FaCog } from "react-icons/fa";
 import Loading from "./../components/Feedback/Loading";
 import ErrorMessage from "../components/Feedback/ErrorMessage";
+import { useAuth } from "../context/AuthContext";
 
 const StudyInfo = () => {
   // 임시
   const userId = "member1";
-  const { setUserId } = useUser();
+  const { authToken } = useAuth();
 
   const [activeTab, setActiveTab] = useState("members");
   const { studyId } = useParams();

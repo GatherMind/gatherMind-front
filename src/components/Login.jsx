@@ -51,6 +51,7 @@ const Login = () => {
 
     try {
       const response = await loginMember(memberId, password);
+
       localStorage.setItem("token", response.data.token); // 토큰 저장
       navigate("/mypage"); // 로그인 후 마이페이지로 이동
     } catch (error) {

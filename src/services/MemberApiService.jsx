@@ -105,10 +105,10 @@ export const updateMember = async (filed, value) => {
   }
 };
 
-// 회원 정보 수정
+// 회원 탈퇴
 export const deleteMember = async () => {
   try {
-    const response = await axios.put(`${API_URL}/member/delete-account`, {
+    const response = await axios.delete(`${API_URL}/member/delete-account`, {
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,
       },

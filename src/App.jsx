@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-import { UserProvider } from "./context/UserContext";
+import { AuthProvider } from "./context/AuthContext";
 
 import Enter from "./components/Enter";
 import Login from "./components/Login";
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <>
-      <UserProvider>
+      <AuthProvider>
         <Router>
           <Header setLoginresult={setLoginresult} />
           <div className="container">
@@ -106,7 +106,7 @@ function App() {
           </div>
           {/* <Footer/> */}
         </Router>
-      </UserProvider>
+      </AuthProvider>
     </>
   );
 }

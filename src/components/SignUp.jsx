@@ -113,9 +113,9 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
-      <header>
+      {/* <header>
         <Header />
-      </header>
+      </header> */}
       <main>
         <h2>회원가입</h2>
         {signUpSuccess ? (
