@@ -1,0 +1,424 @@
+
+
+
+.profile {
+ 
+  justify-content: left;
+  margin: 10px;
+  margin-top: 10px;
+  text-align: center;
+  border: 2px solid;
+  width: 90%;
+  padding: 10px;
+}
+
+.profilename {
+
+  text-align: left;
+}
+
+.title {
+    font-size: 15px;
+    text-align: left;
+    font-family: "Do Hyeon", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  
+  
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.mytitle{ 
+  margin-left: 15px;
+  padding: 5px;
+  width: 100%;
+
+  font-size: 25px;
+  text-align: left;
+  font-family: "Do Hyeon", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  
+}
+
+.mygroup-list{
+  padding: 0px;
+  display: inline-flex;
+  justify-content: center; 
+  gap: 5px; 
+  flex-wrap: wrap; 
+  width:100%; 
+  align-items: flex-start;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
+
+}
+.mygroup-card{
+  
+  
+  margin:5px; 
+  padding: 0px; 
+  height: 30px;
+  width: 45%; 
+
+  display: flex;
+  box-sizing: border-box;
+
+
+  }
+
+  .mybtn-card{
+   
+    margin:2px;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+
+    background-color: rgb(222, 245, 213);
+    border: 1px solid;
+
+
+    
+  }
+
+
+
+
+.group {
+  border-radius: 10px;
+  border: 5px solid #606265;
+  margin: 10px;
+  padding: 10px;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  height: auto;
+  
+}
+
+.group-header{
+  display: flex;
+  gap: 12px;
+  margin: 5px;
+  padding: 2px;
+
+    font-size: 24px; /* 글자 크기 */
+    font-weight: bold; /* 글자 굵기 */
+    color: rgba(169, 169, 169, 0.8); /* 회색과 투명도 조정 */
+    text-transform: uppercase; /* 대문자 */
+    letter-spacing: 1px; /* 글자 간격 */
+    cursor: pointer; /* 클릭할 수 있다는 느낌을 줌 */
+    transition: color 0.3s, transform 0.3s ease-in-out; /* 호버 효과를 위한 부드러운 변환 */
+
+  
+ 
+}
+.groupheader-title:hover{ 
+  
+    color: #555555; /* 호버 시 색상 변경 (어두운 회색) */
+    transform: translateY(-1px); /* 위로 살짝 이동하여 클릭 느낌을 강조 */
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가로 강조 */
+
+}
+
+
+@media (max-width: 768px){
+
+
+
+  .group-list {
+    margin-top: 10px;
+    padding: 0px;
+    display: flex;
+    justify-content: flex-start; /* 가로 중앙 정렬 */
+    gap: 10px; /* 카드 간격 */
+    flex-wrap: wrap; /* 카드가 공간에 맞게 줄 바꿈 */
+    width:100%; /* 그룹 리스트가 전체 너비를 차지하도록 설정 */
+    flex-direction: row;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #cfd0d5;
+    border-radius: 10px;
+    
+  
+  }
+  
+  .group-card {
+    margin: 5px;
+    padding: 5px; 
+    height: 80px;
+    width: 95%; 
+  
+    box-sizing: border-box; 
+    display: flex;
+    
+    
+  }
+  
+  .btn-component {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  
+  }
+
+
+
+
+}
+
+
+
+.status.false{
+  position: relative;
+  display: inline-block; 
+  padding-left: 5px;
+  border: 1px solid rgb(10, 238, 105);
+  border-radius: 10px;
+  font-size : 10px;
+  width: 50px;
+  background-color: rgb(215, 240, 215);
+  
+  
+}
+
+.status.true{
+  position: relative;  
+  display: inline-block;  
+  border: 1px solid rgb(246, 17, 4);
+  border-radius: 10px;
+  font-size: 11px;  
+  width: 60px;  /* 너비 자동 조정 */
+  background-color: rgb(245, 249, 6);
+  box-sizing: border-box;  /* padding, border를 너비에 포함 */
+  justify-content: center;
+
+  
+}
+
+.btn-name{
+ color: rgb(10, 10, 10);
+ width: auto;
+ font-size: 14px;
+ padding: 5px;
+
+}
+
+
+.bounce {
+  font-family: 'Arial Black', sans-serif; 
+  font-size:15px; 
+  color: #7e737d; 
+  text-align: center; 
+  margin: 20px 0;
+  animation: shake 0.3s infinite; 
+}
+
+@keyframes shake {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-5px); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+
+
+
+
+
+
+
+.linkgroup {
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #d0d5e4; 
+  color: rgb(245, 243, 243); 
+  border-radius: 20px;
+  font-size: 16px; 
+  transition: background-color 0.3s, transform 0.2s; 
+}
+
+.linkgroup span {
+  text-decoration: none;
+}
+
+.linkgroup:hover {
+  background-color: #8d90c7;; 
+  transform: scale(1.05); 
+  text-decoration: none;
+}
+
+.studymakediv{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  padding: 10px;
+  margin: 5px;
+}
+
+.studymakebtn{
+
+  padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 20px;
+      border: none;
+      background-color: #ff6b6b;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background-color 0.3s ease;
+
+}
+
+.studymakebtn:hover {
+  background-color: #ff4c4c;
+  transform: translateY(-4px);
+}
+
+
+.modal {
+  text-align: center;
+  }
+
+  .modal-btn{
+
+    background-color: #4CAF50; 
+  color: white;
+  border: none; 
+  border-radius: 5px; 
+  padding: 5px 10px; 
+  font-size: 15px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+
+
+  }
+
+
+
+
+
+
+
+  /* 웹 화면용 스타일 */
+@media (min-width: 769px) {
+
+  .group-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    position: relative;
+   
+    
+    
+    
+  
+  }
+  
+  .group-card {
+    flex: 1 1 25%;
+    box-sizing: border-box;
+    
+    overflow: hidden;
+    min-width: 150px;  /* 최소 너비 200px */
+    max-width: 24%; 
+    min-height: 100px; 
+    
+    
+  }
+  
+  .btn-component {
+        
+    border-radius: 10px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+
+    
+  }
+
+
+
+.status.false{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+  padding-left: 5px;
+  border: 1px solid rgb(10, 238, 105);
+  border-radius: 10px;
+  font-size : 10px;
+  width: 50px;
+  background-color: rgb(215, 240, 215);
+  left: 0px;
+  padding: 1px;
+  
+  
+}
+
+.status.true{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 5px;
+  border: 1px solid rgb(246, 17, 4);
+  border-radius: 10px;
+  font-size: 11px;  
+  width: 60px;  /* 너비 자동 조정 */
+  background-color: rgb(245, 249, 6);
+  box-sizing: border-box;  /* padding, border를 너비에 포함 */
+  justify-content: left;
+
+  
+}
+
+.btn-name {
+
+  position: relative;
+  margin-top: 10px;
+} 
+
+  
+
+
+}
+
+
+
+
+
