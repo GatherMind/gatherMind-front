@@ -5,7 +5,6 @@ import {
   deleteMember,
   getMemberByToken,
   updateMember,
-  updateMemberNickname,
 } from "../services/MemberApiService";
 import { validateField } from "../services/ValidateApiService";
 
@@ -140,7 +139,7 @@ const EditProfile = () => {
         //     },
         //   }
         // );
-        await updateMemberNickname("password", newPassword);
+        await updateMember("password", newPassword);
         successMessage = `${
           newNickname || originalNickname
         }님의 비밀번호가 안전하게 변경되었습니다.\n`;
@@ -159,7 +158,7 @@ const EditProfile = () => {
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
     if (confirmDelete) {
       try {
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
         // await axios.delete("/api/members/delete-account", {
         //   headers: { Authorization: `Bearer ${token}` },
         // });
