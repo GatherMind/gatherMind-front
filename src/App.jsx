@@ -7,10 +7,8 @@ import Enter from "./components/Enter";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Mypage from "./components/MyPage";
-import MypageAct from "./components/MyPageAct";
 import Goodbye from "./components/Goodbye";
 import EditProfile from "./components/EditProfile";
-import PrivateRoute from "./PrivateRoute";
 import Serious from "./components/Serious";
 
 import CreateSchedule from "./pages/CreateSchedule";
@@ -18,6 +16,9 @@ import QuestionDetail from "./pages/QuestionDetail";
 import QuestionFormPage from "./pages/QuestionFormPage";
 import StudyInfo from "./pages/StudyInfo";
 import StudyFormPage from "./pages/StudyFormPage";
+import JoinedStudy from "./components/JoinedStudy";
+import WrittenQuestion from "./components/WrittenQuestion";
+import WrittenAnswer from "./components/WrittenAnswer";
 
 function App() {
   return (
@@ -29,9 +30,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/mypage" element={<Mypage />} />
-            <Route path="/mypage/act" element={<MypageAct />} />
-            <Route path="/goodbye" element={<Goodbye />} />
+            <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+            <Route path="/mypage/written-question" element={<WrittenQuestion />} />
+            <Route path="/mypage/written-answer" element={<WrittenAnswer />} />
             <Route path="/editprofile" element={<EditProfile />} />
+            <Route path="/goodbye" element={<Goodbye />} />
             <Route path="/serious" element={<Serious />} />
 
             {/* schedule */}

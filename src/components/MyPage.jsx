@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import { getMemberByToken } from "../services/MemberApiService";
+import "../styles/Mypage.css";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -42,23 +42,31 @@ const Mypage = () => {
     <div className="mypage-container">
       <header>
         <Header />
-        <ul>
+        <h2>{memberInfo.nickname}님의 마이 페이지</h2>
+        <ul className="mypage-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
-          <li onClick={() => navigate("/mypage/act")}>활동 보기</li>
+          <li onClick={() => navigate("/mypage/joined-study")}>
+            가입한 스터디
+          </li>
+          <li onClick={() => navigate("/mypage/written-question")}>
+            작성한 질문
+          </li>
+          <li onClick={() => navigate("/mypage/written-answer")}>
+            작성한 답변
+          </li>
         </ul>
       </header>
-      <h2>마이 페이지</h2>
 
       {/* 기본 정보 표시 */}
-      <div>
-        <p>
-          <strong>아이디:</strong> {memberInfo.memberId || "Undefined"}
+      <div className="mypage-info-box">
+        <p className="mypage-info">
+          <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
         </p>
-        <p>
-          <strong>닉네임:</strong> {memberInfo.nickname || "Undefined"}
+        <p className="mypage-info">
+          <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
         </p>
-        <p>
-          <strong>이메일:</strong> {memberInfo.email || "Undefined"}
+        <p className="mypage-info">
+          <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
         </p>
       </div>
       <button onClick={handleEditInfo}>정보 수정</button>

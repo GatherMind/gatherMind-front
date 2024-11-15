@@ -1,1 +1,4 @@
 @import "./styles/global/variables.css";
+.App {
+  text-align: center;
+}

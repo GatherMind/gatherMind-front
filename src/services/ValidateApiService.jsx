@@ -7,7 +7,7 @@ if (!API_URL) {
 }
 
 // validate
-export const validateField = async (field, value) => {
+export const duplicationCheck = async (field, value) => {
   try {
     const response = await axios.post(`${API_URL}/member/check-${field}`, {
       [field]: value,
