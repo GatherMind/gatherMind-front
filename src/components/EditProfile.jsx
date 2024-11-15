@@ -39,6 +39,7 @@ const EditProfile = () => {
     fetchCurrentUserInfo();
   }, []);
 
+<<<<<<< HEAD
   const validateField = async (field, value) => {
     const newErrors = { ...errors };
 
@@ -96,6 +97,74 @@ const EditProfile = () => {
     if (newPassword) {
       const isPasswordValid = await validateField("password", newPassword);
       isFormValid = isFormValid && isPasswordValid;
+=======
+  // 공백 문자 또는 전각 공백을 포함하는지 확인하는 함수
+  const containsWhitespace = (value) => /\s|　/.test(value);
+
+  // 유효성 검사 함수
+  const validate = () => {
+    let isValid = true;
+    setNicknameErrors("");
+    setPasswordErrors("");
+    setConfirmPasswordError("");
+
+    if (newNickname) {
+      if (containsWhitespace(newNickname)) {
+        setNicknameErrors("닉네임에는 공백을 포함할 수 없습니다.");
+        isValid = false;
+      } else if (newNickname.length < 2 || newNickname.length > 20) {
+        setNicknameErrors("닉네임은 2자에서 20자 사이여야 합니다.");
+        isValid = false;
+      } else if (isNicknameUnique === false) {
+        setNicknameErrors("이미 사용 중인 닉네임입니다.");
+        isValid = false;
+      }
+    }
+
+    if (newPassword) {
+      if (containsWhitespace(newPassword)) {
+        setPasswordErrors("비밀번호에는 공백을 포함할 수 없습니다.");
+        isValid = false;
+      } else if (newPassword.length < 8 || newPassword.length > 255) {
+        setPasswordErrors("비밀번호는 8자 이상 255자 이하로 입력해야 합니다.");
+        isValid = false;
+      }
+    }
+
+    if (confirmPassword && confirmPassword !== newPassword) {
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  const checkNicknameUniqueness = async (event) => {
+    event.preventDefault();
+    setNicknameErrors("");
+
+    if (!newNickname) {
+      setNicknameErrors("닉네임을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("/api/members/check-nickname", {
+        nickname: newNickname,
+      });
+
+      const isUnique = response.data.isUnique;
+      setIsNicknameUnique(isUnique);
+
+      if (!isUnique) {
+        setNicknameErrors("이미 사용 중인 닉네임입니다.");
+      } else {
+        setNicknameErrors("");
+      }
+    } catch (error) {
+      console.error("닉네임 중복 확인 오류:", error);
+      setNicknameErrors("닉네임 중복 확인 중 오류가 발생했습니다.");
+>>>>>>> 3b829b817cb9868d323040c00a1cbed515e3414d
     }
 
     // 비밀번호 일치 여부 확인
@@ -163,6 +232,7 @@ const EditProfile = () => {
     }
   };
 
+<<<<<<< HEAD
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
@@ -183,6 +253,8 @@ const EditProfile = () => {
     }
   };
 
+=======
+>>>>>>> 3b829b817cb9868d323040c00a1cbed515e3414d
   return (
     <div className="edit-profile-container">
       <header>
@@ -250,6 +322,7 @@ const EditProfile = () => {
           </div>
 
           {formError && <p className="error-message">{formError}</p>}
+<<<<<<< HEAD
           <button className="mypage-edit-button" type="submit">
             수정하기
           </button>
@@ -260,6 +333,9 @@ const EditProfile = () => {
           >
             회원탈퇴
           </button>
+=======
+          <button type="submit">수정하기</button>
+>>>>>>> 3b829b817cb9868d323040c00a1cbed515e3414d
         </form>
       </main>
     </div>
