@@ -6,11 +6,12 @@ import "../styles/global/FixedButton.css";
 import "../styles/global/DropdownMenu.css";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getMyInfoById,
   getStudyMembersAndBoards,
   getStudyInfoAndMembersAndBoards,
   getBoards,
 } from "../services/apiService";
+
+import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
 import { useUser } from "../context/UserContext";
 import ScheduleTab from "../components/ScheduleTab";

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import { loginMember } from "../services/MemberApiService";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,10 +49,7 @@ const Login = () => {
     if (!validate()) return;
 
     try {
-      const response = await axios.post("/api/members/login", {
-        memberId,
-        password,
-      });
+      const response = await loginMember(memberId, password);
       localStorage.setItem("token", response.data.token); // 토큰 저장
       navigate("/mypage"); // 로그인 후 마이페이지로 이동
     } catch (error) {
@@ -97,7 +95,10 @@ const Login = () => {
       </main>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
-        <p><button onClick={() => navigate("/signup")}>여기</button>를 눌러 다양한 스터디를 둘러보세요!</p>
+        <p>
+          <button onClick={() => navigate("/signup")}>여기</button>를 눌러
+          다양한 스터디를 둘러보세요!
+        </p>
       </footer>
     </div>
   );

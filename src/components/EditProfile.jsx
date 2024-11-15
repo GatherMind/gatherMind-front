@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import {
+  deleteMember,
+  getMemberByToken,
+  updateMember,
+  updateMemberNickname,
+} from "../services/MemberApiService";
+import { validateField } from "../services/ValidateApiService";
 
 const EditProfile = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -23,11 +29,8 @@ const EditProfile = () => {
     const fetchCurrentUserInfo = async () => {
       try {
         const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
-        const response = await axios.get("/api/members/me", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Authorization 헤더 추가
-          },
-        });
+        const response = await getMemberByToken(token);
+
         setMemberInfo({
           memberId: response.data.memberId || "정보 없음",
           email: response.data.email || "정보 없음",
@@ -74,20 +77,18 @@ const EditProfile = () => {
   const checkNicknameUniqueness = async (event) => {
     event.preventDefault();
     setNicknameErrors(""); // 기존 오류 메시지 초기화
-  
+
     if (!newNickname) {
       setNicknameErrors("닉네임을 입력해주세요.");
       return;
     }
-  
+
     try {
-      const response = await axios.post("/api/members/check-nickname", {
-        nickname: newNickname,
-      });
-  
+      const response = await validateField("nickname", newNickname);
+
       const isUnique = response.data.isUnique;
       setIsNicknameUnique(isUnique);
-  
+
       if (!isUnique) {
         setNicknameErrors("이미 사용 중인 닉네임입니다.");
       } else {
@@ -115,29 +116,31 @@ const EditProfile = () => {
     try {
       // 닉네임 변경 요청
       if (newNickname && newNickname !== originalNickname && isNicknameUnique) {
-        await axios.put(
-          "/api/members/update",
-          { nickname: newNickname },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        // await axios.put(
+        //   "/api/members/update",
+        //   { nickname: newNickname },
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //     },
+        //   }
+        // );
+        await updateMember("nickname", newNickname);
         successMessage = `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
       }
 
       // 비밀번호 변경 요청
       if (newPassword) {
-        await axios.put(
-          "/api/members/update",
-          { password: newPassword },
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        // await axios.put(
+        //   "/api/members/update",
+        //   { password: newPassword },
+        //   {
+        //     headers: {
+        //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //     },
+        //   }
+        // );
+        await updateMemberNickname("password", newPassword);
         successMessage = `${
           newNickname || originalNickname
         }님의 비밀번호가 안전하게 변경되었습니다.\n`;
@@ -157,9 +160,10 @@ const EditProfile = () => {
     if (confirmDelete) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete("/api/members/delete-account", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // await axios.delete("/api/members/delete-account", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+        await deleteMember();
         alert("회원 탈퇴가 완료되었습니다.");
         localStorage.removeItem("token"); // 로그아웃 처리
         navigate("/goodbye");

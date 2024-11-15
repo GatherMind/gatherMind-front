@@ -85,25 +85,6 @@ export const getStudySchedule = async (studyId) => {
   }
 };
 
-// 멤버 조회
-export const getMember = async (id) => {
-  try {
-    const response = await axios.get(`${API_URL}/member/${id}`);
-
-    return response.data;
-  } catch (error) {
-    if (error.response) {
-      if (error.response.status === 404) {
-        throw new Error("Member not found.");
-      }
-      throw new Error("Error occurred while fetching the member data.");
-    } else {
-      console.error("Network error or server unreachable: ", error);
-      throw new Error("Network error or server unreachable.");
-    }
-  }
-};
-
 // 스터디 아이디로 스터디 조회
 export const getStudyById = async (studyId) => {
   try {
@@ -112,19 +93,6 @@ export const getStudyById = async (studyId) => {
   } catch (error) {
     console.error("Failed to fetch study info: ", error);
     throw new Error("Failed to fetch study info.");
-  }
-};
-
-// 현재 아이디 정보 조회
-export const getMyInfoById = async (memberId, studyId) => {
-  try {
-    const response = await axios.get(
-      `${API_URL}/member/role?memberId=${memberId}&studyId=${studyId}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error("Failed to fetch my Info: ", error);
-    throw new Error("Failed to fetch my Info.");
   }
 };
 
