@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import "../styles/EditProfile.css";
 
 const EditProfile = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -12,9 +13,7 @@ const EditProfile = () => {
   const [newNickname, setNewNickname] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [nicknameErrors, setNicknameErrors] = useState("");
-  const [passwordErrors, setPasswordErrors] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState("");
   const [isNicknameUnique, setIsNicknameUnique] = useState(null);
   const navigate = useNavigate();
@@ -22,18 +21,17 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchCurrentUserInfo = async () => {
       try {
-        const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
+        const token = localStorage.getItem("token");
         const response = await axios.get("/api/members/me", {
           headers: {
-            Authorization: `Bearer ${token}`, // Authorization 헤더 추가
+            Authorization: `Bearer ${token}`,
           },
         });
         setMemberInfo({
           memberId: response.data.memberId || "정보 없음",
           email: response.data.email || "정보 없음",
-          nickname: response.data.nickname || "",
+          nickname: response.data.nickname || "정보 없음",
         });
-        // 기존 setNewNickname 호출을 제거하여 인풋 필드에 닉네임이 보이지 않도록 합니다.
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류 발생:", error);
       }
@@ -41,71 +39,88 @@ const EditProfile = () => {
     fetchCurrentUserInfo();
   }, []);
 
-  const validate = () => {
-    let isValid = true;
-    setNicknameErrors("");
-    setPasswordErrors("");
-    setConfirmPasswordError("");
+  const validateField = async (field, value) => {
+    const newErrors = { ...errors };
 
-    if (newNickname && (newNickname.length < 2 || newNickname.length > 20)) {
-      setNicknameErrors("닉네임은 2자에서 20자 사이여야 합니다.");
-      isValid = false;
-    } else if (isNicknameUnique === false) {
-      setNicknameErrors("이미 사용 중인 닉네임입니다.");
-      isValid = false;
+    if (!value && field === "password" && newPassword) {
+      newErrors.password = "비밀번호를 입력해 주세요.";
+    } else if (
+      field === "nickname" &&
+      (value.length < 2 || value.length > 20)
+    ) {
+      newErrors.nickname = "닉네임은 2자에서 20자 사이여야 합니다.";
+    } else if (
+      field === "password" &&
+      newPassword &&
+      (value.length < 8 || value.length > 255)
+    ) {
+      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
+    } else if (field === "password" && /\s/.test(value)) {
+      newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+    } else {
+      if (field === "nickname" && value !== memberInfo.nickname) {
+        try {
+          const response = await axios.post(`/api/members/check-nickname`, {
+            nickname: value,
+          });
+          if (!response.data.isUnique) {
+            newErrors.nickname = "이미 사용 중인 닉네임입니다.";
+            setIsNicknameUnique(false);
+          } else {
+            setIsNicknameUnique(true);
+            delete newErrors.nickname;
+          }
+        } catch (error) {
+          console.error("닉네임 중복 확인 오류:", error);
+        }
+      } else {
+        delete newErrors[field];
+      }
     }
 
-    if (newPassword && (newPassword.length < 8 || newPassword.length > 255)) {
-      setPasswordErrors("비밀번호는 8자 이상 255자 이하로 입력해야 합니다.");
-      isValid = false;
-    } else if (/\s/.test(newPassword)) {
-      setPasswordErrors("비밀번호에는 공백을 사용할 수 없습니다.");
-      isValid = false;
-    }
-
-    if (confirmPassword && confirmPassword !== newPassword) {
-      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
-      isValid = false;
-    }
-
-    return isValid;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const checkNicknameUniqueness = async (event) => {
-    event.preventDefault();
-    setNicknameErrors(""); // 기존 오류 메시지 초기화
-  
-    if (!newNickname) {
-      setNicknameErrors("닉네임을 입력해주세요.");
-      return;
+  const validate = async () => {
+    const newErrors = {};
+    let isFormValid = true;
+
+    // 닉네임 유효성 검사
+    if (newNickname && newNickname !== memberInfo.nickname) {
+      const isNicknameValid = await validateField("nickname", newNickname);
+      isFormValid = isFormValid && isNicknameValid;
     }
-  
-    try {
-      const response = await axios.post("/api/members/check-nickname", {
-        nickname: newNickname,
-      });
-  
-      const isUnique = response.data.isUnique;
-      setIsNicknameUnique(isUnique);
-  
-      if (!isUnique) {
-        setNicknameErrors("이미 사용 중인 닉네임입니다.");
-      } else {
-        setNicknameErrors(""); // 중복이 아닌 경우 오류 메시지 삭제
-        // 필요 시 중복 확인 성공 메시지 표시
-      }
-    } catch (error) {
-      console.error("닉네임 중복 확인 오류:", error);
-      setNicknameErrors("닉네임 중복 확인 중 오류가 발생했습니다."); // 추가 오류 메시지
+
+    // 비밀번호 유효성 검사
+    if (newPassword) {
+      const isPasswordValid = await validateField("password", newPassword);
+      isFormValid = isFormValid && isPasswordValid;
     }
+
+    // 비밀번호 일치 여부 확인
+    if (confirmPassword && confirmPassword !== newPassword) {
+      newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
+      isFormValid = false;
+    } else {
+      delete newErrors.confirmPassword;
+    }
+
+    setErrors((prev) => ({ ...prev, ...newErrors }));
+    return isFormValid;
+  };
+
+  const handleNicknameCheck = async () => {
+    await validateField("nickname", newNickname);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validate()) return;
+
+    if (!(await validate())) return;
 
     const originalNickname = memberInfo.nickname;
-    let successMessage;
+    let successMessage = "";
 
     if (!newNickname && !newPassword) {
       alert("수정된 내용이 없습니다.");
@@ -113,7 +128,6 @@ const EditProfile = () => {
     }
 
     try {
-      // 닉네임 변경 요청
       if (newNickname && newNickname !== originalNickname && isNicknameUnique) {
         await axios.put(
           "/api/members/update",
@@ -124,10 +138,9 @@ const EditProfile = () => {
             },
           }
         );
-        successMessage = `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
+        successMessage += `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
       }
 
-      // 비밀번호 변경 요청
       if (newPassword) {
         await axios.put(
           "/api/members/update",
@@ -138,7 +151,7 @@ const EditProfile = () => {
             },
           }
         );
-        successMessage = `${
+        successMessage += `${
           newNickname || originalNickname
         }님의 비밀번호가 안전하게 변경되었습니다.\n`;
       }
@@ -150,7 +163,6 @@ const EditProfile = () => {
     }
   };
 
-  // 회원 탈퇴 요청
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
@@ -161,7 +173,7 @@ const EditProfile = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         alert("회원 탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token"); // 로그아웃 처리
+        localStorage.removeItem("token");
         navigate("/goodbye");
       } catch (error) {
         alert("회원 탈퇴에 실패했습니다.");
@@ -187,65 +199,66 @@ const EditProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>변경할 닉네임</label>
             <input
               type="text"
               value={newNickname}
               onChange={(e) => {
                 setNewNickname(e.target.value);
                 setIsNicknameUnique(null);
-                setNicknameErrors("");
               }}
               autoComplete="off"
+              placeholder="변경할 닉네임"
             />
             <button
               type="button"
-              onClick={checkNicknameUniqueness}
+              onClick={handleNicknameCheck}
               className="check-button"
             >
-              닉네임 중복 확인
+              중복확인
             </button>
             {isNicknameUnique === true && (
               <p className="success-message">사용 가능한 닉네임입니다.</p>
             )}
-            {nicknameErrors && (
-              <p className="error-message">{nicknameErrors}</p>
+            {errors.nickname && (
+              <p className="error-message">{errors.nickname}</p>
             )}
           </div>
 
           <div className="form-group">
-            <label>변경할 비밀번호</label>
             <input
               type="password"
               value={newPassword}
-              onChange={(e) => {
-                setNewPassword(e.target.value);
-                setPasswordErrors("");
-                setConfirmPasswordError("");
-              }}
+              onChange={(e) => setNewPassword(e.target.value)}
               autoComplete="off"
+              placeholder="변경할 비밀번호"
             />
-            {passwordErrors && (
-              <p className="error-message">{passwordErrors}</p>
+            {errors.password && (
+              <p className="error-message">{errors.password}</p>
             )}
           </div>
           <div className="form-group">
-            <label>비밀번호 재확인</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               autoComplete="off"
+              placeholder="변경할 비밀번호 재입력"
             />
-            {confirmPasswordError && (
-              <p className="error-message">{confirmPasswordError}</p>
+            {errors.confirmPassword && (
+              <p className="error-message">{errors.confirmPassword}</p>
             )}
           </div>
 
           {formError && <p className="error-message">{formError}</p>}
-          <button type="submit">수정하기</button>
-          <button type="button" onClick={handleDeleteAccount}>
-            회원 탈퇴
+          <button className="mypage-edit-button" type="submit">
+            수정하기
+          </button>
+          <button
+            className="mypage-delete-button"
+            type="button"
+            onClick={handleDeleteAccount}
+          >
+            회원탈퇴
           </button>
         </form>
       </main>

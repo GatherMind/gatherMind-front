@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.edit-profile-container {
+    width: 1400px;
+    height: 100vh;
+    margin: 15vh auto;
+    text-align: center;
+}
+
+input {
+    border: 1px solid rgb(2, 136, 180);
+}
+
+input:focus {
+    outline: 2px solid rgb(2, 136, 180);
+}
+
+.check-button {
+    width: 10.6vh;
+    height: 4.5vh;
+    position: absolute;
+    margin-left: -11.2vh;
+    margin-top: 3.5vh;
+    background-color: white;
+    color: rgb(2, 136, 180);
+    border: 1px solid rgb(2, 136, 180);
+}
+
+.check-button:hover {
+    width: 10.6vh;
+    height: 4.5vh;
+    position: absolute;
+    margin-left: -11.2vh;
+    margin-top: 3.5vh;
+    background-color: rgb(2, 136, 180);
+    color: white;
+}
+
+.mypage-edit-button,
+.mypage-delete-button {
+    width: 13vh;
+    height: 5.1vh;
+    margin: 5vh 1vh;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0;
+}
+
+.mypage-delete-button {
+    background-color: rgb(194, 68, 68);
+}
+
+.mypage-delete-button:hover {
+    
+    background-color: rgba(194, 68, 68, 0.5);
+}

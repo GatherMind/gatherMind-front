@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.joined-study-container {
+    width: 1400px;
+    height: 100vh;
+    margin: 5vh auto 15vh;
+    text-align: center;
+}
+
+.mypage-joined-study-nav {
+    width: 80vh;
+    margin: 9vh auto;
+}
+
+.mypage-joined-study-nav > li {
+    display: inline-flex;
+    justify-content: center;
+    width: 20%;
+    height: 5vh;
+    padding: 0.5vh 1vh;
+    font-size: large;
+    font-weight: bold;
+    border: 1px solid rgb(2, 136, 180);
+    border-radius: 9px 6px 0 0;
+    border-bottom-style: none;
+    list-style: none;
+    text-align: center;
+    align-items: center;
+}
+
+.mypage-joined-study-nav > li:nth-child(2) {
+    background-color: rgb(2, 136, 180);
+    color: white;
+}
+
+.study-title {
+    margin: 1.2vh 1vh;
+    position: absolute;
+}
+
+.study-card,
+.no-study-message {
+    width: 55vh;
+    padding: 1vh;
+    margin: 3vh auto;
+    border: 1px solid rgb(2, 136, 180);
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.withdraw-button {
+    position: absolute;
+    margin-top: 0.4vh;
+    margin-left: 39vh;
+    padding: 1vh 6vh;
+    background-color: rgba(220, 90, 90, 1);
+}
+
+.withdraw-button:hover {
+    position: absolute;
+    margin-top: 0.4vh;
+    margin-left: 39vh;
+    padding: 1vh 6vh;
+    background-color: rgba(220, 90, 90, 0.7);
+}

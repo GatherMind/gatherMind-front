@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import "../styles/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Login = () => {
 
     // memberId 유효성 검사
     if (!memberId) {
-      newErrors.memberId = "아이디는 필수 입력 항목입니다.";
+      newErrors.memberId = "아이디를 입력해주세요.";
     } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
       newErrors.memberId =
         "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
@@ -25,7 +26,7 @@ const Login = () => {
 
     // password 유효성 검사
     if (!password) {
-      newErrors.password = "비밀번호는 필수 입력 항목입니다.";
+      newErrors.password = "비밀번호를 입력해주세요.";
     } else if (password.length < 8 || password.length > 255) {
       newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
     } else if (/\s/.test(password)) {
@@ -68,36 +69,39 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>아이디</label>
             <input
               type="text"
               value={memberId}
               onChange={handleMemberIdChange}
               autoComplete="off"
+              placeholder="아이디"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
             )}
           </div>
           <div className="form-group">
-            <label>비밀번호</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
+              placeholder="비밀번호"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>
             )}
           </div>
           {loginError && <p className="error-message">{loginError}</p>}
-          <button type="submit">로그인</button>
+          <button className="login-button" type="submit">로그인</button>
         </form>
       </main>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
-        <p><button onClick={() => navigate("/signup")}>여기</button>를 눌러 다양한 스터디를 둘러보세요!</p>
+        <p>
+          <span onClick={() => navigate("/signup")}>여기</span>를 눌러
+          다양한 스터디를 둘러보세요!
+        </p>
       </footer>
     </div>
   );

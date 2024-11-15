@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import "../styles/Signup.css";
 
 const SignUp = () => {
   const [memberId, setMemberId] = useState("");
@@ -10,51 +11,82 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [errors, setErrors] = useState({});
+  const [successMessages, setSuccessMessages] = useState({});
   const [signUpSuccess, setSignUpSuccess] = useState(false);
   const navigate = useNavigate();
 
   const validateAndCheckUniqueness = async (field, value) => {
     const newErrors = {};
+    const newSuccessMessages = {};
 
     if (!value) {
-      newErrors[field] = `${field}을 입력해 주세요.`;
+      newErrors[field] = `${field}을(를) 입력해 주세요.`;
     } else if (field === "memberId" && !/^[a-z0-9]{8,50}$/.test(value)) {
-      newErrors.memberId = "아이디는 8~50자의 영문 소문자와 숫자만 사용 가능합니다.";
-    } else if (field === "nickname" && (value.length < 2 || value.length > 20)) {
+      newErrors.memberId =
+        "아이디는 8~50자의 영문 소문자와 숫자만 사용 가능합니다.";
+    } else if (
+      field === "nickname" &&
+      (value.length < 2 || value.length > 20)
+    ) {
       newErrors.nickname = "닉네임은 2자에서 20자 사이여야 합니다.";
-    } else if (field === "password" && (value.length < 8 || value.length > 255)) {
-      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
-    } else if (field === "password" && /\s/.test(value)) {
-      newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
-    } else if (field === "email" && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
-      newErrors.email = "유효한 이메일 주소를 입력해 주세요.";
     } else {
       try {
         const response = await axios.post(`/api/members/check-${field}`, {
           [field]: value,
         });
-        if (!response.data.isUnique) newErrors[field] = `이미 사용 중인 ${field}입니다.`;
+        if (response.data.isUnique) {
+          newSuccessMessages[field] = `사용할 수 있는 ${
+            field === "memberId" ? "아이디" : "닉네임"
+          }입니다.`;
+          newErrors[field] = ""; // 오류 메시지 초기화
+        } else {
+          newErrors[field] = `이미 사용 중인 ${
+            field === "memberId" ? "아이디" : "닉네임"
+          }입니다.`;
+          delete newSuccessMessages[field]; // 성공 메시지 초기화
+        }
       } catch (error) {
         console.error(`${field} 중복 확인 오류:`, error);
       }
     }
 
     setErrors((prev) => ({ ...prev, ...newErrors }));
-    return Object.keys(newErrors).length === 0;
+    setSuccessMessages((prev) => ({ ...prev, ...newSuccessMessages }));
+
+    // 새로운 에러가 없는 경우 유효성 검증 통과
+    return !newErrors[field];
   };
 
   const validate = async () => {
-    const isMemberIdValid = await validateAndCheckUniqueness("memberId", memberId);
+    const isMemberIdValid = await validateAndCheckUniqueness(
+      "memberId",
+      memberId
+    );
     const isEmailValid = await validateAndCheckUniqueness("email", email);
-    const isNicknameValid = await validateAndCheckUniqueness("nickname", nickname);
+    const isNicknameValid = await validateAndCheckUniqueness(
+      "nickname",
+      nickname
+    );
     const newErrors = {};
 
-    if (password !== confirmPassword) {
+    if (!password) {
+      newErrors.password = "비밀번호를 입력해 주세요.";
+    }
+    
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "비밀번호 확인을 입력해 주세요.";
+    } else if (password !== confirmPassword) {
       newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
     }
+
     setErrors((prev) => ({ ...prev, ...newErrors }));
 
-    return isMemberIdValid && isEmailValid && isNicknameValid && !newErrors.confirmPassword;
+    return (
+      isMemberIdValid &&
+      isEmailValid &&
+      isNicknameValid &&
+      !newErrors.confirmPassword
+    );
   };
 
   const handleSubmit = async (event) => {
@@ -62,7 +94,12 @@ const SignUp = () => {
     if (!(await validate())) return;
 
     try {
-      await axios.post("/api/members/signup", { memberId, password, email, nickname });
+      await axios.post("/api/members/signup", {
+        memberId,
+        password,
+        email,
+        nickname,
+      });
       setSignUpSuccess(true);
       setTimeout(() => navigate("/login"), 3000); // 3초 후 로그인 페이지로 이동
     } catch (error) {
@@ -82,65 +119,110 @@ const SignUp = () => {
         ) : (
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="form-group">
-              <label>아이디</label>
+              <label htmlFor="id">아이디</label>
               <input
                 type="text"
                 value={memberId}
                 onChange={(e) => setMemberId(e.target.value.toLowerCase())}
-                onBlur={() => validateAndCheckUniqueness("memberId", memberId)}
                 autoComplete="off"
+                placeholder="아이디"
+                name="id"
+                id="id"
+                className="signup-input"
               />
-              {errors.memberId && <p className="error-message">{errors.memberId}</p>}
+              <button
+                type="button"
+                onClick={() => validateAndCheckUniqueness("memberId", memberId)}
+                className="signup-check-button"
+              >
+                중복확인
+              </button>
+              {errors.memberId && (
+                <p className="error-message">{errors.memberId}</p>
+              )}
+              {successMessages.memberId && (
+                <p className="success-message">{successMessages.memberId}</p>
+              )}
             </div>
 
             <div className="form-group">
-              <label>비밀번호</label>
+              <label htmlFor="password">비밀번호</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="off"
+                placeholder="비밀번호"
+                name="password"
+                id="password"
+                className="signup-input"
               />
-              {errors.password && <p className="error-message">{errors.password}</p>}
+              {errors.password && (
+                <p className="error-message">{errors.password}</p>
+              )}
             </div>
 
             <div className="form-group">
-              <label>비밀번호 재확인</label>
+              <label htmlFor="confirmPassword">비밀번호 재입력</label>
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 autoComplete="off"
+                placeholder="비밀번호 재입력"
+                name="confirmPassword"
+                id="confirmPassword"
+                className="signup-input"
               />
-              {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
+              {errors.confirmPassword && (
+                <p className="error-message">{errors.confirmPassword}</p>
+              )}
             </div>
 
             <div className="form-group">
-              <label>이메일</label>
+              <label htmlFor="email">이메일</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                onBlur={() => validateAndCheckUniqueness("email", email)}
                 autoComplete="off"
+                placeholder="이메일"
+                name="email"
+                id="email"
+                className="signup-input"
               />
               {errors.email && <p className="error-message">{errors.email}</p>}
             </div>
 
             <div className="form-group">
-              <label>닉네임</label>
+              <label htmlFor="nickname">닉네임</label>
               <input
                 type="text"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
-                onBlur={() => validateAndCheckUniqueness("nickname", nickname)}
                 autoComplete="off"
+                placeholder="닉네임"
+                name="nickname"
+                id="nickname"
+                className="signup-input"
               />
-              {errors.nickname && <p className="error-message">{errors.nickname}</p>}
+              <button
+                type="button"
+                onClick={() => validateAndCheckUniqueness("nickname", nickname)}
+                className="signup-check-button"
+              >
+                중복확인
+              </button>
+              {errors.nickname && (
+                <p className="error-message">{errors.nickname}</p>
+              )}
+              {successMessages.nickname && (
+                <p className="success-message">{successMessages.nickname}</p>
+              )}
             </div>
 
             {errors.form && <p className="error-message">{errors.form}</p>}
-            <button type="submit">회원가입</button>
+            <button className="signup-button" type="submit">회원가입</button>
           </form>
         )}
       </main>
