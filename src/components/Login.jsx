@@ -69,24 +69,30 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
+            <label className="login-label" htmlFor="loginId">아이디</label>
             <input
               type="text"
               value={memberId}
               onChange={handleMemberIdChange}
               autoComplete="off"
               placeholder="아이디"
+              className="login-input"
+              id="loginId"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
             )}
           </div>
           <div className="form-group">
+            <label className="login-label" htmlFor="loginPw">비밀번호</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
               placeholder="비밀번호"
+              className="login-input"
+              id="loginPw"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>

@@ -20,7 +20,11 @@ const SignUp = () => {
     const newSuccessMessages = {};
 
     if (!value) {
-      newErrors[field] = `${field}을(를) 입력해 주세요.`;
+      newErrors[field] = {
+        memberId: "아이디를 입력해 주세요.",
+        nickname: "닉네임을 입력해 주세요.",
+        email: "이메일을 입력해 주세요.",
+      }[field];
     } else if (field === "memberId" && !/^[a-z0-9]{8,50}$/.test(value)) {
       newErrors.memberId =
         "아이디는 8~50자의 영문 소문자와 숫자만 사용 가능합니다.";
@@ -119,14 +123,16 @@ const SignUp = () => {
         ) : (
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="form-group">
-              <label htmlFor="id">아이디</label>
+              <label className="signup-label" htmlFor="id">
+                아이디
+              </label>
               <input
                 type="text"
                 value={memberId}
                 onChange={(e) => setMemberId(e.target.value.toLowerCase())}
                 autoComplete="off"
                 placeholder="아이디"
-                name="id"
+                name="아이디"
                 id="id"
                 className="signup-input"
               />
@@ -146,7 +152,9 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="password">비밀번호</label>
+              <label className="signup-label" htmlFor="password">
+                비밀번호
+              </label>
               <input
                 type="password"
                 value={password}
@@ -163,7 +171,9 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="confirmPassword">비밀번호 재입력</label>
+              <label className="signup-label" htmlFor="confirmPassword">
+                비밀번호 재입력
+              </label>
               <input
                 type="password"
                 value={confirmPassword}
@@ -180,14 +190,16 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">이메일</label>
+              <label className="signup-label" htmlFor="email">
+                이메일
+              </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="off"
                 placeholder="이메일"
-                name="email"
+                name="이메일"
                 id="email"
                 className="signup-input"
               />
@@ -195,14 +207,16 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="nickname">닉네임</label>
+              <label className="signup-label" htmlFor="nickname">
+                닉네임
+              </label>
               <input
                 type="text"
                 value={nickname}
                 onChange={(e) => setNickname(e.target.value)}
                 autoComplete="off"
                 placeholder="닉네임"
-                name="nickname"
+                name="닉네임"
                 id="nickname"
                 className="signup-input"
               />
