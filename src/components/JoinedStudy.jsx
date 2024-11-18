@@ -52,35 +52,46 @@ const JoinedStudy = () => {
 
   return (
     <div className="joined-study-container">
-    <header>
       <Header />
-      <h2>{memberInfo.nickname}님의 마이 페이지</h2>
-      <ul className="mypage-joined-study-nav">
-        <li onClick={() => navigate("/mypage")}>정보 보기</li>
-        <li onClick={() => navigate("/mypage/joined-study")}>가입한 스터디</li>
-        <li onClick={() => navigate("/mypage/written-question")}>작성한 질문</li>
-        <li onClick={() => navigate("/mypage/written-answer")}>작성한 답변</li>
-      </ul>
-    </header>
-
-    <h3>가입한 스터디 목록</h3>
-      {joinedGroups.length > 0 ? (
-        <div className="study-list">
-          {joinedGroups.map((group) => (
-            <div className="study-card" key={group.id}>
-              <p className="study-title">{group.title}</p>
-              <button
-                className="withdraw-button"
-                onClick={() => handleWithdrawFromStudy(group.id)}
-              >
-                탈퇴
-              </button>
+      <div className="joined-study-wrap">
+        <header>
+          <h2>{memberInfo.nickname}님의 마이 페이지</h2>
+          <ul className="mypage-joined-study-nav">
+            <li onClick={() => navigate("/mypage")}>정보 보기</li>
+            <li onClick={() => navigate("/mypage/joined-study")}>
+              가입한 스터디
+            </li>
+            <li onClick={() => navigate("/mypage/written-question")}>
+              작성한 질문
+            </li>
+            <li onClick={() => navigate("/mypage/written-answer")}>
+              작성한 답변
+            </li>
+          </ul>
+        </header>
+        <main>
+          <h3>가입한 스터디 목록</h3>
+          {joinedGroups.length > 0 ? (
+            <div className="study-list">
+              {joinedGroups.map((group) => (
+                <div className="study-card" key={group.id}>
+                  <p className="study-title">{group.title}</p>
+                  <button
+                    className="withdraw-button"
+                    onClick={() => handleWithdrawFromStudy(group.id)}
+                  >
+                    탈퇴
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      ) : (
-        <p className="no-study-message">현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?</p>
-      )}
+          ) : (
+            <p className="no-study-message">
+              현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?
+            </p>
+          )}
+        </main>
+      </div>
     </div>
   );
 };

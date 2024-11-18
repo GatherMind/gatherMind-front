@@ -1,83 +1,82 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .joined-container {
-    width: 768px;
-    height: 100vh;
-    margin: 0 auto;
-  }
-  
-  .joined-wrap {
-    width: 80%;
-    margin: 0 auto;
-  }
-  
-  .joined-wrap > header > h2 {
-    margin: 5vh auto;
-    text-align: center;
-  }
-  
-  .mypage-joined-study-nav {
-    width: 100%;
-  }
-  
-  .mypage-joined-study-nav li {
-    display: inline-block;
-    width: 25%;
-    height: 6vh;
-    margin: 3vh auto;
-    padding-top: 1vh;
-    border: 1px solid rgb(2, 136, 180);
-    border-top: 2px solid rgb(2, 136, 180);
-    border-bottom: 2px solid rgb(2, 136, 180);
-    text-align: center;
-    box-sizing: border-box;
-    font-size: 1.2rem;
-  }
-  
-  .joined-nav li:nth-child(1) {
-    color: white;
-    background-color: rgb(2, 136, 180);
-    border-left: 2px solid rgb(2, 136, 180);
-    border-radius: 4px 0 0 4px;
-  }
-  
-  .joined-nav li:nth-child(4) {
-    border-right: 2px solid rgb(2, 136, 180);
-    border-radius: 0 4px 4px 0;
-  }
-  
-  .joined-info {
-    width: 100%;
-    margin: 3vh auto;
-    border: 2px solid rgb(2, 136, 180);
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .joined-info > h3,
-  .joined-info > span {
-    display: inline-block;
-    font-size: 1.2em;
-    margin: 0;
-    padding: 3vh 5vh;
-  }
-  
-  .joined-info > span {
-    margin: 0 auto;
-  }
-  
-  .joined-button {
-    width: 100%;
-    height: 7vh;
-    margin: 3vh auto;
-    border-style: none;
-    border-radius: 4px;
-    color: white;
-    background-color: rgb(2, 136, 180);
-    outline: none;
-    font-size: 1.2rem;
-  }
-  
+  margin: 0;
+  padding: 0;
+}
+
+.joined-study-container {
+  width: 768px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.joined-study-wrap {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.joined-study-wrap > header > h2 {
+  margin: 5vh auto;
+  text-align: center;
+}
+
+.mypage-joined-study-nav {
+  width: 100%;
+}
+
+.mypage-joined-study-nav li {
+  display: inline-block;
+  width: 25%;
+  height: 6vh;
+  margin: 3vh auto;
+  padding-top: 1vh;
+  border: 1px solid rgb(2, 136, 180);
+  border-top: 2px solid rgb(2, 136, 180);
+  border-bottom: 2px solid rgb(2, 136, 180);
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+}
+
+.mypage-nav li:nth-child(1) {
+  color: white;
+  background-color: rgb(2, 136, 180);
+  border-left: 2px solid rgb(2, 136, 180);
+  border-radius: 4px 0 0 4px;
+}
+
+.mypage-nav li:nth-child(4) {
+  border-right: 2px solid rgb(2, 136, 180);
+  border-radius: 0 4px 4px 0;
+}
+
+.mypage-info {
+  width: 100%;
+  margin: 3vh auto;
+  border: 2px solid rgb(2, 136, 180);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.mypage-info > h3,
+.mypage-info > span {
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 3vh 5vh;
+}
+
+.mypage-info > span {
+  margin: 0 auto;
+}
+
+.mypage-button {
+  width: 100%;
+  height: 7vh;
+  margin: 3vh auto;
+  border-style: none;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(2, 136, 180);
+  outline: none;
+  font-size: 1.2rem;
+}

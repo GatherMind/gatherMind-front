@@ -21,19 +21,6 @@ const Mypage = () => {
   //       return;
   //     }
 
-<<<<<<< Updated upstream
-      try {
-        const response = await axios.get("/api/members/me", {
-          headers: { Authorization: `Bearer ${token}` }, // 헤더에 토큰 추가
-        });
-        setMemberInfo(response.data || {});
-      } catch (error) {
-        console.error("회원 정보를 가져오는 중 오류가 발생했습니다.", error);
-        alert("로그인이 필요합니다.");
-        navigate("/login");
-      }
-    };
-=======
   //     try {
   //       const response = await getMemberByToken();
   //       setMemberInfo(response.data || {});
@@ -43,7 +30,6 @@ const Mypage = () => {
   //       navigate("/login");
   //     }
   //   };
->>>>>>> Stashed changes
 
   //   fetchMemberInfo();
   // }, [navigate]);
@@ -72,20 +58,22 @@ const Mypage = () => {
           </ul>
         </header>
 
-        {/* 기본 정보 표시 */}
-        <div className="mypage-info-box">
-          <p className="mypage-info">
-            <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
-          </p>
-          <p className="mypage-info">
-            <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
-          </p>
-          <p className="mypage-info">
-            <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
-          </p>
-        </div>
-        {/* <button onClick={handleEditInfo}>정보 수정</button> */}
-        <button className="mypage-button">정보 수정</button>
+        <main>
+          {/* 기본 정보 표시 */}
+          <div className="mypage-info-box">
+            <p className="mypage-info">
+              <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
+            </p>
+            <p className="mypage-info">
+              <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
+            </p>
+            <p className="mypage-info">
+              <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
+            </p>
+          </div>
+          {/* <button onClick={handleEditInfo}>정보 수정</button> */}
+          <button className="mypage-button">정보 수정</button>
+        </main>
       </div>
     </div>
   );
