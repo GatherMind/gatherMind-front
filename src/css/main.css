@@ -7,8 +7,7 @@
   margin: 10px;
   margin-top: 10px;
   text-align: center;
-  border: 2px solid;
-  width: 90%;
+  width: 100%;
   padding: 10px;
 }
 
@@ -18,13 +17,14 @@
 }
 
 .title {
-    font-size: 15px;
-    text-align: left;
-    font-family: "Do Hyeon", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+
+
   
-  
+  font-family: "Black Han Sans", serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 50px;
+
 }
 
 @keyframes pulse {
@@ -38,76 +38,80 @@
   padding: 5px;
   width: 100%;
 
-  font-size: 25px;
   text-align: left;
-  font-family: "Do Hyeon", sans-serif;
-  font-weight: 700;
+
+  font-family: "Black Han Sans", serif;
+  font-weight: 500;
   font-style: normal;
+  font-size: 45px;
+  letter-spacing: 1px;
+
   
 }
 
-.mygroup-list{
-  padding: 0px;
-  display: inline-flex;
-  justify-content: center; 
+
+.mygrouplist{
+  margin: 10px;
+  padding: 10px;
+  display: flex; 
+  flex-direction: row;
+  
   gap: 5px; 
   flex-wrap: wrap; 
-  width:100%; 
-  align-items: flex-start;
-  border-bottom: 3px solid black;
-  border-top: 3px solid black;
+   width: 100%;
+  align-items: flex-start; 
+  border-top: 2px solid rgb(121, 218, 186);
+  border-bottom: 2px solid rgb(121, 218, 186);
+  height: auto;
 
 }
 .mygroup-card{
-  
-  
+
   margin:5px; 
   padding: 0px; 
-  height: 30px;
-  width: 45%; 
+  height: auto;
+  width: 30%; 
 
   display: flex;
   box-sizing: border-box;
 
 
-  }
-
-  .mybtn-card{
-   
-    margin:2px;
-    display: inline-block;
-    width: 100%;
-    height: 30px;
-    color: black;
-    border: none;
-    border-radius: 10px;
-    padding: 5px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    overflow: hidden;
-    text-overflow: ellipsis;
   
 
-    background-color: rgb(222, 245, 213);
-    border: 1px solid;
 
-
-    
   }
+
+  .my-card{
+    border-radius: 10px;
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    position: relative;
+    background-color: #f3ffe0;
+    text-align: left;
+    justify-content: left;
+    
+ 
+     }
 
 
 
 
 .group {
-  border-radius: 10px;
-  border: 5px solid #606265;
+  
+  border-left: 10px solid #85c7eb;
+  border-right: 10px solid #85c7eb;
+  padding-left: 20px;  /* 왼쪽 내용과 보더 사이 여백 */
+  padding-right: 20px; /* 오른쪽 내용과 보더 사이 여백 */
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1), -4px 0 4px rgba(0, 0, 0, 0.1); /* 양쪽에 그림자 추가 */
   margin: 10px;
   padding: 10px;
   justify-content: center;
   width: 100%;
   text-align: center;
   height: auto;
+  background-color: #ffffff;
   
 }
 
@@ -153,7 +157,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    background-color: #cfd0d5;
+    background-color: #ffffff;
     border-radius: 10px;
     
   
@@ -176,7 +180,7 @@
     display: inline-block;
     width: 100%;
     height: 70px;
-    background-color: #ffffff;
+    background-color: #d6e5f2;
     color: black;
     border: none;
     border-radius: 10px;
@@ -188,6 +192,9 @@
     text-overflow: ellipsis;
   
   }
+
+
+  
 
 
 
@@ -227,7 +234,8 @@
  color: rgb(10, 10, 10);
  width: auto;
  font-size: 14px;
- padding: 5px;
+ margin-left: 10px;
+ text-align: left;
 
 }
 
@@ -349,13 +357,14 @@
   }
   
   .group-card {
-    flex: 1 1 25%;
+    flex: 1 1 33%;
     box-sizing: border-box;
     
     overflow: hidden;
-    min-width: 150px;  /* 최소 너비 200px */
-    max-width: 24%; 
+    min-width: 200px;  /* 최소 너비 200px */
+    max-width: 32%; 
     min-height: 100px; 
+   
     
     
   }
@@ -363,11 +372,11 @@
   .btn-component {
         
     border-radius: 10px;
-    padding: 0px;
+    padding: 5px;
     width: 100%;
     height: 100%;
     position: relative;
-    
+    background-color: #d6e5f2;
 
     
   }
@@ -379,14 +388,14 @@
   top: 0;
   left: 0;
   margin: 5px;
-  padding-left: 5px;
+  marin-top:5px;
   border: 1px solid rgb(10, 238, 105);
   border-radius: 10px;
   font-size : 10px;
   width: 50px;
   background-color: rgb(215, 240, 215);
   left: 0px;
-  padding: 1px;
+
   
   
 }
@@ -396,28 +405,25 @@
   top: 0;
   left: 0;
   margin: 5px;
+  marin-top:5px;
   border: 1px solid rgb(246, 17, 4);
   border-radius: 10px;
   font-size: 11px;  
   width: 60px;  /* 너비 자동 조정 */
   background-color: rgb(245, 249, 6);
-  box-sizing: border-box;  /* padding, border를 너비에 포함 */
-  justify-content: left;
-
   
 }
 
 .btn-name {
 
   position: relative;
-  margin-top: 10px;
+  margin-top: 20px;
 } 
 
   
 
 
 }
-
 
 
 

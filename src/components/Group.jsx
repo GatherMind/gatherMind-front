@@ -6,7 +6,7 @@ import redlighticon from "../assets/redlighticon.png";
 import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
 
-function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
+function Group({ statusFilter, searchResult }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [groupInfoData, setGroupInfoData] = useState();
 
@@ -78,7 +78,7 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
           <div className="group-card" key={data.id}>
             <button className="btn-component" onClick={() => handleclick(data)}>
               <div className="status">
-                {data.status === false ? (
+                {data.status === "false" ? (
                   <div className={`status ${data.status}`}>
                     <img src={greenlighticon} alt="" width={12} height={12} />
                     모집중
@@ -96,4 +96,4 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
   );
 }
 
-export default GroupApi;
+export default Group;

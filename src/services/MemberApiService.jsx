@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
-const getAuthToken = () => localStorage.getItem("token");
+const getAuthToken = () => localStorage.getItem('token');
 
 if (!API_URL) {
   throw new Error("API URI: is not defined.");
@@ -73,10 +73,33 @@ export const loginMember = async (memberId, password) => {
 
 // 토큰으로 회원 정보 가져오기
 export const getMemberByToken = async () => {
+
+
+  console.log(getAuthToken())
   try {
     const response = await axios.get(`${API_URL}/member/me`, {
-      headers: { Authorization: `Bearer ${getAuthToken()}` }, // 헤더에 토큰 추가
-    });
+      headers: {  Authorization: `Bearer ${getAuthToken()}`,
+     }, // 헤더에 토큰 추가
+    }
+    );
+
+    return response;
+  } catch (error) {
+    console.error("Network error or server unreachable: ", error);
+    throw new Error("Network error or server unreachable.");
+  }
+};
+
+export const getMystudyByToken = async () => {
+
+
+  console.log(getAuthToken())
+  try {
+    const response = await axios.get(`${API_URL}/member/my-studies`, {
+      headers: {  Authorization: `Bearer ${getAuthToken()}`,
+     }, // 헤더에 토큰 추가
+    }
+    );
 
     return response;
   } catch (error) {
@@ -105,10 +128,10 @@ export const updateMember = async (filed, value) => {
   }
 };
 
-// 회원 탈퇴
+// 회원 정보 수정
 export const deleteMember = async () => {
   try {
-    const response = await axios.delete(`${API_URL}/member/delete-account`, {
+    const response = await axios.put(`${API_URL}/member/delete-account`, {
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,
       },

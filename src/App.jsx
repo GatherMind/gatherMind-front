@@ -36,8 +36,9 @@ function App() {
     <>
       <AuthProvider>
         <Router>
-          <Header setLoginresult={setLoginresult} />
+        
           <div className="container">
+          <Header setLoginresult={setLoginresult} />
             <div className="content">
               <Routes>
                 <Route path="/" element={<Main />}></Route>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import homeicon from "../assets/homeicon.png";
+import homeicon from "../assets/gathermind.png";
 import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
 
@@ -23,7 +23,7 @@ export default function Header({ setLoginresult }) {
     <header className="header">
       <div className="header">
         {" "}
-        <img src={homeicon} alt="HomeIcon" onClick={handleClick} />
+        <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
       <div>
         {" "}
