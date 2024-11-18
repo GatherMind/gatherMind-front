@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { dateFormat } from "../services/QuestionService";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { updateAnswer, deleteAnswer } from "../services/apiService"
 
 const Answer = ({answer, fetch, scrollToRef}) => {
-
-    const navigate = useNavigate();
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(answer.content);
 
     const handleEdit = () => {
+        if (isEditing) setEditedContent(answer.content); // 수정 취소 시 원래 데이터로 돌아감
         setIsEditing(!isEditing);
     }
 
@@ -20,13 +18,9 @@ const Answer = ({answer, fetch, scrollToRef}) => {
             return;
         }
         try {
-            const response = await axios.put(`http://localhost:8080/api/answer/${answer.answerId}`,
-                editedContent, 
-                {
-                    headers: { "Content-Type": "text/plain" } // text/plain으로 설정
-                }
-            );
-            console.log("댓글 수정 완료", response);
+            const response = await updateAnswer(answer.answerId, editedContent);
+            console.log("댓글 수정 완료");
+
             setIsEditing(false);
             setTimeout(()=>{fetch()}, 500);
             setTimeout(()=>{scrollToRef()}, 800);
@@ -37,7 +31,7 @@ const Answer = ({answer, fetch, scrollToRef}) => {
 
     const handleDelete = async () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-            await axios.delete(`http://localhost:8080/api/answer/${answer.answerId}`);
+            deleteAnswer(answer.answerId);
             setTimeout(()=>{fetch()}, 500);
             alert("댓글이 삭제되었습니다.");
         }
@@ -49,14 +43,15 @@ const Answer = ({answer, fetch, scrollToRef}) => {
             {isEditing ? (
                 // 수정 모드
                 <div className="edit-mode">
-                    <input
-                        type="text"
+                    <textarea
                         value={editedContent}
                         onChange={(e) => setEditedContent(e.target.value)}
                         className="edit-input"
                     />
-                    <button onClick={handleSave} className="save-button">저장</button>
-                    <button onClick={handleEdit} className="cancel-button">취소</button>
+                    <div className="edit-buttons">
+                        <button onClick={handleSave} className="save-button">저장</button>
+                        <button onClick={handleEdit} className="cancel-button">취소</button>
+                    </div>
                 </div>
             ) : (
                 // 수정 모드가 아닐 때

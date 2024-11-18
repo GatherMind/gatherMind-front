@@ -1,45 +1,36 @@
-/* CreateMeeting.css */
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/* Design System 기반 CSS - CreateMeeting.css */
 
 h1 {
-  font-size: 24px;
+  font-size: 1.5rem; /* px 대신 rem 사용으로 반응형 지원 */
   font-weight: bold;
-  color: #333;
+  color: var(--text-color);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 
 .study-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  color: white;
-  background-color: #0288b4;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+/* 추가로 반응형 지원 */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
 
-button:hover {
-  background-color: #0288b4a1;
-}
+  h1 {
+    font-size: 1.25rem; /* 화면 크기에 따른 폰트 크기 조절 */
+  }
 
-.alert {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
+  button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
 }

@@ -3,64 +3,37 @@
   padding: 0;
 }
 
-.login-container {
-  width: 768px;
-  height: 100vh;
-  margin: 0 auto;
-}
-
 .login-container > main {
-  width: 50%;
+  width: 350px;
   margin: 0 auto;
-}
-
-.login-container > main > h2 {
-    margin: 3vh auto;
-}
-
-.form-group > .login-label {
-  position: absolute;
-  margin: 1vh 1.4vh;
-  padding: 0 0.5vh;
-  color: rgb(0, 123, 255);
-  background-color: white;
 }
 
 .form-group > .login-input {
-  width: 100%;
-  height: 7vh;
-  margin: 2vh auto;
-  padding: 0;
-  border: 1px solid rgb(0, 123, 255);
-  border-radius: 4px;;
-}
-
-.form-group > .login-input:focus {
-  width: 100%;
-  height: 7vh;
-  margin: 2vh auto;
-  padding: 0;
-  border: 2px solid rgb(0, 123, 255);
-  border-radius: 4px;;
+  margin-top: 2vh;
 }
 
 .form-group > .error-message {
-    width: 100%;
-    padding: 1vh 0;
+  width: 100%;
+  height: 3vh;
+  margin-top: 1vh;
+  padding: 0;
 }
 
-.login-button {
-    width: 100%;
-    margin: 1vh auto;
+.login-error-message {
+  margin-top: 1vh;
 }
 
-.login-container > footer {
-    width: 50%;
-    margin: 5vh auto;
-    text-align: center;
+main > form > .login-button {
+  width: 100%;
+  margin-top: 3vh;
+  background-color: rgb(2, 136, 255);
 }
 
-.login-container > footer > p > span {
-    font-weight: bold;
-    color: rgb(0, 123, 255);
+footer {
+  margin-top: 5vh;
+}
+
+footer > p > span {
+  color: rgb(2, 136, 255);
+  font-weight: bold;
 }

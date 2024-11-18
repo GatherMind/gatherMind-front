@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+
 import "../styles/Login.css";
+import { loginMember } from "../services/MemberApiService";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -49,10 +50,8 @@ const Login = () => {
     if (!validate()) return;
 
     try {
-      const response = await axios.post("/api/members/login", {
-        memberId,
-        password,
-      });
+      const response = await loginMember(memberId, password);
+
       localStorage.setItem("token", response.data.token); // 토큰 저장
       navigate("/mypage"); // 로그인 후 마이페이지로 이동
     } catch (error) {
@@ -62,9 +61,6 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <header>
-        <Header />
-      </header>
       <main>
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
@@ -77,7 +73,6 @@ const Login = () => {
               autoComplete="off"
               placeholder="아이디"
               className="login-input"
-              id="loginId"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
@@ -92,21 +87,22 @@ const Login = () => {
               autoComplete="off"
               placeholder="비밀번호"
               className="login-input"
-              id="loginPw"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          {loginError && <p className="error-message">{loginError}</p>}
-          <button className="login-button" type="submit">로그인</button>
+          {loginError && <p className="login-error-message">{loginError}</p>}
+          <button className="login-button" type="submit">
+            로그인
+          </button>
         </form>
       </main>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
         <p>
-          <span onClick={() => navigate("/signup")}>여기</span>를 눌러
-          다양한 스터디를 둘러보세요!
+          <span onClick={() => navigate("/signup")}>여기</span>를 눌러 다양한
+          스터디를 둘러보세요!
         </p>
       </footer>
     </div>

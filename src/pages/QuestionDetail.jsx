@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AnswerList from "../components/AnswerList";
 import { dateFormat } from "../services/QuestionService"
+import { getQuestion, deleteQuestion, createAnswer } from "../services/apiService";
 import "../styles/QuestionDetail.css";
 
 const QuestionDetail = () => {
@@ -12,19 +12,20 @@ const QuestionDetail = () => {
     const scrollRef = useRef();
 
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
     const [question, setQuestion] = useState(null);
 
     const [answer, setAnswer] = useState("");
 
     const fetchQuestion = async () => {
-        //setLoading(true);
         try {
-            const data = await axios.get(`http://localhost:8080/api/question/${id}`);
+            const questionData = await getQuestion(id);
 
             console.log("게시글 조회 성공");
-            setQuestion(data.data);
+            setQuestion(questionData);
         } catch (error) {
-            console.log("게시글 조회 실패", error);
+            console.log("게시글 정보를 불러오지 못했습니다.", error);
+            setError("게시글 정보를 불러오지 못했습니다.");
         } finally {
             setLoading(false); // 로딩 상태 해제
         }
@@ -38,25 +39,28 @@ const QuestionDetail = () => {
     const handleDelete = async () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
             try {
-                await axios.delete(`http://localhost:8080/api/question/${id}`);
-
+                deleteQuestion(id);
                 console.log("게시글 삭제 성공");
                 alert("게시글이 삭제되었습니다.");
                 navigate('/'); // 메인 페이지로 이동
             } catch (error) {
-                console.log("게시글 삭제 실패", error);
+                console.log("게시글 삭제 실패");
             }
         }
     }
     
     const onSubmit = async () => {
+        if (answer === "") {
+            alert("내용을 입력해주세요.");
+            return;
+        }
         try {
-            const response = await axios.post("http://localhost:8080/api/answer", {
+            const response = await createAnswer({
                 content : answer, 
                 questionId : id, 
-                memberId : "user1" // 임시 userId
+                memberId : "user2" // 임시 userId
             });
-            console.log("댓글 작성 성공" , response);
+            console.log("댓글 작성 성공");
             
             setAnswer(""); // 댓글 작성 후 입력창 초기화
             setTimeout(()=>{fetchQuestion()}, 500);
@@ -68,6 +72,8 @@ const QuestionDetail = () => {
     
     // 로딩 상태
     if (loading) return <div>Loading...</div>;
+
+    if (error) return <div>{error}</div>
 
     return (
         <div className="container">
@@ -94,9 +100,9 @@ const QuestionDetail = () => {
             <hr />
 
             <AnswerList answers={question?.answers} fetch={fetchQuestion} />
-            <div id="answer-input" className="answer-input-section" ref={scrollRef}>
-                <input type="text" placeholder="댓글을 남겨보세요" className="answer-input" value={answer} onChange={(e) => setAnswer(e.target.value)}/>
-                <button onClick={onSubmit}>등록</button>
+            <div className="answer-input-section" ref={scrollRef}>
+                <textarea placeholder="댓글을 남겨보세요" className="answer-input" value={answer} onChange={(e) => setAnswer(e.target.value)}/>
+                <button onClick={onSubmit} className="submit-button">등록</button>
             </div>
         </div>
     );

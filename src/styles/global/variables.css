@@ -1,0 +1,20 @@
+/* variables.css */
+:root {
+  --primary-color: #4a90e2;
+  --primary-color-hover: #357abd;
+  --secondary-color: #7a99b4;
+  --secondary-color-hover: #506f92;
+  --background-color-light: #fafafa;
+  --border-color: #e0e0e0;
+  --error-color: #d32f2f;
+  --error-color-hover: #a72222;
+  --text-color: #4a4a4a;
+  --button-color: #0288b4;
+  --button-color-hover: #026f94;
+  --pagination-background: #e3f2fd;
+  --font-family: Arial, sans-serif;
+  --border-radius: 5px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+  --container-max-width: 600px;
+}

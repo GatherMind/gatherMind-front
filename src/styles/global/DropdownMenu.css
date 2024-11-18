@@ -1,0 +1,49 @@
+/* DropdownMenu.css */
+.menu {
+  position: absolute;
+  width: 100px;
+  top: 30px;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.menu button:hover {
+  background-color: #f0f0f0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .menu {
+    width: 90px;
+  }
+
+  .menu button {
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu {
+    width: 80px;
+  }
+
+  .menu button {
+    padding: 5px 8px;
+  }
+}

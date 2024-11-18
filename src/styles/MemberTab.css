@@ -1,76 +1,11 @@
+/* MembersTab.css */
+
 .members {
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: var(--background-color-light);
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   margin-top: 20px;
-}
-
-.board-list,
-.member-list {
-  margin-bottom: 20px;
-}
-
-.member-list-header {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-h3 {
-  color: #007bff;
-  margin-bottom: 10px;
-}
-
-.arrow {
-  margin-left: auto;
-  transition: transform 0.3s;
-}
-
-.arrow.open {
-  transform: rotate(180deg);
-}
-
-.board-item,
-.member-item {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #ffffff;
-  margin-bottom: 10px;
-  transition: background-color 0.3s;
-}
-
-.board-list {
-  display: flex; /* 플렉스 박스 사용 */
-  flex-direction: column; /* 세로 방향으로 배치 */
-  gap: 3px; /* 항목 간 간격 설정 */
-}
-
-.board-item {
-  text-align: center;
-  display: flex; /* 플렉스 박스 사용 */
-  justify-content: space-around; /* 각 요소를 양쪽 끝으로 배치 */
-  align-items: center; /* 세로 중앙 정렬 */
-  padding: 10px; /* 여백 설정 */
-  background-color: #ffffff; /* 흰색 배경 */
-  border-radius: 5px; /* 둥근 모서리 */
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-}
-
-.board-item div {
-  flex: 1; /* 각 div가 동일한 너비를 차지하도록 설정 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-}
-
-.board-item:hover,
-.member-item:hover {
-  background-color: #f0f8ff;
-}
-
-.no-board {
-  color: #666;
-  text-align: center;
 }
 
 .member-list ul {
@@ -79,45 +14,26 @@ h3 {
   text-align: center;
 }
 
+.board-item,
+.member-item {
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  align-items: center;
+  text-align: center;
+
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.board-item div {
+  flex: 1;
+  text-align: center;
+}
+
 .pagination {
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* 반응형 스타일 */
-@media (max-width: 768px) {
-  .members {
-    padding: 15px; /* 작은 화면에서 여백 감소 */
-  }
-
-  h3 {
-    font-size: 1.5em; /* 제목 크기 감소 */
-  }
-
-  .board-item,
-  .member-item {
-    font-size: 14px; /* 폰트 크기 감소 */
-    padding: 8px; /* 여백 감소 */
-  }
-}
-
-@media (max-width: 480px) {
-  .members {
-    padding: 10px; /* 더 작은 화면에서 여백 감소 */
-  }
-
-  h3 {
-    font-size: 1.2em; /* 제목 크기 더 감소 */
-  }
-
-  .board-item,
-  .member-item {
-    font-size: 12px; /* 폰트 크기 더 감소 */
-    padding: 6px; /* 여백 더 감소 */
-  }
-
-  .no-board {
-    font-size: 12px; /* '지각하는 멤버가 없습니다!' 텍스트 크기 감소 */
-  }
 }

@@ -1,0 +1,59 @@
+/* Button.css */
+
+.button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.button-error {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: white;
+  background-color: var(--error-color);
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-error:hover {
+  background-color: var(--error-color-hover);
+}
+
+.btn-left {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.btn-right {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.no-radius {
+  border-radius: 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .button {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    padding: 8px 15px;
+    font-size: 0.85rem;
+  }
+}

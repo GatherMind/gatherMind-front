@@ -1,59 +1,46 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.signup-container {
-    width: 768px;
-    height: 100vh;
+.signup-container > main{
+    width: 350px;
     margin: 0 auto;
 }
 
-.signup-container > main {
-    width: 50%;
-    margin: 0 auto;
-  }
-  
-  .signup-container > main > h2 {
-      margin: 3vh auto;
-  }
-  
-  .form-group > .signup-label {
+.form-group > .signup-input {
+    margin-top: 2vh;
+}
+
+.form-group > .option-duplicated {
+    width: 73.5%;
+}
+
+.form-group > .error-message {
+    width: 100%;
+    height: 3vh;
+    margin-top: 1vh;
+    padding: 2vh;
+}
+
+.form-group > .signup-check-button {
     position: absolute;
-    margin: 1vh 1.4vh;
-    padding: 0 0.5vh;
-    color: rgb(0, 123, 255);
+    width: 10vh;
+    height: 4.8vh;
+    margin: 2vh 0 0 28.3vh;
     background-color: white;
-  }
-  
-  .form-group > .signup-input {
-    width: 100%;
-    height: 7vh;
-    margin: 2vh auto;
-  }
-
-  .form-group > .signup-check-button {
-    position: absolute;
-    width: 10vh;
-    height: 5vh;
-    margin: 3vh 31vh;
-    background: none;
-    border: 1px solid rgb(2, 136, 180);
+    border: 1px solid rgb(224, 224, 224);
     border-radius: 4px;
-  }
+}
 
-  .form-group > .signup-check-button:active {
-    position: absolute;
-    width: 10vh;
-    height: 5vh;
-    margin: 3vh 31vh;
+.form-group > .signup-check-button:active {
+    outline: none;
     color: white;
-    background: rgb(2, 136, 280);
-    border: 1px solid rgb(2, 136, 180);
-    border-radius: 4px;
-  }
+    background-color: rgb(2, 136, 255);
+}
 
-  .signup-button {
+main > form > .signup-button {
     width: 100%;
-    margin:2vh auto;
-  }
+    margin-top: 3vh;
+    background-color: rgb(2, 136, 255);
+}

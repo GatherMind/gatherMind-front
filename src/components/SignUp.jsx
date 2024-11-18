@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import { createMember } from "./../services/MemberApiService";
+import { duplicationCheck } from "./../services/ValidateApiService";
 import "../styles/Signup.css";
+import axios from "axios";
 
 const SignUp = () => {
   const [memberId, setMemberId] = useState("");
@@ -20,11 +22,14 @@ const SignUp = () => {
     const newSuccessMessages = {};
 
     if (!value) {
-      newErrors[field] = {
-        memberId: "아이디를 입력해 주세요.",
-        nickname: "닉네임을 입력해 주세요.",
-        email: "이메일을 입력해 주세요.",
-      }[field];
+      // 필드별 맞춤 메시지 설정
+      if (field === "memberId") {
+        newErrors[field] = "아이디를 입력해 주세요.";
+      } else if (field === "email") {
+        newErrors[field] = "이메일을 입력해 주세요.";
+      } else if (field === "nickname") {
+        newErrors[field] = "닉네임을 입력해 주세요.";
+      }
     } else if (field === "memberId" && !/^[a-z0-9]{8,50}$/.test(value)) {
       newErrors.memberId =
         "아이디는 8~50자의 영문 소문자와 숫자만 사용 가능합니다.";
@@ -35,22 +40,38 @@ const SignUp = () => {
       newErrors.nickname = "닉네임은 2자에서 20자 사이여야 합니다.";
     } else {
       try {
-        const response = await axios.post(`/api/members/check-${field}`, {
-          [field]: value,
-        });
+        const response = await duplicationCheck(field, value);
+
         if (response.data.isUnique) {
           newSuccessMessages[field] = `사용할 수 있는 ${
-            field === "memberId" ? "아이디" : "닉네임"
+            field === "memberId"
+              ? "아이디"
+              : field === "email"
+              ? "이메일"
+              : "닉네임"
           }입니다.`;
           newErrors[field] = ""; // 오류 메시지 초기화
         } else {
           newErrors[field] = `이미 사용 중인 ${
-            field === "memberId" ? "아이디" : "닉네임"
+            field === "memberId"
+              ? "아이디"
+              : field === "email"
+              ? "이메일"
+              : "닉네임"
           }입니다.`;
           delete newSuccessMessages[field]; // 성공 메시지 초기화
         }
       } catch (error) {
-        console.error(`${field} 중복 확인 오류:`, error);
+        console.error(
+          `${
+            field === "memberId"
+              ? "아이디"
+              : field === "email"
+              ? "이메일"
+              : "닉네임"
+          } 중복 확인 오류:`,
+          error
+        );
       }
     }
 
@@ -76,7 +97,7 @@ const SignUp = () => {
     if (!password) {
       newErrors.password = "비밀번호를 입력해 주세요.";
     }
-    
+
     if (!confirmPassword) {
       newErrors.confirmPassword = "비밀번호 확인을 입력해 주세요.";
     } else if (password !== confirmPassword) {
@@ -104,6 +125,7 @@ const SignUp = () => {
         email,
         nickname,
       });
+      await createMember(memberId, password, email, nickname);
       setSignUpSuccess(true);
       setTimeout(() => navigate("/login"), 3000); // 3초 후 로그인 페이지로 이동
     } catch (error) {
@@ -113,9 +135,6 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
-      <header>
-        <Header />
-      </header>
       <main>
         <h2>회원가입</h2>
         {signUpSuccess ? (
@@ -123,9 +142,6 @@ const SignUp = () => {
         ) : (
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="form-group">
-              <label className="signup-label" htmlFor="id">
-                아이디
-              </label>
               <input
                 type="text"
                 value={memberId}
@@ -134,7 +150,7 @@ const SignUp = () => {
                 placeholder="아이디"
                 name="아이디"
                 id="id"
-                className="signup-input"
+                className="signup-input option-duplicated"
               />
               <button
                 type="button"
@@ -152,9 +168,6 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label className="signup-label" htmlFor="password">
-                비밀번호
-              </label>
               <input
                 type="password"
                 value={password}
@@ -171,9 +184,6 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label className="signup-label" htmlFor="confirmPassword">
-                비밀번호 재입력
-              </label>
               <input
                 type="password"
                 value={confirmPassword}
@@ -190,9 +200,6 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label className="signup-label" htmlFor="email">
-                이메일
-              </label>
               <input
                 type="email"
                 value={email}
@@ -207,9 +214,6 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label className="signup-label" htmlFor="nickname">
-                닉네임
-              </label>
               <input
                 type="text"
                 value={nickname}
@@ -218,7 +222,7 @@ const SignUp = () => {
                 placeholder="닉네임"
                 name="닉네임"
                 id="nickname"
-                className="signup-input"
+                className="signup-input option-duplicated"
               />
               <button
                 type="button"
@@ -236,7 +240,9 @@ const SignUp = () => {
             </div>
 
             {errors.form && <p className="error-message">{errors.form}</p>}
-            <button className="signup-button" type="submit">회원가입</button>
+            <button className="signup-button" type="submit">
+              회원가입
+            </button>
           </form>
         )}
       </main>

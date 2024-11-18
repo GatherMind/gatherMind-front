@@ -1,0 +1,98 @@
+/* ListContainer.css */
+
+.list-container {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: #ffffff;
+  box-shadow: var(--shadow);
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color);
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.list-header .arrow {
+  font-size: 1rem;
+  transition: transform var(--transition-speed);
+}
+
+.list-header .arrow.open {
+  transform: rotate(180deg);
+}
+
+.list-item {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-speed);
+  margin-bottom: 0px;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.no-content,
+.no-board {
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 20px;
+}
+
+.board-list,
+.member-list {
+  margin-bottom: 20px;
+}
+
+/* 공통 제목 스타일 */
+h3 {
+  color: var(--secondary-color);
+  margin-bottom: 10px;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .list-container {
+    padding: 15px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  .list-item {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-container {
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 1.2em;
+  }
+
+  .list-item {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .no-content,
+  .no-board {
+    font-size: 12px;
+  }
+}

@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import QuestionForm from "../components/QuestionForm";
+import { createQuestion, getQuestion, updateQuestion } from "../services/apiService";
 
 const QuestionFormPage = ({ isModify }) => {
     const navigate = useNavigate();
@@ -19,13 +19,12 @@ const QuestionFormPage = ({ isModify }) => {
         if (isModify) { // 수정 모드일 때 데이터 불러옴
             const fetchQuestion = async () => {
                 try {
-                    const data = await axios.get(`http://localhost:8080/api/question/${id}`);
+                    const questionData = await getQuestion(id);
                     console.log("게시글 조회 성공");
                     
-                    // console.log(response);
-                    setQuestionInitData(data.data);
+                    setQuestionInitData(questionData);
                 } catch (error) {
-                    console.log("게시글 조회 실패");
+                    console.log("게시글 정보를 불러오지 못했습니다.", error);
                 }
             };
             fetchQuestion();
@@ -33,22 +32,22 @@ const QuestionFormPage = ({ isModify }) => {
     }, [isModify, id]);
 
     const handleCreateQuestion = async (questionData) => {
-        console.log(questionData);
         try {
             var response = null;
 
             if (isModify) {
-                response = await axios.put(`http://localhost:8080/api/question/${id}`, questionData); 
-                console.log("질문 수정 완료 ", response);
+                response = await updateQuestion(id, questionData); 
+                console.log("게시글 수정 완료");
                 navigate(`/question-detail/${id}`);
             } else {
-                // response = await axios.post(`http://localhost:8080/api/question?memberId=${userId}&studyId=${studyId}`, questionData);
-                response = await axios.post(`http://localhost:8080/api/question?memberId=user1&studyId=1`, questionData); // userId, studyId 받아오도록 수정
-                console.log("질문 생성 완료 ", response);
-                navigate(''); // 스터디 메인 페이지로 이동하도록 수정
+                // response = await createQuestion(userId, studyId, questionData); // userId 받아오도록 수정
+                response = await createQuestion("user1", 1, questionData);
+                
+                console.log("게시글 생성 완료");
+                navigate(`/study-info/${studyId}`);
             }
             } catch (error) {
-            console.log(`질문 ${isModify ? "수정" : "생성"} 실패`);
+            console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
         }
     };
 

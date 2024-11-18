@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/MemberTab.css";
+import "../styles/global/ListComponent.css";
+import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const MembersTab = ({
   members,
@@ -26,15 +29,15 @@ const MembersTab = ({
   };
 
   const renderMemberList = () => (
-    <div className="member-list">
-      <div className="member-list-header" onClick={toggleList}>
+    <div className="list-container member-list">
+      <div className="list-header" onClick={toggleList}>
         <h3>멤버 목록</h3>
         <span className={`arrow ${isOpen ? "open" : ""}`}>▼</span>
       </div>
       {isOpen && (
         <ul>
           {members.map((member) => (
-            <li key={member.memberId} className="member-item">
+            <li key={member.memberId} className="list-item member-item">
               {member.nickname} ({member.status})
             </li>
           ))}
@@ -44,8 +47,11 @@ const MembersTab = ({
   );
 
   const renderBoardList = () => (
-    <div className="board-list">
-      <h3>게시판 목록</h3>
+    <div className="list-container board-list">
+      <div className="list-header">
+        <h3>게시판 목록</h3>
+      </div>
+
       {boards.map((board, index) => {
         // 전체 게시글 수에서 현재 페이지와 index를 이용하여 순번 계산
         const boardNumber = boardsTotalElements - boardsPage * size - index;
@@ -53,7 +59,7 @@ const MembersTab = ({
         return (
           <div
             key={board.questionId}
-            className="board-item"
+            className="list-item board-item board-item"
             onClick={() => handleClick(board.questionId)}
           >
             <div>{boardNumber}</div>
@@ -65,35 +71,11 @@ const MembersTab = ({
         );
       })}
 
-      <div className="pagination">
-        <button
-          onClick={() => onPageChange(boardsPage - 1)}
-          disabled={boardsPage === 0}
-        >
-          Previous
-        </button>
-        {[...Array(boardsTotalPages).keys()]
-          .slice(
-            Math.max(0, boardsPage - 2),
-            Math.min(boardsTotalPages, boardsPage + 3)
-          )
-          .map((pageNumber) => (
-            <button
-              key={pageNumber}
-              onClick={() => onPageChange(pageNumber)}
-              disabled={boardsPage === pageNumber}
-              className={boardsPage === pageNumber ? "active" : ""}
-            >
-              {pageNumber + 1}
-            </button>
-          ))}
-        <button
-          onClick={() => onPageChange(boardsPage + 1)}
-          disabled={boardsPage === boardsTotalPages - 1}
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        currentPage={boardsPage}
+        totalPages={boardsTotalPages}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 

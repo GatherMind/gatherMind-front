@@ -1,0 +1,11 @@
+/* Container.css */
+
+.container {
+  margin: 0;
+  padding: 20px;
+  background-color: var(--background-color-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font-family);
+  text-align: center;
+}
