@@ -52,7 +52,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
 
                 {/* 비로그인 시 로그인 페이지로 이동 */}
-                <Route element={<PrivateRoute />}>
+                {/* <Route element={<PrivateRoute />}> */}
                   <Route path="/mypage" element={<Mypage />} />
                   <Route
                     path="/mypage/joined-study"
@@ -67,7 +67,7 @@ function App() {
                     element={<WrittenAnswer />}
                   />{" "}
                   <Route path="/editprofile" element={<EditProfile />} />
-                </Route>
+                {/* </Route> */}
 
                 {/* <Route path="/" element={<Enter />} /> */}
 

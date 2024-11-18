@@ -61,9 +61,6 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* <header>
-        <Header />
-      </header> */}
       <main>
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
@@ -74,6 +71,7 @@ const Login = () => {
               onChange={handleMemberIdChange}
               autoComplete="off"
               placeholder="아이디"
+              className="login-input"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
@@ -86,12 +84,13 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
               placeholder="비밀번호"
+              className="login-input"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          {loginError && <p className="error-message">{loginError}</p>}
+          {loginError && <p className="login-error-message">{loginError}</p>}
           <button className="login-button" type="submit">
             로그인
           </button>
