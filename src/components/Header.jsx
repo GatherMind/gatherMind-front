@@ -7,7 +7,7 @@ import "../css/Header.css";
 export default function Header({ setLoginresult }) {
   const navigate = useNavigate();
 
-  function handleclick() {
+  function handleClick() {
     navigate("/");
   }
 
@@ -15,17 +15,19 @@ export default function Header({ setLoginresult }) {
     navigate("/login");
   }
 
-
+  function handleMyPageClick() {
+    navigate("/mypage");
+  }
 
   return (
     <header className="header">
       <div className="header">
         {" "}
-        <img src={homeicon} onClick={handleclick} />
+        <img src={homeicon} alt="HomeIcon" onClick={handleClick} />
       </div>
       <div>
         {" "}
-        <img src={settingicon} onClick={handleclick} />
+        <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
         MyPage
       </div>
       <button className="header-login" onClick={handleLoginClick}>
@@ -34,7 +36,7 @@ export default function Header({ setLoginresult }) {
     </header>
   );
 
-    // return (
+  // return (
   //   <header>
   //     <h1 onClick={() => navigate("/")}>GATHER MIND</h1>
   //   </header>

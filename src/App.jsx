@@ -27,6 +27,7 @@ import WrittenQuestion from "./components/WrittenQuestion";
 import WrittenAnswer from "./components/WrittenAnswer";
 import Main from "./components/Main.jsx";
 import { useState } from "react";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 function App() {
   const [loginResult, setLoginresult] = useState(null);
@@ -42,26 +43,36 @@ function App() {
                 <Route path="/" element={<Main />}></Route>
                 <Route path="main" element={<Main />}></Route>
                 <Route path="main/makegroup" element={<MakeGroup />}></Route>
-                <Route
+                {/* <Route
                   path="main/appointment/:id"
                   element={<Mystudy />}
-                ></Route>
+                ></Route> */}
                 <Route path="main/group/:id" element={<Groupid />}></Route>
 
-                <Route path="/" element={<Enter />} />
                 <Route path="/login" element={<Login />} />
+
+                {/* 비로그인 시 로그인 페이지로 이동 */}
+                <Route element={<PrivateRoute />}>
+                  <Route path="/mypage" element={<Mypage />} />
+                  <Route
+                    path="/mypage/joined-study"
+                    element={<JoinedStudy />}
+                  />
+                  <Route
+                    path="/mypage/written-question"
+                    element={<WrittenQuestion />}
+                  />
+                  <Route
+                    path="/mypage/written-answer"
+                    element={<WrittenAnswer />}
+                  />{" "}
+                  <Route path="/editprofile" element={<EditProfile />} />
+                </Route>
+
+                {/* <Route path="/" element={<Enter />} /> */}
+
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/mypage" element={<Mypage />} />
-                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-                <Route
-                  path="/mypage/written-question"
-                  element={<WrittenQuestion />}
-                />
-                <Route
-                  path="/mypage/written-answer"
-                  element={<WrittenAnswer />}
-                />
-                <Route path="/editprofile" element={<EditProfile />} />
+
                 <Route path="/goodbye" element={<Goodbye />} />
                 <Route path="/serious" element={<Serious />} />
 

@@ -236,11 +236,49 @@ export const updateSchedule = async (id, scheduleData) => {
 export const deleteSchedule = async (id) => {
   try {
     const response = await axios.delete(`${API_URL}/schedule/${id}`);
-    console.log(response);
 
     return response.data;
   } catch (error) {
     console.error("일정 삭제 실패: ", error);
+    throw error;
+  }
+};
+
+// 내 스터디 조회
+export const getMyStudy = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/member/joined-groups`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response;
+  } catch (error) {
+    console.error("내 스터디 조회 실패 : ", error);
+    throw error;
+  }
+};
+
+// 내 정보 조회
+export const getMyInfo = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/member/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response;
+  } catch (error) {
+    console.error("내 정보 조회 실패 : ", error);
+    throw error;
+  }
+};
+
+// 전체 스터디 조회
+export const getAllStudies = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/study`);
+    return response;
+  } catch (error) {
+    console.error("전체 스터디 조회 : ", error);
     throw error;
   }
 };

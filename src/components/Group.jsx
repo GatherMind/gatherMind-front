@@ -14,7 +14,6 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
 
   const navigate = useNavigate();
 
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -24,15 +23,14 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
   }
 
   function handleclick(data) {
-    console.log(data)
-    setGroupInfoData(data)
+    console.log(data);
+    setGroupInfoData(data);
     handleOpenModal();
   }
 
   function handlemakeclick() {
-
-    navigate('/makegroup')
-  } 
+    navigate("/makegroup");
+  }
 
   const filteredData = data.filter((e) => {
     if (statusFilter === null) return true; // 전체
@@ -60,11 +58,17 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
   return (
     <div className="group-list">
       <div className="studymakediv">
-        <GroupInfo isOpen={isModalOpen} onClose={handleCloseModal} groupInfoData={groupInfoData}>
+        <GroupInfo
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          groupInfoData={groupInfoData}
+        >
           <h2></h2>
         </GroupInfo>
 
-        <button className="studymakebtn" onClick={handlemakeclick}>스터디 만들기</button>
+        <button className="studymakebtn" onClick={handlemakeclick}>
+          스터디 만들기
+        </button>
       </div>
 
       {dataToRender.length === 0 ? (
@@ -76,7 +80,7 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
               <div className="status">
                 {data.status === false ? (
                   <div className={`status ${data.status}`}>
-                    <img src={greenlighticon} width={12} height={12} />
+                    <img src={greenlighticon} alt="" width={12} height={12} />
                     모집중
                   </div>
                 ) : (

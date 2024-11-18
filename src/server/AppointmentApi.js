@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { getMyStudy } from "../services/apiService";
 
 function AppointmentApi({ setHasAppointment }) {
   const navigate = useNavigate();
@@ -8,19 +10,46 @@ function AppointmentApi({ setHasAppointment }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { authToken } = useAuth();
+
   useEffect(() => {
-    axios
-      .get("http://localhost:5001/api/appointment")
-      .then((response) => {
-        console.log(response.data.appointments);
-        const appointments = response.data.appointments || null;
-        setData(appointments);
+    // axios
+    //   .get("http://localhost:5001/api/appointment")
+    //   .then((response) => {
+    //     console.log(response.data.appointments);
+    //     const appointments = response.data.appointments || null;
+    //     setData(appointments);
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     setError("Error fetching data");
+    //     setLoading(false);
+    //   });
+    const fetchMyStudyData = async () => {
+      if (!authToken) {
+        setHasAppointment(true);
         setLoading(false);
-      })
-      .catch((error) => {
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await getMyStudy(authToken);
+        const studies = response.data || null;
+        setData(studies);
+
+        if (studies.length === 0) {
+          setHasAppointment(true); // 데이터가 없을 때만 설정
+        }
+      } catch (error) {
         setError("Error fetching data");
+        setLoading(true);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+    fetchMyStudyData();
   }, []);
 
   if (loading) {
@@ -29,10 +58,6 @@ function AppointmentApi({ setHasAppointment }) {
 
   if (error) {
     return <div>{error}</div>;
-  }
-
-  if (data === null || data.length === 0) {
-    setHasAppointment(true);
   }
 
   function handleClick(id) {

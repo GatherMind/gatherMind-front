@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import "../styles/JoinedStudy.css";
+import { getMyInfo, getMyStudy } from "../services/apiService";
+import { useAuth } from "../context/AuthContext";
 
 const JoinedStudy = () => {
   const [joinedGroups, setJoinedGroups] = useState([]);
@@ -11,18 +13,25 @@ const JoinedStudy = () => {
   });
   const navigate = useNavigate();
 
+  const { authToken } = useAuth();
+
   useEffect(() => {
     const fetchActivityData = async () => {
       try {
         const token = localStorage.getItem("token");
 
-        const groupResponse = await axios.get("/api/members/joined-groups", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // const groupResponse = await axios.get("/api/members/joined-groups", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
 
-        const response = await axios.get("/api/members/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        // const response = await axios.get("/api/members/me", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+
+        const groupResponse = await getMyStudy(authToken);
+
+        const response = await getMyInfo(authToken);
+
         setMemberInfo(response.data || {});
         setJoinedGroups(groupResponse.data);
       } catch (error) {
@@ -52,18 +61,24 @@ const JoinedStudy = () => {
 
   return (
     <div className="joined-study-container">
-    <header>
-      <Header />
-      <h2>{memberInfo.nickname}님의 마이 페이지</h2>
-      <ul className="mypage-joined-study-nav">
-        <li onClick={() => navigate("/mypage")}>정보 보기</li>
-        <li onClick={() => navigate("/mypage/joined-study")}>가입한 스터디</li>
-        <li onClick={() => navigate("/mypage/written-question")}>작성한 질문</li>
-        <li onClick={() => navigate("/mypage/written-answer")}>작성한 답변</li>
-      </ul>
-    </header>
+      <header>
+        {/* <Header /> */}
+        <h2>{memberInfo.nickname}님의 마이 페이지</h2>
+        <ul className="mypage-joined-study-nav">
+          <li onClick={() => navigate("/mypage")}>정보 보기</li>
+          <li onClick={() => navigate("/mypage/joined-study")}>
+            가입한 스터디
+          </li>
+          <li onClick={() => navigate("/mypage/written-question")}>
+            작성한 질문
+          </li>
+          <li onClick={() => navigate("/mypage/written-answer")}>
+            작성한 답변
+          </li>
+        </ul>
+      </header>
 
-    <h3>가입한 스터디 목록</h3>
+      <h3>가입한 스터디 목록</h3>
       {joinedGroups.length > 0 ? (
         <div className="study-list">
           {joinedGroups.map((group) => (
@@ -79,7 +94,9 @@ const JoinedStudy = () => {
           ))}
         </div>
       ) : (
-        <p className="no-study-message">현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?</p>
+        <p className="no-study-message">
+          현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?
+        </p>
       )}
     </div>
   );

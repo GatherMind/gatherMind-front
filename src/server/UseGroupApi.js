@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { getAllStudies } from "../services/apiService";
 
-
-export default function UseGroupApi() { 
+export default function UseGroupApi() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,8 +10,12 @@ export default function UseGroupApi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/group");
+        // const response = await axios.get("http://localhost:5001/api/group");
+        // console.log(response.data);
+
+        const response = await getAllStudies();
         console.log(response.data);
+
         const sortedData = response.data.sort((a, b) => {
           const dateA = new Date(a.createdAt);
           const dateB = new Date(b.createdAt);
@@ -26,8 +30,8 @@ export default function UseGroupApi() {
       }
     };
 
-    fetchData(); 
-  }, []); 
+    fetchData();
+  }, []);
 
   return { data, loading, error };
 }

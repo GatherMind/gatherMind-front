@@ -222,9 +222,9 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile-container">
-      <header>
+      {/* <header>
         <Header />
-      </header>
+      </header> */}
       <main>
         <h2>정보 수정</h2>
         <form onSubmit={handleSubmit} autoComplete="off">

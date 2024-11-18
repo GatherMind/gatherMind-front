@@ -57,7 +57,7 @@ const WrittenAnswer = () => {
   return (
     <div className="written-answer-container">
       <header>
-        <Header />
+        {/* <Header /> */}
         <h2>{memberInfo.nickname}님의 마이 페이지</h2>
         <ul className="mypage-written-answer-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
