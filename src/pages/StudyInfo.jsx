@@ -53,7 +53,7 @@ const StudyInfo = () => {
     let isMounted = true;
     try {
       const [memberInfo, studyData] = await Promise.all([
-        getMyInfoById(userId, studyId),
+        getMyInfoById(studyId, authToken),
         getStudyInfoAndMembersAndBoards(studyId, 0, 5),
       ]);
 

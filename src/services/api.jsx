@@ -11,16 +11,16 @@ const api = axios.create({
 });
 
 // 요청 인터셉터: Authorization 헤더에 JWT 토큰 추가
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token"); // JWT 토큰 가져오기
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+// api.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem("token"); // JWT 토큰 가져오기
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
 
 // 응답 인터셉터: 401 Unauthorized 에러 처리
 api.interceptors.response.use(

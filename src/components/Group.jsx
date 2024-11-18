@@ -29,7 +29,7 @@ function GroupApi({ setHasAppointment, statusFilter, searchResult }) {
   }
 
   function handlemakeclick() {
-    navigate("/makegroup");
+    navigate("/create-study");
   }
 
   const filteredData = data.filter((e) => {

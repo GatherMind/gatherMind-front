@@ -39,6 +39,7 @@ function AppointmentApi({ setHasAppointment }) {
         const studies = response.data || null;
         setData(studies);
 
+        console.log(data);
         if (studies.length === 0) {
           setHasAppointment(true); // 데이터가 없을 때만 설정
         }
@@ -61,7 +62,7 @@ function AppointmentApi({ setHasAppointment }) {
   }
 
   function handleClick(id) {
-    navigate(`/main/appointment/${id}`);
+    navigate(`/study-info/${id}`);
   }
 
   return (
@@ -69,7 +70,7 @@ function AppointmentApi({ setHasAppointment }) {
       {data.slice(0.8).map((e) => (
         <div className="mygroup-card" key={e.id}>
           <button className="mybtn-card" onClick={() => handleClick(e.id)}>
-            {e.name}
+            {e.title}
           </button>
         </div>
       ))}

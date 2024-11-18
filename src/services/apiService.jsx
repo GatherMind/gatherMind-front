@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "./api";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -7,9 +8,15 @@ if (!API_URL) {
 }
 
 // 스터디 생성
-export const createStudy = async (studyData) => {
+export const createStudy = async (studyData, token) => {
   try {
-    const response = await axios.post(`${API_URL}/study`, studyData);
+    // const response = api.post("/study", studyData, {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // });
+    const response = await axios.post(`${API_URL}/study`, studyData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(response);
 
     return response.data;
   } catch (error) {
@@ -279,6 +286,22 @@ export const getAllStudies = async () => {
     return response;
   } catch (error) {
     console.error("전체 스터디 조회 : ", error);
+    throw error;
+  }
+};
+
+export const applyStudy = async (studyId, token) => {
+  try {
+    const response = await axios.post(
+      `${API_URL}/study-members`,
+      { studyId },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("스터디 지원 : ", error);
     throw error;
   }
 };

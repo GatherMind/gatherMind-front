@@ -41,7 +41,7 @@ const Mypage = () => {
   return (
     <div className="mypage-container">
       <header>
-        <Header />
+        {/* <Header /> */}
         <h2>{memberInfo.nickname}님의 마이 페이지</h2>
         <ul className="mypage-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>

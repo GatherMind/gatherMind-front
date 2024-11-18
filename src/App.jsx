@@ -33,76 +33,39 @@ function App() {
   const [loginResult, setLoginresult] = useState(null);
 
   return (
-    <>
-      <AuthProvider>
-        <Router>
-          <Header setLoginresult={setLoginresult} />
-          <div className="container">
-            <div className="content">
-              <Routes>
-                <Route path="/" element={<Main />}></Route>
-                <Route path="main" element={<Main />}></Route>
-                <Route path="main/makegroup" element={<MakeGroup />}></Route>
-                {/* <Route
-                  path="main/appointment/:id"
-                  element={<Mystudy />}
-                ></Route> */}
-                <Route path="main/group/:id" element={<Groupid />}></Route>
+    <AuthProvider>
+      <Router>
+        <Header setLoginresult={setLoginresult} />
+        <div className="container">
+          <div className="content">
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="main" element={<Main />}></Route>
+              {/* <Route path="main/makegroup" element={<MakeGroup />}></Route> */}
 
-                <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
 
-                {/* 비로그인 시 로그인 페이지로 이동 */}
-                <Route element={<PrivateRoute />}>
-                  <Route path="/mypage" element={<Mypage />} />
-                  <Route
-                    path="/mypage/joined-study"
-                    element={<JoinedStudy />}
-                  />
-                  <Route
-                    path="/mypage/written-question"
-                    element={<WrittenQuestion />}
-                  />
-                  <Route
-                    path="/mypage/written-answer"
-                    element={<WrittenAnswer />}
-                  />{" "}
-                  <Route path="/editprofile" element={<EditProfile />} />
-                </Route>
+              <Route path="/signup" element={<SignUp />} />
 
-                {/* <Route path="/" element={<Enter />} /> */}
+              <Route path="/goodbye" element={<Goodbye />} />
+              <Route path="/serious" element={<Serious />} />
 
-                <Route path="/signup" element={<SignUp />} />
-
-                <Route path="/goodbye" element={<Goodbye />} />
-                <Route path="/serious" element={<Serious />} />
-
-                {/* schedule */}
+              {/* 비로그인 시 로그인 페이지로 이동 */}
+              <Route element={<PrivateRoute />}>
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
                 <Route
-                  path="/create-schedule"
-                  element={<CreateSchedule isModify={false} />}
+                  path="/mypage/written-question"
+                  element={<WrittenQuestion />}
                 />
                 <Route
-                  path="/edit-schedule/:id"
-                  element={<CreateSchedule isModify={true} />}
-                />
-
-                {/* question */}
-                <Route
-                  path="/create-question"
-                  element={<QuestionFormPage isModify={false} />}
-                />
-                <Route
-                  path="/edit-question/:id"
-                  element={<QuestionFormPage isModify={true} />}
-                />
-                <Route
-                  path="/question-detail/:id"
-                  element={<QuestionDetail />}
-                />
-
+                  path="/mypage/written-answer"
+                  element={<WrittenAnswer />}
+                />{" "}
+                <Route path="/editprofile" element={<EditProfile />} />
                 {/* create study  */}
                 <Route
-                  path="/create-study/:memberId"
+                  path="/create-study"
                   element={<StudyFormPage mode="create" />}
                 />
                 {/* edit study */}
@@ -110,15 +73,39 @@ function App() {
                   path="/edit-study/:studyId"
                   element={<StudyFormPage mode="edit" />}
                 />
-                {/* study info page */}
-                <Route path="/study-info/:studyId" element={<StudyInfo />} />
-              </Routes>
-            </div>
+              </Route>
+
+              {/* study info page */}
+              <Route path="/study-info/:studyId" element={<StudyInfo />} />
+
+              {/* <Route path="/" element={<Enter />} /> */}
+
+              {/* schedule */}
+              <Route
+                path="/create-schedule"
+                element={<CreateSchedule isModify={false} />}
+              />
+              <Route
+                path="/edit-schedule/:id"
+                element={<CreateSchedule isModify={true} />}
+              />
+
+              {/* question */}
+              <Route
+                path="/create-question"
+                element={<QuestionFormPage isModify={false} />}
+              />
+              <Route
+                path="/edit-question/:id"
+                element={<QuestionFormPage isModify={true} />}
+              />
+              <Route path="/question-detail/:id" element={<QuestionDetail />} />
+            </Routes>
           </div>
-          {/* <Footer/> */}
-        </Router>
-      </AuthProvider>
-    </>
+        </div>
+        {/* <Footer/> */}
+      </Router>
+    </AuthProvider>
   );
 }
 
