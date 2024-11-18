@@ -10,7 +10,7 @@ export default function UseGroupApi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/group");
+        const response = await axios.get("http://localhost:8080/api/study/getallstudies");
         console.log(response.data);
         const sortedData = response.data.sort((a, b) => {
           const dateA = new Date(a.createdAt);
@@ -25,7 +25,7 @@ export default function UseGroupApi() {
         setLoading(false);
       }
     };
-
+     console.log('그룹', data)
     fetchData(); 
   }, []); 
 

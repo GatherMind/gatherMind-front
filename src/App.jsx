@@ -6,7 +6,6 @@ import {
   Switch,
   BrowserRouter,
 } from "react-router-dom";
-import Mystudy from "./components/Mystudy.jsx";
 import Groupid from "./components/Groupid.jsx";
 import Header from "./components/Header.jsx";
 import "../src/css/App.css";
@@ -21,14 +20,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header setLoginresult={setLoginresult} />
+   
       <div className="container">
+      <Header setLoginresult={setLoginresult} />
         <div className="content">
           <Routes>
             <Route path="/" element={<Main />}></Route>
             <Route path="main" element={<Main />}></Route>
             <Route path="main/makegroup" element={<MakeGroup />}></Route>
-            <Route path="main/appointment/:id" element={<Mystudy />}></Route>
             <Route path="main/group/:id" element={<Groupid />}></Route>
             <Route path="/login" element={<Login />}></Route>
           </Routes>

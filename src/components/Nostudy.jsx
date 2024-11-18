@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 
-export default function Noappointment(){
+export default function Nostudy(){
 
   const [animate, setAnimate] = useState(false);
 

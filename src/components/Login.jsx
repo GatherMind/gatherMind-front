@@ -27,14 +27,20 @@ async function handleSubmit(e) {
 
 
   try {
-    const response = await axios.post('http://localhost:8080/login', {
-      username: username,
+    const response = await axios.post('http://localhost:8080/api/member/login', {
+      memberId: username,
       password: password
     });
     
-    // 로그인 성공 시, 서버에서 반환된 토큰 혹은 세션 정보 처리
+
+    const token = response.data.token; // 예시: 서버에서 반환된 JWT 토큰
     console.log('Login successful', response);
 
+
+
+    localStorage.setItem('token', token);
+
+ 
   
   
     
