@@ -301,7 +301,23 @@ export const applyStudy = async (studyId, token) => {
     );
     return response;
   } catch (error) {
-    console.error("스터디 지원 : ", error);
+    console.error("스터디 지원 실패 : ", error);
+    throw error;
+  }
+};
+
+export const confirmStudyMember = async ({ studyId, memberId }, token) => {
+  try {
+    const response = await axios.put(
+      `${API_URL}/study-members`,
+      { studyId, memberId },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("스터디 승인 실패 : ", error);
     throw error;
   }
 };

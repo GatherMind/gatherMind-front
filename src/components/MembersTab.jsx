@@ -4,6 +4,8 @@ import "../styles/global/ListComponent.css";
 import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
+import { useAuth } from "../context/AuthContext";
+import { confirmStudyMember } from "../services/apiService";
 
 const MembersTab = ({
   members,
@@ -12,8 +14,12 @@ const MembersTab = ({
   boardsTotalPages,
   boardsTotalElements,
   onPageChange,
+  role,
+  studyId,
 }) => {
   const navigate = useNavigate();
+
+  const { authToken } = useAuth();
 
   // 상태값으로 목록이 열렸는지 닫혔는지를 관리
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +34,10 @@ const MembersTab = ({
     navigate(`/question-detail/${questionId}`);
   };
 
+  const handleConfirmClick = async (memberId) => {
+    await confirmStudyMember({ studyId, memberId }, authToken);
+  };
+
   const renderMemberList = () => (
     <div className="list-container member-list">
       <div className="list-header" onClick={toggleList}>
@@ -38,7 +48,20 @@ const MembersTab = ({
         <ul>
           {members.map((member) => (
             <li key={member.memberId} className="list-item member-item">
-              {member.nickname} ({member.status})
+              {member.nickname}
+              {role === "member" && (
+                <>
+                  <span style={{ color: "red" }}>{`(${member.status})`}</span>
+                  {member.status === "승인대기" && (
+                    <button
+                      className="button"
+                      onClick={() => handleConfirmClick(member.memberId)}
+                    >
+                      승인
+                    </button>
+                  )}
+                </>
+              )}
             </li>
           ))}
         </ul>

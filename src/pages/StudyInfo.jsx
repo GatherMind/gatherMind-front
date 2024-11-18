@@ -65,6 +65,7 @@ const StudyInfo = () => {
         setBoardsPage(studyData.questions.pageable.pageNumber);
         setBoardsTotalPages(studyData.questions.totalPages);
         setBoardsTotalElements(studyData.questions.totalElements);
+        console.log(studyData.questions.content);
       }
     } catch (error) {
       if (isMounted) {
@@ -195,6 +196,8 @@ const StudyInfo = () => {
             boardsTotalPages={boardsTotalPages}
             boardsTotalElements={boardsTotalElements}
             onPageChange={handlePageChange}
+            studyId={studyId}
+            role={role}
           />
         )}
 
