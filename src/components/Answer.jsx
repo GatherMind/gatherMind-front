@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { dateFormat } from "../services/QuestionService";
-import { updateAnswer, deleteAnswer } from "../services/apiService"
 
-const Answer = ({answer, fetch, scrollToRef}) => {
+const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
 
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(answer.content);
@@ -12,27 +11,20 @@ const Answer = ({answer, fetch, scrollToRef}) => {
         setIsEditing(!isEditing);
     }
 
-    const handleSave = async () => {
+    const handleUpdate = () => {
         if (editedContent === "") {
             alert("내용을 입력해주세요.");
             return;
         }
-        try {
-            const response = await updateAnswer(answer.answerId, editedContent);
-            console.log("댓글 수정 완료");
+        onUpdate(answer.answerId, editedContent);
 
-            setIsEditing(false);
-            setTimeout(()=>{fetch()}, 500);
-            setTimeout(()=>{scrollToRef()}, 800);
-        } catch (error) {
-            console.log("댓글 수정 실패", error);
-        }
+        setIsEditing(false);
+        scrollToRef()
     };
 
-    const handleDelete = async () => {
+    const handleDelete = () => {
         if (window.confirm("정말 삭제하시겠습니까?")) {
-            deleteAnswer(answer.answerId);
-            setTimeout(()=>{fetch()}, 500);
+            onDelete(answer.answerId);
             alert("댓글이 삭제되었습니다.");
         }
     }
@@ -49,7 +41,7 @@ const Answer = ({answer, fetch, scrollToRef}) => {
                         className="edit-input"
                     />
                     <div className="edit-buttons">
-                        <button onClick={handleSave} className="save-button">저장</button>
+                        <button onClick={handleUpdate} className="save-button">저장</button>
                         <button onClick={handleEdit} className="cancel-button">취소</button>
                     </div>
                 </div>
@@ -59,17 +51,12 @@ const Answer = ({answer, fetch, scrollToRef}) => {
                     <div className="answer-content">{answer.content}</div>
                     <div className="answer-meta">
                         <p className="createdAt">{dateFormat(answer.createdAt)}</p>
-                        {/* 작성자에게만 보이도록 수정 */}
-                        {answer?.memberId === "사용자ID" && (
+                        {answer?.memberId === memberId && (
                             <div className="action-buttons">
                                 <button className="edit-button" onClick={handleEdit}>수정</button>
                                 <button className="delete-button" onClick={handleDelete}>삭제</button>
                             </div>
                         )}
-                        <div className="action-buttons">
-                            <button className="edit-button" onClick={handleEdit}>수정</button>
-                            <button className="delete-button" onClick={handleDelete}>삭제</button>
-                        </div>
                     </div>
                 </>
             )}

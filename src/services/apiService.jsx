@@ -144,6 +144,19 @@ export const getQuestion = async (id) => {
   }
 };
 
+// 댓글 조회
+export const getAnswers = async (id, page) => {
+  try {
+    const response = await axios.get(`${API_URL}/question/${id}/answers?page=${page}`);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("댓글 조회 실패 : ", error);
+    throw error;
+  }
+}
+
 // 게시글 생성
 export const createQuestion = async (memberId, studyId, questionData) => {
   console.log(questionData);
