@@ -82,9 +82,9 @@ const Mypage = () => {
 
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
-          <li>가입한 스터디 수: {counts.studyCount}</li>
-          <li>작성한 질문 수: {counts.questionCount}</li>
-          <li>작성한 답변 수: {counts.answerCount}</li>
+          <li>가입 스터디 수<p>{counts.studyCount}</p></li>
+          <li>작성 질문 수<p>{counts.questionCount}</p></li>
+          <li>작성 답변 수<p>{counts.answerCount}</p></li>
         </ul>
       </header>
 

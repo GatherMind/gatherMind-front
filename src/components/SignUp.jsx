@@ -119,7 +119,7 @@ const SignUp = () => {
     if (!(await validate())) return;
 
     try {
-      await axios.post("/api/members/signup", {
+      await axios.post("/api/member/signup", {
         memberId,
         password,
         email,

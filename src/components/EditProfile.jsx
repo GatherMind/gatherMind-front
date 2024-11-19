@@ -166,7 +166,7 @@ const EditProfile = () => {
         await updateMember("nickname", newNickname);
 
         // await axios.put(
-        //   "/api/members/update",
+        //   "/api/member/update",
         //   { nickname: newNickname },
         //   {
         //     headers: {
@@ -180,7 +180,7 @@ const EditProfile = () => {
       if (newPassword) {
         await updateMember("password", newPassword);
         // await axios.put(
-        //   "/api/members/update",
+        //   "/api/member/update",
         //   { password: newPassword },
         //   {
         //     headers: {
@@ -208,7 +208,7 @@ const EditProfile = () => {
 
     try {
       // const token = localStorage.getItem("token");
-      // await axios.delete("/api/members/delete-account", {
+      // await axios.delete("/api/member/delete-account", {
       //   headers: { Authorization: `Bearer ${token}` },
       // });
       await deleteMember();

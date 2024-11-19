@@ -65,7 +65,6 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginId">아이디</label>
             <input
               type="text"
               value={memberId}
@@ -79,7 +78,6 @@ const Login = () => {
             )}
           </div>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginPw">비밀번호</label>
             <input
               type="password"
               value={password}
@@ -92,7 +90,7 @@ const Login = () => {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          {loginError && <p className="login-error-message">{loginError}</p>}
+          {loginError && <p className="login-confirm-error-message">{loginError}</p>}
           <button className="login-button" type="submit">
             로그인
           </button>
