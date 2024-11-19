@@ -38,7 +38,7 @@ function App() {
               {/* <Route path="main/makegroup" element={<MakeGroup />}></Route> */}
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/mypage" element={<Mypage />} />
+              {/* <Route path="/mypage" element={<Mypage />} />
               <Route path="/mypage/joined-study" element={<JoinedStudy />} />
               <Route
                 path="/mypage/written-question"
@@ -47,7 +47,7 @@ function App() {
               <Route
                 path="/mypage/written-answer"
                 element={<WrittenAnswer />}
-              />{" "}
+              />{" "} */}
               <Route path="/editprofile" element={<EditProfile />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />

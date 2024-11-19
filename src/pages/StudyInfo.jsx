@@ -9,6 +9,7 @@ import {
   getStudyMembersAndBoards,
   getStudyInfoAndMembersAndBoards,
   getBoards,
+  deleteStudy,
 } from "../services/apiService";
 
 import { getMyInfoById } from "../services/MemberApiService";
@@ -122,6 +123,22 @@ const StudyInfo = () => {
     }
   };
 
+  // 탭 클릭
+  const handleStudyDelete = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await deleteStudy(studyId, authToken);
+      alert("삭제 완료");
+      navigate("/");
+    } catch (error) {
+      console.error("스터디 삭제 실패", error);
+      setError("스터디 삭제에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // fixed 버튼 클릭시
   const handleButtonClick = () => {
     if (activeTab === "members") {
@@ -145,7 +162,7 @@ const StudyInfo = () => {
         <h2>{study.title}</h2>
         <p>{study.description} </p>
         <div className="settings-icon" onClick={toggleMenu}>
-          {role === "Leader" && (
+          {role === "admin" && (
             <>
               <FaCog />
               {showMenu && (
@@ -155,7 +172,7 @@ const StudyInfo = () => {
                   >
                     수정
                   </button>
-                  <button onClick={() => console.log("삭제")}>삭제</button>
+                  <button onClick={() => handleStudyDelete()}>삭제</button>
                 </div>
               )}
             </>

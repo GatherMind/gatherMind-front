@@ -1,4 +1,5 @@
 .study-intro {
+  position: relative; /* 자식 요소 위치 조정을 위한 설정 */
   margin-bottom: 20px;
   text-align: center;
 }
@@ -11,9 +12,9 @@ h2 {
 
 /* 톱니바퀴 아이콘 스타일 */
 .settings-icon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: absolute; /* 부모 요소를 기준으로 위치 조정 */
+  top: 16px; /* 상단 여백 */
+  right: 16px; /* 오른쪽 여백 */
   font-size: 20px;
   cursor: pointer;
 }

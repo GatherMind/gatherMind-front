@@ -127,18 +127,17 @@ export const deleteMember = async () => {
 // 가입된 스터디 개수 불러오기
 export const getStudyCount = () => {
   const token = localStorage.getItem("token");
-  return axios.get("/api/members/study-count", {
+  return axios.get(`${API_URL}/member/study-count`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
 
-
 // 작성한 질문 개수 불러오기
 export const getQuestionCount = () => {
   const token = localStorage.getItem("token");
-  return axios.get("/api/members/question-count", {
+  return axios.get(`${API_URL}/member/question-count`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -148,7 +147,7 @@ export const getQuestionCount = () => {
 // 작성한 답변 개수 불러오기
 export const getAnswerCount = () => {
   const token = localStorage.getItem("token");
-  return axios.get("/api/members/answer-count", {
+  return axios.get(`${API_URL}/member/answer-count`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

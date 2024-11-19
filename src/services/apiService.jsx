@@ -103,6 +103,19 @@ export const getStudyById = async (studyId) => {
   }
 };
 
+// 스터디 삭제
+export const deleteStudy = async (studyId, token) => {
+  try {
+    const response = await axios.delete(`${API_URL}/study/${studyId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch study info: ", error);
+    throw new Error("Failed to fetch study info.");
+  }
+};
+
 // 게시글 조회
 export const getQuestion = async (id) => {
   try {

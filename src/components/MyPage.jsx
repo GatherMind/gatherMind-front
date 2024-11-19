@@ -52,7 +52,7 @@ const Mypage = () => {
         });
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류가 발생했습니다.", error);
-        alert("로그인이 필요합니다.");
+        alert("로그인이 필요합니다.dd?");
         navigate("/login");
       }
     };

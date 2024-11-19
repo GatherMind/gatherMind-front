@@ -119,12 +119,12 @@ const SignUp = () => {
     if (!(await validate())) return;
 
     try {
-      await axios.post("/api/members/signup", {
-        memberId,
-        password,
-        email,
-        nickname,
-      });
+      // await axios.post("/api/members/signup", {
+      //   memberId,
+      //   password,
+      //   email,
+      //   nickname,
+      // });
       await createMember(memberId, password, email, nickname);
       setSignUpSuccess(true);
       setTimeout(() => navigate("/login"), 3000); // 3초 후 로그인 페이지로 이동
