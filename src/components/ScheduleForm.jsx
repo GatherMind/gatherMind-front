@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DaumPostcode from "react-daum-postcode";
 import { subDays } from "date-fns";
 
-const ScheduleForm = ({ onSubmit, studyId, scheduleData }) => {
+const ScheduleForm = ({ onSubmit, scheduleData }) => {
 
     const [title, setTitle] = useState("");
     const [dateTime, setDateTime] = useState(new Date());
@@ -53,7 +53,7 @@ const ScheduleForm = ({ onSubmit, studyId, scheduleData }) => {
         e.preventDefault();
 
         var SceduleDateTime = new Date(new Date(dateTime).getTime() + 540 * 60 * 1000);
-        onSubmit({title, dateTime : SceduleDateTime, location, description, studyId});
+        onSubmit({title, dateTime : SceduleDateTime, location, description});
     }
 
     return (

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-const QuestionForm = ({onSubmit, studyId, question}) => {
+const QuestionForm = ({onSubmit, question}) => {
 
     const [option, setOption] = useState("질문");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
-    // userId 받아서 같이 저장
 
     useEffect(() => {
         console.log(question);
@@ -21,7 +20,7 @@ const QuestionForm = ({onSubmit, studyId, question}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        onSubmit({title, option, content, studyId});
+        onSubmit({title, option, content});
     };
 
     const handleSelect = (e) => {

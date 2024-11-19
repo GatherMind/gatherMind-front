@@ -14,6 +14,8 @@ const QuestionFormPage = ({ isModify }) => {
     const {id} = useParams();
 
     const [questionInitData, setQuestionInitData] = useState(null);
+
+    const [error, setError] = useState("");
     
     useEffect(() => {
         if (isModify) { // 수정 모드일 때 데이터 불러옴
@@ -41,22 +43,26 @@ const QuestionFormPage = ({ isModify }) => {
                 navigate(`/question-detail/${id}`);
             } else {
                 // response = await createQuestion(userId, studyId, questionData); // userId 받아오도록 수정
-                response = await createQuestion("user1", 1, questionData);
+                response = await createQuestion("", 1, questionData);
                 
                 console.log("게시글 생성 완료");
                 navigate(`/study-info/${studyId}`);
             }
             } catch (error) {
             console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
+            setError("로그인 정보를 확인해주세요.");
         }
     };
 
+    if (error) {
+        alert(error);
+    }
+    
     return (
         <div className="container">
         <h1>{isModify ? "게시글 수정하기" : "새로운 게시글 작성"}</h1>
         <QuestionForm
             onSubmit={handleCreateQuestion}
-            studyId={studyId}
             question={questionInitData}
         />
         </div>
