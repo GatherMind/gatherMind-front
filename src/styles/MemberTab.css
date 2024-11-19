@@ -14,8 +14,7 @@
   text-align: center;
 }
 
-.board-item,
-.member-item {
+.board-item {
   display: flex;
   justify-content: space-around;
   border: 1px solid var(--border-color);
@@ -24,6 +23,46 @@
   text-align: center;
 
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.member-item {
+  display: flex; /* 플렉스 컨테이너 */
+  align-items: center; /* 세로 정렬 */
+  justify-content: space-between; /* 요소 간 간격 균등 */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: #ffffff;
+  transition: background-color var(--transition-speed);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  gap: 10px; /* 요소 간 간격 */
+}
+
+.member-item > .nickname {
+  flex: 2; /* 닉네임 영역이 넓게 차지 */
+  text-align: left;
+  min-width: 150px; /* 최소 너비 설정 */
+  margin-left: 100px;
+}
+
+.member-item > .status {
+  flex: 1; /* 상태 텍스트의 영역 크기 */
+  text-align: center;
+  min-width: 80px; /* 최소 너비를 설정 */
+  color: red;
+}
+
+.member-item > .actions {
+  flex: 0; /* 버튼은 고정 크기 */
+  min-width: 70px; /* 버튼이 없는 경우에도 동일한 크기 유지 */
+  text-align: right;
+}
+
+.member-item .button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%; /* 버튼이 부모 영역 내에서 꽉 차도록 설정 */
 }
 
 .board-item div {

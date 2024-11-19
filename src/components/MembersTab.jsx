@@ -48,20 +48,20 @@ const MembersTab = ({
         <ul>
           {members.map((member) => (
             <li key={member.memberId} className="list-item member-item">
-              {member.nickname}
-              {role === "admin" && (
-                <>
-                  <span style={{ color: "red" }}>{`(${member.status})`}</span>
-                  {member.status === "pending" && (
-                    <button
-                      className="button"
-                      onClick={() => handleConfirmClick(member.memberId)}
-                    >
-                      승인
-                    </button>
-                  )}
-                </>
-              )}
+              <div className="nickname">{member.nickname}</div>
+              <div className="status">
+                {role === "admin" ? `(${member.status})` : ""}
+              </div>
+              <div className="actions">
+                {role === "admin" && member.status === "pending" && (
+                  <button
+                    className="button"
+                    onClick={() => handleConfirmClick(member.memberId)}
+                  >
+                    승인
+                  </button>
+                )}
+              </div>
             </li>
           ))}
         </ul>
