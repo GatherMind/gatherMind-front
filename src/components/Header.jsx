@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import homeicon from "../assets/homeicon.png";
 import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header({ setLoginresult }) {
   const navigate = useNavigate();
+
+  const { authToken, logout } = useAuth();
 
   function handleClick() {
     navigate("/");
@@ -19,6 +22,8 @@ export default function Header({ setLoginresult }) {
     navigate("/mypage");
   }
 
+  useEffect(() => {}, [authToken]); // authToken 변경 시 호출
+
   return (
     <header className="header">
       <div className="header">
@@ -30,8 +35,11 @@ export default function Header({ setLoginresult }) {
         <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
         MyPage
       </div>
-      <button className="header-login" onClick={handleLoginClick}>
-        로그인
+      <button
+        className="header-login"
+        onClick={authToken ? logout : handleLoginClick}
+      >
+        {authToken ? "로그아웃" : "로그인"}
       </button>
     </header>
   );

@@ -8,10 +8,13 @@ if (!API_URL) {
 }
 
 // 현재 아이디 정보 조회
-export const getMyInfoById = async (memberId, studyId) => {
+export const getMyInfoById = async (studyId, token) => {
   try {
     const response = await axios.get(
-      `${API_URL}/member/role?memberId=${memberId}&studyId=${studyId}`
+      `${API_URL}/member/role?studyId=${studyId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     return response.data;
   } catch (error) {

@@ -7,17 +7,19 @@ import "../styles/global/Container.css";
 import "../styles/global/Button.css";
 import "../styles/global/Alert.css";
 import { createStudy, getStudyById, updateStudy } from "../services/apiService";
-// import { useUser } from "./../context/UserContext";
 import Loading from "./../components/Feedback/Loading";
 import ErrorMessage from "../components/Feedback/ErrorMessage";
+import { useAuth } from "../context/AuthContext";
 
 const StudyFormPage = ({ mode }) => {
   const navigate = useNavigate();
-  const { memberId, studyId } = useParams();
+  const { studyId } = useParams();
   const [initialData, setInitialData] = useState(null);
-  // const { userId } = useUser();
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const { authToken } = useAuth();
 
   const fetchStudyData = async () => {
     setIsLoading(true);
@@ -56,7 +58,8 @@ const StudyFormPage = ({ mode }) => {
         response = await updateStudy(studyId, { ...studyData, studyId });
         alert("성공적으로 스터디가 수정됐습니다.");
       } else {
-        response = await createStudy({ ...studyData, memberId });
+        response = await createStudy({ ...studyData }, authToken);
+        console.log(response);
         alert("성공적으로 스터디가 생성됐습니다.");
       }
       navigate(`/study-info/${response.studyId}`);
@@ -78,15 +81,9 @@ const StudyFormPage = ({ mode }) => {
   if (error) return <ErrorMessage message={error} onRetry={fetchStudyData} />;
 
   return (
-    <div className="container">
-      <div className="study-form">
-        <h1>{mode === "edit" ? "스터디 수정" : "새로운 스터디 생성"}</h1>
-        <StudyForm
-          onSubmit={handleSubmit}
-          initialData={initialData}
-          studyCreatedUserId={memberId}
-        ></StudyForm>
-      </div>
+    <div className="study-form">
+      <h1>{mode === "edit" ? "스터디 수정" : "새로운 스터디 생성"}</h1>
+      <StudyForm onSubmit={handleSubmit} initialData={initialData}></StudyForm>
     </div>
   );
 };

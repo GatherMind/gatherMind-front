@@ -14,6 +14,7 @@ export default function UseMemberApi() {
     const fetchMyInfo = async () => {
       if (!authToken) {
         setLoading(false);
+        setData("");
         return;
       }
 
@@ -42,7 +43,7 @@ export default function UseMemberApi() {
     //   });
 
     fetchMyInfo();
-  }, []);
+  }, [authToken]);
 
   return {
     data,

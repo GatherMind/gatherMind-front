@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../styles/Login.css";
 import { loginMember } from "../services/MemberApiService";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState(null);
+
+  const { login } = useAuth();
 
   // 유효성 검사 함수
   const validate = () => {
@@ -52,10 +55,12 @@ const Login = () => {
     try {
       const response = await loginMember(memberId, password);
 
-      localStorage.setItem("token", response.data.token); // 토큰 저장
-      navigate("/mypage"); // 로그인 후 마이페이지로 이동
+      // localStorage.setItem("token", response.data.token); // 토큰 저장
+      login(response.data.token);
+      navigate("/main"); // 로그인 후 마이페이지로 이동
     } catch (error) {
       setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
+      console.error(error);
     }
   };
 

@@ -23,13 +23,6 @@ export default function Main() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setModalOpen(true);
-  // }, []);
-  // function modalclick(){
-  //   navigate('/main/makegroup')
-  // }
-
   function handleStatus(e) {
     setStatusFilter(e);
   }
