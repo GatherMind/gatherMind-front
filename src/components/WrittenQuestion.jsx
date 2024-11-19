@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/WrittenQuestion.css";
+import {
+  getMemberByToken,
+  getRecentQuestionLimit3,
+} from "../services/MemberApiService";
 
 const WrittenQuestion = () => {
   // State 관리
@@ -16,18 +20,22 @@ const WrittenQuestion = () => {
         const token = localStorage.getItem("token");
 
         // 회원 정보 가져오기
-        const response = await axios.get("/api/members/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setMemberInfo(response.data || {});
+        // const response = await axios.get("/api/members/me", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
 
         // 최근 질문 가져오기 (최대 3개)
-        const questionsResponse = await axios.get(
-          "/api/members/recent-questions",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        // const questionsResponse = await axios.get(
+        //   "/api/members/recent-questions",
+        //   {
+        //     headers: { Authorization: `Bearer ${token}` },
+        //   }
+        // );
+
+        const response = await getMemberByToken();
+        setMemberInfo(response.data || {});
+
+        const questionsResponse = await getRecentQuestionLimit3();
         setRecentQuestions(questionsResponse.data.slice(0, 3));
       } catch (error) {
         console.error("질문 데이터를 불러오는 중 오류가 발생했습니다.");
@@ -68,7 +76,9 @@ const WrittenQuestion = () => {
       <header>
         <ul className="mypage-written-question-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
-          <li onClick={() => navigate("/mypage/joined-study")}>가입한 스터디</li>
+          <li onClick={() => navigate("/mypage/joined-study")}>
+            가입한 스터디
+          </li>
           <li onClick={() => navigate("/mypage/written-question")}>
             작성한 질문
           </li>

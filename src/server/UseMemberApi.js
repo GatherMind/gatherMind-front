@@ -1,7 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { getMyInfo } from "../services/apiService";
+import { getMemberByToken } from "../services/MemberApiService";
 
 export default function UseMemberApi() {
   const [data, setData] = useState("");
@@ -19,7 +18,8 @@ export default function UseMemberApi() {
       }
 
       try {
-        const response = await getMyInfo(authToken);
+        // const response = await getMyInfo(authToken);
+        const response = await getMemberByToken();
         console.log(response.data);
         setData(response.data);
         setLoading(false);

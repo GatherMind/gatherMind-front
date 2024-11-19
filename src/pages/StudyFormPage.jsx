@@ -6,10 +6,14 @@ import "../styles/CreateMeeting.css";
 import "../styles/global/Container.css";
 import "../styles/global/Button.css";
 import "../styles/global/Alert.css";
-import { createStudy, getStudyById, updateStudy } from "../services/apiService";
 import Loading from "./../components/Feedback/Loading";
 import ErrorMessage from "../components/Feedback/ErrorMessage";
 import { useAuth } from "../context/AuthContext";
+import {
+  createStudy,
+  getStudyById,
+  updateStudy,
+} from "../services/StudyApiService";
 
 const StudyFormPage = ({ mode }) => {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { getMyInfo, getMyStudy } from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
 import "../styles/JoinedStudy.css";
+import { getMemberByToken, getMyStudy } from "../services/MemberApiService";
 
 const JoinedStudy = () => {
   const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
@@ -17,7 +17,8 @@ const JoinedStudy = () => {
       try {
         // API 호출
         const groupResponse = await getMyStudy(authToken);
-        const response = await getMyInfo(authToken);
+        // const response = await getMyInfo(authToken);
+        const response = await getMemberByToken();
 
         // 상태 업데이트
         setMemberInfo(response.data || {});

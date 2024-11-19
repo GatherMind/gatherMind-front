@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/GroupInfo.css"; // 스타일 import
 import { useAuth } from "../context/AuthContext";
-import { applyStudy } from "../services/apiService";
+import { applyStudy } from "../services/StudyMemberApiService";
 
 const GroupInfo = ({ isOpen, onClose, groupInfoData }) => {
   const { authToken } = useAuth();

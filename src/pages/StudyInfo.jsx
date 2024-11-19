@@ -5,12 +5,6 @@ import "../styles/global/Tabs.css";
 import "../styles/global/FixedButton.css";
 import "../styles/global/DropdownMenu.css";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  getStudyMembersAndBoards,
-  getStudyInfoAndMembersAndBoards,
-  getBoards,
-  deleteStudy,
-} from "../services/apiService";
 
 import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
@@ -19,10 +13,14 @@ import { FaCog } from "react-icons/fa";
 import Loading from "./../components/Feedback/Loading";
 import ErrorMessage from "../components/Feedback/ErrorMessage";
 import { useAuth } from "../context/AuthContext";
+import {
+  getStudyMembersAndBoards,
+  getStudyInfoAndMembersAndBoards,
+  deleteStudy,
+  getBoards,
+} from "../services/StudyApiService.jsx";
 
 const StudyInfo = () => {
-  // 임시
-  const userId = "member1";
   const { authToken } = useAuth();
 
   const [activeTab, setActiveTab] = useState("members");
@@ -128,7 +126,7 @@ const StudyInfo = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await deleteStudy(studyId, authToken);
+      await deleteStudy(studyId, authToken);
       alert("삭제 완료");
       navigate("/");
     } catch (error) {

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/WrittenAnswer.css";
+import {
+  getMemberByToken,
+  getRecentAnswerLimit3,
+} from "../services/MemberApiService";
 
 const WrittenAnswer = () => {
   // State 관리
@@ -13,24 +17,30 @@ const WrittenAnswer = () => {
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
 
         // 회원 정보 가져오기
-        const response = await axios.get("/api/members/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setMemberInfo(response.data || {});
+        // const response = await axios.get("/api/members/me", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
 
         // 최근 답변 가져오기 (최대 3개)
-        const answersResponse = await axios.get(
-          "/api/members/recent-answers",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        // const answersResponse = await axios.get("/api/members/recent-answers", {
+        //   headers: { Authorization: `Bearer ${token}` },
+        // });
+
+        const response = await getMemberByToken();
+        setMemberInfo(response.data || {});
+
+        const answersResponse = await getRecentAnswerLimit3();
         setRecentAnswers(answersResponse.data.slice(0, 3));
+
+        // const [response, answersResponse] = await Promise.all([
+        //   getMemberByToken(),
+        //   answersResponse(),
+        // ]);
       } catch (error) {
-        console.error("답변 데이터를 불러오는 중 오류가 발생했습니다.");
+        console.error("답변 데이터를 불러오는 중 오류가 발생했습니다.", error);
       }
     };
 
@@ -68,7 +78,9 @@ const WrittenAnswer = () => {
       <header>
         <ul className="mypage-written-answer-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
-          <li onClick={() => navigate("/mypage/joined-study")}>가입한 스터디</li>
+          <li onClick={() => navigate("/mypage/joined-study")}>
+            가입한 스터디
+          </li>
           <li onClick={() => navigate("/mypage/written-question")}>
             작성한 질문
           </li>

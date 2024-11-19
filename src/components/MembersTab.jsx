@@ -5,7 +5,7 @@ import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useAuth } from "../context/AuthContext";
-import { confirmStudyMember } from "../services/apiService";
+import { confirmStudyMember } from "../services/StudyMemberApiService";
 
 const MembersTab = ({
   members,

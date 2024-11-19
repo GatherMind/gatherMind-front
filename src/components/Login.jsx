@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/Login.css";
@@ -70,7 +69,9 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginId">아이디</label>
+            <label className="login-label" htmlFor="loginId">
+              아이디
+            </label>
             <input
               type="text"
               value={memberId}
@@ -84,7 +85,9 @@ const Login = () => {
             )}
           </div>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginPw">비밀번호</label>
+            <label className="login-label" htmlFor="loginPw">
+              비밀번호
+            </label>
             <input
               type="password"
               value={password}

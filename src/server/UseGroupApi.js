@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { getAllStudies } from "../services/apiService";
+import { getAllStudies } from "../services/StudyApiService.jsx";
 
 export default function UseGroupApi() {
   const [data, setData] = useState([]);

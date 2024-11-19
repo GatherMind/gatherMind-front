@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getMyStudy } from "../services/apiService";
+import { getMyStudy } from "../services/MemberApiService";
 
 function AppointmentApi({ setHasAppointment }) {
   const navigate = useNavigate();

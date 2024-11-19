@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { deleteSchedule, getStudySchedule } from "../services/apiService";
 import "../styles/AppointmentTab.css";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
+import { getStudySchedule } from "../services/StudyApiService";
+import { deleteSchedule } from "../services/ScheduleApiService";
 
 const ScheduleTab = ({ studyId }) => {
   const [isLoading, setIsLoading] = useState(false);

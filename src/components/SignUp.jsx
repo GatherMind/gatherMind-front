@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import { createMember } from "./../services/MemberApiService";
 import { duplicationCheck } from "./../services/ValidateApiService";
 import "../styles/Signup.css";
-import axios from "axios";
 
 const SignUp = () => {
   const [memberId, setMemberId] = useState("");
