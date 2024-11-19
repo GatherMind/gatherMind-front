@@ -1,95 +1,199 @@
-*{
+* {
     margin: 0;
     padding: 0;
-}
+  }
+  
+  @media (max-width: 768px) {
+    .written-question-container {
+      width: 350px;
+      margin: 0 auto;
+    }
+  
+    .mypage-written-question-nav {
+      display: flex;
+      width: 100%;
+      margin: 0 auto;
+      list-style: none;
+    }
+  
+    .mypage-written-question-nav > li {
+      width: 25%;
+      height: 5vh;
+      align-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgb(2, 136, 255);
+      border-left: none;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(1) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      border-left: 1px solid rgb(2, 136, 255);
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(3) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      background-color: rgb(2, 136, 255);
+      color: white;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(4) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats {
+      display: flex;
+      width: 100%;
+      margin: 3vh auto;
+      list-style: none;
+    }
+  
+    .mypage-stats > li {
+      width: 33.39%;
+      height: 7vh;
+      align-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgba(2, 136, 255);
+      border-left: none;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats > li:nth-child(1) {
+      width: 33.39%;
+      border-left: 1px solid rgb(2, 136, 255);
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats > li:nth-child(3) {
+      width: 33.39%;
+      border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
+    }
+  
+    .mypage-info {
+      display: flex;
+      margin-top: 3vh;
+      border: 1px solid rgb(2, 136, 255);
+      border-radius: 4px;
+    }
 
-.written-question-container {
-    width: 1400px;
-    height: 100vh;
-    margin: 5vh auto 15vh;
-    text-align: center;
-}
+    .question-card,
+    .no-question-message {
+      padding: 4vh;
+      border: 1px solid rgb(2, 136, 255);
+      border-radius: 4px;
+    }
+  }
+  
+  /* ------------------------------------------------------------- */
+  
+  @media (min-width: 768px) {
+    .written-question-container {
+      width: 740px;
+      margin: 0 auto;
+    }
+  
+    .mypage-written-question-nav {
+      display: flex;
+      width: 100%;
+      margin: 0 auto;
+      list-style: none;
+    }
+  
+    .mypage-written-question-nav > li {
+      width: 25%;
+      height: 5vh;
+      align-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgb(2, 136, 255);
+      border-left: none;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(1) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      border-left: 1px solid rgb(2, 136, 255);
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(3) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      background-color: rgb(2, 136, 255);
+      color: white;
+      box-sizing: border-box;
+    }
+  
+    .mypage-written-question-nav > li:nth-child(4) {
+      width: 25%;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats {
+      display: flex;
+      width: 100%;
+      margin: 3vh auto;
+      list-style: none;
+    }
+  
+    .mypage-stats > li {
+      width: 33.39%;
+      height: 7vh;
+      align-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgba(2, 136, 255);
+      border-left: none;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats > li:nth-child(1) {
+      width: 33.39%;
+      border-left: 1px solid rgb(2, 136, 255);
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+    }
+  
+    .mypage-stats > li:nth-child(3) {
+      width: 33.39%;
+      border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
+    }
+  
+    .mypage-info {
+      display: flex;
+      margin-top: 3vh;
+      border: 1px solid rgb(2, 136, 255);
+      border-radius: 4px;
+    }
 
-.mypage-written-question-nav {
-    width: 80vh;
-    margin: 9vh auto;
-}
-
-.mypage-written-question-nav > li {
-    display: inline-flex;
-    justify-content: center;
-    width: 20%;
-    height: 5vh;
-    padding: 0.5vh 1vh;
-    font-size: large;
-    font-weight: bold;
-    border: 1px solid rgb(2, 136, 180);
-    border-radius: 9px 6px 0 0;
-    border-bottom-style: none;
-    list-style: none;
-    text-align: center;
-    align-items: center;
-}
-
-.mypage-written-question-nav > li:nth-child(3) {
-    background-color: rgb(2, 136, 180);
-    color: white;
-}
-
-.question-card,
-.no-question-message {
-    width: 55vh;
-    height: 8vh;
-    padding: 1vh;
-    margin: 3vh auto;
-    border: 1px solid rgb(2, 136, 180);
-    border-radius: 6px;
-    font-size: 16px;
-    justify-content: center;
-}
-
-.question-study-title {
-    position: absolute;
-    margin: -2.5vh 0vh;
-    color: rgb(2, 136, 180);
-    background-color: white;
-}
-
-.mypage-question-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    text-align: left;
-    margin-top: 2.3vh;
-    margin-left: 1.5vh;
-}
-
-.mypage-question-button-box {
-    width: 10vh;
-    display: flex;
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    position: absolute;
-    justify-content: center;
-    margin: -6.65vh 45.8vh;
-}
-
-.mypage-question-edit {
-    padding: 1vh 3vh;
-    background-color: rgba(2, 136, 180, 1);
-    margin-bottom: 1vh; /* 버튼 간격 조정 */
-}
-
-.mypage-question-edit:hover {
-    padding: 1vh 3vh;
-    background-color: rgba(2, 136, 180, 0.7);
-}
-
-.mypage-question-delete {
-    padding: 1vh 3vh;
-    background-color: rgba(220, 90, 90, 1);
-    margin-bottom: 1vh; /* 버튼 간격 조정 */
-}
-
-.mypage-question-delete:hover {
-    padding: 1vh 3vh;
-    background-color: rgba(220, 90, 90, 0.7);
-}
+    .question-card,
+    .no-question-message {
+      padding: 4vh;
+      border: 1px solid rgb(2, 136, 255);
+      border-radius: 4px;
+    }
+  }
+  

@@ -3,19 +3,13 @@ import "./App.css";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import Enter from "./components/Enter";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Mypage from "./components/MyPage";
 import Goodbye from "./components/Goodbye";
 import EditProfile from "./components/EditProfile";
 import Serious from "./components/Serious";
-import Mystudy from "./components/Mystudy.jsx";
-import Groupid from "./components/Groupid.jsx";
 import Header from "./components/Header.jsx";
-import MakeGroup from "./components/GroupInfo.jsx";
-
-import Footer from "./components/Footer.jsx";
 
 import CreateSchedule from "./pages/CreateSchedule";
 import QuestionDetail from "./pages/QuestionDetail";
@@ -42,14 +36,21 @@ function App() {
               <Route path="/" element={<Main />}></Route>
               <Route path="main" element={<Main />}></Route>
               {/* <Route path="main/makegroup" element={<MakeGroup />}></Route> */}
-
               <Route path="/login" element={<Login />} />
-
               <Route path="/signup" element={<SignUp />} />
-
+              <Route path="/mypage" element={<Mypage />} />
+              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+              <Route
+                path="/mypage/written-question"
+                element={<WrittenQuestion />}
+              />
+              <Route
+                path="/mypage/written-answer"
+                element={<WrittenAnswer />}
+              />{" "}
+              <Route path="/editprofile" element={<EditProfile />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
-
               {/* 비로그인 시 로그인 페이지로 이동 */}
               <Route element={<PrivateRoute />}>
                 <Route path="/mypage" element={<Mypage />} />
@@ -74,12 +75,9 @@ function App() {
                   element={<StudyFormPage mode="edit" />}
                 />
               </Route>
-
               {/* study info page */}
               <Route path="/study-info/:studyId" element={<StudyInfo />} />
-
               {/* <Route path="/" element={<Enter />} /> */}
-
               {/* schedule */}
               <Route
                 path="/create-schedule"
@@ -89,7 +87,6 @@ function App() {
                 path="/edit-schedule/:id"
                 element={<CreateSchedule isModify={true} />}
               />
-
               {/* question */}
               <Route
                 path="/create-question"

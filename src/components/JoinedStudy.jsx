@@ -1,37 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
-import "../styles/JoinedStudy.css";
 import { getMyInfo, getMyStudy } from "../services/apiService";
 import { useAuth } from "../context/AuthContext";
+import "../styles/JoinedStudy.css";
 
 const JoinedStudy = () => {
-  const [joinedGroups, setJoinedGroups] = useState([]);
-  const [memberInfo, setMemberInfo] = useState({
-    nickname: "Undefined",
-  });
+  const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
+  const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
   const navigate = useNavigate();
+  const { authToken } = useAuth(); // 인증 토큰
 
-  const { authToken } = useAuth();
-
+  // 데이터 가져오기
   useEffect(() => {
     const fetchActivityData = async () => {
       try {
-        const token = localStorage.getItem("token");
-
-        // const groupResponse = await axios.get("/api/members/joined-groups", {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-
-        // const response = await axios.get("/api/members/me", {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-
+        // API 호출
         const groupResponse = await getMyStudy(authToken);
-
         const response = await getMyInfo(authToken);
 
+        // 상태 업데이트
         setMemberInfo(response.data || {});
         setJoinedGroups(groupResponse.data);
       } catch (error) {
@@ -40,18 +28,19 @@ const JoinedStudy = () => {
     };
 
     fetchActivityData();
-  }, []);
+  }, [authToken]);
 
+  // 스터디 탈퇴
   const handleWithdrawFromStudy = async (studyId) => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
         `/api/studies/${studyId}/withdraw`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      // 탈퇴 후 스터디 목록 갱신
       setJoinedGroups(joinedGroups.filter((group) => group.id !== studyId));
       alert("스터디 탈퇴가 완료되었습니다.");
     } catch (error) {
@@ -61,9 +50,8 @@ const JoinedStudy = () => {
 
   return (
     <div className="joined-study-container">
+      {/* 헤더 */}
       <header>
-        {/* <Header /> */}
-        <h2>{memberInfo.nickname}님의 마이 페이지</h2>
         <ul className="mypage-joined-study-nav">
           <li onClick={() => navigate("/mypage")}>정보 보기</li>
           <li onClick={() => navigate("/mypage/joined-study")}>
@@ -76,28 +64,47 @@ const JoinedStudy = () => {
             작성한 답변
           </li>
         </ul>
+
+        {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
+        <ul className="mypage-stats">
+          <li>
+            가입한 스터디 수<br />
+            <span>{joinedGroups.length}</span>
+          </li>
+          <li>
+            작성한 질문 수<br />
+            <span>0</span>
+          </li>
+          <li>
+            작성한 답변 수<br />
+            <span>0</span>
+          </li>
+        </ul>
       </header>
 
-      <h3>가입한 스터디 목록</h3>
-      {joinedGroups.length > 0 ? (
-        <div className="study-list">
-          {joinedGroups.map((group) => (
-            <div className="study-card" key={group.id}>
-              <p className="study-title">{group.title}</p>
-              <button
-                className="withdraw-button"
-                onClick={() => handleWithdrawFromStudy(group.id)}
-              >
-                탈퇴
-              </button>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p className="no-study-message">
-          현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?
-        </p>
-      )}
+      {/* 메인 콘텐츠 */}
+      <main>
+        <h3>가입한 스터디 목록</h3>
+        {joinedGroups.length > 0 ? (
+          <div className="study-list">
+            {joinedGroups.map((group) => (
+              <div className="study-card" key={group.id}>
+                <p className="study-title">{group.title}</p>
+                <button
+                  className="withdraw-button"
+                  onClick={() => handleWithdrawFromStudy(group.id)}
+                >
+                  탈퇴
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="no-study-message">
+            현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?
+          </p>
+        )}
+      </main>
     </div>
   );
 };
