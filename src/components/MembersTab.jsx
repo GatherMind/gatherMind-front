@@ -35,7 +35,7 @@ const MembersTab = ({
   };
 
   const handleConfirmClick = async (memberId) => {
-    await confirmStudyMember({ studyId, memberId }, authToken);
+    const response = await confirmStudyMember({ studyId, memberId }, authToken);
   };
 
   const renderMemberList = () => (
@@ -49,10 +49,10 @@ const MembersTab = ({
           {members.map((member) => (
             <li key={member.memberId} className="list-item member-item">
               {member.nickname}
-              {role === "member" && (
+              {role === "admin" && (
                 <>
                   <span style={{ color: "red" }}>{`(${member.status})`}</span>
-                  {member.status === "승인대기" && (
+                  {member.status === "pending" && (
                     <button
                       className="button"
                       onClick={() => handleConfirmClick(member.memberId)}
