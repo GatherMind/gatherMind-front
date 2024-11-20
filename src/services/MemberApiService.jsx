@@ -85,6 +85,19 @@ export const getMemberByToken = async () => {
   }
 };
 
+export const getMystudyByToken = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/my-studies`, {
+      headers: { Authorization: `Bearer ${getAuthToken()}` }, // 헤더에 토큰 추가
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Network error or server unreachable: ", error);
+    throw new Error("Network error or server unreachable.");
+  }
+};
+
 // // 내 정보 조회
 // export const getMyInfo = async (token) => {
 //   try {
@@ -119,7 +132,7 @@ export const updateMember = async (filed, value) => {
   }
 };
 
-// 회원 탈퇴
+// 회원 정보 수정
 export const deleteMember = async () => {
   try {
     const response = await axios.delete(`${API_URL}/delete-account`, {

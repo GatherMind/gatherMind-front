@@ -12,7 +12,7 @@
   font-weight: bold;
   color: #333;
   text-align: center;
-  border: 1px solid rgb(15, 16, 15);
+
 
   margin: 10px;
   padding: 10px;
@@ -72,9 +72,10 @@
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 80%;
+  width: 90%;
   max-width: 800px;
   position: relative;
+  
 }
 
 .close-button { 
@@ -116,4 +117,23 @@
 
 .apply-button:hover {
   background-color: #45a049;
+}
+
+
+.secondmodal-content {
+  background-color: rgb(246, 242, 242);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  max-width: 800px;
+  position: relative;
+  
+}
+.second-modal{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 20px;
 }

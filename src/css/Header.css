@@ -1,13 +1,27 @@
 .header {
   display: flex;
-  align-items: center;
   width: 100%;
-  position: relative;
   background-color: rgb(253, 253, 253);
+  justify-content: space-between;
+  align-items: center;
 }
 
+.header-mypage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header-mypage img {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
 .header-login {
-  width: 120px;
+  align-items: center;
+  width: 130px;
+  height: 50px;
   margin-right: 40px;
   background-color: rgba(191, 196, 201, 0.3); /* 연한 파란색 (불투명도 30%) */
   color: rgb(7, 7, 7); /* 글자색은 선명한 파란색 */

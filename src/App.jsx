@@ -22,20 +22,29 @@ import WrittenAnswer from "./components/WrittenAnswer";
 import Main from "./components/Main.jsx";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import MakeGroup from "./components/GroupInfo.jsx";
+import Groupid from "./components/Groupid";
 
 function App() {
   const [loginResult, setLoginresult] = useState(null);
 
+  function handleLoginStatus(e) {
+    setLoginresult(e);
+  }
+
   return (
     <AuthProvider>
       <Router>
-        <Header setLoginresult={setLoginresult} />
         <div className="container">
+          <Header loginResult={loginResult} />
           <div className="content">
             <Routes>
-              <Route path="/" element={<Main />}></Route>
-              <Route path="main" element={<Main />}></Route>
-              {/* <Route path="main/makegroup" element={<MakeGroup />}></Route> */}
+              <Route
+                path="/"
+                element={<Main handleLoginStatus={handleLoginStatus} />}
+              ></Route>
+              <Route path="main/makegroup" element={<MakeGroup />}></Route>
+              <Route path="main/group/:id" element={<Groupid />}></Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               {/* <Route path="/mypage" element={<Mypage />} />
@@ -53,27 +62,27 @@ function App() {
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}
               {/* <Route element={<PrivateRoute />}> */}
-                <Route path="/mypage" element={<Mypage />} />
-                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-                <Route
-                  path="/mypage/written-question"
-                  element={<WrittenQuestion />}
-                />
-                <Route
-                  path="/mypage/written-answer"
-                  element={<WrittenAnswer />}
-                />{" "}
-                <Route path="/editprofile" element={<EditProfile />} />
-                {/* create study  */}
-                <Route
-                  path="/create-study"
-                  element={<StudyFormPage mode="create" />}
-                />
-                {/* edit study */}
-                <Route
-                  path="/edit-study/:studyId"
-                  element={<StudyFormPage mode="edit" />}
-                />
+              <Route path="/mypage" element={<Mypage />} />
+              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+              <Route
+                path="/mypage/written-question"
+                element={<WrittenQuestion />}
+              />
+              <Route
+                path="/mypage/written-answer"
+                element={<WrittenAnswer />}
+              />{" "}
+              <Route path="/editprofile" element={<EditProfile />} />
+              {/* create study  */}
+              <Route
+                path="/create-study"
+                element={<StudyFormPage mode="create" />}
+              />
+              {/* edit study */}
+              <Route
+                path="/edit-study/:studyId"
+                element={<StudyFormPage mode="edit" />}
+              />
               {/* </Route> */}
               {/* study info page */}
               <Route path="/study-info/:studyId" element={<StudyInfo />} />

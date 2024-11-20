@@ -1,24 +1,42 @@
 import "../css/main.css";
 import Group from "../components/Group";
-import AppointmentApi from "../server/AppointmentApi";
-import Noappointment from "../components/Noappointment";
+import Nostudy from "./Nostudy";
 import React, { useEffect, useState } from "react";
 import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SerchBar";
 import Slide from "../components/Slide";
-import MakeGroup from "./GroupInfo";
+import checkLoginStatus from "../hooks/checkLoginStatus";
+import MyStudyList from "./MyStudyList";
 
-export default function Main() {
-  const [hasAppointment, setHasAppointment] = useState(false);
+export default function Main({ handleLoginStatus }) {
+  const [hasStudy, setHasStudy] = useState(false);
 
   const [statusFilter, setStatusFilter] = useState(null);
 
   const [searchResult, setSearchResult] = useState([]);
 
+  const [loginData, setLoginData] = useState(null);
+
+  const [dataLoaded, setDataLoaded] = useState(false);
+
+  useEffect(() => {
+    const verifyLoginStatus = async () => {
+      const status = await checkLoginStatus();
+      setLoginData(status);
+      handleLoginStatus(status);
+    };
+
+    verifyLoginStatus();
+  }, []);
+
   function handleSearch(query) {
     console.log(query);
     setSearchResult([query]);
+  }
+
+  function handlemakeclick() {
+    navigate("/makegroup");
   }
 
   const navigate = useNavigate();
@@ -27,23 +45,39 @@ export default function Main() {
     setStatusFilter(e);
   }
 
+  function handdlesetDataLoaded() {
+    setDataLoaded();
+  }
+
   return (
     <>
-      <Profile />
+      {loginData ? (
+        <Profile loginData={loginData} />
+      ) : (
+        <p>로그인되지dd 않았습니다.</p>
+      )}
 
       <Slide />
 
       <div className="mytitle">내 스터디</div>
 
-      <div className="mygrouplist">
-        {hasAppointment ? (
-          <Noappointment />
-        ) : (
-          <AppointmentApi setHasAppointment={setHasAppointment} />
-        )}
-      </div>
+      {hasStudy ? (
+        <Nostudy />
+      ) : (
+        <MyStudyList
+          statusFilter={statusFilter}
+          setHasStudy={setHasStudy}
+          handdlesetDataLoaded={handdlesetDataLoaded}
+        />
+      )}
 
       <SearchBar onSearch={handleSearch} />
+
+      <div className="studymakediv">
+        <button className="studymakebtn" onClick={handlemakeclick}>
+          스터디 만들기
+        </button>
+      </div>
 
       <div className="group">
         <div className="group-header">
@@ -53,11 +87,14 @@ export default function Main() {
           </div>
           <div
             className="groupheader-title"
-            onClick={() => handleStatus(false)}
+            onClick={() => handleStatus("false")}
           >
             모집중
           </div>{" "}
-          <div className="groupheader-title" onClick={() => handleStatus(true)}>
+          <div
+            className="groupheader-title"
+            onClick={() => handleStatus("true")}
+          >
             모집완료
           </div>{" "}
         </div>
@@ -66,7 +103,7 @@ export default function Main() {
           <Group
             statusFilter={statusFilter}
             searchResult={searchResult}
-            setHasAppointment={setHasAppointment}
+            loginData={loginData}
           />
         </div>
       </div>
