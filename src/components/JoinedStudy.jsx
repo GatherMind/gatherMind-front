@@ -7,9 +7,9 @@ import {
   getStudyCount,
   getQuestionCount,
   getAnswerCount,
+  getMyStudy,
 } from "../services/MemberApiService";
 import "../styles/JoinedStudy.css";
-import { getMemberByToken, getMyStudy } from "../services/MemberApiService";
 
 const JoinedStudy = () => {
   const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
@@ -94,9 +94,15 @@ const JoinedStudy = () => {
 
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
-          <li>가입 스터디 수<p>{counts.studyCount}</p></li>
-          <li>작성 질문 수<p>{counts.questionCount}</p></li>
-          <li>작성 답변 수<p>{counts.answerCount}</p></li>
+          <li>
+            가입 스터디 수<p>{counts.studyCount}</p>
+          </li>
+          <li>
+            작성 질문 수<p>{counts.questionCount}</p>
+          </li>
+          <li>
+            작성 답변 수<p>{counts.answerCount}</p>
+          </li>
         </ul>
       </header>
 
