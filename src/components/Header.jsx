@@ -4,7 +4,7 @@ import homeicon from "../assets/gathermind.png";
 import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
 
-export default function Header({ setLoginresult }) {
+export default function Header({ loginResult }) {
   const navigate = useNavigate();
 
   function handleClick() {
@@ -15,9 +15,15 @@ export default function Header({ setLoginresult }) {
     navigate("/login");
   }
 
+  function handleLogoutClick() {
+    navigate("/logout");
+  }
+
   function handleMyPageClick() {
     navigate("/mypage");
   }
+
+
 
   return (
     <header className="header">
@@ -30,9 +36,13 @@ export default function Header({ setLoginresult }) {
         <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
         MyPage
       </div>
-      <button className="header-login" onClick={handleLoginClick}>
-        로그인
+     
+     
+       {loginResult ? <button className="header-login" onClick={handleLogoutClick}>
+        로그아웃
       </button>
+     :   <button className="header-login" onClick={handleLoginClick}>
+        로그인 </button> }  
     </header>
   );
 

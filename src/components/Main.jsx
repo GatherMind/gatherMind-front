@@ -9,7 +9,7 @@ import Slide from "../components/Slide";
 import checkLoginStatus from '../hooks/checkLoginStatus'
 import MyStudyList from "./MyStudyList";
 
-export default function Main() {
+export default function Main({handleLoginStatus}) {
   const [hasStudy, setHasStudy] = useState(false);
 
   const [statusFilter, setStatusFilter] = useState(null);
@@ -21,14 +21,19 @@ export default function Main() {
   const [dataLoaded, setDataLoaded] = useState(false);
 
 
+
+
+
+
   useEffect(() => {
     const verifyLoginStatus = async () => {
       const status = await checkLoginStatus();
       setLoginData(status);
-      console.log(status)
+      handleLoginStatus(status); 
     };
-
-    verifyLoginStatus(); // 컴포넌트 로드 시 로그인 상태 확인
+  
+   
+    verifyLoginStatus(); 
   }, []);
 
   function handleSearch(query) {
@@ -107,6 +112,7 @@ function handdlesetDataLoaded() {
           <Group
             statusFilter={statusFilter}
             searchResult={searchResult}
+            loginData={loginData}
           />
         </div>
       </div>

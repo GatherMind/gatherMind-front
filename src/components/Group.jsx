@@ -6,7 +6,7 @@ import redlighticon from "../assets/redlighticon.png";
 import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
 
-function Group({ statusFilter, searchResult }) {
+function Group({ statusFilter, searchResult,loginData}) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [groupInfoData, setGroupInfoData] = useState();
 
@@ -62,13 +62,10 @@ function Group({ statusFilter, searchResult }) {
           isOpen={isModalOpen}
           onClose={handleCloseModal}
           groupInfoData={groupInfoData}
+          loginData={loginData}
         >
           <h2></h2>
         </GroupInfo>
-
-        <button className="studymakebtn" onClick={handlemakeclick}>
-          스터디 만들기
-        </button>
       </div>
 
       {dataToRender.length === 0 ? (

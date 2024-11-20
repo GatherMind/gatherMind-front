@@ -32,17 +32,21 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 function App() {
   const [loginResult, setLoginresult] = useState(null);
 
+  function handleLoginStatus(e) {
+    setLoginresult(e)
+  }
+
   return (
     <>
       <AuthProvider>
         <Router>
         
           <div className="container">
-          <Header setLoginresult={setLoginresult} />
+          <Header loginResult={loginResult} />
             <div className="content">
               <Routes>
-                <Route path="/" element={<Main />}></Route>
-                <Route path="main" element={<Main />}></Route>
+        
+                <Route path="/" element={<Main handleLoginStatus={handleLoginStatus}/>}></Route>
                 <Route path="main/makegroup" element={<MakeGroup />}></Route>
                 {/* <Route
                   path="main/appointment/:id"

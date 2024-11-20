@@ -49,7 +49,7 @@ export default function MyStudyList({setHasStudy,handdlesetDataLoaded}){
     handleOpenModal();
   }
 
-
+const filterdata = data.filter((e)=> e.status)
 
 
   return (
