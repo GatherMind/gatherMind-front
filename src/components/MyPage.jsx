@@ -81,27 +81,26 @@ const Mypage = () => {
 
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
-          <li>가입한 스터디 수: {counts.studyCount}</li>
-          <li>작성한 질문 수: {counts.questionCount}</li>
-          <li>작성한 답변 수: {counts.answerCount}</li>
+          <li>가입 스터디 수<p>{counts.studyCount}</p></li>
+          <li>작성 질문 수<p>{counts.questionCount}</p></li>
+          <li>작성 답변 수<p>{counts.answerCount}</p></li>
         </ul>
       </header>
 
       <main>
         {/* 기본 정보 표시 */}
         <div className="mypage-info-box">
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
           </p>
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
           </p>
         </div>
-        {/* <button onClick={handleEditInfo}>정보 수정</button> */}
-        <button className="mypage-button">정보 수정</button>
+        <button className="mypage-button" onClick={handleEditInfo}>정보 수정</button>
       </main>
     </div>
   );

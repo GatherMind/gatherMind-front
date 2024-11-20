@@ -24,14 +24,14 @@ const Login = () => {
       newErrors.memberId = "아이디를 입력해주세요.";
     } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
       newErrors.memberId =
-        "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
+        "아이디는 8~30자 이내의 영문 소문자와 숫자만 조합하여 입력해주세요.";
     }
 
     // password 유효성 검사
     if (!password) {
       newErrors.password = "비밀번호를 입력해주세요.";
     } else if (password.length < 8 || password.length > 255) {
-      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
+      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
     } else if (/\s/.test(password)) {
       newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
     }
@@ -69,9 +69,6 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginId">
-              아이디
-            </label>
             <input
               type="text"
               value={memberId}
@@ -85,9 +82,6 @@ const Login = () => {
             )}
           </div>
           <div className="form-group">
-            <label className="login-label" htmlFor="loginPw">
-              비밀번호
-            </label>
             <input
               type="password"
               value={password}
@@ -100,7 +94,9 @@ const Login = () => {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
-          {loginError && <p className="login-error-message">{loginError}</p>}
+          {loginError && (
+            <p className="login-confirm-error-message">{loginError}</p>
+          )}
           <button className="login-button" type="submit">
             로그인
           </button>

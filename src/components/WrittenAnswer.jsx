@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../styles/WrittenAnswer.css";
 import {
+  getStudyCount,
+  getQuestionCount,
+  getAnswerCount,
   getMemberByToken,
   getRecentAnswerLimit3,
 } from "../services/MemberApiService";
+import "../styles/WrittenAnswer.css";
 
 const WrittenAnswer = () => {
   // State 관리
   const [recentAnswers, setRecentAnswers] = useState([]); // 최근 답변 목록
   const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
   const navigate = useNavigate();
+
+  const [counts, setCounts] = useState({
+    studyCount: 0,
+    questionCount: 0,
+    answerCount: 0,
+  });
 
   // 데이터 가져오기
   useEffect(() => {
@@ -23,6 +32,20 @@ const WrittenAnswer = () => {
         // const response = await axios.get("/api/members/me", {
         //   headers: { Authorization: `Bearer ${token}` },
         // });
+
+        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
+        const [studyResponse, questionResponse, answerResponse] =
+          await Promise.all([
+            getStudyCount(),
+            getQuestionCount(),
+            getAnswerCount(),
+          ]);
+
+        setCounts({
+          studyCount: studyResponse.data || 0,
+          questionCount: questionResponse.data || 0,
+          answerCount: answerResponse.data || 0,
+        });
 
         // 최근 답변 가져오기 (최대 3개)
         // const answersResponse = await axios.get("/api/members/recent-answers", {
@@ -92,16 +115,13 @@ const WrittenAnswer = () => {
         {/* 통계 정보 */}
         <ul className="mypage-stats">
           <li>
-            가입한 스터디 수<br />
-            <span>0</span>
+            가입 스터디 수<p>{counts.studyCount}</p>
           </li>
           <li>
-            작성한 질문 수<br />
-            <span>0</span>
+            작성 질문 수<p>{counts.questionCount}</p>
           </li>
           <li>
-            작성한 답변 수<br />
-            <span>{recentAnswers.length}</span>
+            작성 답변 수<p>{counts.answerCount}</p>
           </li>
         </ul>
       </header>

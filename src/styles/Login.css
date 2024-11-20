@@ -4,7 +4,7 @@
 }
 
 .login-container > main {
-  width: 350px;
+  width: 300px;
   margin: 0 auto;
 }
 
@@ -12,14 +12,16 @@
   margin-top: 2vh;
 }
 
-.form-group > .error-message {
+form > .form-group > .error-message {
   width: 100%;
   height: 3vh;
   margin-top: 1vh;
-  padding: 0;
+  padding: 0 0 1.5vh 0;
+  background: none;
+  align-content: center;
 }
 
-.login-error-message {
+.login-confirm-error-message {
   margin-top: 1vh;
 }
 

@@ -140,23 +140,27 @@ const SignUp = () => {
         ) : (
           <form onSubmit={handleSubmit} autoComplete="off">
             <div className="form-group">
-              <input
-                type="text"
-                value={memberId}
-                onChange={(e) => setMemberId(e.target.value.toLowerCase())}
-                autoComplete="off"
-                placeholder="아이디"
-                name="아이디"
-                id="id"
-                className="signup-input option-duplicated"
-              />
-              <button
-                type="button"
-                onClick={() => validateAndCheckUniqueness("memberId", memberId)}
-                className="signup-check-button"
-              >
-                중복확인
-              </button>
+              <div className="signup-input-wrap">
+                <input
+                  type="text"
+                  value={memberId}
+                  onChange={(e) => setMemberId(e.target.value.toLowerCase())}
+                  autoComplete="off"
+                  placeholder="아이디"
+                  name="아이디"
+                  id="id"
+                  className="option-duplicated"
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    validateAndCheckUniqueness("memberId", memberId)
+                  }
+                  className="signup-check-button"
+                >
+                  중복확인
+                </button>
+              </div>
               {errors.memberId && (
                 <p className="error-message">{errors.memberId}</p>
               )}
@@ -212,23 +216,27 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <input
-                type="text"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                autoComplete="off"
-                placeholder="닉네임"
-                name="닉네임"
-                id="nickname"
-                className="signup-input option-duplicated"
-              />
-              <button
-                type="button"
-                onClick={() => validateAndCheckUniqueness("nickname", nickname)}
-                className="signup-check-button"
-              >
-                중복확인
-              </button>
+              <div className="signup-input-wrap">
+                <input
+                  type="text"
+                  value={nickname}
+                  onChange={(e) => setNickname(e.target.value)}
+                  autoComplete="off"
+                  placeholder="닉네임"
+                  name="닉네임"
+                  id="nickname"
+                  className="signup-input option-duplicated"
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    validateAndCheckUniqueness("nickname", nickname)
+                  }
+                  className="signup-check-button"
+                >
+                  중복확인
+                </button>
+              </div>
               {errors.nickname && (
                 <p className="error-message">{errors.nickname}</p>
               )}

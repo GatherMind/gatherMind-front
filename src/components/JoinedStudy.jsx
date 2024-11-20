@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import {
+  getMemberByToken,
+  getStudyCount,
+  getQuestionCount,
+  getAnswerCount,
+} from "../services/MemberApiService";
 import "../styles/JoinedStudy.css";
 import { getMemberByToken, getMyStudy } from "../services/MemberApiService";
 
@@ -10,6 +16,12 @@ const JoinedStudy = () => {
   const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
   const navigate = useNavigate();
   const { authToken } = useAuth(); // 인증 토큰
+
+  const [counts, setCounts] = useState({
+    studyCount: 0,
+    questionCount: 0,
+    answerCount: 0,
+  });
 
   // 데이터 가져오기
   useEffect(() => {
@@ -23,6 +35,20 @@ const JoinedStudy = () => {
         // 상태 업데이트
         setMemberInfo(response.data || {});
         setJoinedGroups(groupResponse.data);
+
+        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
+        const [studyResponse, questionResponse, answerResponse] =
+          await Promise.all([
+            getStudyCount(),
+            getQuestionCount(),
+            getAnswerCount(),
+          ]);
+
+        setCounts({
+          studyCount: studyResponse.data || 0,
+          questionCount: questionResponse.data || 0,
+          answerCount: answerResponse.data || 0,
+        });
       } catch (error) {
         console.error("스터디 정보를 불러오는 중 오류가 발생했습니다.");
       }
@@ -68,18 +94,9 @@ const JoinedStudy = () => {
 
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
-          <li>
-            가입한 스터디 수<br />
-            <span>{joinedGroups.length}</span>
-          </li>
-          <li>
-            작성한 질문 수<br />
-            <span>0</span>
-          </li>
-          <li>
-            작성한 답변 수<br />
-            <span>0</span>
-          </li>
+          <li>가입 스터디 수<p>{counts.studyCount}</p></li>
+          <li>작성 질문 수<p>{counts.questionCount}</p></li>
+          <li>작성 답변 수<p>{counts.answerCount}</p></li>
         </ul>
       </header>
 
