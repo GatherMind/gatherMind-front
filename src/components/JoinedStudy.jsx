@@ -7,9 +7,9 @@ import {
   getStudyCount,
   getQuestionCount,
   getAnswerCount,
+  getMyStudy,
 } from "../services/MemberApiService";
 import "../styles/JoinedStudy.css";
-import { getMemberByToken, getMyStudy } from "../services/MemberApiService";
 
 const JoinedStudy = () => {
   const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
