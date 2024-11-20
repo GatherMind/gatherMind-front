@@ -23,24 +23,24 @@ const EditProfile = () => {
   const [isNicknameUnique, setIsNicknameUnique] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCurrentUserInfo = async () => {
-      try {
-        const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
-        if (!token) return navigate("/login");
-        const response = await getMemberByToken(token);
+  // useEffect(() => {
+  //   const fetchCurrentUserInfo = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
+  //       if (!token) return navigate("/login");
+  //       const response = await getMemberByToken(token);
 
-        setMemberInfo({
-          memberId: response.data.memberId || "정보 없음",
-          email: response.data.email || "정보 없음",
-          nickname: response.data.nickname || "정보 없음",
-        });
-      } catch (error) {
-        console.error("회원 정보를 가져오는 중 오류 발생:", error);
-      }
-    };
-    fetchCurrentUserInfo();
-  }, [navigate]);
+  //       setMemberInfo({
+  //         memberId: response.data.memberId || "정보 없음",
+  //         email: response.data.email || "정보 없음",
+  //         nickname: response.data.nickname || "정보 없음",
+  //       });
+  //     } catch (error) {
+  //       console.error("회원 정보를 가져오는 중 오류 발생:", error);
+  //     }
+  //   };
+  //   fetchCurrentUserInfo();
+  // }, [navigate]);
 
   const validateField = async (field, value) => {
     const newErrors = { ...errors };
@@ -222,37 +222,40 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile-container">
-      {/* <header>
-        <Header />
-      </header> */}
+      <h2>정보 수정</h2>
+      <div className="profile-basic-info">
+        <ul>
+          <li>
+            아이디<span>{memberInfo.memberId}</span>
+          </li>
+
+          <li>
+            이메일<span>{memberInfo.email}</span>
+          </li>
+        </ul>
+      </div>
       <main>
-        <h2>정보 수정</h2>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
-            <strong>아이디:</strong> {memberInfo.memberId}
-          </div>
-          <div className="form-group">
-            <strong>이메일:</strong> {memberInfo.email}
-          </div>
-
-          <div className="form-group">
-            <input
-              type="text"
-              value={newNickname}
-              onChange={(e) => {
-                setNewNickname(e.target.value);
-                setIsNicknameUnique(null);
-              }}
-              autoComplete="off"
-              placeholder="변경할 닉네임"
-            />
-            <button
-              type="button"
-              onClick={() => validateField("nickname", newNickname)}
-              className="check-button"
-            >
-              중복확인
-            </button>
+            <div className="edit-nickname-box">
+              <input
+                type="text"
+                value={newNickname}
+                onChange={(e) => {
+                  setNewNickname(e.target.value);
+                  setIsNicknameUnique(null);
+                }}
+                autoComplete="off"
+                placeholder="변경할 닉네임"
+              />
+              <button
+                type="button"
+                onClick={() => validateField("nickname", newNickname)}
+                className="check-button"
+              >
+                중복확인
+              </button>
+            </div>
             {isNicknameUnique === true && (
               <p className="success-message">사용 가능한 닉네임입니다.</p>
             )}
@@ -287,16 +290,18 @@ const EditProfile = () => {
           </div>
 
           {formError && <p className="error-message">{formError}</p>}
-          <button className="mypage-edit-button" type="submit">
-            수정하기
-          </button>
-          <button
-            className="mypage-delete-button"
-            type="button"
-            onClick={handleDeleteAccount}
-          >
-            회원탈퇴
-          </button>
+          <div className="edit-profile-button-box">
+            <button className="mypage-edit-button" type="submit">
+              수정하기
+            </button>
+            <button
+              className="mypage-delete-button"
+              type="button"
+              onClick={handleDeleteAccount}
+            >
+              회원탈퇴
+            </button>
+          </div>
         </form>
       </main>
     </div>

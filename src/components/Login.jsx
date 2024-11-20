@@ -25,14 +25,14 @@ const Login = () => {
       newErrors.memberId = "아이디를 입력해주세요.";
     } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
       newErrors.memberId =
-        "아이디는 8~30자의 영문 소문자와 숫자만 사용할 수 있습니다.";
+        "아이디는 8~30자 이내의 영문 소문자와 숫자만 조합하여 입력해주세요.";
     }
 
     // password 유효성 검사
     if (!password) {
       newErrors.password = "비밀번호를 입력해주세요.";
     } else if (password.length < 8 || password.length > 255) {
-      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
+      newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
     } else if (/\s/.test(password)) {
       newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
     }

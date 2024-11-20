@@ -76,16 +76,28 @@
     box-sizing: border-box;
   }
 
-  .mypage-info {
+  .mypage-info-box > .mypage-joined-info {
     display: flex;
-    margin-top: 3vh;
+    height: 70px;
+    margin-top: 2.5vh;
+    padding-top: 4vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
   }
 
+  .mypage-joined-info > h3 {
+    margin-left: 10px;
+  }
+
+  .mypage-joined-info > span {
+    margin-left: 15px;
+    margin-top: 5px;
+  }
+
   .mypage-info-box + button {
     width: 100%;
-    margin-top: 3vh;
+    margin-top: 5vh;
+    padding: 1.5vh 0;
     color: white;
     background-color: rgb(2, 136, 255);
     border: none;
@@ -168,13 +180,23 @@
     box-sizing: border-box;
   }
 
-  .mypage-info {
+  .mypage-info-box > .mypage-joined-info {
     display: flex;
-    margin-top: 3vh;
+    height: 70px;
+    margin-top: 2.5vh;
+    padding: 5vh 0 0 3vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
   }
-  
+
+  .mypage-joined-info > h3 {
+    margin-left: 40px;
+  }
+
+  .mypage-joined-info > span {
+    margin-left: 30px;
+  }
+
   .mypage-info-box + button {
     width: 100%;
     margin-top: 5vh;

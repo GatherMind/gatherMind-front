@@ -91,18 +91,17 @@ const Mypage = () => {
       <main>
         {/* 기본 정보 표시 */}
         <div className="mypage-info-box">
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
           </p>
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
-          <p className="mypage-info">
+          <p className="mypage-joined-info">
             <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
           </p>
         </div>
-        {/* <button onClick={handleEditInfo}>정보 수정</button> */}
-        <button className="mypage-button">정보 수정</button>
+        <button className="mypage-button" onClick={handleEditInfo}>정보 수정</button>
       </main>
     </div>
   );
