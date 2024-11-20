@@ -33,12 +33,34 @@ export const getAnswers = async (id, page) => {
 };
 
 // 게시글 생성
-export const createQuestion = async (memberId, studyId, questionData) => {
+// export const createQuestion = async (memberId, studyId, questionData) => {
+//   console.log(questionData);
+//   try {
+//     const response = await axios.post(
+//       `${API_URL}?memberId=${memberId}&studyId=${studyId}`,
+//       questionData
+//     );
+//     console.log(response);
+
+//     return response.data;
+//   } catch (error) {
+//     console.error("게시글 생성 실패: ", error);
+//     throw error;
+//   }
+// };
+
+// 게시글 생성
+export const createQuestion = async (studyId, questionData, token) => {
   console.log(questionData);
   try {
     const response = await axios.post(
-      `${API_URL}?memberId=${memberId}&studyId=${studyId}`,
-      questionData
+      `${API_URL}?studyId=${studyId}`,
+      questionData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     console.log(response);
 

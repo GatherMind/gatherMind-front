@@ -6,6 +6,7 @@ import {
   getQuestion,
   updateQuestion,
 } from "../services/QuestionApiService";
+import { useAuth } from "../context/AuthContext";
 
 const QuestionFormPage = ({ isModify }) => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const QuestionFormPage = ({ isModify }) => {
   const LocationDom = useLocation();
   const { studyId } = LocationDom.state || {};
   const { id } = useParams();
+
+  const { authToken } = useAuth();
 
   const [questionInitData, setQuestionInitData] = useState(null);
 
@@ -48,7 +51,7 @@ const QuestionFormPage = ({ isModify }) => {
         navigate(`/question-detail/${id}`);
       } else {
         // response = await createQuestion(userId, studyId, questionData); // userId 받아오도록 수정
-        await createQuestion("", 1, questionData);
+        await createQuestion(studyId, questionData, authToken);
 
         console.log("게시글 생성 완료");
         navigate(`/study-info/${studyId}`);

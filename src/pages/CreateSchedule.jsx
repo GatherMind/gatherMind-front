@@ -17,7 +17,7 @@ const CreateSchedule = ({ isModify }) => {
   // 24.11.11 suhwan
   const LocationDom = useLocation();
   const { id } = useParams();
-  // const { studyId } = LocationDom.state || {};
+  const { studyId } = LocationDom.state || {};
 
   const [scheduleInitData, setScheduleInitData] = useState(null);
 
@@ -48,7 +48,7 @@ const CreateSchedule = ({ isModify }) => {
         response = await updateSchedule(id, scheduleData);
         console.log("일정 수정 완료");
       } else {
-        response = await createSchedule({ ...scheduleData, studyId: 1 }); // studyId 임시
+        response = await createSchedule({ ...scheduleData, studyId }); // studyId 임시
         console.log("일정 생성 완료");
       }
     } catch (error) {
@@ -57,8 +57,7 @@ const CreateSchedule = ({ isModify }) => {
         "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
       );
     }
-    // navigate(`/study-info/${studyId}`);
-    navigate(``);
+    navigate(`/study-info/${studyId}`);
   };
 
   if (error) {

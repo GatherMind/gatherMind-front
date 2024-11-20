@@ -14,7 +14,7 @@
   border: 2px solid rgba(0, 123, 255, 0.5); /* 테두리는 연한 파란색 */
   border-radius: 15px; /* 둥근 모서리 */
   padding: 10px 20px; /* 버튼 안쪽 여백 */
-  font-size: 15px; /* 글자 크기 */
+  font-size: 14px; /* 글자 크기 */
   font-weight: bold; /* 글자 두껍게 */
   cursor: pointer; /* 마우스를 올리면 클릭할 수 있음을 시각적으로 표시 */
   transition: background-color 0.5s, border-color 0.5s;

@@ -30,7 +30,7 @@ const ScheduleTab = ({ studyId }) => {
   }, [studyId]);
 
   const handleUpdateClick = (scheduleId) => {
-    navigate(`/edit-schedule/${scheduleId}`);
+    navigate(`/edit-schedule/${scheduleId}`, { state: { studyId } });
   };
 
   const handleDeleteClick = (scheduleId) => {

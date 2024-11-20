@@ -6,6 +6,7 @@ import {
   deleteAnswer,
   updateAnswer,
 } from "../services/AnswerApiService";
+import { useAuth } from "../context/AuthContext";
 
 const AnswerList = ({ questionId }) => {
   const userId = "user2"; // 임시
@@ -18,6 +19,8 @@ const AnswerList = ({ questionId }) => {
 
   const [isLastPage, setIsLastPage] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const { authToken } = useAuth();
 
   useEffect(() => {
     loadMoreAnswers(questionId);
@@ -55,11 +58,13 @@ const AnswerList = ({ questionId }) => {
       return;
     }
     try {
-      const response = await createAnswer({
-        content: answer,
-        questionId: questionId,
-        memberId: userId, // 임시 userId
-      });
+      const response = await createAnswer(
+        {
+          content: answer,
+          questionId: questionId,
+        },
+        authToken
+      );
       console.log("댓글 작성 성공");
 
       setAnswer(""); // 댓글 작성 후 입력창 초기화

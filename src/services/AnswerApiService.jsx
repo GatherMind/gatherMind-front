@@ -7,9 +7,11 @@ if (!API_URL) {
 }
 
 // 댓글 생성
-export const createAnswer = async (answerData) => {
+export const createAnswer = async (answerData, token) => {
   try {
-    const response = await axios.post(`${API_URL}/answer`, answerData);
+    const response = await axios.post(`${API_URL}`, answerData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response);
 
     return response.data;
@@ -22,7 +24,7 @@ export const createAnswer = async (answerData) => {
 // 댓글 수정
 export const updateAnswer = async (id, content) => {
   try {
-    const response = await axios.put(`${API_URL}/answer/${id}`, content, {
+    const response = await axios.put(`${API_URL}/${id}`, content, {
       headers: { "Content-Type": "text/plain" },
     });
     console.log(response);
@@ -37,7 +39,7 @@ export const updateAnswer = async (id, content) => {
 // 댓글 삭제
 export const deleteAnswer = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/answer/${id}`);
+    const response = await axios.delete(`${API_URL}/${id}`);
     console.log(response);
 
     return response.data;
