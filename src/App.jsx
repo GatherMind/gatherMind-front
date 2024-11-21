@@ -61,29 +61,29 @@ function App() {
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}
-              {/* <Route element={<PrivateRoute />}> */}
-              <Route path="/mypage" element={<Mypage />} />
-              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-              <Route
-                path="/mypage/written-question"
-                element={<WrittenQuestion />}
-              />
-              <Route
-                path="/mypage/written-answer"
-                element={<WrittenAnswer />}
-              />{" "}
-              <Route path="/editprofile" element={<EditProfile />} />
-              {/* create study  */}
-              <Route
-                path="/create-study"
-                element={<StudyFormPage mode="create" />}
-              />
-              {/* edit study */}
-              <Route
-                path="/edit-study/:studyId"
-                element={<StudyFormPage mode="edit" />}
-              />
-              {/* </Route> */}
+              <Route element={<PrivateRoute />}>
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+                <Route
+                  path="/mypage/written-question"
+                  element={<WrittenQuestion />}
+                />
+                <Route
+                  path="/mypage/written-answer"
+                  element={<WrittenAnswer />}
+                />{" "}
+                <Route path="/editprofile" element={<EditProfile />} />
+                {/* create study  */}
+                <Route
+                  path="/create-study"
+                  element={<StudyFormPage mode="create" />}
+                />
+                {/* edit study */}
+                <Route
+                  path="/edit-study/:studyId"
+                  element={<StudyFormPage mode="edit" />}
+                />
+              </Route>
               {/* study info page */}
               <Route path="/study-info/:studyId" element={<StudyInfo />} />
               {/* <Route path="/" element={<Enter />} /> */}

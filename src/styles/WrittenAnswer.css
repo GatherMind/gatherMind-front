@@ -84,11 +84,62 @@
     border-radius: 4px;
   }
 
-  .answer-card,
   .no-answer-message {
     padding: 4vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
+  }
+
+  .answer-card {
+    padding: 2vh 2vh;
+    border: 1px solid rgb(2, 136, 255);
+    border-radius: 4px;
+  }
+
+  .answer-study-title {
+    position: absolute;
+    margin: -3.3vh auto;
+    padding: 0 1.5vh;
+    color: rgb(2, 136, 255);
+    font-weight: bold;
+    text-shadow: 1px 1px rgba(2, 136, 255, 0.1);
+    background-color: rgb(250, 250, 250);
+  }
+
+  .answer-content-box {
+    flex: 1;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+
+  .mypage-answer-edit,
+  .mypage-answer-delete {
+    width: 50%;
+    height: 3.5vh;
+    border: none;
+  }
+
+  .mypage-answer-edit {
+    margin-bottom: 1vh;
+    color: white;
+    background-color: rgb(2, 136, 255);
+    border-radius: 4px;
+  }
+
+  .mypage-answer-delete {
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-radius: 4px;
+  }
+
+  .answer-question-title {
+    font-weight: bold;
+    margin-bottom: 1vh;
+  }
+
+  .mypage-answer-content {
+    margin-bottom: 1vh;
   }
 }
 
@@ -175,10 +226,67 @@
     border-radius: 4px;
   }
 
-  .answer-card,
   .no-answer-message {
     padding: 4vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
+  }
+
+  .answer-card {
+    padding: 3vh 2vh;
+    border: 1px solid rgb(2, 136, 255);
+    border-radius: 4px;
+  }
+
+  .answer-study-title {
+    position: absolute;
+    margin: -4.2vh auto;
+    padding: 0 1.5vh;
+    color: rgb(2, 136, 255);
+    font-weight: bold;
+    text-shadow: 1px 1px rgba(2, 136, 255, 0.1);
+    background-color: rgb(250, 250, 250);
+  }
+
+  .answer-content-button-box {
+    display: flex;
+  }
+
+  .answer-content-box {
+    flex: 1;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 15px;
+  }
+
+  .mypage-answer-button-box {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mypage-answer-edit,
+  .mypage-answer-delete {
+    width: 100%;
+    height: 3.5vh;
+    border: none;
+  }
+
+  .mypage-answer-edit {
+    margin-bottom: 1vh;
+    color: white;
+    background-color: rgb(2, 136, 255);
+    border-radius: 4px;
+  }
+
+  .mypage-answer-delete {
+    color: white;
+    background-color: rgb(255, 0, 0);
+    border-radius: 4px;
+  }
+
+  .answer-question-title {
+    font-weight: bold;
+    margin-bottom: 1vh;
   }
 }
