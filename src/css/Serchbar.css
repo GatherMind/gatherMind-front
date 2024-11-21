@@ -1,42 +1,48 @@
 .search-bar {
   width: 100%;
   max-width: 400px;  /* 최대 너비를 400px로 설정 */
-  margin: 20px auto;  /* 중앙 정렬 */
-  display: flex;
-  justify-content: space-between;  /* 입력 필드와 버튼 사이 간격 */
+  display: flex; 
+  justify-content: center;
   align-items: center;
   padding: 8px 15px;  /* 패딩을 줄여서 크기를 좀 더 작게 */
   box-sizing: border-box;
-  
 }
 
 /* 검색 입력창 */
-.search-input {
+.search-bar .serchbarInput {
+  display: flex;
+  justify-content: center;
   width: 70%;  /* 입력창 너비를 70%로 조정 */
-  padding: 8px 12px;  /* 패딩을 줄여서 크기 축소 */
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 50px;  /* 타원형 모서리 */
+  height: 70px;
+
+  border: 2px solid #8de8be;  /* 경계선 두께를 1px로 수정 */
+  border-radius: 15px;  /* 타원형 모서리 */
   outline: none;
+  padding: 0 10px;  /* 좌우 패딩 추가 */
   transition: border-color 0.3s;
+  height: 36px;
+  margin: auto; 
+  
 }
 
 /* 입력창 포커스 시 스타일 */
-.search-input:focus {
+.serchbarInput:focus {
   border: 2px solid green; /* 포커스 시 색상 */
 }
 
 /* 검색 버튼 */
 .search-button {
   width: 25%;  /* 버튼 크기 축소 */
-  padding: 8px 10px;  /* 패딩 줄이기 */
+  height: 36px;  /* 버튼 높이 설정 */
   background-color: #a3a7a3;
   color: white;
   border: none;
-  border-radius: 50px;  /* 타원형 모서리 */
+  border-radius: 10px;  /* 타원형 모서리 */
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-align: center;
+  padding: 0;  /* 내부 패딩 초기화 */
 }
 
 /* 검색 버튼 hover 상태 */

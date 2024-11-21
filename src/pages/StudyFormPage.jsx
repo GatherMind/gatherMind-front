@@ -59,7 +59,11 @@ const StudyFormPage = ({ mode }) => {
     try {
       let response = null;
       if (mode === "edit") {
-        response = await updateStudy(studyId, { ...studyData, studyId });
+        response = await updateStudy(
+          studyId,
+          { ...studyData, studyId },
+          authToken
+        );
         alert("성공적으로 스터디가 수정됐습니다.");
       } else {
         response = await createStudy({ ...studyData }, authToken);

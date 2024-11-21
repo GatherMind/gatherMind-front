@@ -24,7 +24,7 @@ function Searchbar({ onSearch }) {
     <div className="search-bar">
       <input
         type="text"
-        className="search-input"
+        className="serchbarInput"
         placeholder="검색어를 입력하세요"
         value={query}
         onChange={handleChange}
