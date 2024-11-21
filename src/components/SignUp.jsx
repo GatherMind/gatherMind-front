@@ -184,12 +184,16 @@ const SignUp = () => {
     }
 
     try {
+      console.log("전송 데이터:", { memberId, password, email, nickname });
+
       await axios.post("/api/member/signup", {
         memberId,
         password,
         email,
         nickname,
       });
+
+      console.log("전송 데이터:", { memberId, password, email, nickname });
       setSignUpSuccess(true);
       setTimeout(() => navigate("/login"), 3000); // 3초 후 로그인 페이지로 이동
     } catch (error) {
