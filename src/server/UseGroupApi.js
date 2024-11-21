@@ -10,9 +10,10 @@ export default function UseGroupApi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/study/getallstudies"
-        );
+        // const response = await axios.get(
+        //   "http://localhost:8080/api/study/getallstudies"
+        // );
+        const response = await getAllStudies();
         console.log(response.data);
 
         const sortedData = response.data.sort((a, b) => {

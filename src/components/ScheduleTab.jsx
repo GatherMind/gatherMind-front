@@ -72,6 +72,9 @@ const ScheduleTab = ({ studyId }) => {
                 <div className="schedule-detail">
                   <strong>장소:</strong> {schedule.location}
                 </div>
+                <div className="schedule-detail">
+                  <strong>주최자:</strong> {schedule.nickname}
+                </div>
               </div>
               <div>
                 <button
