@@ -20,9 +20,11 @@ export const getSchedule = async (id) => {
 };
 
 // 일정 생성
-export const createSchedule = async (scheduleData) => {
+export const createSchedule = async (scheduleData, token) => {
   try {
-    const response = await axios.post(`${API_URL}`, scheduleData);
+    const response = await axios.post(`${API_URL}`, scheduleData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response);
 
     return response.data;

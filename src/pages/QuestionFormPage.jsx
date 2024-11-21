@@ -10,14 +10,10 @@ import { useAuth } from "../context/AuthContext";
 
 const QuestionFormPage = ({ isModify }) => {
   const navigate = useNavigate();
-  //   const { studyId } = useLocation(); // StudyInfo 페이지에서 StudyId 값 받아오기
 
-  // StudyInfo 페이지에서 StudyId 값 받아오기
-  // 24.11.11 suhwan
   const LocationDom = useLocation();
   const { studyId } = LocationDom.state || {};
   const { id } = useParams();
-
   const { authToken } = useAuth();
 
   const [questionInitData, setQuestionInitData] = useState(null);
@@ -35,6 +31,7 @@ const QuestionFormPage = ({ isModify }) => {
           setQuestionInitData(questionData);
         } catch (error) {
           console.log("게시글 정보를 불러오지 못했습니다.", error);
+          setError("게시글 정보를 불러오지 못했습니다.");
         }
       };
       fetchQuestion();
@@ -43,14 +40,12 @@ const QuestionFormPage = ({ isModify }) => {
 
   const handleCreateQuestion = async (questionData) => {
     try {
-      var response = null;
 
       if (isModify) {
         await updateQuestion(id, questionData);
         console.log("게시글 수정 완료");
-        navigate(`/question-detail/${id}`);
+        navigate(`/question-detail/${id}`, { state: { studyId } });
       } else {
-        // response = await createQuestion(userId, studyId, questionData); // userId 받아오도록 수정
         await createQuestion(studyId, questionData, authToken);
 
         console.log("게시글 생성 완료");
@@ -58,12 +53,13 @@ const QuestionFormPage = ({ isModify }) => {
       }
     } catch (error) {
       console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
-      setError("로그인 정보를 확인해주세요.");
+      setError("저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요.");
     }
   };
 
   if (error) {
     alert(error);
+    setError("");
   }
 
   return (

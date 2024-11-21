@@ -30,7 +30,7 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
 
   return (
     <div className="answer-list-items">
-      <p className="answer-nickname">{answer.nickname}</p>
+      <p className="answer-nickname">{answer.nickname || "알수없음"}</p>
       {isEditing ? (
         // 수정 모드
         <div className="edit-mode">

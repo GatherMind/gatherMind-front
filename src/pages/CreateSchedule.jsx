@@ -8,16 +8,15 @@ import {
   getSchedule,
   updateSchedule,
 } from "../services/ScheduleApiService";
+import { useAuth } from "../context/AuthContext";
 
 const CreateSchedule = ({ isModify }) => {
-  const navigate = useNavigate();
-  // const {studyId} = useLocation(); // StudyInfo 페이지에서 StudyId 값 받아오기
 
-  // StudyInfo 페이지에서 StudyId 값 받아오기
-  // 24.11.11 suhwan
+  const navigate = useNavigate();
   const LocationDom = useLocation();
   const { id } = useParams();
   const { studyId } = LocationDom.state || {};
+  const { authToken } = useAuth();
 
   const [scheduleInitData, setScheduleInitData] = useState(null);
 
@@ -48,7 +47,7 @@ const CreateSchedule = ({ isModify }) => {
         response = await updateSchedule(id, scheduleData);
         console.log("일정 수정 완료");
       } else {
-        response = await createSchedule({ ...scheduleData, studyId }); // studyId 임시
+        response = await createSchedule({ ...scheduleData, studyId}, authToken); // studyId 임시
         console.log("일정 생성 완료");
       }
     } catch (error) {
@@ -68,7 +67,6 @@ const CreateSchedule = ({ isModify }) => {
   return (
     <div className="container">
       <h1>{isModify ? "일정 수정하기" : "새로운 일정 생성"}</h1>
-      {/* <ScheduleForm onSubmit={handleSaveSchedule} studyId={studyId} scheduleData={scheduleInitData} /> */}
       <ScheduleForm
         onSubmit={handleSaveSchedule}
         scheduleData={scheduleInitData}
