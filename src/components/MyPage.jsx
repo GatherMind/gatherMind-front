@@ -14,6 +14,7 @@ const Mypage = () => {
     nickname: "정보 없음",
     email: "정보 없음",
   });
+
   const [counts, setCounts] = useState({
     studyCount: 0,
     questionCount: 0,
@@ -81,9 +82,15 @@ const Mypage = () => {
 
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
-          <li>가입 스터디 수<p>{counts.studyCount}</p></li>
-          <li>작성 질문 수<p>{counts.questionCount}</p></li>
-          <li>작성 답변 수<p>{counts.answerCount}</p></li>
+          <li>
+            가입 스터디 수<p>{counts.studyCount}</p>
+          </li>
+          <li>
+            작성 질문 수<p>{counts.questionCount}</p>
+          </li>
+          <li>
+            작성 답변 수<p>{counts.answerCount}</p>
+          </li>
         </ul>
       </header>
 
@@ -100,7 +107,9 @@ const Mypage = () => {
             <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
           </p>
         </div>
-        <button className="mypage-button" onClick={handleEditInfo}>정보 수정</button>
+        <button className="mypage-button" onClick={handleEditInfo}>
+          정보 수정
+        </button>
       </main>
     </div>
   );
