@@ -8,6 +8,7 @@ import {
   getSchedule,
   updateSchedule,
 } from "../services/ScheduleApiService";
+import { useAuth } from "../context/AuthContext";
 
 const CreateSchedule = ({ isModify }) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const CreateSchedule = ({ isModify }) => {
   const LocationDom = useLocation();
   const { id } = useParams();
   const { studyId } = LocationDom.state || {};
+  const { authToken } = useAuth();
 
   const [scheduleInitData, setScheduleInitData] = useState(null);
 
@@ -48,7 +50,7 @@ const CreateSchedule = ({ isModify }) => {
         response = await updateSchedule(id, scheduleData);
         console.log("일정 수정 완료");
       } else {
-        response = await createSchedule({ ...scheduleData, studyId }); // studyId 임시
+        response = await createSchedule({ ...scheduleData, studyId : 1 }, authToken); // studyId 임시
         console.log("일정 생성 완료");
       }
     } catch (error) {
