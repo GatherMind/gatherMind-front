@@ -51,7 +51,7 @@ const QuestionDetail = () => {
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
-        deleteQuestion(id);
+        deleteQuestion(id, authToken);
         console.log("게시글 삭제 성공");
         alert("게시글이 삭제되었습니다.");
         navigate("/"); // 메인 페이지로 이동

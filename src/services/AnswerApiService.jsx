@@ -22,10 +22,13 @@ export const createAnswer = async (answerData, token) => {
 };
 
 // 댓글 수정
-export const updateAnswer = async (id, content) => {
+export const updateAnswer = async (id, content, token) => {
   try {
     const response = await axios.put(`${API_URL}/${id}`, content, {
-      headers: { "Content-Type": "text/plain" },
+      headers: { 
+        Authorization: `Bearer ${token}`, 
+        "Content-Type": "text/plain" 
+      },
     });
     console.log(response);
 
@@ -37,9 +40,12 @@ export const updateAnswer = async (id, content) => {
 };
 
 // 댓글 삭제
-export const deleteAnswer = async (id) => {
+export const deleteAnswer = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
+    const response = await axios.delete(`${API_URL}/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      });
     console.log(response);
 
     return response.data;

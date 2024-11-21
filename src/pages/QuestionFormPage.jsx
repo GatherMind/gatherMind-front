@@ -42,7 +42,7 @@ const QuestionFormPage = ({ isModify }) => {
     try {
 
       if (isModify) {
-        await updateQuestion(id, questionData);
+        await updateQuestion(id, questionData, authToken);
         console.log("게시글 수정 완료");
         navigate(`/question-detail/${id}`, { state: { studyId } });
       } else {
