@@ -31,7 +31,7 @@ const MembersTab = ({
   };
 
   const handleClick = (questionId) => {
-    navigate(`/question-detail/${questionId}`);
+    navigate(`/question-detail/${questionId}`, { state: { studyId } });
   };
 
   const handleConfirmClick = async (memberId) => {

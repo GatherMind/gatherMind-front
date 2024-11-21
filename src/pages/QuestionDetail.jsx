@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AnswerList from "../components/AnswerList";
 import { dateFormat } from "../services/QuestionService";
 import "../styles/QuestionDetail.css";
 import { deleteQuestion, getQuestion } from "../services/QuestionApiService";
+import { getMyInfoById } from "../services/MemberApiService";
+import { useAuth } from "../context/AuthContext";
 
 const QuestionDetail = () => {
-  const userId = "user2"; // 임시
 
   const { id } = useParams();
+  const { authToken } = useAuth();
+  const LocationDom = useLocation();
+  const { studyId } = LocationDom.state || {};
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [question, setQuestion] = useState(null);
+  const [memberId, setMemberId] = useState("");
 
   const fetchQuestion = async () => {
     try {
@@ -29,9 +34,19 @@ const QuestionDetail = () => {
     }
   };
 
+  const memberInfo = async () => {
+    try {
+      const memberInfo = await getMyInfoById(studyId, authToken);
+      setMemberId(memberInfo.memberId);        
+    } catch (error) {
+      console.log("로그인된 사용자 정보를 불러오지 못했습니다.", error)
+    }
+  }
+  
   useEffect(() => {
     fetchQuestion();
-  }, [id]);
+    memberInfo();
+  }, [id, authToken]);
 
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -62,16 +77,16 @@ const QuestionDetail = () => {
       <h1>{question?.title}</h1>
       <p className="option">{question?.option}</p>
       <div className="meta">
-        <p className="nickname">{question?.nickname}</p>
+        <p className="nickname">{question?.nickname || "알수없음"}</p>
         <p className="createdAt">{dateFormat(question?.createdAt)}</p>
       </div>
       <p className="content">{question?.content}</p>
 
-      {question?.memberId === userId && (
+      {question?.memberId === memberId && (
         <div className="action-buttons">
           <button
             className="edit-button"
-            onClick={() => navigate(`/edit-question/${question?.questionId}`)}
+            onClick={() => navigate(`/edit-question/${question?.questionId}`, { state: { studyId } })}
           >
             수정
           </button>
@@ -83,7 +98,7 @@ const QuestionDetail = () => {
 
       <hr />
 
-      <AnswerList questionId={id} />
+      <AnswerList questionId={id} memberId={memberId} />
     </div>
   );
 };

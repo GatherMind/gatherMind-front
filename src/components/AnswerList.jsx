@@ -8,8 +8,7 @@ import {
 } from "../services/AnswerApiService";
 import { useAuth } from "../context/AuthContext";
 
-const AnswerList = ({ questionId }) => {
-  const userId = "user2"; // 임시
+const AnswerList = ({ questionId, memberId }) => {
   const answerRefs = useRef([]);
   const scrollUpRef = useRef();
 
@@ -44,7 +43,6 @@ const AnswerList = ({ questionId }) => {
         );
       });
       setCurrentPage(currentPage + 1);
-      console.log(currentPage);
 
       setIsLastPage(answerData.last); // 마지막 페이지 여부 확인
     } catch (error) {
@@ -82,7 +80,7 @@ const AnswerList = ({ questionId }) => {
   };
 
   const isLogin = () => {
-    if (userId === "") {
+    if (memberId === "") {
       alert("댓글을 작성하려면 로그인 해주세요.");
     }
   };
@@ -130,7 +128,7 @@ const AnswerList = ({ questionId }) => {
             ref={(el) => (answerRefs.current[index] = el)}
           >
             <Answer
-              memberId={userId}
+              memberId={memberId}
               answer={answer}
               onDelete={handleDeleteAnswer}
               onUpdate={handleUpdateAnswer}
@@ -159,7 +157,7 @@ const AnswerList = ({ questionId }) => {
           onClick={isLogin}
           onChange={(e) => setAnswer(e.target.value)}
         />
-        {userId !== "" ? (
+        {memberId !== "" ? (
           <button onClick={onSubmit} className="submit-button">
             등록
           </button>
