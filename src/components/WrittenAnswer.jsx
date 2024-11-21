@@ -133,21 +133,27 @@ const WrittenAnswer = () => {
           recentAnswers.map((answer) => (
             <div className="answer-card" key={answer.id}>
               <p className="answer-study-title">{answer.studyTitle}</p>
-              <p className="answer-question-title">{answer.questionTitle}</p>
-              <p className="mypage-answer-content">{answer.content}</p>
-              <div className="mypage-answer-button-box">
-                <button
-                  className="mypage-answer-edit"
-                  onClick={() => handleEditAnswer(answer.questionId)}
-                >
-                  수정
-                </button>
-                <button
-                  className="mypage-answer-delete"
-                  onClick={() => handleDeleteAnswer(answer.questionId)}
-                >
-                  삭제
-                </button>
+              <div className="answer-content-button-box">
+                <div className="answer-content-box">
+                  <p className="answer-question-title">
+                    {answer.questionTitle}
+                  </p>
+                  <p className="mypage-answer-content">{answer.content}</p>
+                </div>
+                <div className="mypage-answer-button-box">
+                  <button
+                    className="mypage-answer-edit"
+                    onClick={() => handleEditAnswer(answer.questionId)}
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="mypage-answer-delete"
+                    onClick={() => handleDeleteAnswer(answer.questionId)}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             </div>
           ))

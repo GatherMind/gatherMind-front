@@ -131,20 +131,22 @@ const WrittenQuestion = () => {
           recentQuestions.map((question) => (
             <div key={question.id} className="question-card">
               <p className="question-study-title">{question.studyTitle}</p>
-              <p className="mypage-question-title">{question.title}</p>
-              <div className="mypage-question-button-box">
-                <button
-                  className="mypage-question-edit"
-                  onClick={() => handleEditQuestion(question.id)}
-                >
-                  수정
-                </button>
-                <button
-                  className="mypage-question-delete"
-                  onClick={() => handleDeleteQuestion(question.id)}
-                >
-                  삭제
-                </button>
+              <div className="question-content-button-box">
+                <p className="mypage-question-title">{question.title}</p>
+                <div className="mypage-question-button-box">
+                  <button
+                    className="mypage-question-edit"
+                    onClick={() => handleEditQuestion(question.id)}
+                  >
+                    수정
+                  </button>
+                  <button
+                    className="mypage-question-delete"
+                    onClick={() => handleDeleteQuestion(question.id)}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             </div>
           ))
