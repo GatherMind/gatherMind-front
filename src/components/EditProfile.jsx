@@ -22,24 +22,24 @@ const EditProfile = () => {
   const [isNicknameUnique, setIsNicknameUnique] = useState(null);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchCurrentUserInfo = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
-  //       if (!token) return navigate("/login");
-  //       const response = await getMemberByToken(token);
+  useEffect(() => {
+    const fetchCurrentUserInfo = async () => {
+      try {
+        const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
+        if (!token) return navigate("/login");
+        const response = await getMemberByToken(token);
 
-  //       setMemberInfo({
-  //         memberId: response.data.memberId || "정보 없음",
-  //         email: response.data.email || "정보 없음",
-  //         nickname: response.data.nickname || "정보 없음",
-  //       });
-  //     } catch (error) {
-  //       console.error("회원 정보를 가져오는 중 오류 발생:", error);
-  //     }
-  //   };
-  //   fetchCurrentUserInfo();
-  // }, [navigate]);
+        setMemberInfo({
+          memberId: response.data.memberId || "정보 없음",
+          email: response.data.email || "정보 없음",
+          nickname: response.data.nickname || "정보 없음",
+        });
+      } catch (error) {
+        console.error("회원 정보를 가져오는 중 오류 발생:", error);
+      }
+    };
+    fetchCurrentUserInfo();
+  }, [navigate]);
 
   const validateField = async (field, value) => {
     const newErrors = { ...errors };
@@ -201,18 +201,21 @@ const EditProfile = () => {
 
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
+  
+    // 사용자 확인 창
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-
-    if (!confirmDelete) navigate("/serious");
-
+    
+    // 취소 시 회원 탈퇴 중단
+    if (!confirmDelete) {
+      navigate("/serious");
+      return; // 회원 탈퇴 로직 중단
+    }
+  
     try {
-      // const token = localStorage.getItem("token");
-      // await axios.delete("/api/member/delete-account", {
-      //   headers: { Authorization: `Bearer ${token}` },
-      // });
-      await deleteMember();
+      // 탈퇴 API 호출
+      await deleteMember(); // deleteMember 함수 호출
       alert("회원 탈퇴가 완료되었습니다.");
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); // 토큰 제거
       navigate("/goodbye");
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
