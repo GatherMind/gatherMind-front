@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { duplicationCheck } from "./../services/ValidateApiService";
 import "../styles/Signup.css";
 import axios from "axios";
+import { signUp } from "../services/MemberApiService";
 
 const SignUp = () => {
   const [memberId, setMemberId] = useState("");
@@ -186,7 +187,14 @@ const SignUp = () => {
     try {
       console.log("전송 데이터:", { memberId, password, email, nickname });
 
-      await axios.post("/api/member/signup", {
+      // await axios.post("/api/member/signup", {
+      //   memberId,
+      //   password,
+      //   email,
+      //   nickname,
+      // });
+
+      await signUp({
         memberId,
         password,
         email,

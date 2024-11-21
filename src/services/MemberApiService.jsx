@@ -56,6 +56,17 @@ export const createMember = async (memberId, password, email, nickname) => {
   }
 };
 
+export const signUp = async (data) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup`, data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Network error or server unreachable: ", error);
+    throw new Error("Network error or server unreachable.");
+  }
+};
+
 // 로그인
 export const loginMember = async (memberId, password) => {
   try {
