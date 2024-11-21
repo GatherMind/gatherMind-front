@@ -54,7 +54,7 @@ export default function Main({ handleLoginStatus }) {
       {loginData ? (
         <Profile loginData={loginData} />
       ) : (
-        <p>로그인되지dd 않았습니다.</p>
+        <p>로그인되지 않았습니다.</p>
       )}
 
       <Slide />

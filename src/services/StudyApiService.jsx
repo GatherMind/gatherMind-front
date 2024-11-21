@@ -25,9 +25,11 @@ export const createStudy = async (studyData, token) => {
 };
 
 // 스터디 수정
-export const updateStudy = async (studyId, studyData) => {
+export const updateStudy = async (studyId, studyData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${studyId}`, studyData);
+    const response = await axios.put(`${API_URL}/${studyId}`, studyData, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     return response.data;
   } catch (error) {

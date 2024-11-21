@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getAllStudies } from "../services/StudyApiService.jsx";
+import axios from "axios";
 
 export default function UseGroupApi() {
   const [data, setData] = useState([]);
@@ -9,7 +10,9 @@ export default function UseGroupApi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/study/getallstudies");
+        const response = await axios.get(
+          "http://localhost:8080/api/study/getallstudies"
+        );
         console.log(response.data);
 
         const sortedData = response.data.sort((a, b) => {
@@ -25,9 +28,9 @@ export default function UseGroupApi() {
         setLoading(false);
       }
     };
-     console.log('그룹', data)
-    fetchData(); 
-  }, []); 
+    console.log("그룹", data);
+    fetchData();
+  }, []);
 
   return { data, loading, error };
 }
