@@ -56,7 +56,7 @@ const Login = () => {
 
       // localStorage.setItem("token", response.data.token); // 토큰 저장
       login(response.data.token);
-      navigate("/main"); // 로그인 후 마이페이지로 이동
+      navigate("/"); // 로그인 후 메인페이지로 이동
     } catch (error) {
       setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
       console.error(error);

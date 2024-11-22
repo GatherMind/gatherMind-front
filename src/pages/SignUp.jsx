@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { duplicationCheck } from "./../services/ValidateApiService";
+import { duplicationCheck } from "../services/ValidateApiService";
 import "../styles/Signup.css";
 import axios from "axios";
 import { signUp } from "../services/MemberApiService";

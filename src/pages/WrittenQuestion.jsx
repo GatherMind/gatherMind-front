@@ -61,7 +61,7 @@ const WrittenQuestion = () => {
         const questionsResponse = await getRecentQuestionLimit3();
         setRecentQuestions(questionsResponse.data.slice(0, 3));
       } catch (error) {
-        console.error("질문 데이터를 불러오는 중 오류가 발생했습니다.");
+        console.error("질문 데이터를 불러오는 중 오류가 발생했습니다.", error);
       }
     };
 

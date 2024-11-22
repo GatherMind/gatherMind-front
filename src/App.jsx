@@ -3,12 +3,12 @@ import "./App.css";
 
 import { AuthProvider } from "./context/AuthContext";
 
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
-import Mypage from "./components/MyPage";
-import Goodbye from "./components/Goodbye";
-import EditProfile from "./components/EditProfile";
-import Serious from "./components/Serious";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Mypage from "./pages/MyPage";
+import Goodbye from "./pages/Goodbye";
+import EditProfile from "./pages/EditProfile";
+import Serious from "./pages/Serious";
 import Header from "./components/Header.jsx";
 
 import CreateSchedule from "./pages/CreateSchedule";
@@ -16,9 +16,9 @@ import QuestionDetail from "./pages/QuestionDetail";
 import QuestionFormPage from "./pages/QuestionFormPage";
 import StudyInfo from "./pages/StudyInfo";
 import StudyFormPage from "./pages/StudyFormPage";
-import JoinedStudy from "./components/JoinedStudy";
-import WrittenQuestion from "./components/WrittenQuestion";
-import WrittenAnswer from "./components/WrittenAnswer";
+import JoinedStudy from "./pages/JoinedStudy";
+import WrittenQuestion from "./pages/WrittenQuestion";
+import WrittenAnswer from "./pages/WrittenAnswer";
 import Main from "./components/Main.jsx";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute.jsx";
