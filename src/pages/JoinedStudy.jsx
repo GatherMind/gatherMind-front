@@ -50,7 +50,7 @@ const JoinedStudy = () => {
           answerCount: answerResponse.data || 0,
         });
       } catch (error) {
-        console.error("스터디 정보를 불러오는 중 오류가 발생했습니다.");
+        console.error("스터디 정보를 불러오는 중 오류가 발생했습니다.", error);
       }
     };
 

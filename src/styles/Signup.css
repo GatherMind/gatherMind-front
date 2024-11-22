@@ -26,9 +26,10 @@ button + .error-message {
   background: none;
 }
 
-button + .success-message {
+.success-message {
   font-size: 14px;
   color: rgb(2, 136, 255);
+  margin: 0 auto;
 }
 
 .signup-check-button {

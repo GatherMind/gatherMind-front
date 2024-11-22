@@ -180,7 +180,7 @@ export const getAnswerCount = () => {
 
 // 최근 답변 가져오기 (최대 3개)
 export const getRecentAnswerLimit3 = () => {
-  return axios.get(`${API_URL}/answer-count`, {
+  return axios.get(`${API_URL}/recent-answers`, {
     headers: {
       Authorization: `Bearer ${getAuthToken()}`,
     },
