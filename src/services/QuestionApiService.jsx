@@ -19,6 +19,19 @@ export const getQuestion = async (id) => {
   }
 };
 
+// 게시글 조회
+export const getQuestionWithFileUrl = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/test/detail/${id}`);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 조회 실패: ", error);
+    throw error;
+  }
+};
+
 // 댓글 조회
 export const getAnswers = async (id, page) => {
   try {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import FileUpload from "./FileUpload";
 
 const QuestionForm = ({ onSubmit, question }) => {
   const [option, setOption] = useState("질문");
@@ -58,10 +57,6 @@ const QuestionForm = ({ onSubmit, question }) => {
           <option value="자료공유">자료공유</option>
         </select>
       </div>
-      {/* <select name="option" id="option" value={option} onChange={handleSelect}>
-        <option value="질문">질문하기</option>
-        <option value="자료공유">자료공유</option>
-      </select> */}
       <div className="form-group">
         <label htmlFor="question_title">게시글 제목 </label>
         <input

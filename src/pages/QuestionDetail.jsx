@@ -3,12 +3,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AnswerList from "../components/AnswerList";
 import { dateFormat } from "../services/QuestionService";
 import "../styles/QuestionDetail.css";
-import { deleteQuestion, getQuestion } from "../services/QuestionApiService";
+import {
+  deleteQuestion,
+  getQuestion,
+  getQuestionWithFileUrl,
+} from "../services/QuestionApiService";
 import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
 
 const QuestionDetail = () => {
-
   const { id } = useParams();
   const { authToken } = useAuth();
   const LocationDom = useLocation();
@@ -22,7 +25,7 @@ const QuestionDetail = () => {
 
   const fetchQuestion = async () => {
     try {
-      const questionData = await getQuestion(id);
+      const questionData = await getQuestionWithFileUrl(id);
 
       console.log("게시글 조회 성공");
       setQuestion(questionData);
@@ -37,12 +40,12 @@ const QuestionDetail = () => {
   const memberInfo = async () => {
     try {
       const memberInfo = await getMyInfoById(studyId, authToken);
-      setMemberId(memberInfo.memberId);        
+      setMemberId(memberInfo.memberId);
     } catch (error) {
-      console.log("로그인된 사용자 정보를 불러오지 못했습니다.", error)
+      console.log("로그인된 사용자 정보를 불러오지 못했습니다.", error);
     }
-  }
-  
+  };
+
   useEffect(() => {
     fetchQuestion();
     memberInfo();
@@ -73,20 +76,31 @@ const QuestionDetail = () => {
     );
 
   return (
-    <div className="container">
+    <div className="question-container">
       <h1>{question?.title}</h1>
       <p className="option">{question?.option}</p>
       <div className="meta">
         <p className="nickname">{question?.nickname || "알수없음"}</p>
         <p className="createdAt">{dateFormat(question?.createdAt)}</p>
       </div>
+      {question?.fileName && (
+        <div className="question-file">
+          <div>첨부파일 : </div>
+          <a href={`${question.url}`}>{question.fileName}</a>
+        </div>
+      )}
+
       <p className="content">{question?.content}</p>
 
       {question?.memberId === memberId && (
         <div className="action-buttons">
           <button
             className="edit-button"
-            onClick={() => navigate(`/edit-question/${question?.questionId}`, { state: { studyId } })}
+            onClick={() =>
+              navigate(`/edit-question/${question?.questionId}`, {
+                state: { studyId },
+              })
+            }
           >
             수정
           </button>

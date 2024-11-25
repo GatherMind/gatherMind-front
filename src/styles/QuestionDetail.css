@@ -1,4 +1,9 @@
 /* 게시글 */
+.question-container {
+  width: 100%;
+  background-color: var(--background-color-light);
+}
+
 .option {
   font-size: 0.9rem;
   color: #888;
@@ -20,6 +25,13 @@
 
 .createdAt {
   font-style: italic;
+}
+.question-file {
+  display: flex;
+}
+
+.question-file a {
+  text-decoration: none;
 }
 
 .content {
