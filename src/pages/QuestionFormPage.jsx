@@ -40,7 +40,6 @@ const QuestionFormPage = ({ isModify }) => {
 
   const handleCreateQuestion = async (questionData) => {
     try {
-
       if (isModify) {
         await updateQuestion(id, questionData);
         console.log("게시글 수정 완료");
@@ -53,7 +52,9 @@ const QuestionFormPage = ({ isModify }) => {
       }
     } catch (error) {
       console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
-      setError("저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요.");
+      setError(
+        "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
+      );
     }
   };
 
@@ -63,13 +64,13 @@ const QuestionFormPage = ({ isModify }) => {
   }
 
   return (
-    <div className="container">
+    <>
       <h1>{isModify ? "게시글 수정하기" : "새로운 게시글 작성"}</h1>
       <QuestionForm
         onSubmit={handleCreateQuestion}
         question={questionInitData}
       />
-    </div>
+    </>
   );
 };
 

@@ -1,12 +1,13 @@
 import React from "react";
-import Loading from "./components/Feedback/Loading"; // 예시로 Loading 컴포넌트
-import Error from "./components/Feedback/Error";
+
+import FileUpload from "./components/FileUpload copy";
 
 const TestComponents = () => (
   <div>
-    <Loading />
+    {/* <Loading /> */}
     {/* 필요하면 다른 컴포넌트 추가 */}
-    <Error message={"test"} />
+    <FileUpload />
+    {/* <Error message={"test"} /> */}
   </div>
 );
 

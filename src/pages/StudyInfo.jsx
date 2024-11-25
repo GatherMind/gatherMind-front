@@ -154,7 +154,7 @@ const StudyInfo = () => {
 
   return (
     // <div className="study-info">
-    <div className="container">
+    <div>
       {/* 그룹 정보 */}
       <div className="study-intro">
         <h2>{study.title}</h2>
