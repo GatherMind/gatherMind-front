@@ -5,6 +5,7 @@ import {
   getMemberByToken,
   updateMember,
 } from "../services/MemberApiService";
+import { duplicationCheck } from "../services/ValidateApiService";
 import "../styles/EditProfile.css";
 
 const EditProfile = () => {
@@ -17,8 +18,8 @@ const EditProfile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [isNicknameUnique, setIsNicknameUnique] = useState(null);
   const [formError, setFormError] = useState("");
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,14 +42,68 @@ const EditProfile = () => {
   }, [navigate]);
 
   // 유효성 검사 함수
+  const validateField = (field, value) => {
+    const newErrors = { ...errors };
+
+    if (field === "password") {
+      if (!value) {
+        newErrors.password = "비밀번호를 입력해 주세요.";
+      } else if (value.length < 8 || value.length > 255) {
+        newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
+      } else if (/\s/.test(value)) {
+        newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+      } else {
+        delete newErrors.password;
+      }
+    }
+
+    if (field === "confirmPassword") {
+      if (value !== newPassword) {
+        newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
+      } else {
+        delete newErrors.confirmPassword;
+      }
+    }
+
+    setErrors(newErrors);
+  };
+
+  const handleNicknameCheck = async () => {
+    if (!newNickname || !/^[a-zA-Z0-9가-힣]{2,20}$/.test(newNickname)) {
+      setErrors((prev) => ({
+        ...prev,
+        nickname: "닉네임은 2~20자의 한글, 영문, 숫자만 입력 가능합니다.",
+      }));
+      return;
+    }
+
+    try {
+      const response = await duplicationCheck("nickname", newNickname);
+      if (response.data.isUnique) {
+        setIsNicknameUnique(true);
+        setErrors((prev) => ({ ...prev, nickname: "" }));
+      } else {
+        setIsNicknameUnique(false);
+        setErrors((prev) => ({
+          ...prev,
+          nickname: "이미 사용 중인 닉네임입니다.",
+        }));
+      }
+    } catch (error) {
+      console.error("닉네임 중복 확인 오류:", error);
+    }
+  };
+
   const validate = () => {
     const newErrors = {};
+    let isFormValid = true;
 
     // 닉네임 유효성 검사
     if (newNickname && newNickname !== memberInfo.nickname) {
       if (!/^[a-zA-Z0-9가-힣]{2,20}$/.test(newNickname)) {
         newErrors.nickname =
-          "닉네임은 2~20자의 한글, 영문, 숫자만 조합하여 입력해주세요.";
+          "닉네임은 2~20자의 한글, 영문, 숫자만 입력 가능합니다.";
+        isFormValid = false;
       }
     }
 
@@ -56,20 +111,21 @@ const EditProfile = () => {
     if (newPassword) {
       if (newPassword.length < 8 || newPassword.length > 255) {
         newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
+        isFormValid = false;
       } else if (/\s/.test(newPassword)) {
         newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+        isFormValid = false;
       }
     }
 
     // 비밀번호 확인
     if (confirmPassword && confirmPassword !== newPassword) {
       newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
+      isFormValid = false;
     }
 
     setErrors(newErrors);
-
-    // 유효성 검사 결과 반환
-    return Object.keys(newErrors).length === 0;
+    return isFormValid;
   };
 
   const handleSubmit = async (event) => {
@@ -85,37 +141,47 @@ const EditProfile = () => {
     try {
       let successMessage = "";
 
-      if (newNickname && newNickname !== memberInfo.nickname) {
+      if (
+        newNickname &&
+        newNickname !== memberInfo.nickname &&
+        isNicknameUnique
+      ) {
         await updateMember("nickname", newNickname);
         successMessage += `닉네임이 ${newNickname}으로 변경되었습니다.\n`;
       }
 
       if (newPassword) {
         await updateMember("password", newPassword);
-        successMessage += `비밀번호가 변경되었습니다.\n`;
+        successMessage += "비밀번호가 변경되었습니다.";
       }
 
       alert(successMessage.trim());
       navigate("/mypage");
     } catch (error) {
       setFormError("정보 변경에 실패했습니다. 다시 시도해주세요.");
-      console.error("회원 정보 수정 중 오류:", error);
     }
   };
 
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
+
+    // 사용자 확인 창
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-    if (!confirmDelete) return;
+
+    // 취소 시 회원 탈퇴 중단
+    if (!confirmDelete) {
+      navigate("/serious");
+      return; // 회원 탈퇴 로직 중단
+    }
 
     try {
-      await deleteMember();
+      // 탈퇴 API 호출
+      await deleteMember(); // deleteMember 함수 호출
       alert("회원 탈퇴가 완료되었습니다.");
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); // 토큰 제거
       navigate("/goodbye");
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
-      console.error("회원 탈퇴 중 오류 발생:", error);
     }
   };
 
@@ -135,13 +201,28 @@ const EditProfile = () => {
       <main>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
-            <input
-              type="text"
-              value={newNickname}
-              onChange={(e) => setNewNickname(e.target.value)}
-              autoComplete="off"
-              placeholder="변경할 닉네임"
-            />
+            <div className="edit-nickname-box">
+              <input
+                type="text"
+                value={newNickname}
+                onChange={(e) => {
+                  setNewNickname(e.target.value);
+                  setIsNicknameUnique(null);
+                }}
+                autoComplete="off"
+                placeholder="변경할 닉네임"
+              />
+              <button
+                type="button"
+                onClick={handleNicknameCheck}
+                className="check-button"
+              >
+                중복확인
+              </button>
+            </div>
+            {isNicknameUnique === true && (
+              <p className="success-message">사용 가능한 닉네임입니다.</p>
+            )}
             {errors.nickname && (
               <p className="error-message">{errors.nickname}</p>
             )}
@@ -151,7 +232,10 @@ const EditProfile = () => {
             <input
               type="password"
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={(e) => {
+                setNewPassword(e.target.value);
+                validateField("password", e.target.value);
+              }}
               autoComplete="off"
               placeholder="변경할 비밀번호"
             />
@@ -164,7 +248,10 @@ const EditProfile = () => {
             <input
               type="password"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                validateField("confirmPassword", e.target.value);
+              }}
               autoComplete="off"
               placeholder="변경할 비밀번호 재입력"
             />
