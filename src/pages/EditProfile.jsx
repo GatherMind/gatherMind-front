@@ -5,7 +5,6 @@ import {
   getMemberByToken,
   updateMember,
 } from "../services/MemberApiService";
-import { duplicationCheck } from "../services/ValidateApiService";
 import "../styles/EditProfile.css";
 
 const EditProfile = () => {
@@ -19,13 +18,13 @@ const EditProfile = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [formError, setFormError] = useState("");
-  const [isNicknameUnique, setIsNicknameUnique] = useState(null);
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCurrentUserInfo = async () => {
       try {
-        const token = localStorage.getItem("token"); // JWT 토큰을 로컬 저장소에서 가져옴
+        const token = localStorage.getItem("token");
         if (!token) return navigate("/login");
         const response = await getMemberByToken(token);
 
@@ -41,184 +40,82 @@ const EditProfile = () => {
     fetchCurrentUserInfo();
   }, [navigate]);
 
-  const validateField = async (field, value) => {
-    const newErrors = { ...errors };
-
-    if (field === "password") {
-      if (!value && newPassword) {
-        newErrors.password = "비밀번호를 입력해 주세요.";
-      } else if (/\s/.test(value)) {
-        newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
-      } else if (value.length < 8 || value.length > 255) {
-        newErrors.password =
-          "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
-      } else {
-        delete newErrors[field];
-      }
-    }
-
-    if (field === "nickname") {
-      if (value.length < 2 || value.length > 20) {
-        newErrors.nickname = "닉네임은 2자에서 20자 사이여야 합니다.";
-      } else if (value !== memberInfo.nickname) {
-        try {
-          const response = await duplicationCheck("nickname", value);
-          if (!response.data.isUnique) {
-            newErrors.nickname = "이미 사용 중인 닉네임입니다.";
-            setIsNicknameUnique(false);
-          } else {
-            setIsNicknameUnique(true);
-            delete newErrors.nickname;
-          }
-        } catch (error) {
-          console.error("닉네임 중복 확인 오류:", error);
-        }
-      } else {
-        delete newErrors.nickname;
-      }
-    }
-
-    // if (!value && field === "password" && newPassword) {
-    // } else if (
-    //   field === "nickname" &&
-    //   (value.length < 2 || value.length > 20)
-    // ) {
-    //   newErrors.nickname = "닉네임은 2자에서 20자 사이여야 합니다.";
-    // } else if (
-    //   field === "password" &&
-    //   newPassword &&
-    //   (value.length < 8 || value.length > 255)
-    // ) {
-    //   newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해야 합니다.";
-    // } else if (field === "password" && /\s/.test(value)) {
-    //   newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
-    // } else {
-    //   if (field === "nickname" && value !== memberInfo.nickname) {
-    //     try {
-    //       const response = duplicationCheck("nickname", value);
-    //       if (!response.data.isUnique) {
-    //         newErrors.nickname = "이미 사용 중인 닉네임입니다.";
-    //         setIsNicknameUnique(false);
-    //       } else {
-    //         setIsNicknameUnique(true);
-    //         delete newErrors.nickname;
-    //       }
-    //     } catch (error) {
-    //       console.error("닉네임 중복 확인 오류:", error);
-    //     }
-    //   } else {
-    //     delete newErrors[field];
-    //   }
-    // }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const validate = async () => {
+  // 유효성 검사 함수
+  const validate = () => {
     const newErrors = {};
-    let isFormValid = true;
 
     // 닉네임 유효성 검사
     if (newNickname && newNickname !== memberInfo.nickname) {
-      const isNicknameValid = await validateField("nickname", newNickname);
-      isFormValid = isFormValid && isNicknameValid;
+      if (!/^[a-zA-Z0-9가-힣]{2,20}$/.test(newNickname)) {
+        newErrors.nickname =
+          "닉네임은 2~20자의 한글, 영문, 숫자만 조합하여 입력해주세요.";
+      }
     }
 
     // 비밀번호 유효성 검사
     if (newPassword) {
-      const isPasswordValid = await validateField("password", newPassword);
-      isFormValid = isFormValid && isPasswordValid;
+      if (newPassword.length < 8 || newPassword.length > 255) {
+        newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
+      } else if (/\s/.test(newPassword)) {
+        newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+      }
     }
 
-    // 비밀번호 일치 여부 확인
+    // 비밀번호 확인
     if (confirmPassword && confirmPassword !== newPassword) {
       newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
-      isFormValid = false;
-    } else {
-      delete newErrors.confirmPassword;
     }
 
-    setErrors((prev) => ({ ...prev, ...newErrors }));
-    return isFormValid;
-  };
+    setErrors(newErrors);
 
-  // const handleNicknameCheck = async () => {
-  //   await duplicationCheck("nickname", newNickname);
-  // };
+    // 유효성 검사 결과 반환
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!(await validate())) return;
-
-    const originalNickname = memberInfo.nickname;
-    let successMessage = "";
-
     if (!newNickname && !newPassword) {
       alert("수정된 내용이 없습니다.");
-      return navigate("/mypage");
+      return;
     }
 
-    try {
-      if (newNickname && newNickname !== originalNickname && isNicknameUnique) {
-        await updateMember("nickname", newNickname);
+    if (!validate()) return;
 
-        // await axios.put(
-        //   "/api/member/update",
-        //   { nickname: newNickname },
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-        //     },
-        //   }
-        // );
-        successMessage += `${originalNickname}님의 닉네임이 ${newNickname}으로 변경되었습니다.\n`;
+    try {
+      let successMessage = "";
+
+      if (newNickname && newNickname !== memberInfo.nickname) {
+        await updateMember("nickname", newNickname);
+        successMessage += `닉네임이 ${newNickname}으로 변경되었습니다.\n`;
       }
 
       if (newPassword) {
         await updateMember("password", newPassword);
-        // await axios.put(
-        //   "/api/member/update",
-        //   { password: newPassword },
-        //   {
-        //     headers: {
-        //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-        //     },
-        //   }
-        // );
-        successMessage += `${
-          newNickname || originalNickname
-        }님의 비밀번호가 안전하게 변경되었습니다.\n`;
+        successMessage += `비밀번호가 변경되었습니다.\n`;
       }
 
       alert(successMessage.trim());
       navigate("/mypage");
     } catch (error) {
       setFormError("정보 변경에 실패했습니다. 다시 시도해주세요.");
+      console.error("회원 정보 수정 중 오류:", error);
     }
   };
 
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
-  
-    // 사용자 확인 창
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-    
-    // 취소 시 회원 탈퇴 중단
-    if (!confirmDelete) {
-      navigate("/serious");
-      return; // 회원 탈퇴 로직 중단
-    }
-  
+    if (!confirmDelete) return;
+
     try {
-      // 탈퇴 API 호출
-      await deleteMember(); // deleteMember 함수 호출
+      await deleteMember();
       alert("회원 탈퇴가 완료되었습니다.");
-      localStorage.removeItem("token"); // 토큰 제거
+      localStorage.removeItem("token");
       navigate("/goodbye");
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
+      console.error("회원 탈퇴 중 오류 발생:", error);
     }
   };
 
@@ -230,7 +127,6 @@ const EditProfile = () => {
           <li>
             아이디<span>{memberInfo.memberId}</span>
           </li>
-
           <li>
             이메일<span>{memberInfo.email}</span>
           </li>
@@ -239,28 +135,13 @@ const EditProfile = () => {
       <main>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
-            <div className="edit-nickname-box">
-              <input
-                type="text"
-                value={newNickname}
-                onChange={(e) => {
-                  setNewNickname(e.target.value);
-                  setIsNicknameUnique(null);
-                }}
-                autoComplete="off"
-                placeholder="변경할 닉네임"
-              />
-              <button
-                type="button"
-                onClick={() => validateField("nickname", newNickname)}
-                className="check-button"
-              >
-                중복확인
-              </button>
-            </div>
-            {isNicknameUnique === true && (
-              <p className="success-message">사용 가능한 닉네임입니다.</p>
-            )}
+            <input
+              type="text"
+              value={newNickname}
+              onChange={(e) => setNewNickname(e.target.value)}
+              autoComplete="off"
+              placeholder="변경할 닉네임"
+            />
             {errors.nickname && (
               <p className="error-message">{errors.nickname}</p>
             )}
@@ -278,6 +159,7 @@ const EditProfile = () => {
               <p className="error-message">{errors.password}</p>
             )}
           </div>
+
           <div className="form-group">
             <input
               type="password"
