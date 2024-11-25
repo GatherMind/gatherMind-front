@@ -124,14 +124,16 @@ export const getMystudyByToken = async () => {
 // };
 
 // 회원 정보 수정
-export const updateMember = async (filed, value) => {
+export const updateMember = async (field, value) => {
   try {
+    const requestBody = { [field]: value };
+
     const response = await axios.put(
-      `${API_URL}/update`,
-      { filed: value },
+      `${API_URL}/update`, // 올바른 경로 설정
+      requestBody,
       {
         headers: {
-          Authorization: `Bearer ${getAuthToken()}`,
+          Authorization: `Bearer ${getAuthToken()}`, // 인증 헤더 추가
         },
       }
     );
