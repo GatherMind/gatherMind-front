@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import DOMPurify from 'dompurify';
 import AnswerList from "../components/AnswerList";
 import { dateFormat } from "../services/QuestionService";
 import "../styles/QuestionDetail.css";
+import "../styles/global/ReactQuill.css"
 import { deleteQuestion, getQuestion } from "../services/QuestionApiService";
 import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
@@ -54,7 +56,7 @@ const QuestionDetail = () => {
         deleteQuestion(id, authToken);
         console.log("게시글 삭제 성공");
         alert("게시글이 삭제되었습니다.");
-        navigate("/"); // 메인 페이지로 이동
+        navigate(`/study-info/${studyId}`); // 스터디 페이지로 이동
       } catch (error) {
         console.log("게시글 삭제 실패");
       }
@@ -73,14 +75,15 @@ const QuestionDetail = () => {
     );
 
   return (
-    <div className="container">
+    <div className="question-container">
       <h1>{question?.title}</h1>
-      <p className="option">{question?.option}</p>
-      <div className="meta">
-        <p className="nickname">{question?.nickname || "알수없음"}</p>
-        <p className="createdAt">{dateFormat(question?.createdAt)}</p>
+      <p className="question-option">{question?.option}</p>
+      <div className="question-meta">
+        <p className="question-nickname">{question?.nickname || "알수없음"}</p>
+        <p className="question-createdAt">{dateFormat(question?.createdAt)}</p>
       </div>
-      <p className="content">{question?.content}</p>
+      <p className="question-content" 
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(String(question?.content))}} />
 
       {question?.memberId === memberId && (
         <div className="action-buttons">

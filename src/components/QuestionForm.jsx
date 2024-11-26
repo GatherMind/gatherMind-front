@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Editor from "./Editor";
+import "../styles/global/Button.css"
 
 const QuestionForm = ({onSubmit, question}) => {
 
@@ -35,9 +37,10 @@ const QuestionForm = ({onSubmit, question}) => {
             </select>
             <input type="text" value={title} 
                 onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력하세요" required />
-            <textarea value={content} rows={18}
-                onChange={(e) => setContent(e.target.value)} required />
-            <button type="submit">{question ? "수정" : "저장"}</button>
+            {/* <textarea value={content} rows={18}
+                onChange={(e) => setContent(e.target.value)} required /> */}
+            <Editor editorValue={content} onChangeEditorValue={setContent} />
+            <button className="button" type="submit">{question ? "수정" : "저장"}</button>
         </form>
     );
 };

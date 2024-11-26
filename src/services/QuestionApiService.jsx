@@ -51,6 +51,7 @@ export const getAnswers = async (id, page) => {
 
 // 게시글 생성
 export const createQuestion = async (studyId, questionData, token) => {
+  console.log(questionData);
   try {
     const response = await axios.post(
       `${API_URL}?studyId=${studyId}`,

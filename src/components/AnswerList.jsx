@@ -116,7 +116,7 @@ const AnswerList = ({ questionId, memberId }) => {
   };
 
   return (
-    <div>
+    <div className="answer-container">
       <p className="answer-count" ref={scrollUpRef}>
         댓글 {count}
       </p>

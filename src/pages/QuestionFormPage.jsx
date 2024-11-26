@@ -63,13 +63,13 @@ const QuestionFormPage = ({ isModify }) => {
   }
 
   return (
-    <div className="container">
+    <>
       <h1>{isModify ? "게시글 수정하기" : "새로운 게시글 작성"}</h1>
       <QuestionForm
         onSubmit={handleCreateQuestion}
         question={questionInitData}
       />
-    </div>
+    </>
   );
 };
 
