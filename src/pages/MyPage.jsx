@@ -7,6 +7,7 @@ import {
   getAnswerCount,
 } from "../services/MemberApiService";
 import "../styles/Mypage.css";
+import MypageProfileImage from "../components/MypageProfileImage";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -68,15 +69,15 @@ const Mypage = () => {
     <div className="mypage-container">
       <header>
         <ul className="mypage-nav">
-          <li onClick={() => navigate("/mypage")}>정보 보기</li>
+          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한 스터디
+            가입한<br />스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한 질문
+            작성한<br />질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한 답변
+            작성한<br />답변
           </li>
         </ul>
 
@@ -95,6 +96,7 @@ const Mypage = () => {
       </header>
 
       <main>
+        <MypageProfileImage />
         {/* 기본 정보 표시 */}
         <div className="mypage-info-box">
           <p className="mypage-joined-info">
