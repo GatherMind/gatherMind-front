@@ -1,6 +1,7 @@
 import icon from "../assets/profileicon.png";
 import { useNavigate } from "react-router-dom";
 import UseMemberApi from "../server/UseMemberApi";
+import "../css/profile.css";
 
 export default function Profile({loginData}) {
 

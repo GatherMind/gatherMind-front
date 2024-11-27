@@ -1,5 +1,6 @@
 import UseMemberApi from "../server/UseMemberApi"
 import React, { useEffect, useState } from "react";
+import "../css/mystudylist.css";
 
 import { useNavigate } from "react-router-dom";
 import greenlighticon from "../assets/greenlighticon.png";
