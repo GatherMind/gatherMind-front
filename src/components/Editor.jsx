@@ -1,27 +1,29 @@
 import React from "react";
-import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill, { Quill } from "react-quill-new";
+import 'react-quill-new/dist/quill.snow.css';
 import '../styles/Editor.css'
+import { ImageResize } from "quill-image-resize-module-ts";
+
+if (typeof window !== 'undefined' && window.Quill) {
+    window.Quill = Quill;
+}
+
+Quill.register('modules/ImageResize', ImageResize);
 
 const Editor = ({ editorValue, onChangeEditorValue }) => {
 
     const formats = [
         'font',
-        'header',
         'bold',
         'italic',
         'underline',
         'strike',
-        'blockquote',
         'list',
-        'bullet',
-        'indent',
-        'link',
         'align',
         'color',
         'background',
         'size',
-        'h1',
+        'image'
     ];
 
     const modules = {
@@ -35,6 +37,9 @@ const Editor = ({ editorValue, onChangeEditorValue }) => {
                 ["image"],
             ],
         },
+        ImageResize: {
+            modules: ['Resize', 'DisplaySize']
+        }
     };
 
     return (
