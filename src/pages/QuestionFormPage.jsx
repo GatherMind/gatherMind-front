@@ -3,9 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import QuestionForm from "../components/QuestionForm";
 import {
   createQuestion,
-  getQuestion,
   getQuestionWithFileUrl,
-  updateQuestion,
   updateQuestionWithFile,
 } from "../services/QuestionApiService";
 import { useAuth } from "../context/AuthContext";

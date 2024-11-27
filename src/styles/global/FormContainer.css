@@ -2,7 +2,7 @@
 
 /* 공통 폼 컨테이너 */
 .form-container {
-  width: 100%; /* 부모 요소의 너비에 맞추어 확장 */
+  /* width: 100%; 부모 요소의 너비에 맞추어 확장 */
   max-width: 700px; /* 최대 너비 제한 */
   gap: 20px;
   padding: 20px;

@@ -4,14 +4,23 @@
   background-color: var(--background-color-light);
 }
 
-.option {
+.question-container {
+  align-items: unset !important;
+  text-align: left;
+}
+
+.content {
+  align-items: normal;
+}
+
+.question-option {
   font-size: 0.9rem;
   color: #888;
   text-align: left;
   margin-bottom: 20px;
 }
 
-.meta {
+.question-meta {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
@@ -19,11 +28,11 @@
   margin-bottom: 20px;
 }
 
-.nickname {
+.question-nickname {
   font-weight: bold;
 }
 
-.createdAt {
+.question-createdAt {
   font-style: italic;
 }
 .question-file {
@@ -34,9 +43,10 @@
   text-decoration: none;
 }
 
-.content {
+.question-content {
   font-size: 1rem;
   line-height: 1.5;
+  text-align: left;
   margin-bottom: 20px;
 }
 
@@ -92,9 +102,14 @@
 }
 
 /* 댓글 리스트 */
+.answer-container {
+  text-align: left;
+}
+
 .answer-count {
   font-size: 1rem;
   margin-top: 20px;
+  margin-bottom: 20px;
   font-weight: bold;
 }
 
@@ -104,6 +119,7 @@
 }
 
 .answer-nickname {
+  color: #666;
   font-weight: bold;
   margin-bottom: 5px;
 }

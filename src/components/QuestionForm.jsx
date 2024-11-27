@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Editor from "./Editor";
+import "../styles/global/Button.css";
 
 const QuestionForm = ({ onSubmit, question }) => {
   const [option, setOption] = useState("질문");
@@ -35,7 +37,6 @@ const QuestionForm = ({ onSubmit, question }) => {
       formData.append("file", file); // file 자체를 추가
     }
 
-    // onSubmit({ title, option, content });
     onSubmit(formData);
   };
 
@@ -89,15 +90,18 @@ const QuestionForm = ({ onSubmit, question }) => {
 
       <div className="form-group">
         <label htmlFor="description">게시글 내용</label>
-        <textarea
+        {/* <textarea
           value={content}
           rows={18}
           onChange={(e) => setContent(e.target.value)}
           required
-        />
+        /> */}
+        <Editor editorValue={content} onChangeEditorValue={setContent} />
       </div>
 
-      <button type="submit">{question ? "수정" : "저장"}</button>
+      <button className="button" type="submit">
+        {question ? "수정" : "저장"}
+      </button>
     </form>
   );
 };
