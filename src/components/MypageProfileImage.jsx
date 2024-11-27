@@ -6,7 +6,7 @@ const MypageProfileImage = ({ profileImage, nickname }) => {
   return (
     <div className="profile-image-container">
       <img
-        src={profileImage || DefaultProfileImage} // profileImage가 없으면 DefaultProfileImage 사용
+        src={profileImage || "/api/files/default-profile"} // profileImage가 없으면 DefaultProfileImage 사용
         className="profile-image"
         alt={`프로필 이미지`}
       />
