@@ -5,7 +5,6 @@ import "../styles/global/Tabs.css";
 import "../styles/global/FixedButton.css";
 import "../styles/global/DropdownMenu.css";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
 import ScheduleTab from "../components/ScheduleTab";
@@ -154,7 +153,7 @@ const StudyInfo = () => {
 
   return (
     // <div className="study-info">
-    <div className="container">
+    <>
       {/* 그룹 정보 */}
       <div className="study-intro">
         <h2>{study.title}</h2>
@@ -226,7 +225,7 @@ const StudyInfo = () => {
           {activeTab === "members" ? "글쓰기" : "일정 추가"}
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

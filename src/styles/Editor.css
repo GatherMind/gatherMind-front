@@ -1,0 +1,34 @@
+.ql-toolbar.ql-snow {
+    display: inline-block;
+}
+
+.ql-container.ql-snow {
+    height: 80vh;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.ql-editor {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* 모바일 및 작은 화면용 스타일 */
+@media (max-width: 768px) {
+    .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 5px;
+    }
+
+    .ql-container.ql-snow {
+        height: 50vh;
+    }
+}
+
+/* 웹 화면용 스타일 */
+@media (min-width: 769px) {
+    .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 15px;
+    }
+}

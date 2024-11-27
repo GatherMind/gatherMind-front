@@ -87,7 +87,7 @@ const AnswerList = ({ questionId, memberId }) => {
 
   const handleDeleteAnswer = async (answerId) => {
     try {
-      await deleteAnswer(answerId);
+      await deleteAnswer(answerId, authToken);
       setAnswers((prevAnswers) =>
         prevAnswers.filter((answer) => answer.answerId !== answerId)
       );
@@ -100,7 +100,7 @@ const AnswerList = ({ questionId, memberId }) => {
 
   const handleUpdateAnswer = async (answerId, editedContent) => {
     try {
-      const updatedAnswer = await updateAnswer(answerId, editedContent);
+      const updatedAnswer = await updateAnswer(answerId, editedContent, authToken);
       console.log("수정내용", updatedAnswer.content);
       setAnswers((prevAnswers) =>
         prevAnswers.map((answer) =>
@@ -116,7 +116,7 @@ const AnswerList = ({ questionId, memberId }) => {
   };
 
   return (
-    <div>
+    <div className="answer-container">
       <p className="answer-count" ref={scrollUpRef}>
         댓글 {count}
       </p>

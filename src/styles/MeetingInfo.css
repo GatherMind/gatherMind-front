@@ -19,8 +19,13 @@ h2 {
   cursor: pointer;
 }
 
+.tabs {
+  width: 80%;
+}
+
 .tab-content {
   margin-top: 20px;
+  width: 80%;
 }
 
 .members ul {

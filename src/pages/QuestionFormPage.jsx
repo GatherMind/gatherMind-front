@@ -3,8 +3,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import QuestionForm from "../components/QuestionForm";
 import {
   createQuestion,
-  getQuestion,
-  updateQuestion,
+  getQuestionWithFileUrl,
+  updateQuestionWithFile,
 } from "../services/QuestionApiService";
 import { useAuth } from "../context/AuthContext";
 
@@ -25,8 +25,9 @@ const QuestionFormPage = ({ isModify }) => {
       // 수정 모드일 때 데이터 불러옴
       const fetchQuestion = async () => {
         try {
-          const questionData = await getQuestion(id);
+          const questionData = await getQuestionWithFileUrl(id);
           console.log("게시글 조회 성공");
+          console.log(questionData);
 
           setQuestionInitData(questionData);
         } catch (error) {
@@ -40,9 +41,9 @@ const QuestionFormPage = ({ isModify }) => {
 
   const handleCreateQuestion = async (questionData) => {
     try {
-
       if (isModify) {
-        await updateQuestion(id, questionData);
+        // await updateQuestion(id, questionData, authToken);
+        await updateQuestionWithFile(id, questionData, authToken);
         console.log("게시글 수정 완료");
         navigate(`/question-detail/${id}`, { state: { studyId } });
       } else {
@@ -53,7 +54,9 @@ const QuestionFormPage = ({ isModify }) => {
       }
     } catch (error) {
       console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
-      setError("저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요.");
+      setError(
+        "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
+      );
     }
   };
 
@@ -63,13 +66,13 @@ const QuestionFormPage = ({ isModify }) => {
   }
 
   return (
-    <div className="container">
+    <>
       <h1>{isModify ? "게시글 수정하기" : "새로운 게시글 작성"}</h1>
       <QuestionForm
         onSubmit={handleCreateQuestion}
         question={questionInitData}
       />
-    </div>
+    </>
   );
 };
 

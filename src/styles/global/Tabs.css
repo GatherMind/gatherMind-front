@@ -27,10 +27,25 @@
 }
 
 /* 반응형 디자인 */
+
+@media (min-width: 1400px) {
+  .tab-button {
+    padding: 10px 15px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .tab-button {
+    padding: 14px 18px;
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .tab-button {
     padding: 10px 15px;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 

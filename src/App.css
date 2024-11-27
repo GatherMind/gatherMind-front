@@ -1,17 +1,15 @@
 @import "./styles/global/variables.css";
 
-
 /* 모바일 및 작은 화면용 스타일 */
 @media (max-width: 768px) {
-  html, body {
-
+  html,
+  body {
     margin: 0; /* 기본 마진 제거 */
     padding: 0;
   }
 
   .container {
-  
-    height: 100%;  
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -27,30 +25,26 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-  
+
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
-    flex-grow: 1;  
-   
+    flex-grow: 1;
+
     margin-bottom: 50px;
   }
-
 }
 
 /* 웹 화면용 스타일 */
-@media (min-width: 769px) and (max-width: 1399px){
-  html, body {
-    display: flex;
-    justify-content: center; /* 수평 중앙 정렬 */
-    width: 100%;
+@media (min-width: 769px) and (max-width: 1399px) {
+  html,
+  body {
     margin: 0; /* 기본 마진 제거 */
+    padding: 0;
   }
 
   .container {
-    max-width: 800px;
-   
-    height: 100%;  
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -66,29 +60,22 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-  
-    flex-grow: 1;  
-  
+
+    flex-grow: 1;
+
     margin-bottom: 50px;
-   
   }
-
-
 }
-
 
 /* 최대 화면용 스타일 */
 @media (min-width: 1400px) {
-  html, body {
-    display: flex;
-    justify-content: center; /* 수평 중앙 정렬 */
-    width: 100%;
+  html,
+  body {
     margin: 0; /* 기본 마진 제거 */
+    padding: 0;
   }
   .container {
-    max-width: 1200px;
-   
-    height: 100%; 
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -104,20 +91,11 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-  
-    flex-grow: 1;  
-    margin-bottom: 70px;
 
+    flex-grow: 1;
+    margin-bottom: 70px;
   }
 }
-
-
-
-
-
-
-
-
 
 .footer {
   display: flex;
@@ -127,10 +105,10 @@
   background-color: #f3ecec;
   color: white;
   flex-wrap: wrap;
-  position: fixed;  
+  position: fixed;
   left: 0;
-  bottom: 0;  
-  width: 100%;  
+  bottom: 0;
+  width: 100%;
   height: 40px;
 }
 
@@ -138,5 +116,5 @@
   text-align: center;
   padding: 0; /* 아이템 간의 패딩 */
   margin-bottom: 10px;
-  flex-grow: 1; 
+  flex-grow: 1;
 }

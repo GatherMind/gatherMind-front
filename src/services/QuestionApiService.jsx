@@ -19,6 +19,19 @@ export const getQuestion = async (id) => {
   }
 };
 
+// 게시글 조회
+export const getQuestionWithFileUrl = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/test/detail/${id}`);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 조회 실패: ", error);
+    throw error;
+  }
+};
+
 // 댓글 조회
 export const getAnswers = async (id, page) => {
   try {
@@ -51,7 +64,6 @@ export const getAnswers = async (id, page) => {
 
 // 게시글 생성
 export const createQuestion = async (studyId, questionData, token) => {
-  console.log(questionData);
   try {
     const response = await axios.post(
       `${API_URL}?studyId=${studyId}`,
@@ -72,9 +84,30 @@ export const createQuestion = async (studyId, questionData, token) => {
 };
 
 // 게시글 수정
-export const updateQuestion = async (id, questionData) => {
+export const updateQuestion = async (id, questionData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, questionData);
+    const response = await axios.put(`${API_URL}/${id}`, questionData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 수정 실패: ", error);
+    throw error;
+  }
+};
+
+// 게시글 수정
+export const updateQuestionWithFile = async (id, questionData, token) => {
+  try {
+    const response = await axios.put(`${API_URL}/test/${id}`, questionData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response);
 
     return response.data;
@@ -85,9 +118,11 @@ export const updateQuestion = async (id, questionData) => {
 };
 
 // 게시글 삭제
-export const deleteQuestion = async (id) => {
+export const deleteQuestion = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
+    const response = await axios.delete(`${API_URL}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     console.log(response);
 
     return response.data;
