@@ -98,15 +98,15 @@ const WrittenQuestion = () => {
       {/* 헤더 */}
       <header>
         <ul className="mypage-written-question-nav">
-          <li onClick={() => navigate("/mypage")}>정보 보기</li>
+          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한 스터디
+            가입한<br />스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한 질문
+            작성한<br />질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한 답변
+            작성한<br />답변
           </li>
         </ul>
 

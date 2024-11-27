@@ -5,7 +5,7 @@
 
 @media (max-width: 768px) {
   .written-answer-container {
-    width: 350px;
+    width: 100%;
     margin: 0 auto;
   }
 
@@ -18,7 +18,7 @@
 
   .mypage-written-answer-nav > li {
     width: 25%;
-    height: 5vh;
+    height: 8vh;
     align-content: center;
     font-size: 13px;
     font-weight: bold;
@@ -91,6 +91,7 @@
   }
 
   .answer-card {
+    margin-bottom: 3vh;
     padding: 2vh 2vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
@@ -160,7 +161,7 @@
 
   .mypage-written-answer-nav > li {
     width: 25%;
-    height: 5vh;
+    height: 7vh;
     align-content: center;
     font-size: 13px;
     font-weight: bold;
@@ -233,6 +234,7 @@
   }
 
   .answer-card {
+    margin-bottom: 5vh;
     padding: 3vh 2vh;
     border: 1px solid rgb(2, 136, 255);
     border-radius: 4px;
