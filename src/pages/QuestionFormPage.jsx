@@ -26,12 +26,10 @@ const QuestionFormPage = ({ isModify }) => {
       const fetchQuestion = async () => {
         try {
           const questionData = await getQuestionWithFileUrl(id);
-          console.log("게시글 조회 성공");
-          console.log(questionData);
 
           setQuestionInitData(questionData);
         } catch (error) {
-          console.log("게시글 정보를 불러오지 못했습니다.", error);
+          console.error("게시글 정보를 불러오지 못했습니다.", error);
           setError("게시글 정보를 불러오지 못했습니다.");
         }
       };
@@ -44,16 +42,15 @@ const QuestionFormPage = ({ isModify }) => {
       if (isModify) {
         // await updateQuestion(id, questionData, authToken);
         await updateQuestionWithFile(id, questionData, authToken);
-        console.log("게시글 수정 완료");
+
         navigate(`/question-detail/${id}`, { state: { studyId } });
       } else {
         await createQuestion(studyId, questionData, authToken);
 
-        console.log("게시글 생성 완료");
         navigate(`/study-info/${studyId}`);
       }
     } catch (error) {
-      console.log(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
+      console.error(`게시글 ${isModify ? "수정" : "생성"} 실패`, error);
       setError(
         "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
       );

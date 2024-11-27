@@ -11,8 +11,6 @@ const QuestionForm = ({ onSubmit, question }) => {
   const [beforeFileName, setBeforeFileName] = useState("");
 
   useEffect(() => {
-    console.log(question);
-
     if (question) {
       // 수정모드일 경우
       setOption(question.option);
