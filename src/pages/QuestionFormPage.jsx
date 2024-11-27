@@ -4,7 +4,9 @@ import QuestionForm from "../components/QuestionForm";
 import {
   createQuestion,
   getQuestion,
+  getQuestionWithFileUrl,
   updateQuestion,
+  updateQuestionWithFile,
 } from "../services/QuestionApiService";
 import { useAuth } from "../context/AuthContext";
 
@@ -25,8 +27,9 @@ const QuestionFormPage = ({ isModify }) => {
       // 수정 모드일 때 데이터 불러옴
       const fetchQuestion = async () => {
         try {
-          const questionData = await getQuestion(id);
+          const questionData = await getQuestionWithFileUrl(id);
           console.log("게시글 조회 성공");
+          console.log(questionData);
 
           setQuestionInitData(questionData);
         } catch (error) {
@@ -41,7 +44,8 @@ const QuestionFormPage = ({ isModify }) => {
   const handleCreateQuestion = async (questionData) => {
     try {
       if (isModify) {
-        await updateQuestion(id, questionData);
+        // await updateQuestion(id, questionData, authToken);
+        await updateQuestionWithFile(id, questionData, authToken);
         console.log("게시글 수정 완료");
         navigate(`/question-detail/${id}`, { state: { studyId } });
       } else {

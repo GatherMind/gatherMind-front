@@ -62,6 +62,19 @@ export const getAnswers = async (id, page) => {
 //   }
 // };
 
+// 게시글 수정
+export const updateQuestion = async (id, questionData) => {
+  try {
+    const response = await axios.put(`${API_URL}/${id}`, questionData);
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.error("게시글 수정 실패: ", error);
+    throw error;
+  }
+};
+
 // 게시글 생성
 export const createQuestion = async (studyId, questionData, token) => {
   try {
@@ -84,9 +97,13 @@ export const createQuestion = async (studyId, questionData, token) => {
 };
 
 // 게시글 수정
-export const updateQuestion = async (id, questionData) => {
+export const updateQuestionWithFile = async (id, questionData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, questionData);
+    const response = await axios.put(`${API_URL}/test/${id}`, questionData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     console.log(response);
 
     return response.data;

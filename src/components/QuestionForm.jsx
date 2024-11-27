@@ -4,7 +4,9 @@ const QuestionForm = ({ onSubmit, question }) => {
   const [option, setOption] = useState("질문");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [url, setUrl] = useState("");
   const [file, setFile] = useState(null);
+  const [beforeFileName, setBeforeFileName] = useState("");
 
   useEffect(() => {
     console.log(question);
@@ -14,6 +16,8 @@ const QuestionForm = ({ onSubmit, question }) => {
       setOption(question.option);
       setTitle(question.title);
       setContent(question.content);
+      setBeforeFileName(question.fileName);
+      setUrl(question.url);
     }
   }, [question]);
 
@@ -70,6 +74,17 @@ const QuestionForm = ({ onSubmit, question }) => {
       <div className="form-group">
         <label htmlFor="file_select">파일 선택</label>
         <input type="file" onChange={handleFileChange} />
+        <div>
+          {" "}
+          {beforeFileName && (
+            <p>
+              수정 전 파일:
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {beforeFileName}
+              </a>
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="form-group">
