@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/Button.css"
+import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 
 const QuestionForm = ({onSubmit, question}) => {
 
     const [option, setOption] = useState("질문");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+
+    const { replaceImages, endContent } = useQuillImageReplacement();
 
     useEffect(() => {
         console.log(question);
@@ -19,10 +22,11 @@ const QuestionForm = ({onSubmit, question}) => {
     }, [question]);
 
     // 데이터 전송
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         
-        onSubmit({title, option, content});
+        const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
+        onSubmit({title, option, content: updatedContent});
     };
 
     const handleSelect = (e) => {
