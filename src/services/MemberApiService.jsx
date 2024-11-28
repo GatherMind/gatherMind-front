@@ -222,14 +222,3 @@ export const getMyStudy = async (token) => {
     throw error;
   }
 };
-
-// 프로필 사진 가져오기
-export const getProfileImage = () => {
-  try {
-    
-    return
-  } catch (error) {
-    
-    return
-  } 
-}
