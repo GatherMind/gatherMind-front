@@ -7,10 +7,6 @@ const MypageProfileImage = ({ profileImage }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const inputRef = useRef(null);
 
-  const handleUploadClick = () => {
-    inputRef.current.click();
-  };
-
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -23,24 +19,23 @@ const MypageProfileImage = ({ profileImage }) => {
     formData.append("file", file);
 
     try {
-      console.log("멤버 이미지 교체");
+      console.log("업로드 중...");
       const response = await axios.post(
         "/api/files/update-profile-image",
         formData,
         {
           headers: {
-            "Content-Type": "myltipart/form-data",
+            "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
 
-      console.log("멤버 프로필 교체 성공", response.data);
-
+      console.log("업로드 성공", response.data);
       fetchMemberProfileImage();
     } catch (error) {
-      console.error("오류", error);
-      alert("이미지에 업로드 실패");
+      console.error("업로드 실패", error);
+      alert("이미지 업로드에 실패했습니다.");
     }
   };
 
@@ -53,7 +48,7 @@ const MypageProfileImage = ({ profileImage }) => {
       });
       setSelectedImage(response.data.profileImageURL);
     } catch (error) {
-      console.error("실패", error);
+      console.error("프로필 이미지를 가져오는 데 실패했습니다.", error);
     }
   };
 
@@ -61,25 +56,22 @@ const MypageProfileImage = ({ profileImage }) => {
     <div className="profile-image-container">
       <div className="profile">
         <img
-          src={profileImage || DefaultProfileImage}
+          src={selectedImage || profileImage || DefaultProfileImage}
           className="profile-image"
           alt="프로필 이미지"
         />
       </div>
       <div className="update-profile-image">
         <div className="upload-profile-image-box">
-          <label
-            htmlFor="profileImage"
-            className="upload-profile-image-label"
-            onClick={handleUploadClick}
-          >
+          {/* label의 onClick 제거 */}
+          <label htmlFor="profileImage" className="upload-profile-image-label">
             프로필 이미지 수정
           </label>
           <input
             type="file"
             name="profileImage"
             id="profileImage"
-            accept="image/*" // 이미지 파일만 허용
+            accept="image/*"
             style={{ display: "none" }}
             onChange={handleProfileImageChange}
             ref={inputRef}
