@@ -16,6 +16,7 @@ const MembersTab = ({
   onPageChange,
   role,
   studyId,
+  pendingCnt,
 }) => {
   const navigate = useNavigate();
 
@@ -35,13 +36,29 @@ const MembersTab = ({
   };
 
   const handleConfirmClick = async (memberId) => {
-    const response = await confirmStudyMember({ studyId, memberId }, authToken);
+    try {
+      const response = await confirmStudyMember(
+        { studyId, memberId },
+        authToken
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const renderMemberList = () => (
     <div className="list-container member-list">
       <div className="list-header" onClick={toggleList}>
-        <h3>멤버 목록</h3>
+        <div className="list-header-left">
+          <h3>멤버 목록</h3>
+          {members.length > 0 && (
+            <div className="member-count">({members.length})</div>
+          )}
+          {role === "admin" && pendingCnt > 0 && (
+            <div className="pending-count">승인대기 : {pendingCnt}</div>
+          )}
+        </div>
+
         <span className={`arrow ${isOpen ? "open" : ""}`}>▼</span>
       </div>
       {isOpen && (
@@ -53,7 +70,7 @@ const MembersTab = ({
                 {role === "admin" ? `(${member.status})` : ""}
               </div>
               <div className="actions">
-                {role === "admin" && member.status === "pending" && (
+                {role === "admin" && member.status === "PENDING" && (
                   <button
                     className="button"
                     onClick={() => handleConfirmClick(member.memberId)}

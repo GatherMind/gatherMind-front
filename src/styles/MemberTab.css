@@ -8,6 +8,25 @@
   margin-top: 20px;
 }
 
+.list-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.list-header-left h3 {
+  margin: 0;
+}
+.member-count {
+  margin-left: 10px;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.pending-count {
+  margin-left: 10px;
+  counter-reset: var(--secondary-color);
+}
+
 .member-list ul {
   list-style-type: none;
   padding: 0;

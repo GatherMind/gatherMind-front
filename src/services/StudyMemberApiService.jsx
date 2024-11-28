@@ -34,6 +34,6 @@ export const confirmStudyMember = async ({ studyId, memberId }, token) => {
     return response;
   } catch (error) {
     console.error("스터디 승인 실패 : ", error);
-    throw error;
+    throw error.response.data;
   }
 };

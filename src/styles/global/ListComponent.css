@@ -17,7 +17,7 @@
   font-weight: bold;
   color: var(--text-color);
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 7px;
 }
 
 .list-header .arrow {
@@ -29,6 +29,9 @@
   transform: rotate(180deg);
 }
 
+.list-container ul {
+  margin-top: 15px;
+}
 .list-item {
   padding: 10px;
   border-bottom: 1px solid var(--border-color);

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../css/GroupInfo.css"; // 스타일 import
 import axios from "axios"; // axios import
+import { useAuth } from "../context/AuthContext";
+import { applyStudy } from "../services/StudyMemberApiService";
 
 const GroupInfo = ({ isOpen, onClose, groupInfoData, loginData }) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   // isOpen이 false면 null을 반환하여 렌더링하지 않음
 
+  const { authToken } = useAuth();
   if (!isOpen) return null;
 
   async function handleclick() {
     try {
-      const response = await axios.post(
-        `http://localhost:8080/api/study-members/join/${loginData.memberId}/${groupInfoData.studyId}`
-      );
+      // const response = await axios.post(
+      //   `http://localhost:8080/api/study-members/join/${loginData.memberId}/${groupInfoData.studyId}`
+      // );
+      const response = await applyStudy(groupInfoData.studyId, authToken);
 
       console.log(response.data);
 

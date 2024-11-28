@@ -29,6 +29,7 @@ const StudyInfo = () => {
   const [study, setStudy] = useState(null);
   const [members, setMembers] = useState([]);
   const [boards, setBoards] = useState([]);
+  const [pendingCnt, setPendingCnt] = useState(0);
 
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ const StudyInfo = () => {
         setBoardsPage(studyData.questions.pageable.pageNumber);
         setBoardsTotalPages(studyData.questions.totalPages);
         setBoardsTotalElements(studyData.questions.totalElements);
-        console.log(studyData.questions.content);
+        setPendingCnt(studyData.pendingCnt);
       }
     } catch (error) {
       if (isMounted) {
@@ -102,11 +103,13 @@ const StudyInfo = () => {
   const handleFetchMembers = async () => {
     try {
       const membersData = await getStudyMembersAndBoards(studyId);
+
       setMembers(membersData.members);
       setBoards(membersData.questions.content);
       setBoardsPage(membersData.questions.pageable.pageNumber);
       setBoardsTotalPages(membersData.questions.totalPages);
       setBoardsTotalElements(membersData.questions.totalElements);
+      setPendingCnt(membersData.pendingCnt);
     } catch (err) {
       setError("멤버 정보를 가져오지 못했습니다.");
     }
@@ -212,6 +215,8 @@ const StudyInfo = () => {
             onPageChange={handlePageChange}
             studyId={studyId}
             role={role}
+            pendingCnt={pendingCnt}
+            setPendingCnt={setPendingCnt}
           />
         )}
 

@@ -42,7 +42,7 @@ export const updateStudy = async (studyId, studyData, token) => {
 export const getStudyInfoAndMembersAndBoards = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/${id}/members`);
-
+    console.log(response);
     return response.data;
   } catch (error) {
     console.error("Meeting data fetch error : ", error);
