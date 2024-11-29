@@ -27,11 +27,10 @@ const CreateSchedule = ({ isModify }) => {
       const fetchSchedule = async () => {
         try {
           const scheduleInitData = await getSchedule(id);
-          console.log("일정 정보 조회 성공", scheduleInitData);
 
           setScheduleInitData(scheduleInitData);
         } catch (error) {
-          console.log("일정 정보를 불러오지 못했습니다.", error);
+          console.error("일정 정보를 불러오지 못했습니다.", error);
         }
       };
       fetchSchedule();
@@ -44,16 +43,14 @@ const CreateSchedule = ({ isModify }) => {
       var response = null;
       if (isModify) {
         response = await updateSchedule(id, scheduleData);
-        console.log("일정 수정 완료");
       } else {
         response = await createSchedule(
           { ...scheduleData, studyId },
           authToken
         ); // studyId 임시
-        console.log("일정 생성 완료");
       }
     } catch (error) {
-      console.log(`일정 ${isModify ? "수정" : "생성"} 실패`, error);
+      console.error(`일정 ${isModify ? "수정" : "생성"} 실패`, error);
       setError(
         "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
       );

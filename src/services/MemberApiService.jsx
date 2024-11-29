@@ -96,7 +96,7 @@ export const getMemberByToken = async () => {
   }
 };
 
-export const getMystudyByToken = async () => {
+export const getMyStudyByToken = async () => {
   try {
     const response = await axios.get(`${API_URL}/my-studies`, {
       headers: { Authorization: `Bearer ${getAuthToken()}` }, // 헤더에 토큰 추가
@@ -226,10 +226,8 @@ export const getMyStudy = async (token) => {
 // 프로필 사진 가져오기
 export const getProfileImage = () => {
   try {
-    
-    return
+    return;
   } catch (error) {
-    
-    return
-  } 
-}
+    return;
+  }
+};

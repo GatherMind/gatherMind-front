@@ -8,6 +8,10 @@ import SearchBar from "./SerchBar";
 import Slide from "../components/Slide";
 import checkLoginStatus from "../hooks/checkLoginStatus";
 import MyStudyList from "./MyStudyList";
+import {
+  getMemberByToken,
+  getMyStudyByToken,
+} from "../services/MemberApiService";
 
 export default function Main({ handleLoginStatus }) {
   const [hasStudy, setHasStudy] = useState(false);
@@ -18,25 +22,47 @@ export default function Main({ handleLoginStatus }) {
 
   const [loginData, setLoginData] = useState(null);
 
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [MyStudies, setMyStudies] = useState([]);
 
   useEffect(() => {
     const verifyLoginStatus = async () => {
-      const status = await checkLoginStatus();
-      setLoginData(status);
-      handleLoginStatus(status);
+      try {
+        const response = await getMemberByToken();
+        setLoginData(response.data);
+        handleLoginStatus(response.data);
+      } catch (error) {
+        console.error("에러입니다:", error);
+      }
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await getMyStudyByToken(); // 사용자 스터디 조회
+
+        setMyStudies(response.data);
+      } catch (error) {
+        console.error("에러입니다:", error);
+      }
     };
 
     verifyLoginStatus();
+    fetchData();
   }, []);
 
+  useEffect(() => {
+    if (MyStudies.length > 0) {
+      setHasStudy(true); // 데이터가 있으면 hasStudy 상태를 true로 설정
+    } else {
+      setHasStudy(false); // 데이터가 없으면 false
+    }
+  }, [MyStudies]);
+
   function handleSearch(query) {
-    console.log(query);
     setSearchResult([query]);
   }
 
   function handlemakeclick() {
-    navigate("/makegroup");
+    navigate("/create-study");
   }
 
   const navigate = useNavigate();
@@ -45,30 +71,20 @@ export default function Main({ handleLoginStatus }) {
     setStatusFilter(e);
   }
 
-  function handdlesetDataLoaded() {
-    setDataLoaded();
-  }
-
   return (
     <>
-      {loginData ? (
-        <Profile loginData={loginData} />
-      ) : (
-        <p>로그인되지 않았습니다.</p>
-      )}
+      {loginData && <Profile loginData={loginData} />}
 
       <Slide />
 
-      <div className="mytitle">내 스터디</div>
-
-      {hasStudy ? (
+      {!hasStudy ? (
         <Nostudy />
       ) : (
-        <MyStudyList
-          statusFilter={statusFilter}
-          setHasStudy={setHasStudy}
-          handdlesetDataLoaded={handdlesetDataLoaded}
-        />
+        <>
+          <div className="mytitle">내 스터디</div>
+
+          <MyStudyList statusFilter={statusFilter} MyStudies={MyStudies} />
+        </>
       )}
 
       <SearchBar onSearch={handleSearch} />

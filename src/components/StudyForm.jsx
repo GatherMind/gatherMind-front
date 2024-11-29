@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Editor from "./Editor";
 import "../styles/global/FormContainer.css";
 
 const StudyForm = ({ onSubmit, initialData }) => {
@@ -75,6 +76,10 @@ const StudyForm = ({ onSubmit, initialData }) => {
           placeholder="그룹 소개"
           required
         />
+        {/* <Editor
+          editorValue={description}
+          onChangeEditorValue={setDescription}
+        /> */}
       </div>
       {error && <div className="error-message">{error}</div>}
       <button type="submit" disabled={isSubmitting} className="submit-button">

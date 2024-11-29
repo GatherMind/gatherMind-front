@@ -60,20 +60,17 @@
 .member-item > .nickname {
   flex: 2; /* 닉네임 영역이 넓게 차지 */
   text-align: left;
-  min-width: 150px; /* 최소 너비 설정 */
-  margin-left: 100px;
 }
 
 .member-item > .status {
   flex: 1; /* 상태 텍스트의 영역 크기 */
   text-align: center;
-  min-width: 80px; /* 최소 너비를 설정 */
+
   color: red;
 }
 
 .member-item > .actions {
-  flex: 0; /* 버튼은 고정 크기 */
-  min-width: 70px; /* 버튼이 없는 경우에도 동일한 크기 유지 */
+  flex: 1; /* 버튼은 고정 크기 */
   text-align: right;
 }
 

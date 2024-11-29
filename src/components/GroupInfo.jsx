@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../css/GroupInfo.css"; // 스타일 import
-import axios from "axios"; // axios import
 import { useAuth } from "../context/AuthContext";
 import { applyStudy } from "../services/StudyMemberApiService";
 
@@ -11,14 +10,9 @@ const GroupInfo = ({ isOpen, onClose, groupInfoData, loginData }) => {
   const { authToken } = useAuth();
   if (!isOpen) return null;
 
-  async function handleclick() {
+  async function handleClick() {
     try {
-      // const response = await axios.post(
-      //   `http://localhost:8080/api/study-members/join/${loginData.memberId}/${groupInfoData.studyId}`
-      // );
       const response = await applyStudy(groupInfoData.studyId, authToken);
-
-      console.log(response.data);
 
       setShowSuccessModal(true);
     } catch (error) {
@@ -41,7 +35,7 @@ const GroupInfo = ({ isOpen, onClose, groupInfoData, loginData }) => {
           <div className="content-group">
             <div className="title">{groupInfoData.title}</div>
             <div className="description">{groupInfoData.description}</div>
-            <button className="apply-button" onClick={handleclick}>
+            <button className="apply-button" onClick={handleClick}>
               지원하기
             </button>
           </div>

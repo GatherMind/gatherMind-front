@@ -52,7 +52,7 @@ const MembersTab = ({
         <div className="list-header-left">
           <h3>멤버 목록</h3>
           {members.length > 0 && (
-            <div className="member-count">({members.length})</div>
+            <div className="member-count">({members.length - pendingCnt})</div>
           )}
           {role === "admin" && pendingCnt > 0 && (
             <div className="pending-count">승인대기 : {pendingCnt}</div>
@@ -64,22 +64,32 @@ const MembersTab = ({
       {isOpen && (
         <ul>
           {members.map((member) => (
-            <li key={member.memberId} className="list-item member-item">
-              <div className="nickname">{member.nickname}</div>
-              <div className="status">
-                {role === "admin" ? `(${member.status})` : ""}
-              </div>
-              <div className="actions">
-                {role === "admin" && member.status === "PENDING" && (
-                  <button
-                    className="button"
-                    onClick={() => handleConfirmClick(member.memberId)}
-                  >
-                    승인
-                  </button>
-                )}
-              </div>
-            </li>
+            <>
+              {role === "admin" ? (
+                <li key={member.memberId} className="list-item member-item">
+                  <div className="nickname">{member.nickname}</div>
+                  <div className="status">(${member.status})</div>
+                  <div className="actions">
+                    {member.status === "PENDING" && (
+                      <button
+                        className="button"
+                        onClick={() => handleConfirmClick(member.memberId)}
+                      >
+                        승인
+                      </button>
+                    )}
+                  </div>
+                </li>
+              ) : (
+                member.status !== "PENDING" && (
+                  <li key={member.memberId} className="list-item member-item">
+                    <div className="nickname">{member.nickname}</div>
+                    <div className="status"></div>
+                    <div className="actions"></div>
+                  </li>
+                )
+              )}
+            </>
           ))}
         </ul>
       )}

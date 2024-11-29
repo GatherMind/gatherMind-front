@@ -28,10 +28,9 @@ const QuestionDetail = () => {
     try {
       const questionData = await getQuestionWithFileUrl(id);
 
-      console.log("게시글 조회 성공");
       setQuestion(questionData);
     } catch (error) {
-      console.log("게시글 정보를 불러오지 못했습니다.", error);
+      console.error("게시글 정보를 불러오지 못했습니다.", error);
       setError("게시글이 삭제되었거나 존재하지 않습니다.");
     } finally {
       setLoading(false); // 로딩 상태 해제
@@ -43,7 +42,7 @@ const QuestionDetail = () => {
       const memberInfo = await getMyInfoById(studyId, authToken);
       setMemberId(memberInfo.memberId);
     } catch (error) {
-      console.log("로그인된 사용자 정보를 불러오지 못했습니다.", error);
+      console.error("로그인된 사용자 정보를 불러오지 못했습니다.", error);
     }
   };
 
@@ -56,11 +55,10 @@ const QuestionDetail = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
         deleteQuestion(id, authToken);
-        console.log("게시글 삭제 성공");
         alert("게시글이 삭제되었습니다.");
         navigate(`/study-info/${studyId}`); // 스터디 페이지로 이동
       } catch (error) {
-        console.log("게시글 삭제 실패");
+        console.error("게시글 삭제 실패");
       }
     }
   };
