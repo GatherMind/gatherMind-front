@@ -23,7 +23,6 @@ function FileUpload() {
           },
         }
       );
-      console.log("파일 업로드 성공:", response.data);
     } catch (error) {
       console.error("파일 업로드 실패:", error);
     }

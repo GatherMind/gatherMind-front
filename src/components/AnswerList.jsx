@@ -29,8 +29,6 @@ const AnswerList = ({ questionId, memberId }) => {
     try {
       const answerData = await getAnswers(id, currentPage);
 
-      console.log("댓글 조회 성공 ", answerData);
-
       setCount(answerData.totalElements);
 
       // 더보기
@@ -46,7 +44,7 @@ const AnswerList = ({ questionId, memberId }) => {
 
       setIsLastPage(answerData.last); // 마지막 페이지 여부 확인
     } catch (error) {
-      console.log("댓글을 불러오는데 실패했습니다.", error);
+      console.error("댓글을 불러오는데 실패했습니다 : ", error);
     }
   };
 
@@ -63,18 +61,16 @@ const AnswerList = ({ questionId, memberId }) => {
         },
         authToken
       );
-      console.log("댓글 작성 성공");
 
       setAnswer(""); // 댓글 작성 후 입력창 초기화
       addNewAnswer(response);
       scrollUpRef.current?.scrollIntoView({ behavior: "smooth" });
     } catch (error) {
-      console.log("댓글 작성 실패", error);
+      console.error("댓글 작성 실패", error);
     }
   };
 
   const addNewAnswer = (newAnswer) => {
-    console.log(newAnswer);
     setAnswers((prevAnswers) => [newAnswer, ...prevAnswers]);
     setCount(count + 1);
   };
@@ -92,7 +88,6 @@ const AnswerList = ({ questionId, memberId }) => {
         prevAnswers.filter((answer) => answer.answerId !== answerId)
       );
       setCount((prevCount) => prevCount - 1);
-      console.log("댓글 삭제 성공");
     } catch (error) {
       console.error("댓글 삭제 실패", error);
     }
@@ -100,8 +95,12 @@ const AnswerList = ({ questionId, memberId }) => {
 
   const handleUpdateAnswer = async (answerId, editedContent) => {
     try {
-      const updatedAnswer = await updateAnswer(answerId, editedContent, authToken);
-      console.log("수정내용", updatedAnswer.content);
+      const updatedAnswer = await updateAnswer(
+        answerId,
+        editedContent,
+        authToken
+      );
+
       setAnswers((prevAnswers) =>
         prevAnswers.map((answer) =>
           answer.answerId === answerId
@@ -109,7 +108,6 @@ const AnswerList = ({ questionId, memberId }) => {
             : answer
         )
       );
-      console.log("댓글 수정 성공");
     } catch (error) {
       console.error("댓글 수정 실패", error);
     }

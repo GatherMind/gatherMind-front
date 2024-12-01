@@ -16,6 +16,7 @@ const MembersTab = ({
   onPageChange,
   role,
   studyId,
+  pendingCnt,
 }) => {
   const navigate = useNavigate();
 
@@ -35,34 +36,60 @@ const MembersTab = ({
   };
 
   const handleConfirmClick = async (memberId) => {
-    const response = await confirmStudyMember({ studyId, memberId }, authToken);
+    try {
+      const response = await confirmStudyMember(
+        { studyId, memberId },
+        authToken
+      );
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const renderMemberList = () => (
     <div className="list-container member-list">
       <div className="list-header" onClick={toggleList}>
-        <h3>멤버 목록</h3>
+        <div className="list-header-left">
+          <h3>멤버 목록</h3>
+          {members.length > 0 && (
+            <div className="member-count">({members.length - pendingCnt})</div>
+          )}
+          {role === "admin" && pendingCnt > 0 && (
+            <div className="pending-count">승인대기 : {pendingCnt}</div>
+          )}
+        </div>
+
         <span className={`arrow ${isOpen ? "open" : ""}`}>▼</span>
       </div>
       {isOpen && (
         <ul>
           {members.map((member) => (
-            <li key={member.memberId} className="list-item member-item">
-              <div className="nickname">{member.nickname}</div>
-              <div className="status">
-                {role === "admin" ? `(${member.status})` : ""}
-              </div>
-              <div className="actions">
-                {role === "admin" && member.status === "pending" && (
-                  <button
-                    className="button"
-                    onClick={() => handleConfirmClick(member.memberId)}
-                  >
-                    승인
-                  </button>
-                )}
-              </div>
-            </li>
+            <>
+              {role === "admin" ? (
+                <li key={member.memberId} className="list-item member-item">
+                  <div className="nickname">{member.nickname}</div>
+                  <div className="status">(${member.status})</div>
+                  <div className="actions">
+                    {member.status === "PENDING" && (
+                      <button
+                        className="button"
+                        onClick={() => handleConfirmClick(member.memberId)}
+                      >
+                        승인
+                      </button>
+                    )}
+                  </div>
+                </li>
+              ) : (
+                member.status !== "PENDING" && (
+                  <li key={member.memberId} className="list-item member-item">
+                    <div className="nickname">{member.nickname}</div>
+                    <div className="status"></div>
+                    <div className="actions"></div>
+                  </li>
+                )
+              )}
+            </>
           ))}
         </ul>
       )}

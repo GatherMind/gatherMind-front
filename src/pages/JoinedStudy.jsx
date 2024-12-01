@@ -80,15 +80,25 @@ const JoinedStudy = () => {
       {/* 헤더 */}
       <header>
         <ul className="mypage-joined-study-nav">
-          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
+          <li onClick={() => navigate("/mypage")}>
+            정보
+            <br />
+            보기
+          </li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한<br />스터디
+            가입한
+            <br />
+            스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한<br />질문
+            작성한
+            <br />
+            질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한<br />답변
+            작성한
+            <br />
+            답변
           </li>
         </ul>
 
@@ -112,7 +122,7 @@ const JoinedStudy = () => {
         {joinedGroups.length > 0 ? (
           <div className="study-list">
             {joinedGroups.map((group) => (
-              <div className="study-card" key={group.id}>
+              <div className="study-card" key={group.studyId}>
                 <p className="study-title">{group.title}</p>
                 <button
                   className="withdraw-button"

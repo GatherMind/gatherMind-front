@@ -89,7 +89,7 @@ const StudyFormPage = ({ mode }) => {
   if (error) return <ErrorMessage message={error} onRetry={fetchStudyData} />;
 
   return (
-    <div className="study-form">
+    <div>
       <h1>{mode === "edit" ? "스터디 수정" : "새로운 스터디 생성"}</h1>
       <StudyForm onSubmit={handleSubmit} initialData={initialData}></StudyForm>
     </div>

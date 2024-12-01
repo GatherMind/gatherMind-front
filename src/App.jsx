@@ -22,7 +22,6 @@ import WrittenAnswer from "./pages/WrittenAnswer";
 import Main from "./components/Main.jsx";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute.jsx";
-import MakeGroup from "./components/GroupInfo.jsx";
 import Groupid from "./components/Groupid";
 
 function App() {
@@ -43,7 +42,7 @@ function App() {
                 path="/"
                 element={<Main handleLoginStatus={handleLoginStatus} />}
               ></Route>
-              <Route path="main/makegroup" element={<MakeGroup />}></Route>
+
               <Route path="main/group/:id" element={<Groupid />}></Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />

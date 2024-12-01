@@ -6,7 +6,7 @@ import redlighticon from "../assets/redlighticon.png";
 import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
 
-function Group({ statusFilter, searchResult,loginData}) {
+function Group({ statusFilter, searchResult, loginData }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [groupInfoData, setGroupInfoData] = useState();
 
@@ -23,7 +23,6 @@ function Group({ statusFilter, searchResult,loginData}) {
   }
 
   function handleclick(data) {
-    console.log(data);
     setGroupInfoData(data);
     handleOpenModal();
   }
@@ -50,8 +49,6 @@ function Group({ statusFilter, searchResult,loginData}) {
     setModalOpen(false);
   };
   const handleOpenModal = () => {
-    console.log("열림");
-
     setModalOpen(true);
   };
 
@@ -72,7 +69,7 @@ function Group({ statusFilter, searchResult,loginData}) {
         <div>검색결과가 없습니다</div>
       ) : (
         dataToRender.map((data) => (
-          <div className="group-card" key={data.id}>
+          <div className="group-card" key={data.studyId}>
             <button className="btn-component" onClick={() => handleclick(data)}>
               <div className="status">
                 {data.status === "false" ? (

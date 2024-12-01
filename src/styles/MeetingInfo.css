@@ -20,12 +20,12 @@ h2 {
 }
 
 .tabs {
-  width: 80%;
+  width: 100%;
 }
 
 .tab-content {
   margin-top: 20px;
-  width: 80%;
+  width: 100%;
 }
 
 .members ul {

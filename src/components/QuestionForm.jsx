@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/Button.css";
+import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 
 const QuestionForm = ({ onSubmit, question }) => {
   const [option, setOption] = useState("질문");
@@ -10,13 +11,16 @@ const QuestionForm = ({ onSubmit, question }) => {
   const [file, setFile] = useState(null);
   const [beforeFileName, setBeforeFileName] = useState("");
 
-  useEffect(() => {
-    console.log(question);
+  const { replaceImages, endContent } = useQuillImageReplacement();
 
+  useEffect(() => {
     if (question) {
       // 수정모드일 경우
       setOption(question.option);
       setTitle(question.title);
+      setContent(question.content);
+      setBeforeFileName(question.fileName);
+      setUrl(question.url);
       setContent(question.content);
       setBeforeFileName(question.fileName);
       setUrl(question.url);
@@ -37,7 +41,10 @@ const QuestionForm = ({ onSubmit, question }) => {
       formData.append("file", file); // file 자체를 추가
     }
 
-    onSubmit(formData);
+    onSubmit({ title, option, content });
+
+    // const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
+    // onSubmit({title, option, content: updatedContent});
   };
 
   const handleSelect = (e) => {
