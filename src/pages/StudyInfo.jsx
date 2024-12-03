@@ -22,14 +22,12 @@ import {
   confirmStudyMember,
   resignStudyMember,
 } from "../services/StudyMemberApiService.jsx";
+import { MEMBER_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
 
 const StudyInfo = () => {
-  const MEMBER_ROLE_CONSTANTS = ["ADMIN", "MEMBER"];
-  const TABS_CONSTANTS = ["members", "schedules"];
-
   const { authToken } = useAuth();
 
-  const [activeTab, setActiveTab] = useState(TABS_CONSTANTS[0]);
+  const [activeTab, setActiveTab] = useState(TABS.MEMBER);
   const { studyId } = useParams();
   const navigate = useNavigate();
 
@@ -49,7 +47,7 @@ const StudyInfo = () => {
   // 톱니바퀴 버튼
   const [showMenu, setShowMenu] = useState(false);
 
-  const [role, setRole] = useState(MEMBER_ROLE_CONSTANTS[1]);
+  const [role, setRole] = useState(MEMBER_ROLE.MEMBER);
 
   // 그룹 정보/멤버 가져오기
 
@@ -125,7 +123,7 @@ const StudyInfo = () => {
   // 탭 클릭
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === TABS_CONSTANTS[0]) {
+    if (tab === TABS.MEMBER) {
       handleFetchMembers();
     }
   };
@@ -148,7 +146,7 @@ const StudyInfo = () => {
 
   // fixed 버튼 클릭시
   const handleButtonClick = () => {
-    if (activeTab === TABS_CONSTANTS[0]) {
+    if (activeTab === TABS.MEMBER) {
       navigate(`/create-question`, { state: { studyId } });
     } else {
       // 일정 생성 페이지로 이동
@@ -162,7 +160,7 @@ const StudyInfo = () => {
       setMembers((prev) =>
         prev.map((member) =>
           member.memberId === memberId
-            ? { ...member, status: "APPROVED" }
+            ? { ...member, status: MEMBER_STATUS.APPROVED }
             : member
         )
       );
@@ -196,7 +194,7 @@ const StudyInfo = () => {
         <h2>{study.title}</h2>
         <p>{study.description} </p>
         <div className="settings-icon" onClick={toggleMenu}>
-          {role === MEMBER_ROLE_CONSTANTS[0] && (
+          {role === MEMBER_ROLE.ADMIN && (
             <>
               <FaCog />
               {showMenu && (
@@ -217,9 +215,7 @@ const StudyInfo = () => {
       {/* 멤버 / 약속 탭 */}
       <div className="tabs">
         <button
-          className={`tab-button ${
-            activeTab === TABS_CONSTANTS[0] ? "active" : ""
-          }`}
+          className={`tab-button ${activeTab === TABS.MEMBER ? "active" : ""}`}
           onClick={() => {
             handleTabClick("members");
             handleFetchMembers();
@@ -229,10 +225,10 @@ const StudyInfo = () => {
         </button>
         <button
           className={`tab-button ${
-            activeTab === TABS_CONSTANTS[1] ? "active" : ""
+            activeTab === TABS.SCHEDULE ? "active" : ""
           }`}
           onClick={() => {
-            handleTabClick(TABS_CONSTANTS[1]);
+            handleTabClick(TABS.SCHEDULE);
           }}
         >
           약속
@@ -243,7 +239,7 @@ const StudyInfo = () => {
       <div className="tab-content">
         {/* 멤버탭 콘텐츠 */}
 
-        {activeTab === TABS_CONSTANTS[0] && (
+        {activeTab === TABS.MEMBER && (
           <MembersTab
             members={members}
             boards={boards}
@@ -261,13 +257,13 @@ const StudyInfo = () => {
         )}
 
         {/* 일정탭 콘텐츠 */}
-        {activeTab === TABS_CONSTANTS[1] && <ScheduleTab studyId={studyId} />}
+        {activeTab === TABS.SCHEDULE && <ScheduleTab studyId={studyId} />}
       </div>
 
       {/* 하단 고정 버튼 */}
       <div className="fixed-button">
         <button onClick={handleButtonClick}>
-          {activeTab === TABS_CONSTANTS[0] ? "글쓰기" : "일정 추가"}
+          {activeTab === TABS.MEMBER ? "글쓰기" : "일정 추가"}
         </button>
       </div>
     </>

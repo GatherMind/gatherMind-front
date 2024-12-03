@@ -5,6 +5,7 @@ import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useAuth } from "../context/AuthContext";
+import { MEMBER_ROLE, MEMBER_STATUS } from "../constants/constants";
 
 const MembersTab = ({
   members,
@@ -20,9 +21,6 @@ const MembersTab = ({
   handleResignClick,
 }) => {
   const navigate = useNavigate();
-
-  const ROLE_CONSTANTS = ["ADMIN", "MEMBER"];
-  const MEMBER_STATUS_CONSTANTS = ["PENDING", "APPROVED"];
 
   const { authToken } = useAuth();
 
@@ -50,7 +48,7 @@ const MembersTab = ({
           {members.length > 0 && (
             <div className="member-count">({members.length - pendingCnt})</div>
           )}
-          {role === ROLE_CONSTANTS[0] && pendingCnt > 0 && (
+          {role === MEMBER_ROLE.ADMIN && pendingCnt > 0 && (
             <div className="pending-count">승인대기 : {pendingCnt}</div>
           )}
         </div>
@@ -61,12 +59,12 @@ const MembersTab = ({
         <ul>
           {members.map((member) => (
             <React.Fragment key={member.memberId}>
-              {role === ROLE_CONSTANTS[0] ? (
+              {role === MEMBER_ROLE.ADMIN ? (
                 <li className="list-item member-item">
                   <div className="nickname">{member.nickname}</div>
                   <div
                     className={`status ${
-                      member.status === MEMBER_STATUS_CONSTANTS[0]
+                      member.status === MEMBER_STATUS.PENDING
                         ? "pending"
                         : "approved"
                     }`}
@@ -74,7 +72,7 @@ const MembersTab = ({
                     ({member.status})
                   </div>
                   <div className="actions">
-                    {member.status === MEMBER_STATUS_CONSTANTS[0] && (
+                    {member.status === MEMBER_STATUS.PENDING && (
                       <button
                         className="button"
                         aria-label={`${member.nickname} 승인`}
@@ -84,7 +82,7 @@ const MembersTab = ({
                       </button>
                     )}
 
-                    {member.status === MEMBER_STATUS_CONSTANTS[1] && (
+                    {member.status === MEMBER_STATUS.APPROVED && (
                       <button
                         className="button resign"
                         aria-label={`${member.nickname} 강퇴`}
@@ -96,7 +94,7 @@ const MembersTab = ({
                   </div>
                 </li>
               ) : (
-                member.status !== MEMBER_STATUS_CONSTANTS[0] && (
+                member.status !== MEMBER_STATUS.PENDING && (
                   <li
                     key={member.memberId}
                     className="list-item member-item role-member"

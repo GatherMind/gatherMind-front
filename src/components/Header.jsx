@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import homeicon from "../assets/gathermind.png";
+// import homeicon from "../assets/gathermind.png";
+import homeicon from "../assets/gathermind-removebg-preview.png";
 import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
 import { useAuth } from "../context/AuthContext";
