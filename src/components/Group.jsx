@@ -7,6 +7,8 @@ import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
 
 function Group({ statusFilter, searchResult, loginData }) {
+  const studyStatus = ["OPEN", "CLOSED"];
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [groupInfoData, setGroupInfoData] = useState();
 
@@ -60,9 +62,7 @@ function Group({ statusFilter, searchResult, loginData }) {
           onClose={handleCloseModal}
           groupInfoData={groupInfoData}
           loginData={loginData}
-        >
-          <h2></h2>
-        </GroupInfo>
+        ></GroupInfo>
       </div>
 
       {dataToRender.length === 0 ? (
@@ -72,7 +72,7 @@ function Group({ statusFilter, searchResult, loginData }) {
           <div className="group-card" key={data.studyId}>
             <button className="btn-component" onClick={() => handleclick(data)}>
               <div className="status">
-                {data.status === "false" ? (
+                {data.status === studyStatus[0] ? (
                   <div className={`status ${data.status}`}>
                     <img src={greenlighticon} alt="" width={12} height={12} />
                     모집중

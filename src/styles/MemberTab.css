@@ -33,6 +33,14 @@
   text-align: center;
 }
 
+.status.pending {
+  color: #ffa500; /* Orange for PENDING */
+}
+
+.status.approved {
+  color: #4caf50; /* Green for APPROVED */
+}
+
 .board-item {
   display: flex;
   justify-content: space-around;
@@ -65,8 +73,6 @@
 .member-item > .status {
   flex: 1; /* 상태 텍스트의 영역 크기 */
   text-align: center;
-
-  color: red;
 }
 
 .member-item > .actions {
@@ -74,11 +80,22 @@
   text-align: right;
 }
 
+.role-member .nickname {
+  text-align: center;
+}
+
 .member-item .button {
   padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
   width: 100%; /* 버튼이 부모 영역 내에서 꽉 차도록 설정 */
+}
+
+.resign {
+  background-color: var(--error-color);
+}
+.resign:hover {
+  background-color: var(--error-color-hover);
 }
 
 .board-item div {

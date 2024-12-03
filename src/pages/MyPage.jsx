@@ -53,7 +53,7 @@ const Mypage = () => {
         });
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류가 발생했습니다.", error);
-        alert("로그인이 필요합니다.dd?");
+        alert("로그인이 필요합니다");
         navigate("/login");
       }
     };
@@ -69,15 +69,25 @@ const Mypage = () => {
     <div className="mypage-container">
       <header>
         <ul className="mypage-nav">
-          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
+          <li onClick={() => navigate("/mypage")}>
+            정보
+            <br />
+            보기
+          </li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한<br />스터디
+            가입한
+            <br />
+            스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한<br />질문
+            작성한
+            <br />
+            질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한<br />답변
+            작성한
+            <br />
+            답변
           </li>
         </ul>
 

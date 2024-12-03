@@ -27,21 +27,27 @@ export default function Main({ handleLoginStatus }) {
   const [MyStudies, setMyStudies] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const verifyLoginStatus = async () => {
       try {
-        const [memberResponse, studyResponse] = await Promise.all([
-          getMemberByToken(),
-          getMyStudyByToken(),
-        ]);
-
-        setLoginData(memberResponse.data);
-        handleLoginStatus(memberResponse.data);
-        setMyStudies(studyResponse.data);
+        const response = await getMemberByToken();
+        setLoginData(response.data);
+        handleLoginStatus(response.data);
       } catch (error) {
         console.error("에러입니다:", error);
       }
     };
 
+    const fetchData = async () => {
+      try {
+        const response = await getMyStudyByToken(); // 사용자 스터디 조회
+
+        setMyStudies(response.data);
+      } catch (error) {
+        console.error("에러입니다:", error);
+      }
+    };
+
+    verifyLoginStatus();
     fetchData();
   }, []);
 
@@ -57,13 +63,14 @@ export default function Main({ handleLoginStatus }) {
     setSearchResult([query]);
   }
 
+  function handlemakeclick() {
+    navigate("/create-study");
+  }
+
   const navigate = useNavigate();
 
   function handleStatus(e) {
     setStatusFilter(e);
-  }
-  function handleMakeClick() {
-    navigate("/create-study");
   }
 
   return (
@@ -85,7 +92,7 @@ export default function Main({ handleLoginStatus }) {
       <SearchBar onSearch={handleSearch} />
 
       <div className="studymakediv">
-        <button className="studymakebtn" onClick={handleMakeClick}>
+        <button className="studymakebtn" onClick={handlemakeclick}>
           스터디 만들기
         </button>
       </div>

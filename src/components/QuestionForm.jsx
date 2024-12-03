@@ -4,7 +4,12 @@ import "../styles/global/Button.css";
 import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 
 const QuestionForm = ({ onSubmit, question }) => {
-  const [option, setOption] = useState("질문");
+  const options = [
+    { value: "QUESTION", label: "질문하기" },
+    { value: "FILE_SHARED", label: "파일공유" },
+  ]; // Enum 값과 일치
+
+  const [option, setOption] = useState(options[0].value);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
@@ -36,12 +41,16 @@ const QuestionForm = ({ onSubmit, question }) => {
     formData.append("option", option);
     formData.append("content", content);
 
+    console.log(title);
+    console.log(option);
+    console.log(content);
+
     // 파일이 선택된 경우에만 추가
     if (file) {
       formData.append("file", file); // file 자체를 추가
     }
 
-    onSubmit({ title, option, content });
+    onSubmit(formData);
 
     // const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
     // onSubmit({title, option, content: updatedContent});
@@ -65,8 +74,11 @@ const QuestionForm = ({ onSubmit, question }) => {
           value={option}
           onChange={handleSelect}
         >
-          <option value="질문">질문하기</option>
-          <option value="자료공유">자료공유</option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
         </select>
       </div>
       <div className="form-group">

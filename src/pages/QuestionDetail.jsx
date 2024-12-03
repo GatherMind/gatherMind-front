@@ -14,9 +14,10 @@ import "../styles/global/ReactQuill.css";
 
 const QuestionDetail = () => {
   const { id } = useParams();
-  const { authToken } = useAuth();
   const LocationDom = useLocation();
   const { studyId } = LocationDom.state || {};
+
+  const { authToken } = useAuth();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 
 const API_URL = process.env.REACT_APP_API_URL + "/study-members";
 
@@ -7,29 +7,57 @@ if (!API_URL) {
 }
 
 export const applyStudy = async (studyId, token) => {
+  if (!token) {
+    throw new Error("Token is missing. User is not authenticated.");
+
+    // // Redirect to login or show an error message
+    // window.location.href = "/login"; // Example redirect
+    // return;
+  }
+
   try {
-    const response = await axios.post(
-      `${API_URL}`,
-      { studyId },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await apiClient.post(`${API_URL}`, { studyId });
+
     return response;
   } catch (error) {
-    console.error("스터디 지원 실패 : ", error);
+    if (error.response) {
+      if (error.response.status === 401) {
+        console.error(
+          "Unauthorized: Please check your login credentials or token."
+        );
+        // Optionally redirect to a login page or re-authentication flow
+      } else {
+        console.error(
+          `스터디 지원 실패 - HTTP Code: ${error.response.status}`,
+          error.response.data
+        );
+      }
+    } else if (error.request) {
+      console.error("No response received from server:", error.request);
+    } else {
+      console.error("Error in request setup:", error.message);
+    }
     throw error;
   }
 };
 
 export const confirmStudyMember = async ({ studyId, memberId }, token) => {
   try {
-    const response = await axios.put(
+    const response = await apiClient.put(`${API_URL}`, { studyId, memberId });
+    return response;
+  } catch (error) {
+    console.error("스터디 승인 실패 : ", error);
+    throw error.response.data;
+  }
+};
+
+export const resignStudyMember = async ({ studyId, memberId }, token) => {
+  try {
+    const response = await apiClient.delete(
       `${API_URL}`,
-      { studyId, memberId },
       {
-        headers: { Authorization: `Bearer ${token}` },
-      }
+        data: { studyId, memberId },
+      } // 쿼리 스트링으로 데이터 전달
     );
     return response;
   } catch (error) {

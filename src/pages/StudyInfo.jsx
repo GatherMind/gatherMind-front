@@ -18,11 +18,16 @@ import {
   deleteStudy,
   getBoards,
 } from "../services/StudyApiService.jsx";
+import {
+  confirmStudyMember,
+  resignStudyMember,
+} from "../services/StudyMemberApiService.jsx";
+import { MEMBER_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
 
 const StudyInfo = () => {
   const { authToken } = useAuth();
 
-  const [activeTab, setActiveTab] = useState("members");
+  const [activeTab, setActiveTab] = useState(TABS.MEMBER);
   const { studyId } = useParams();
   const navigate = useNavigate();
 
@@ -42,7 +47,7 @@ const StudyInfo = () => {
   // 톱니바퀴 버튼
   const [showMenu, setShowMenu] = useState(false);
 
-  const [role, setRole] = useState("Member");
+  const [role, setRole] = useState(MEMBER_ROLE.MEMBER);
 
   // 그룹 정보/멤버 가져오기
 
@@ -118,7 +123,7 @@ const StudyInfo = () => {
   // 탭 클릭
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === "members") {
+    if (tab === TABS.MEMBER) {
       handleFetchMembers();
     }
   };
@@ -141,11 +146,38 @@ const StudyInfo = () => {
 
   // fixed 버튼 클릭시
   const handleButtonClick = () => {
-    if (activeTab === "members") {
+    if (activeTab === TABS.MEMBER) {
       navigate(`/create-question`, { state: { studyId } });
     } else {
       // 일정 생성 페이지로 이동
       navigate(`/create-schedule`, { state: { studyId } });
+    }
+  };
+
+  const handleConfirmClick = async (memberId) => {
+    try {
+      await confirmStudyMember({ studyId, memberId }, authToken);
+      setMembers((prev) =>
+        prev.map((member) =>
+          member.memberId === memberId
+            ? { ...member, status: MEMBER_STATUS.APPROVED }
+            : member
+        )
+      );
+      setPendingCnt((prev) => (prev ?? 0) - 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleResignClick = async (memberId) => {
+    try {
+      await resignStudyMember({ studyId, memberId }, authToken);
+      setMembers((prev) =>
+        prev.filter((member) => member.memberId !== memberId)
+      );
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -162,7 +194,7 @@ const StudyInfo = () => {
         <h2>{study.title}</h2>
         <p>{study.description} </p>
         <div className="settings-icon" onClick={toggleMenu}>
-          {role === "admin" && (
+          {role === MEMBER_ROLE.ADMIN && (
             <>
               <FaCog />
               {showMenu && (
@@ -183,7 +215,7 @@ const StudyInfo = () => {
       {/* 멤버 / 약속 탭 */}
       <div className="tabs">
         <button
-          className={`tab-button ${activeTab === "members" ? "active" : ""}`}
+          className={`tab-button ${activeTab === TABS.MEMBER ? "active" : ""}`}
           onClick={() => {
             handleTabClick("members");
             handleFetchMembers();
@@ -192,9 +224,11 @@ const StudyInfo = () => {
           멤버
         </button>
         <button
-          className={`tab-button ${activeTab === "schedules" ? "active" : ""}`}
+          className={`tab-button ${
+            activeTab === TABS.SCHEDULE ? "active" : ""
+          }`}
           onClick={() => {
-            handleTabClick("schedules");
+            handleTabClick(TABS.SCHEDULE);
           }}
         >
           약속
@@ -205,7 +239,7 @@ const StudyInfo = () => {
       <div className="tab-content">
         {/* 멤버탭 콘텐츠 */}
 
-        {activeTab === "members" && (
+        {activeTab === TABS.MEMBER && (
           <MembersTab
             members={members}
             boards={boards}
@@ -217,17 +251,19 @@ const StudyInfo = () => {
             role={role}
             pendingCnt={pendingCnt}
             setPendingCnt={setPendingCnt}
+            handleConfirmClick={handleConfirmClick}
+            handleResignClick={handleResignClick}
           />
         )}
 
         {/* 일정탭 콘텐츠 */}
-        {activeTab === "schedules" && <ScheduleTab studyId={studyId} />}
+        {activeTab === TABS.SCHEDULE && <ScheduleTab studyId={studyId} />}
       </div>
 
       {/* 하단 고정 버튼 */}
       <div className="fixed-button">
         <button onClick={handleButtonClick}>
-          {activeTab === "members" ? "글쓰기" : "일정 추가"}
+          {activeTab === TABS.MEMBER ? "글쓰기" : "일정 추가"}
         </button>
       </div>
     </>

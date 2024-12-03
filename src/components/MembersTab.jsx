@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/MemberTab.css";
 import "../styles/global/ListComponent.css";
 import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
 import { useAuth } from "../context/AuthContext";
-import { confirmStudyMember } from "../services/StudyMemberApiService";
+import { MEMBER_ROLE, MEMBER_STATUS } from "../constants/constants";
 
 const MembersTab = ({
   members,
@@ -17,6 +17,8 @@ const MembersTab = ({
   role,
   studyId,
   pendingCnt,
+  handleConfirmClick,
+  handleResignClick,
 }) => {
   const navigate = useNavigate();
 
@@ -26,6 +28,9 @@ const MembersTab = ({
   const [isOpen, setIsOpen] = useState(false);
   const size = 5;
 
+  useEffect(() => {
+    console.log("Members updated in MembersTab:", members);
+  }, [members]);
   // 화살표 버튼을 클릭할 때 상태 변경
   const toggleList = () => {
     setIsOpen((prev) => !prev);
@@ -33,17 +38,6 @@ const MembersTab = ({
 
   const handleClick = (questionId) => {
     navigate(`/question-detail/${questionId}`, { state: { studyId } });
-  };
-
-  const handleConfirmClick = async (memberId) => {
-    try {
-      const response = await confirmStudyMember(
-        { studyId, memberId },
-        authToken
-      );
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const renderMemberList = () => (
@@ -54,7 +48,7 @@ const MembersTab = ({
           {members.length > 0 && (
             <div className="member-count">({members.length - pendingCnt})</div>
           )}
-          {role === "admin" && pendingCnt > 0 && (
+          {role === MEMBER_ROLE.ADMIN && pendingCnt > 0 && (
             <div className="pending-count">승인대기 : {pendingCnt}</div>
           )}
         </div>
@@ -64,32 +58,52 @@ const MembersTab = ({
       {isOpen && (
         <ul>
           {members.map((member) => (
-            <>
-              {role === "admin" ? (
-                <li key={member.memberId} className="list-item member-item">
+            <React.Fragment key={member.memberId}>
+              {role === MEMBER_ROLE.ADMIN ? (
+                <li className="list-item member-item">
                   <div className="nickname">{member.nickname}</div>
-                  <div className="status">(${member.status})</div>
+                  <div
+                    className={`status ${
+                      member.status === MEMBER_STATUS.PENDING
+                        ? "pending"
+                        : "approved"
+                    }`}
+                  >
+                    ({member.status})
+                  </div>
                   <div className="actions">
-                    {member.status === "PENDING" && (
+                    {member.status === MEMBER_STATUS.PENDING && (
                       <button
                         className="button"
+                        aria-label={`${member.nickname} 승인`}
                         onClick={() => handleConfirmClick(member.memberId)}
                       >
                         승인
                       </button>
                     )}
+
+                    {member.status === MEMBER_STATUS.APPROVED && (
+                      <button
+                        className="button resign"
+                        aria-label={`${member.nickname} 강퇴`}
+                        onClick={() => handleResignClick(member.memberId)}
+                      >
+                        강퇴
+                      </button>
+                    )}
                   </div>
                 </li>
               ) : (
-                member.status !== "PENDING" && (
-                  <li key={member.memberId} className="list-item member-item">
+                member.status !== MEMBER_STATUS.PENDING && (
+                  <li
+                    key={member.memberId}
+                    className="list-item member-item role-member"
+                  >
                     <div className="nickname">{member.nickname}</div>
-                    <div className="status"></div>
-                    <div className="actions"></div>
                   </li>
                 )
               )}
-            </>
+            </React.Fragment>
           ))}
         </ul>
       )}

@@ -1,20 +1,15 @@
 import axios from "axios";
+import apiClient from "./apiClient";
 
 const API_URL = process.env.REACT_APP_API_URL + "/study";
 
 if (!API_URL) {
   throw new Error("API URI: is not defined.");
 }
-
 // 스터디 생성
 export const createStudy = async (studyData, token) => {
   try {
-    // const response = api.post("/study", studyData, {
-    //   headers: { Authorization: `Bearer ${token}` },
-    // });
-    const response = await axios.post(`${API_URL}`, studyData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await apiClient.post("/study", studyData);
     console.log(response);
 
     return response.data;
@@ -27,9 +22,7 @@ export const createStudy = async (studyData, token) => {
 // 스터디 수정
 export const updateStudy = async (studyId, studyData, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${studyId}`, studyData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await apiClient.put(`/study/${studyId}`, studyData);
 
     return response.data;
   } catch (error) {
@@ -41,7 +34,7 @@ export const updateStudy = async (studyId, studyData, token) => {
 // 스터디 정보, 멤버 조회, 게시판 조회
 export const getStudyInfoAndMembersAndBoards = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}/members`);
+    const response = await apiClient.get(`/study/${id}/members`);
     console.log(response);
     return response.data;
   } catch (error) {
@@ -53,7 +46,7 @@ export const getStudyInfoAndMembersAndBoards = async (id) => {
 // 스터디 멤버, 게시판 조회
 export const getStudyMembersAndBoards = async (id, pageNumber) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}/members/boards`, {
+    const response = await apiClient.get(`/study/${id}/members/boards`, {
       params: { page: pageNumber, size: 5 },
     });
 
@@ -69,7 +62,7 @@ export const getBoards = async (id, pageNumber) => {
   console.log("id", id);
   console.log("pageNumber", pageNumber);
   try {
-    const response = await axios.get(`${API_URL}/${id}/boards`, {
+    const response = await apiClient.get(`/study/${id}/boards`, {
       params: { page: pageNumber, size: 5 },
     });
     console.log(response);
@@ -84,7 +77,7 @@ export const getBoards = async (id, pageNumber) => {
 // 스터디 일정 조회
 export const getStudySchedule = async (studyId) => {
   try {
-    const response = await axios.get(`${API_URL}/${studyId}/schedules`);
+    const response = await apiClient.get(`/study/${studyId}/schedules`);
     console.log(response);
     return response.data;
   } catch (error) {
@@ -96,7 +89,7 @@ export const getStudySchedule = async (studyId) => {
 // 스터디 아이디로 스터디 조회
 export const getStudyById = async (studyId) => {
   try {
-    const response = await axios.get(`${API_URL}/${studyId}`);
+    const response = await apiClient.get(`/study/${studyId}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch study info: ", error);
@@ -107,9 +100,7 @@ export const getStudyById = async (studyId) => {
 // 스터디 삭제
 export const deleteStudy = async (studyId, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${studyId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await apiClient.delete(`/study/${studyId}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch study info: ", error);

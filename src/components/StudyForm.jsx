@@ -3,9 +3,13 @@ import Editor from "./Editor";
 import "../styles/global/FormContainer.css";
 
 const StudyForm = ({ onSubmit, initialData }) => {
+  const STATE_CONSTANTS = ["OPEN", "CLOSED"];
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState(initialData?.studyHeader || "모집중");
+  const [status, setStatus] = useState(
+    initialData?.studyHeader || STATE_CONSTANTS[0]
+  );
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -13,7 +17,7 @@ const StudyForm = ({ onSubmit, initialData }) => {
     if (initialData) {
       setTitle(initialData.title);
       setDescription(initialData.description);
-      setStatus(initialData.status || "모집중");
+      setStatus(initialData.status || STATE_CONSTANTS[0]);
     }
   }, [initialData]);
 
@@ -52,8 +56,8 @@ const StudyForm = ({ onSubmit, initialData }) => {
           onChange={(e) => setStatus(e.target.value)}
           required
         >
-          <option value="recruiting">모집중</option>
-          <option value="completed">모집 완료</option>
+          <option value="OPEN">모집중</option>
+          <option value="CLOSED">모집 완료</option>
         </select>
       </div>
       <div className="form-group">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "../css/Serchbar.css";
+import { Navigate } from "react-router-dom";
 
 function Searchbar({ onSearch }) {
   const [query, setQuery] = useState("");
@@ -11,6 +12,11 @@ function Searchbar({ onSearch }) {
 
   const handleSearch = () => {
     onSearch(query);
+  };
+
+  const handleResetSearch = () => {
+    setQuery("");
+    onSearch("");
   };
 
   const handleKeyDown = (event) => {
@@ -32,6 +38,9 @@ function Searchbar({ onSearch }) {
       />
       <button className="search-button" onClick={handleSearch}>
         검색
+      </button>
+      <button className="reset-button" onClick={handleResetSearch}>
+        초기화
       </button>
     </div>
   );

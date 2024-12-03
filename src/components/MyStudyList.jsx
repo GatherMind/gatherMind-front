@@ -19,7 +19,7 @@ export default function MyStudyList({ MyStudies }) {
         <div className="mygroup-card" key={item.studyId}>
           <button className="my-card" onClick={() => handleClick(item)}>
             <div className="status">
-              {item.status === "false" ? (
+              {item.status === "OPEN" ? (
                 <div className={`status ${item.status}`}>
                   <img
                     src={greenlighticon}
