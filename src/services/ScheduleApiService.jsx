@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 
 const API_URL = process.env.REACT_APP_API_URL + "/schedule";
 
@@ -9,7 +9,7 @@ if (!API_URL) {
 // 일정 조회
 export const getSchedule = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/${id}`);
+    const response = await apiClient.get(`${API_URL}/${id}`);
     console.log(response);
 
     return response.data;
@@ -22,10 +22,7 @@ export const getSchedule = async (id) => {
 // 일정 생성
 export const createSchedule = async (scheduleData, token) => {
   try {
-    const response = await axios.post(`${API_URL}`, scheduleData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    console.log(response);
+    const response = await apiClient.post(`${API_URL}`, scheduleData);
 
     return response.data;
   } catch (error) {
@@ -37,8 +34,7 @@ export const createSchedule = async (scheduleData, token) => {
 // 일정 수정
 export const updateSchedule = async (id, scheduleData) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, scheduleData);
-    console.log(response);
+    const response = await apiClient.put(`${API_URL}/${id}`, scheduleData);
 
     return response.data;
   } catch (error) {
@@ -50,7 +46,7 @@ export const updateSchedule = async (id, scheduleData) => {
 // 일정 삭제
 export const deleteSchedule = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`);
+    const response = await apiClient.delete(`${API_URL}/${id}`);
 
     return response.data;
   } catch (error) {

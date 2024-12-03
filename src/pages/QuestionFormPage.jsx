@@ -25,6 +25,7 @@ const QuestionFormPage = ({ isModify }) => {
       // 수정 모드일 때 데이터 불러옴
       const fetchQuestion = async () => {
         try {
+          console.log(id);
           const questionData = await getQuestionWithFileUrl(id);
 
           setQuestionInitData(questionData);

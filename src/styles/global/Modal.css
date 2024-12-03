@@ -1,0 +1,52 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Dimmed background for better focus */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--background-color-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  max-width: 500px; /* Wider content area */
+  width: 90%; /* Responsive width */
+  padding: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.modal-header {
+  font-size: 24px; /* Larger title */
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 20px; /* Add spacing */
+}
+
+.modal-body {
+  font-size: 16px;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin-bottom: 10px; /* Spacing before the button */
+}
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px; /* Bigger for visibility */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color var(--transition-speed);
+}
+
+.close-button:hover {
+  color: var(--error-color);
+}

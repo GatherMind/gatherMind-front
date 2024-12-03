@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/Login.css";
-import { loginMember } from "../services/MemberApiService";
+
 import { useAuth } from "../context/AuthContext";
+import { loginMember } from "../services/AuthApiService";
 
 const Login = () => {
   const navigate = useNavigate();

@@ -42,7 +42,6 @@ function App() {
                 path="/"
                 element={<Main handleLoginStatus={handleLoginStatus} />}
               ></Route>
-
               <Route path="main/group/:id" element={<Groupid />}></Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
@@ -82,29 +81,35 @@ function App() {
                   path="/edit-study/:studyId"
                   element={<StudyFormPage mode="edit" />}
                 />
+                <Route
+                  path="/create-schedule"
+                  element={<CreateSchedule isModify={false} />}
+                />
+                <Route
+                  path="/create-question"
+                  element={<QuestionFormPage isModify={false} />}
+                />
+                {/* schedule */}
+                <Route
+                  path="/edit-schedule/:id"
+                  element={<CreateSchedule isModify={true} />}
+                />
+                {/* question */}
+                <Route
+                  path="/create-question"
+                  element={<QuestionFormPage isModify={false} />}
+                />
+                <Route
+                  path="/edit-question/:id"
+                  element={<QuestionFormPage isModify={true} />}
+                />
+                <Route path="/study-info/:studyId" element={<StudyInfo />} />
+                <Route
+                  path="/question-detail/:id"
+                  element={<QuestionDetail />}
+                />
               </Route>
-              {/* study info page */}
-              <Route path="/study-info/:studyId" element={<StudyInfo />} />
-              {/* <Route path="/" element={<Enter />} /> */}
-              {/* schedule */}
-              <Route
-                path="/create-schedule"
-                element={<CreateSchedule isModify={false} />}
-              />
-              <Route
-                path="/edit-schedule/:id"
-                element={<CreateSchedule isModify={true} />}
-              />
-              {/* question */}
-              <Route
-                path="/create-question"
-                element={<QuestionFormPage isModify={false} />}
-              />
-              <Route
-                path="/edit-question/:id"
-                element={<QuestionFormPage isModify={true} />}
-              />
-              <Route path="/question-detail/:id" element={<QuestionDetail />} />
+              {/* PrivateRoute end */}
             </Routes>
           </div>
         </div>

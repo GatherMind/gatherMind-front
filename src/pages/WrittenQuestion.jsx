@@ -9,6 +9,7 @@ import {
   getRecentQuestionLimit3,
 } from "../services/MemberApiService";
 import "../styles/WrittenQuestion.css";
+import { deleteQuestion } from "../services/QuestionApiService";
 
 const WrittenQuestion = () => {
   // State 관리
@@ -47,17 +48,10 @@ const WrittenQuestion = () => {
           answerCount: answerResponse.data || 0,
         });
 
-        // 최근 질문 가져오기 (최대 3개)
-        // const questionsResponse = await axios.get(
-        //   "/api/members/recent-questions",
-        //   {
-        //     headers: { Authorization: `Bearer ${token}` },
-        //   }
-        // );
-
         const response = await getMemberByToken();
         setMemberInfo(response.data || {});
 
+        // 최근 질문 가져오기 (최대 3개)
         const questionsResponse = await getRecentQuestionLimit3();
         setRecentQuestions(questionsResponse.data.slice(0, 3));
       } catch (error) {
@@ -69,22 +63,21 @@ const WrittenQuestion = () => {
   }, []);
 
   // 질문 수정
-  const handleEditQuestion = (questionId) => {
-    navigate(`/edit-question/${questionId}`);
+  const handleEditQuestion = (questionId, studyId) => {
+    navigate(`/edit-question/${questionId}`, { state: { studyId } });
   };
 
   // 질문 삭제
   const handleDeleteQuestion = async (questionId) => {
     if (window.confirm("정말로 게시글을 삭제하시겠습니까?")) {
       try {
-        const token = localStorage.getItem("token");
-        await axios.delete(`/api/questions/${questionId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await deleteQuestion(questionId);
 
         // 삭제 후 상태 갱신
         setRecentQuestions(
-          recentQuestions.filter((question) => question.id !== questionId)
+          recentQuestions.filter(
+            (question) => question.questionId !== questionId
+          )
         );
         alert("게시글이 삭제되었습니다.");
       } catch (error) {
@@ -98,15 +91,25 @@ const WrittenQuestion = () => {
       {/* 헤더 */}
       <header>
         <ul className="mypage-written-question-nav">
-          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
+          <li onClick={() => navigate("/mypage")}>
+            정보
+            <br />
+            보기
+          </li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한<br />스터디
+            가입한
+            <br />
+            스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한<br />질문
+            작성한
+            <br />
+            질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한<br />답변
+            작성한
+            <br />
+            답변
           </li>
         </ul>
 
@@ -136,13 +139,15 @@ const WrittenQuestion = () => {
                 <div className="mypage-question-button-box">
                   <button
                     className="mypage-question-edit"
-                    onClick={() => handleEditQuestion(question.id)}
+                    onClick={() =>
+                      handleEditQuestion(question.questionId, question.studyId)
+                    }
                   >
                     수정
                   </button>
                   <button
                     className="mypage-question-delete"
-                    onClick={() => handleDeleteQuestion(question.id)}
+                    onClick={() => handleDeleteQuestion(question.questionId)}
                   >
                     삭제
                   </button>

@@ -9,6 +9,7 @@ import {
   getRecentAnswerLimit3,
 } from "../services/MemberApiService";
 import "../styles/WrittenAnswer.css";
+import { deleteAnswer } from "../services/AnswerApiService";
 
 const WrittenAnswer = () => {
   // State 관리
@@ -47,11 +48,6 @@ const WrittenAnswer = () => {
           answerCount: answerResponse.data || 0,
         });
 
-        // 최근 답변 가져오기 (최대 3개)
-        // const answersResponse = await axios.get("/api/members/recent-answers", {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-
         const response = await getMemberByToken();
         setMemberInfo(response.data || {});
 
@@ -71,22 +67,20 @@ const WrittenAnswer = () => {
   }, []);
 
   // 답변 수정
-  const handleEditAnswer = (questionId) => {
-    navigate(`/edit-question/${questionId}`);
+  const handleEditAnswer = (questionId, studyId) => {
+    navigate(`/question-detail/${questionId}`, { state: { studyId } });
   };
 
   // 답변 삭제
-  const handleDeleteAnswer = async (questionId) => {
+  const handleDeleteAnswer = async (answerId) => {
     if (window.confirm("정말로 답변을 삭제하시겠습니까?")) {
       try {
         const token = localStorage.getItem("token");
-        await axios.delete(`/api/answers/${questionId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        await deleteAnswer(answerId);
 
         // 삭제 후 상태 갱신
         setRecentAnswers(
-          recentAnswers.filter((answer) => answer.questionId !== questionId)
+          recentAnswers.filter((answer) => answer.answerId !== answerId)
         );
         alert("답변이 삭제되었습니다.");
       } catch (error) {
@@ -100,15 +94,25 @@ const WrittenAnswer = () => {
       {/* 헤더 */}
       <header>
         <ul className="mypage-written-answer-nav">
-          <li onClick={() => navigate("/mypage")}>정보<br />보기</li>
+          <li onClick={() => navigate("/mypage")}>
+            정보
+            <br />
+            보기
+          </li>
           <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한<br />스터디
+            가입한
+            <br />
+            스터디
           </li>
           <li onClick={() => navigate("/mypage/written-question")}>
-            작성한<br />질문
+            작성한
+            <br />
+            질문
           </li>
           <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한<br />답변
+            작성한
+            <br />
+            답변
           </li>
         </ul>
 
@@ -143,13 +147,15 @@ const WrittenAnswer = () => {
                 <div className="mypage-answer-button-box">
                   <button
                     className="mypage-answer-edit"
-                    onClick={() => handleEditAnswer(answer.questionId)}
+                    onClick={() =>
+                      handleEditAnswer(answer.questionId, answer.studyId)
+                    }
                   >
                     수정
                   </button>
                   <button
                     className="mypage-answer-delete"
-                    onClick={() => handleDeleteAnswer(answer.questionId)}
+                    onClick={() => handleDeleteAnswer(answer.answerId)}
                   >
                     삭제
                   </button>

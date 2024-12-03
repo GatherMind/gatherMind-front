@@ -1,18 +1,9 @@
-import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL + "/answer";
-
-if (!API_URL) {
-  throw new Error("API URI: is not defined.");
-}
+import apiClient from "./apiClient";
 
 // 댓글 생성
 export const createAnswer = async (answerData, token) => {
   try {
-    const response = await axios.post(`${API_URL}`, answerData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    console.log(response);
+    const response = await apiClient.post(`/answer`, answerData);
 
     return response.data;
   } catch (error) {
@@ -24,13 +15,11 @@ export const createAnswer = async (answerData, token) => {
 // 댓글 수정
 export const updateAnswer = async (id, content, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, content, {
-      headers: { 
-        Authorization: `Bearer ${token}`, 
-        "Content-Type": "text/plain" 
+    const response = await apiClient.put(`/answer/${id}`, content, {
+      headers: {
+        "Content-Type": "application/json",
       },
     });
-    console.log(response);
 
     return response.data;
   } catch (error) {
@@ -42,12 +31,7 @@ export const updateAnswer = async (id, content, token) => {
 // 댓글 삭제
 export const deleteAnswer = async (id, token) => {
   try {
-    const response = await axios.delete(`${API_URL}/${id}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    console.log(response);
-
+    const response = await apiClient.delete(`/answer/${id}`);
     return response.data;
   } catch (error) {
     console.error("댓글 삭제 실패: ", error);

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { duplicationCheck } from "../services/ValidateApiService";
 import "../styles/Signup.css";
 import axios from "axios";
-import { signUp } from "../services/MemberApiService";
+import { signUp } from "../services/AuthApiService";
 
 const SignUp = () => {
   const [memberId, setMemberId] = useState("");

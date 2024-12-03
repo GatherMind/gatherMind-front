@@ -19,7 +19,8 @@ export default function Header({ loginResult }) {
   }
 
   function handleLogoutClick() {
-    navigate("/logout");
+    logout();
+    navigate("/");
   }
 
   function handleMyPageClick() {
