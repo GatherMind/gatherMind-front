@@ -58,6 +58,7 @@ export const createQuestion = async (studyId, questionData, token) => {
       questionData,
       {
         headers: {
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       }

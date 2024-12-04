@@ -39,8 +39,8 @@ const QuestionFormPage = ({ isModify }) => {
   }, [isModify, id]);
 
   const handleCreateQuestion = async (questionData) => {
+    console.log(questionData);
     try {
-
       if (isModify) {
         await updateQuestion(id, questionData, authToken);
         console.log("게시글 수정 완료");
@@ -68,6 +68,7 @@ const QuestionFormPage = ({ isModify }) => {
       <QuestionForm
         onSubmit={handleCreateQuestion}
         question={questionInitData}
+        isModify={isModify}
       />
     </>
   );
