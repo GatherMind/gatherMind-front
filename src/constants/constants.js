@@ -9,3 +9,8 @@ export const TABS = {
 };
 
 export const MEMBER_STATUS = { PENDING: "PENDING", APPROVED: "APPROVED" };
+
+export const STUDY_STATE = {
+  OPEN: "OPEN",
+  CLOSED: "CLOSED",
+};

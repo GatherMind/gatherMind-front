@@ -4,7 +4,6 @@ import "../styles/global/ListComponent.css";
 import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import { useAuth } from "../context/AuthContext";
 import { MEMBER_ROLE, MEMBER_STATUS } from "../constants/constants";
 
 const MembersTab = ({
@@ -21,8 +20,6 @@ const MembersTab = ({
   handleResignClick,
 }) => {
   const navigate = useNavigate();
-
-  const { authToken } = useAuth();
 
   // 상태값으로 목록이 열렸는지 닫혔는지를 관리
   const [isOpen, setIsOpen] = useState(false);

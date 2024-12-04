@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/FormContainer.css";
+import { STUDY_STATE } from "../constants/constants";
 
 const StudyForm = ({ onSubmit, initialData }) => {
-  const STATE_CONSTANTS = ["OPEN", "CLOSED"];
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState(
-    initialData?.studyHeader || STATE_CONSTANTS[0]
+    initialData?.studyHeader || STUDY_STATE.OPEN
   );
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,7 +16,7 @@ const StudyForm = ({ onSubmit, initialData }) => {
     if (initialData) {
       setTitle(initialData.title);
       setDescription(initialData.description);
-      setStatus(initialData.status || STATE_CONSTANTS[0]);
+      setStatus(initialData.status || STUDY_STATE.OPEN);
     }
   }, [initialData]);
 

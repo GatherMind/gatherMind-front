@@ -23,12 +23,21 @@
 
 .schedule-details {
   margin-bottom: 10px;
+  margin-left: 20px;
 }
 
 .schedule-detail {
   margin: 5px 0;
+  text-align: left;
 }
 
+.btn-container {
+  margin-right: 10px;
+}
+
+.btn-container button {
+  margin: 5px;
+}
 .pagination {
   display: flex;
   align-items: center;

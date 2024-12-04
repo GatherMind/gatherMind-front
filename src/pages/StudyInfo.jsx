@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../styles/MeetingInfo.css";
 import "../styles/global/Container.css";
 import "../styles/global/Tabs.css";
@@ -51,7 +51,7 @@ const StudyInfo = () => {
 
   // 그룹 정보/멤버 가져오기
 
-  const fetchMeetingInfo = async () => {
+  const fetchMeetingInfo = useCallback(async () => {
     setError(null);
     setLoading(true);
     let isMounted = true;
@@ -73,7 +73,6 @@ const StudyInfo = () => {
       }
     } catch (error) {
       if (isMounted) {
-        console.log(error);
         console.error("데이터 불러오기 실패", error);
         setError("정보를 찾을 수 없습니다.");
       }
@@ -84,11 +83,11 @@ const StudyInfo = () => {
     return () => {
       isMounted = false;
     };
-  };
+  }, [studyId, authToken]); // studyId와 authToken이 변경될 때만 새로 생성
 
   useEffect(() => {
     fetchMeetingInfo();
-  }, []);
+  }, [fetchMeetingInfo]); // fetchMeetingInfo가 변경될 때만 실행
 
   // 페이지 변경 함수
   const handlePageChange = async (newPage) => {

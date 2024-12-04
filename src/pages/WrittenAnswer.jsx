@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   getStudyCount,
@@ -75,7 +74,6 @@ const WrittenAnswer = () => {
   const handleDeleteAnswer = async (answerId) => {
     if (window.confirm("정말로 답변을 삭제하시겠습니까?")) {
       try {
-        const token = localStorage.getItem("token");
         await deleteAnswer(answerId);
 
         // 삭제 후 상태 갱신
