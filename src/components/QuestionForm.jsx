@@ -3,7 +3,7 @@ import Editor from "./Editor";
 import "../styles/global/Button.css";
 import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 
-const QuestionForm = ({ onSubmit, question }) => {
+const QuestionForm = ({ onSubmit, question, isModify }) => {
   const options = [
     { value: "QUESTION", label: "질문하기" },
     { value: "FILE_SHARED", label: "파일공유" },
@@ -16,7 +16,7 @@ const QuestionForm = ({ onSubmit, question }) => {
   const [file, setFile] = useState(null);
   const [beforeFileName, setBeforeFileName] = useState("");
 
-  const { replaceImages, endContent } = useQuillImageReplacement();
+  const { replaceImages } = useQuillImageReplacement();
 
   useEffect(() => {
     if (question) {
@@ -33,17 +33,16 @@ const QuestionForm = ({ onSubmit, question }) => {
   }, [question]);
 
   // 데이터 전송
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("option", option);
-    formData.append("content", content);
 
-    console.log(title);
-    console.log(option);
-    console.log(content);
+    formData.append("content", updatedContent);
 
     // 파일이 선택된 경우에만 추가
     if (file) {
@@ -51,9 +50,6 @@ const QuestionForm = ({ onSubmit, question }) => {
     }
 
     onSubmit(formData);
-
-    // const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
-    // onSubmit({title, option, content: updatedContent});
   };
 
   const handleSelect = (e) => {
