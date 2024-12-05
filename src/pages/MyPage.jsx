@@ -5,9 +5,10 @@ import {
   getStudyCount,
   getQuestionCount,
   getAnswerCount,
+  deleteMember,
 } from "../services/MemberApiService";
 import "../styles/Mypage.css";
-import MypageProfileImage from "../components/MypageProfileImage";
+import ProfileEditModalModal from "../components/ProfileEditModal";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -22,6 +23,7 @@ const Mypage = () => {
     answerCount: 0,
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,8 +63,33 @@ const Mypage = () => {
     fetchMemberInfo();
   }, [navigate]);
 
-  const handleEditInfo = () => {
-    navigate("/editprofile"); // 정보 수정 페이지로 이동
+  const handleDeleteAccount = async (event) => {
+    event.preventDefault();
+
+    const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
+
+    // 취소 시 특정 페이지로 이동
+    if (!confirmDelete) {
+      navigate("/serious"); // 취소 시 /serious 페이지로 이동
+      return; // 회원 탈퇴 로직 중단
+    }
+
+    try {
+      await deleteMember();
+      alert("회원 탈퇴가 완료되었습니다.");
+      localStorage.removeItem("token");
+      navigate("/goodbye"); // 탈퇴 완료 시 /goodbye 페이지로 이동
+    } catch (error) {
+      alert("회원 탈퇴에 실패했습니다.");
+    }
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true); // 모달 열기
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false); // 모달 닫기
   };
 
   return (
@@ -94,35 +121,49 @@ const Mypage = () => {
         {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
           <li>
-            가입 스터디 수<p>{counts.studyCount}</p>
+            가입 스터디 수
+            <p>{counts.studyCount}</p>
           </li>
           <li>
-            작성 질문 수<p>{counts.questionCount}</p>
+            작성 질문 수
+            <p>{counts.questionCount}</p>
           </li>
           <li>
-            작성 답변 수<p>{counts.answerCount}</p>
+            작성 답변 수
+            <p>{counts.answerCount}</p>
           </li>
         </ul>
       </header>
 
       <main>
-        <MypageProfileImage />
-        {/* 기본 정보 표시 */}
+        {/* 프로필정보 */}
         <div className="mypage-info-box">
           <p className="mypage-joined-info">
-            <h3>아이디</h3> <span>{memberInfo.memberId || "Undefined"}</span>
+            <h3>아이디</h3>
+            <span>{memberInfo.memberId || "Undefined"}</span>
           </p>
           <p className="mypage-joined-info">
-            <h3>닉네임</h3> <span>{memberInfo.nickname || "Undefined"}</span>
+            <h3>닉네임</h3>
+            <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
           <p className="mypage-joined-info">
-            <h3>이메일</h3> <span>{memberInfo.email || "Undefined"}</span>
+            <h3>이메일</h3>
+            <span>{memberInfo.email || "Undefined"}</span>
           </p>
         </div>
-        <button className="mypage-button" onClick={handleEditInfo}>
+        <button className="mypage-edit-button" onClick={handleOpenModal}>
           정보 수정
         </button>
+        <button
+          className="mypage-delete-button"
+          type="button"
+          onClick={handleDeleteAccount}
+        >
+          회원탈퇴
+        </button>
       </main>
+
+      {isModalOpen && <ProfileEditModalModal onClose={handleCloseModal} />}
     </div>
   );
 };
