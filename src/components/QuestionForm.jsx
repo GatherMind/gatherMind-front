@@ -15,6 +15,7 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
   const [url, setUrl] = useState("");
   const [file, setFile] = useState(null);
   const [beforeFileName, setBeforeFileName] = useState("");
+  const [fileMetaDataId, setFileMetaDataId] = useState(0);
 
   const { replaceImages } = useQuillImageReplacement();
 
@@ -28,7 +29,7 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
       setUrl(question.url);
       setContent(question.content);
       setBeforeFileName(question.fileName);
-      setUrl(question.url);
+      setFileMetaDataId(question.fileMetadataId);
     }
   }, [question]);
 
@@ -41,8 +42,8 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("option", option);
-
     formData.append("content", updatedContent);
+    formData.append("fileMetaDataId", fileMetaDataId);
 
     // 파일이 선택된 경우에만 추가
     if (file) {

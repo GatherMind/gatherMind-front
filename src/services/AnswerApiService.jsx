@@ -4,7 +4,6 @@ import apiClient from "./apiClient";
 export const createAnswer = async (answerData, token) => {
   try {
     const response = await apiClient.post(`/answer`, answerData);
-
     return response.data;
   } catch (error) {
     console.error("댓글 생성 실패: ", error);

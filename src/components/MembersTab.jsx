@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/MemberTab.css";
 import "../styles/global/ListComponent.css";
 import "../styles/global/Button.css";
@@ -14,6 +14,7 @@ const MembersTab = ({
   boardsTotalElements,
   onPageChange,
   role,
+  myMemberId,
   studyId,
   pendingCnt,
   handleConfirmClick,
@@ -24,10 +25,6 @@ const MembersTab = ({
   // 상태값으로 목록이 열렸는지 닫혔는지를 관리
   const [isOpen, setIsOpen] = useState(false);
   const size = 5;
-
-  useEffect(() => {
-    console.log("Members updated in MembersTab:", members);
-  }, [members]);
   // 화살표 버튼을 클릭할 때 상태 변경
   const toggleList = () => {
     setIsOpen((prev) => !prev);
@@ -69,24 +66,28 @@ const MembersTab = ({
                     ({member.status})
                   </div>
                   <div className="actions">
-                    {member.status === MEMBER_STATUS.PENDING && (
-                      <button
-                        className="button"
-                        aria-label={`${member.nickname} 승인`}
-                        onClick={() => handleConfirmClick(member.memberId)}
-                      >
-                        승인
-                      </button>
-                    )}
+                    {member.memberId !== myMemberId && (
+                      <>
+                        {member.status === MEMBER_STATUS.PENDING && (
+                          <button
+                            className="button"
+                            aria-label={`${member.nickname} 승인`}
+                            onClick={() => handleConfirmClick(member.memberId)}
+                          >
+                            승인
+                          </button>
+                        )}
 
-                    {member.status === MEMBER_STATUS.APPROVED && (
-                      <button
-                        className="button resign"
-                        aria-label={`${member.nickname} 강퇴`}
-                        onClick={() => handleResignClick(member.memberId)}
-                      >
-                        강퇴
-                      </button>
+                        {member.status === MEMBER_STATUS.APPROVED && (
+                          <button
+                            className="button resign"
+                            aria-label={`${member.nickname} 강퇴`}
+                            onClick={() => handleResignClick(member.memberId)}
+                          >
+                            강퇴
+                          </button>
+                        )}
+                      </>
                     )}
                   </div>
                 </li>

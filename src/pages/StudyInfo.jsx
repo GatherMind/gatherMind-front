@@ -48,6 +48,7 @@ const StudyInfo = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const [role, setRole] = useState(MEMBER_ROLE.MEMBER);
+  const [myMemberId, setMyMemberId] = useState("");
 
   // 그룹 정보/멤버 가져오기
 
@@ -62,6 +63,7 @@ const StudyInfo = () => {
       ]);
 
       if (isMounted) {
+        setMyMemberId(memberInfo.memberId);
         setRole(memberInfo.role);
         setStudy(studyData);
         setMembers(studyData.members);
@@ -248,6 +250,7 @@ const StudyInfo = () => {
             onPageChange={handlePageChange}
             studyId={studyId}
             role={role}
+            myMemberId={myMemberId}
             pendingCnt={pendingCnt}
             setPendingCnt={setPendingCnt}
             handleConfirmClick={handleConfirmClick}
