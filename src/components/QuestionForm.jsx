@@ -37,7 +37,7 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedContent = await replaceImages(content); // 이미지 업로드 후 url 변경
+    const updatedContent = await replaceImages(content, isModify); // 이미지 업로드 후 url 변경
 
     const formData = new FormData();
     formData.append("title", title);
