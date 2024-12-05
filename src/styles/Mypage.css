@@ -94,14 +94,32 @@
     margin-top: 5px;
   }
 
-  .mypage-info-box + button {
-    width: 100%;
-    margin-top: 5vh;
-    padding: 1.5vh 0;
+  .mypage-edit-button,
+  .mypage-delete-button {
+    width: 46%;
     color: white;
-    background-color: rgb(2, 136, 255);
+    margin: 20px auto;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
     border-radius: 4px;
+  }
+
+  .mypage-edit-button {
+    background-color: rgb(2, 136, 255);
+  }
+
+  .mypage-edit-button:hover {
+    background-color: rgb(0, 86, 179);
+  }
+
+  .mypage-delete-button {
+    background-color: red;
+  }
+
+  .mypage-delete-button:hover {
+    background-color: rgb(218, 0, 0);
   }
 }
 
@@ -197,13 +215,31 @@
     margin-left: 30px;
   }
 
-  .mypage-info-box + button {
-    width: 100%;
-    margin-top: 5vh;
-    padding: 1.5vh 0;
+  .mypage-edit-button,
+  .mypage-delete-button {
+    width: 46%;
     color: white;
-    background-color: rgb(2, 136, 255);
+    margin: 40px 2%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
     border: none;
     border-radius: 4px;
+  }
+
+  .mypage-edit-button {
+    background-color: rgb(2, 136, 255);
+  }
+
+  .mypage-edit-button:hover {
+    background-color: rgb(0, 86, 179);
+  }
+
+  .mypage-delete-button {
+    background-color: red;
+  }
+
+  .mypage-delete-button:hover {
+    background-color: rgb(218, 0, 0);
   }
 }

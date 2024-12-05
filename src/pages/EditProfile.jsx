@@ -6,7 +6,6 @@ import {
   updateMember,
 } from "../services/MemberApiService";
 import { duplicationCheck } from "../services/ValidateApiService";
-import "../styles/EditProfile.css";
 
 const EditProfile = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -17,6 +16,7 @@ const EditProfile = () => {
   const [newNickname, setNewNickname] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState(""); // 기존 비밀번호 상태 추가
   const [errors, setErrors] = useState({});
   const [isNicknameUnique, setIsNicknameUnique] = useState(null);
   const [formError, setFormError] = useState("");
@@ -34,6 +34,8 @@ const EditProfile = () => {
           email: response.data.email || "정보 없음",
           nickname: response.data.nickname || "정보 없음",
         });
+
+        setCurrentPassword(response.data.password); // 서버에서 기존 비밀번호 받아오기
       } catch (error) {
         console.error("회원 정보를 가져오는 중 오류 발생:", error);
       }
@@ -41,7 +43,6 @@ const EditProfile = () => {
     fetchCurrentUserInfo();
   }, [navigate]);
 
-  // 유효성 검사 함수
   const validateField = (field, value) => {
     const newErrors = { ...errors };
 
@@ -52,6 +53,9 @@ const EditProfile = () => {
         newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
       } else if (/\s/.test(value)) {
         newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
+      } else if (value === currentPassword) {
+        newErrors.password =
+          "기존 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.";
       } else {
         delete newErrors.password;
       }
@@ -98,7 +102,6 @@ const EditProfile = () => {
     const newErrors = {};
     let isFormValid = true;
 
-    // 닉네임 유효성 검사
     if (newNickname && newNickname !== memberInfo.nickname) {
       if (!/^[a-zA-Z0-9가-힣]{2,20}$/.test(newNickname)) {
         newErrors.nickname =
@@ -107,7 +110,6 @@ const EditProfile = () => {
       }
     }
 
-    // 비밀번호 유효성 검사
     if (newPassword) {
       if (newPassword.length < 8 || newPassword.length > 255) {
         newErrors.password = "비밀번호는 8자 이상 255자 이하로 입력해주세요.";
@@ -115,10 +117,13 @@ const EditProfile = () => {
       } else if (/\s/.test(newPassword)) {
         newErrors.password = "비밀번호에는 공백을 사용할 수 없습니다.";
         isFormValid = false;
+      } else if (newPassword === currentPassword) {
+        newErrors.password =
+          "기존 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.";
+        isFormValid = false;
       }
     }
 
-    // 비밀번호 확인
     if (confirmPassword && confirmPassword !== newPassword) {
       newErrors.confirmPassword = "비밀번호가 일치하지 않습니다.";
       isFormValid = false;
@@ -137,6 +142,15 @@ const EditProfile = () => {
     }
 
     if (!validate()) return;
+
+    // 동일 비밀번호 확인
+    if (newPassword === currentPassword) {
+      setErrors((prev) => ({
+        ...prev,
+        password: "기존 비밀번호와 동일한 비밀번호는 사용할 수 없습니다.",
+      }));
+      return;
+    }
 
     try {
       let successMessage = "";
@@ -165,21 +179,19 @@ const EditProfile = () => {
   const handleDeleteAccount = async (event) => {
     event.preventDefault();
 
-    // 사용자 확인 창
     const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
 
-    // 취소 시 회원 탈퇴 중단
+    // 취소 시 특정 페이지로 이동
     if (!confirmDelete) {
-      navigate("/serious");
+      navigate("/serious"); // 취소 시 /serious 페이지로 이동
       return; // 회원 탈퇴 로직 중단
     }
 
     try {
-      // 탈퇴 API 호출
-      await deleteMember(); // deleteMember 함수 호출
+      await deleteMember();
       alert("회원 탈퇴가 완료되었습니다.");
-      localStorage.removeItem("token"); // 토큰 제거
-      navigate("/goodbye");
+      localStorage.removeItem("token");
+      navigate("/goodbye"); // 탈퇴 완료 시 /goodbye 페이지로 이동
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
     }
