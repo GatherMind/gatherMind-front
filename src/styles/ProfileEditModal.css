@@ -122,7 +122,7 @@
 }
 
 .modal-nickname-check-button:hover {
-  height: 41px;
+  height: 40px;
   outline: none;
   border-radius: 4px;
   background-color: #0056b3;
@@ -153,5 +153,9 @@
 }
 
 .password-edit-box > input:nth-child(2) {
+  margin-bottom: 20px;
+}
+
+.password-edit-box > input:nth-child(2):focus {
   margin-bottom: 20px;
 }
