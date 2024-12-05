@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   getMemberByToken,
@@ -27,8 +26,6 @@ const WrittenQuestion = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         // 회원 정보 가져오기
         // const response = await axios.get("/api/members/me", {
         //   headers: { Authorization: `Bearer ${token}` },

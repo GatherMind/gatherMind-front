@@ -21,16 +21,21 @@ export const applyStudy = async (studyId, token) => {
     return response;
   } catch (error) {
     if (error.response) {
-      if (error.response.status === 401) {
-        console.error(
-          "Unauthorized: Please check your login credentials or token."
-        );
-        // Optionally redirect to a login page or re-authentication flow
-      } else {
-        console.error(
-          `스터디 지원 실패 - HTTP Code: ${error.response.status}`,
-          error.response.data
-        );
+      switch (error.response.status) {
+        case 401:
+          console.error(
+            "Unauthorized: Please check your login credentials or token."
+          );
+          // Redirect or prompt for re-authentication if needed
+          break;
+        case 409:
+          console.error("Conflict: You have already applied or are a member.");
+          break;
+        default:
+          console.error(
+            `Failed to apply to study - HTTP Code: ${error.response.status}`,
+            error.response.data
+          );
       }
     } else if (error.request) {
       console.error("No response received from server:", error.request);

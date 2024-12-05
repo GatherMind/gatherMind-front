@@ -76,15 +76,15 @@ const ScheduleTab = ({ studyId }) => {
                   <strong>주최자:</strong> {schedule.nickname}
                 </div>
               </div>
-              <div>
+              <div className="btn-container">
                 <button
-                  className="button btn-left"
+                  className="button btn"
                   onClick={() => handleUpdateClick(schedule.scheduleId)}
                 >
                   수정
                 </button>
                 <button
-                  className="button-error btn-right"
+                  className="button-error btn"
                   onClick={() => handleDeleteClick(schedule.scheduleId)}
                 >
                   삭제

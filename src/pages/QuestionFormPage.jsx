@@ -25,9 +25,8 @@ const QuestionFormPage = ({ isModify }) => {
       // 수정 모드일 때 데이터 불러옴
       const fetchQuestion = async () => {
         try {
-          console.log(id);
           const questionData = await getQuestionWithFileUrl(id);
-
+          console.log(questionData);
           setQuestionInitData(questionData);
         } catch (error) {
           console.error("게시글 정보를 불러오지 못했습니다.", error);
@@ -39,9 +38,9 @@ const QuestionFormPage = ({ isModify }) => {
   }, [isModify, id]);
 
   const handleCreateQuestion = async (questionData) => {
+    console.log(questionData);
     try {
       if (isModify) {
-        // await updateQuestion(id, questionData, authToken);
         await updateQuestionWithFile(id, questionData, authToken);
 
         navigate(`/question-detail/${id}`, { state: { studyId } });
@@ -69,6 +68,7 @@ const QuestionFormPage = ({ isModify }) => {
       <QuestionForm
         onSubmit={handleCreateQuestion}
         question={questionInitData}
+        isModify={isModify}
       />
     </>
   );

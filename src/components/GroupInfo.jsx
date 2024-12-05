@@ -18,9 +18,12 @@ const GroupInfo = ({ isOpen, onClose, groupInfoData, loginData }) => {
       setErrorMessage(""); // Clear any previous error
       setShowSuccessModal(true);
     } catch (error) {
+      if (error.status === 409) {
+        setErrorMessage("이미 지원했거나 회원인 스터디 입니다.");
+      } else {
+        setErrorMessage(error.response.data || "An unexpected error occurred.");
+      }
       console.error("Error during application:", error);
-      setErrorMessage(error.message || "An unexpected error occurred.");
-      // console.log(error);
     }
   };
 
