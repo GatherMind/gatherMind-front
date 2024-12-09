@@ -12,19 +12,25 @@ import {
   getMemberByToken,
   getMyStudyByToken,
 } from "../services/MemberApiService";
+import { getStudyCategory } from "../services/StudyCategoryApiService";
+import StudyCategoriesComponent from "./StudyCategoriesComponent";
 
 export default function Main({ handleLoginStatus }) {
   const studyStatus = ["OPEN", "CLOSED"];
 
   const [hasStudy, setHasStudy] = useState(false);
 
-  const [statusFilter, setStatusFilter] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState(null);
 
   const [searchResult, setSearchResult] = useState([]);
 
   const [loginData, setLoginData] = useState(null);
 
   const [MyStudies, setMyStudies] = useState([]);
+
+  const [studyCategories, setStudyCategories] = useState([]);
+
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +48,15 @@ export default function Main({ handleLoginStatus }) {
       }
     };
 
+    const fetchCategory = async () => {
+      try {
+        const studyCategory = await getStudyCategory();
+        setStudyCategories(studyCategory);
+      } catch (error) {
+        console.error("카테고리 조회 error :", error);
+      }
+    };
+    fetchCategory();
     fetchData();
   }, []);
 
@@ -60,7 +75,7 @@ export default function Main({ handleLoginStatus }) {
   const navigate = useNavigate();
 
   function handleStatus(e) {
-    setStatusFilter(e);
+    setCategoryFilter(e);
   }
   function handleMakeClick() {
     navigate("/create-study");
@@ -78,7 +93,7 @@ export default function Main({ handleLoginStatus }) {
         <>
           <div className="mytitle">내 스터디</div>
 
-          <MyStudyList statusFilter={statusFilter} MyStudies={MyStudies} />
+          <MyStudyList categoryFilter={categoryFilter} MyStudies={MyStudies} />
         </>
       )}
 
@@ -91,28 +106,15 @@ export default function Main({ handleLoginStatus }) {
       </div>
 
       <div className="group">
-        <div className="group-header">
-          {" "}
-          <div className="groupheader-title" onClick={() => handleStatus(null)}>
-            전체
-          </div>
-          <div
-            className="groupheader-title"
-            onClick={() => handleStatus(studyStatus[0])}
-          >
-            모집중
-          </div>{" "}
-          <div
-            className="groupheader-title"
-            onClick={() => handleStatus(studyStatus[1])}
-          >
-            모집완료
-          </div>{" "}
-        </div>
+        <StudyCategoriesComponent
+          studyCategories={studyCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
 
         <div className="group-list">
           <Group
-            statusFilter={statusFilter}
+            categoryFilter={selectedCategory}
             searchResult={searchResult}
             loginData={loginData}
           />

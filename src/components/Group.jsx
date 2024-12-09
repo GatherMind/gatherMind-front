@@ -6,7 +6,7 @@ import redlighticon from "../assets/redlighticon.png";
 import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
 
-function Group({ statusFilter, searchResult, loginData }) {
+function Group({ categoryFilter, searchResult, loginData }) {
   const studyStatus = ["OPEN", "CLOSED"];
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -34,8 +34,8 @@ function Group({ statusFilter, searchResult, loginData }) {
   }
 
   const filteredData = data.filter((e) => {
-    if (statusFilter === null) return true; // 전체
-    return e.status === statusFilter;
+    if (categoryFilter === 0) return true; // 전체
+    return e.status === categoryFilter;
   });
 
   const dataToRender =

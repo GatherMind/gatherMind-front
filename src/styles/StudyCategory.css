@@ -1,0 +1,90 @@
+.study-categories-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.group-header-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  gap: 16px; /* 아이템 간 간격 추가 */
+  padding: 0 16px; /* 컨테이너 내부 여백 추가 */
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+
+  font-size: 24px; /* 글자 크기 */
+  font-weight: bold; /* 글자 굵기 */
+  color: rgba(169, 169, 169, 0.8); /* 회색과 투명도 조정 */
+  text-transform: uppercase; /* 대문자 */
+  letter-spacing: 1px; /* 글자 간격 */
+
+  transition: color 0.3s, transform 0.3s ease-in-out; /* 호버 효과를 위한 부드러운 변환 */
+}
+
+.group-header-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.group-header-title {
+  flex-shrink: 0; /* 아이템 크기 축소 방지 */
+  min-width: 100px;
+  margin-right: 10px;
+  padding: 8px 12px;
+  text-align: center;
+  cursor: pointer; /* 클릭할 수 있다는 느낌을 줌 */
+  scroll-snap-align: start;
+}
+
+.group-header-title.selected {
+  color: #0288d1; /* 선택된 텍스트 색상 (밝은 블루) */
+  font-weight: bold; /* 텍스트 강조 */
+  border-bottom: none; /* 하단선 대신 배경 강조 */
+  transform: scale(1.05); /* 약간 확대 */
+}
+
+.group-header-title:hover {
+  color: #0288d1; /* 호버 시 텍스트 색상 */
+  transform: translateY(-3px) scale(1.02); /* 위로 살짝 이동 및 확대 */
+  text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 텍스트 그림자 */
+}
+
+.scroll-button {
+  aspect-ratio: 1; /* 항상 정사각형 비율 유지 */
+  background: #f0f0f0; /* 연한 배경 */
+  border: 1px solid #ddd; /* 테두리 */
+  border-radius: 50%; /* 동그란 모양 */
+  font-size: 24px; /* 글자 크기 */
+  cursor: pointer; /* 클릭 가능한 커서 */
+  user-select: none; /* 텍스트 선택 방지 */
+  width: 48px; /* 가로 크기 */
+  height: 48px; /* 세로 크기 */
+  display: flex; /* 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  padding: 0; /* 내부 여백 제거 */
+  margin: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 버튼에 그림자 추가 */
+  line-height: 1; /* 내부 텍스트로 인한 높이 변화 방지 */
+}
+
+.scroll-button:disabled {
+  background: #e0e0e0; /* 호버 시 색상 변경 */
+  transform: scale(1.1); /* 살짝 커지는 효과 */
+}
+
+.scroll-button.hidden {
+  opacity: 0; /* 버튼 숨기기 */
+  pointer-events: none; /* 클릭 비활성화 */
+}
+
+.left {
+  margin-right: -16px;
+}
+
+.right {
+  margin-left: -16px;
+}

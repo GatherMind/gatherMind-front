@@ -2,6 +2,12 @@
   display: inline-block;
 }
 
+.quill {
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
 .ql-container.ql-snow {
   height: 60vh;
   max-height: 100%;

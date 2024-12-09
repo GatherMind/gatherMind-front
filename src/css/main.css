@@ -109,26 +109,6 @@
   background-color: #ffffff;
 }
 
-.group-header {
-  display: flex;
-  gap: 12px;
-  margin: 5px;
-  padding: 2px;
-
-  font-size: 24px; /* 글자 크기 */
-  font-weight: bold; /* 글자 굵기 */
-  color: rgba(169, 169, 169, 0.8); /* 회색과 투명도 조정 */
-  text-transform: uppercase; /* 대문자 */
-  letter-spacing: 1px; /* 글자 간격 */
-  cursor: pointer; /* 클릭할 수 있다는 느낌을 줌 */
-  transition: color 0.3s, transform 0.3s ease-in-out; /* 호버 효과를 위한 부드러운 변환 */
-}
-.groupheader-title:hover {
-  color: #555555; /* 호버 시 색상 변경 (어두운 회색) */
-  transform: translateY(-1px); /* 위로 살짝 이동하여 클릭 느낌을 강조 */
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가로 강조 */
-}
-
 @media (max-width: 768px) {
   .group-list {
     margin-top: 10px;

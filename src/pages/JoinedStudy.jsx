@@ -10,6 +10,7 @@ import {
   getMyStudy,
 } from "../services/MemberApiService";
 import "../styles/JoinedStudy.css";
+import { withdrawStudyMember } from "../services/StudyMemberApiService";
 
 const JoinedStudy = () => {
   const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
@@ -60,15 +61,10 @@ const JoinedStudy = () => {
   // 스터디 탈퇴
   const handleWithdrawFromStudy = async (studyId) => {
     try {
-      const token = localStorage.getItem("token");
-      await axios.post(
-        `/api/studies/${studyId}/withdraw`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      await withdrawStudyMember(studyId);
 
       // 탈퇴 후 스터디 목록 갱신
-      setJoinedGroups(joinedGroups.filter((group) => group.id !== studyId));
+      setJoinedGroups(joinedGroups.filter((group) => group.studyId !== studyId));
       alert("스터디 탈퇴가 완료되었습니다.");
     } catch (error) {
       alert("스터디 탈퇴에 실패했습니다.");
@@ -126,7 +122,7 @@ const JoinedStudy = () => {
                 <p className="study-title">{group.title}</p>
                 <button
                   className="withdraw-button"
-                  onClick={() => handleWithdrawFromStudy(group.id)}
+                  onClick={() => handleWithdrawFromStudy(group.studyId)}
                 >
                   탈퇴
                 </button>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/Button.css";
 import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
+import FileDragDrop from "./FileDragDrop";
 
 const QuestionForm = ({ onSubmit, question, isModify }) => {
   const options = [
@@ -13,9 +14,11 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [url, setUrl] = useState("");
-  const [file, setFile] = useState(null);
+
   const [beforeFileName, setBeforeFileName] = useState("");
   const [fileMetaDataId, setFileMetaDataId] = useState(0);
+
+  const [file, setFile] = useState(null);
 
   const { replaceImages } = useQuillImageReplacement();
 
@@ -57,10 +60,6 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
     setOption(e.target.value);
   };
 
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
-
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <div className="form-group">
@@ -89,7 +88,14 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="file_select">파일 선택</label>
+        <FileDragDrop
+          file={file}
+          setFile={setFile}
+          beforeFileName={beforeFileName}
+          url={url}
+        />
+
+        {/* <label htmlFor="file_select">파일 선택</label>
         <input type="file" onChange={handleFileChange} />
         <div>
           {" "}
@@ -101,7 +107,7 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
               </a>
             </p>
           )}
-        </div>
+        </div> */}
       </div>
 
       <div className="form-group">

@@ -21,7 +21,7 @@ export default function Header({ loginResult }) {
 
   function handleLogoutClick() {
     logout();
-    navigate("/");
+    window.location.href = "/";
   }
 
   function handleMyPageClick() {

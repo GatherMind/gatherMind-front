@@ -70,3 +70,15 @@ export const resignStudyMember = async ({ studyId, memberId }, token) => {
     throw error.response.data;
   }
 };
+
+export const withdrawStudyMember = async ( studyId) => {
+  try {
+    const response = await apiClient.delete(
+      `${API_URL}/${studyId}`
+    );
+    return response;
+  } catch (error) {
+    console.error("스터디 승인 실패 : ", error);
+    throw error.response.data;
+  }
+};
