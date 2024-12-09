@@ -94,30 +94,10 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
           beforeFileName={beforeFileName}
           url={url}
         />
-
-        {/* <label htmlFor="file_select">파일 선택</label>
-        <input type="file" onChange={handleFileChange} />
-        <div>
-          {" "}
-          {beforeFileName && (
-            <p>
-              수정 전 파일:
-              <a href={url} target="_blank" rel="noopener noreferrer">
-                {beforeFileName}
-              </a>
-            </p>
-          )}
-        </div> */}
       </div>
 
       <div className="form-group">
         <label htmlFor="description">게시글 내용</label>
-        {/* <textarea
-          value={content}
-          rows={18}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        /> */}
         <Editor editorValue={content} onChangeEditorValue={setContent} />
       </div>
 
