@@ -14,3 +14,5 @@ export const STUDY_STATE = {
   OPEN: "OPEN",
   CLOSED: "CLOSED",
 };
+
+export const CATEGORY_ALL = "ALL";

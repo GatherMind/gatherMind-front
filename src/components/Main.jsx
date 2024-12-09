@@ -14,13 +14,12 @@ import {
 } from "../services/MemberApiService";
 import { getStudyCategory } from "../services/StudyCategoryApiService";
 import StudyCategoriesComponent from "./StudyCategoriesComponent";
+import { CATEGORY_ALL } from "./../constants/constants";
 
 export default function Main({ handleLoginStatus }) {
-  const studyStatus = ["OPEN", "CLOSED"];
-
   const [hasStudy, setHasStudy] = useState(false);
 
-  const [categoryFilter, setCategoryFilter] = useState(null);
+  const [categoryFilter, setCategoryFilter] = useState(CATEGORY_ALL);
 
   const [searchResult, setSearchResult] = useState([]);
 
@@ -30,7 +29,7 @@ export default function Main({ handleLoginStatus }) {
 
   const [studyCategories, setStudyCategories] = useState([]);
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +50,7 @@ export default function Main({ handleLoginStatus }) {
     const fetchCategory = async () => {
       try {
         const studyCategory = await getStudyCategory();
+        console.log(studyCategory);
         setStudyCategories(studyCategory);
       } catch (error) {
         console.error("카테고리 조회 error :", error);

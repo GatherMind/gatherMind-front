@@ -44,16 +44,6 @@ function App() {
               <Route path="main/group/:id" element={<Groupid />}></Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
-              {/* <Route path="/mypage" element={<Mypage />} />
-              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-              <Route
-                path="/mypage/written-question"
-                element={<WrittenQuestion />}
-              />
-              <Route
-                path="/mypage/written-answer"
-                element={<WrittenAnswer />}
-              />{" "} */}
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}

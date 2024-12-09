@@ -97,7 +97,7 @@ const StudyCategoriesComponent = ({
   };
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category.code); // 선택된 카테고리 설정
+    setSelectedCategory(category.name); // 선택된 카테고리 설정
     const element = document.getElementById(`category-${category.code}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });

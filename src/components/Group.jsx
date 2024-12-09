@@ -5,6 +5,7 @@ import greenlighticon from "../assets/greenlighticon.png";
 import redlighticon from "../assets/redlighticon.png";
 import UseGroupApi from "../server/UseGroupApi";
 import GroupInfo from "./GroupInfo";
+import { CATEGORY_ALL } from "./../constants/constants";
 
 function Group({ categoryFilter, searchResult, loginData }) {
   const studyStatus = ["OPEN", "CLOSED"];
@@ -34,8 +35,9 @@ function Group({ categoryFilter, searchResult, loginData }) {
   }
 
   const filteredData = data.filter((e) => {
-    if (categoryFilter === 0) return true; // 전체
-    return e.status === categoryFilter;
+    console.log(e);
+    if (categoryFilter === CATEGORY_ALL) return true; // 전체
+    return e.category === categoryFilter;
   });
 
   const dataToRender =
