@@ -54,7 +54,6 @@ function App() {
                 path="/mypage/written-answer"
                 element={<WrittenAnswer />}
               />{" "} */}
-
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}

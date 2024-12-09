@@ -1,6 +1,12 @@
 * {
   margin: 0;
   padding: 0;
+  color: rgb(74, 74, 74);
+}
+
+.withdraw-button:hover {
+  background-color: rgb(218, 0, 0);
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

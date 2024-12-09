@@ -8,7 +8,10 @@ import {
   deleteMember,
 } from "../services/MemberApiService";
 import "../styles/Mypage.css";
-import ProfileEditModalModal from "../components/ProfileEditModal";
+import ProfileEditModal from "../components/ProfileEditModal";
+import DeleteMemberModal from "../components/DeleteMemberModal";
+import PasswordVerifyModal from "../components/PasswordVerifyModal";
+import { PasswordVerify } from "../services/AuthApiService";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -23,7 +26,11 @@ const Mypage = () => {
     answerCount: 0,
   });
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 탈퇴 모달 상태
+  const [isPasswordVerifyModalOpen, setIsPasswordVerifyModalOpen] =
+    useState(false); // 비밀번호 검증 모달 상태
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 정보 수정 모달 상태
+  const [isPasswordVerified, setIsPasswordVerified] = useState(false); // 비밀번호 검증 상태
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,11 +43,9 @@ const Mypage = () => {
       }
 
       try {
-        // 회원 정보 가져오기
         const memberResponse = await getMemberByToken();
         setMemberInfo(memberResponse.data || {});
 
-        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
         const [studyResponse, questionResponse, answerResponse] =
           await Promise.all([
             getStudyCount(),
@@ -63,33 +68,33 @@ const Mypage = () => {
     fetchMemberInfo();
   }, [navigate]);
 
-  const handleDeleteAccount = async (event) => {
-    event.preventDefault();
-
-    const confirmDelete = window.confirm("정말로 회원 탈퇴를 하시겠습니까?");
-
-    // 취소 시 특정 페이지로 이동
-    if (!confirmDelete) {
-      navigate("/serious"); // 취소 시 /serious 페이지로 이동
-      return; // 회원 탈퇴 로직 중단
-    }
-
+  const handleDeleteAccount = async () => {
     try {
       await deleteMember();
       alert("회원 탈퇴가 완료되었습니다.");
       localStorage.removeItem("token");
-      navigate("/goodbye"); // 탈퇴 완료 시 /goodbye 페이지로 이동
+      navigate("/goodbye");
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
+    } finally {
+      setIsDeleteModalOpen(false); // 모달 닫기
     }
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true); // 모달 열기
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false); // 모달 닫기
+  const handlePasswordVerify = async (password) => {
+    try {
+      const isValid = await PasswordVerify(password); // 검증 API 호출
+      if (isValid) {
+        alert("비밀번호가 확인되었습니다.");
+        setIsPasswordVerifyModalOpen(false); // 비밀번호 검증 모달 닫기
+        setIsEditModalOpen(true); // 정보 수정 모달 열기
+      } else {
+        alert("비밀번호가 일치하지 않습니다.");
+      }
+    } catch (error) {
+      console.error(error.message);
+      alert("비밀번호 확인 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -117,26 +122,20 @@ const Mypage = () => {
             답변
           </li>
         </ul>
-
-        {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
         <ul className="mypage-stats">
           <li>
-            가입 스터디 수
-            <p>{counts.studyCount}</p>
+            가입 스터디 수<p>{counts.studyCount}</p>
           </li>
           <li>
-            작성 질문 수
-            <p>{counts.questionCount}</p>
+            작성 질문 수<p>{counts.questionCount}</p>
           </li>
           <li>
-            작성 답변 수
-            <p>{counts.answerCount}</p>
+            작성 답변 수<p>{counts.answerCount}</p>
           </li>
         </ul>
       </header>
 
       <main>
-        {/* 프로필정보 */}
         <div className="mypage-info-box">
           <p className="mypage-joined-info">
             <h3>아이디</h3>
@@ -151,19 +150,43 @@ const Mypage = () => {
             <span>{memberInfo.email || "Undefined"}</span>
           </p>
         </div>
-        <button className="mypage-edit-button" onClick={handleOpenModal}>
+        <button
+          className="mypage-edit-button"
+          onClick={() => setIsPasswordVerifyModalOpen(true)}
+        >
           정보 수정
         </button>
         <button
           className="mypage-delete-button"
-          type="button"
-          onClick={handleDeleteAccount}
+          onClick={() => setIsDeleteModalOpen(true)}
         >
           회원탈퇴
         </button>
       </main>
 
-      {isModalOpen && <ProfileEditModalModal onClose={handleCloseModal} />}
+      {/* 비밀번호 검증 모달 */}
+      {isPasswordVerifyModalOpen && (
+        <PasswordVerifyModal
+          onVerify={handlePasswordVerify}
+          onClose={() => setIsPasswordVerifyModalOpen(false)}
+        />
+      )}
+
+      {/* 탈퇴 모달 */}
+      {isDeleteModalOpen && (
+        <DeleteMemberModal
+          onDelete={handleDeleteAccount}
+          onCancel={() => setIsDeleteModalOpen(false)}
+        />
+      )}
+
+      {/* 정보 수정 모달 */}
+      {isEditModalOpen && (
+        <ProfileEditModal
+          onClose={() => setIsEditModalOpen(false)}
+          nickname={memberInfo.nickname}
+        />
+      )}
     </div>
   );
 };
