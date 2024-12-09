@@ -31,3 +31,17 @@ export const loginMember = async (memberId, password) => {
     throw new Error("Network error or server unreachable.");
   }
 };
+
+export const PasswordVerify = async (memberId, password) => {
+  try {
+    const respose = await axios.post(`${API_URL}/validate-password`, {
+      memberId,
+      password,
+    });
+
+    return respose;
+  } catch (error) {
+    console.error("Network error or server unreachabnle: ", error);
+    throw new Error("Network error or server unreachable.")
+  }
+}

@@ -1,0 +1,30 @@
+.delete-question-message {
+  font-weight: bold;
+  color: rgb(74, 74, 74);
+  margin: 10px 0 20px;
+}
+
+.modal-actions > button {
+  width: 40%;
+  height: 30px;
+  margin: 0 1%;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.modal-actions > button:nth-child(1) {
+  background-color: rgb(255, 0, 0);
+}
+
+.modal-actions > button:nth-child(1):hover {
+    background-color: rgb(218, 0, 0);
+  }
+
+.modal-actions > button:nth-child(2) {
+  background-color: rgb(0, 123, 255);
+}
+
+.modal-actions > button:nth-child(2):hover {
+    background-color: rgb(0, 86, 179);
+  }

@@ -7,7 +7,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Mypage from "./pages/MyPage";
 import Goodbye from "./pages/Goodbye";
-import EditProfile from "./pages/EditProfile";
 import Serious from "./pages/Serious";
 import Header from "./components/Header.jsx";
 
@@ -55,7 +54,6 @@ function App() {
                 path="/mypage/written-answer"
                 element={<WrittenAnswer />}
               />{" "} */}
-              <Route path="/editprofile" element={<EditProfile />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}
@@ -70,7 +68,6 @@ function App() {
                   path="/mypage/written-answer"
                   element={<WrittenAnswer />}
                 />{" "}
-                <Route path="/editprofile" element={<EditProfile />} />
                 {/* create study  */}
                 <Route
                   path="/create-study"
