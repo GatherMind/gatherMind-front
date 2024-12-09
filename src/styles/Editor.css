@@ -2,17 +2,23 @@
     display: inline-block;
 }
 
+.quill {
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
 .ql-container.ql-snow {
-    height: 80vh;
-    max-height: 100%;
-    overflow: hidden;
+  height: 60vh;
+  overflow: hidden;
 }
 
 .ql-editor {
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    box-sizing: border-box;
+  height: 100%;
+  word-break: break-all;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 /* 모바일 및 작은 화면용 스타일 */

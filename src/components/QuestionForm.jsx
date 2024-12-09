@@ -39,20 +39,59 @@ const QuestionForm = ({onSubmit, question, isModify}) => {
         setOption(e.target.value);
     }
 
-    return (
-        <form onSubmit={handleSubmit} className="form-container">
-            <select name="option" id="option" value={option} onChange={handleSelect}>
-                <option value="질문">질문하기</option>
-                <option value="자료공유">자료공유</option>
-            </select>
-            <input type="text" value={title} 
-                onChange={(e) => setTitle(e.target.value)} placeholder="제목을 입력하세요" required />
-            {/* <textarea value={content} rows={18}
-                onChange={(e) => setContent(e.target.value)} required /> */}
-            <Editor editorValue={content} onChangeEditorValue={setContent} />
-            <button className="button" type="submit">{question ? "수정" : "저장"}</button>
-        </form>
-    );
+  return (
+    <form onSubmit={handleSubmit} className="form-container">
+      <div className="form-group">
+        <label htmlFor="option">말머리</label>
+        <select
+          name="option"
+          id="option"
+          value={option}
+          onChange={handleSelect}
+        >
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
+        <label htmlFor="question_title">게시글 제목 </label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="제목을 입력하세요"
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="file_select">파일 선택</label>
+        <input type="file" onChange={handleFileChange} />
+        <div>
+          {" "}
+          {beforeFileName && (
+            <p>
+              수정 전 파일:
+              <a href={url} target="_blank" rel="noopener noreferrer">
+                {beforeFileName}
+              </a>
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="description">게시글 내용</label>
+        <Editor editorValue={content} onChangeEditorValue={setContent} />
+      </div>
+
+      <button className="button" type="submit">
+        {question ? "수정" : "저장"}
+      </button>
+    </form>
+  );
 };
 
 export default QuestionForm;

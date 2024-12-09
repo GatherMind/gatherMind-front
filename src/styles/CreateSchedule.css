@@ -19,3 +19,7 @@
     line-height: 16px;
     padding: 6px 10px 5px;
 }
+
+.react-datepicker-wrapper, .react-datepicker__input-container {
+    width: 100%;
+}
