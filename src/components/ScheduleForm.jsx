@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DaumPostcode from "react-daum-postcode";
 import { subDays } from "date-fns";
+import Modal from "./Modal";
+import "../styles/global/Modal.css";
 
 const ScheduleForm = ({ onSubmit, scheduleData }) => {
   const [title, setTitle] = useState("");
@@ -26,7 +28,15 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
     let fullAddress = data.address; // 기본 주소
     let extraAddress = ""; // 참고항목
 
-    if (data.addressType === "R") {
+    if (data.userSelectedType === "R") {
+      // 사용자가 도로명 주소를 선택했을 경우
+      fullAddress = data.roadAddress;
+    } else {
+      // 사용자가 지번 주소를 선택했을 경우(J)
+      fullAddress = data.jibunAddress;
+    }
+
+    if (data.userSelectedType === "R") {
       // 도로명 주소 값 입력
       if (data.bname !== "") {
         extraAddress += data.bname;
@@ -37,9 +47,11 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
       }
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
+
     setLocation(fullAddress);
+    setPopup(!popup);
   };
-  const handleComplete = (e) => {
+  const onTogglePopup = (e) => {
     e.preventDefault();
     setPopup(!popup);
   };
@@ -84,15 +96,15 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          placeholder="모이는 위치"
+          placeholder="자유롭게 입력해주세요. ex) 줌, 학교"
           required
         />
-        <button onClick={handleComplete}>주소 검색</button>
-        {popup && (
-          <span>
-            <DaumPostcode autoClose onComplete={handleInput} />
-          </span>
-        )}
+        <button className="button" onClick={onTogglePopup}>
+          정확한 주소가 필요하다면 검색
+        </button>
+        <Modal isOpen={popup} onClose={onTogglePopup} title={"주소 검색하기"}>
+          <DaumPostcode onComplete={handleInput} />
+        </Modal>
       </div>
       <div className="form-group">
         <label>설명 추가 :</label>

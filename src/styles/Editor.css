@@ -10,12 +10,12 @@
 
 .ql-container.ql-snow {
   height: 60vh;
-  max-height: 100%;
   overflow: hidden;
 }
 
 .ql-editor {
   height: 100%;
+  word-break: break-all;
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
