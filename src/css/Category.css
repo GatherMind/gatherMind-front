@@ -1,0 +1,63 @@
+/* .category 전체 컨테이너 스타일 */
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 화살표 버튼 */
+.arrow {
+  background: transparent;
+  border: none;
+  font-size: 24px; /* 글씨 크기 */
+  color: #333; /* 글씨 색상 */
+  font-weight: 700; /* 강한 글씨체 */
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* 텍스트(화살표)를 수직 중앙 정렬 */
+  justify-content: center; /* 텍스트(화살표)를 수평 중앙 정렬 */
+  height: 40px; /* 버튼 높이를 고정 */
+  width: 40px; /* 버튼 너비 설정 */
+  border-radius: 50%; /* 둥근 버튼 모양 */
+  transition: transform 0.3s ease;
+}
+
+
+/* .carousel 컨테이너 스타일 */
+.carousel {
+  display: flex;
+  overflow: hidden; /* 넘치는 아이템 숨김 */
+  width: 90vw; /* 화면 너비의 80% */
+  margin: 0 16px; /* 좌우 여백 */
+  position: relative;
+}
+
+/* .item 각 아이템 스타일 */
+.carousel .item {
+  min-width: 130px; /* 각 아이템 최소 너비 */
+  padding: 10px;
+  margin: 0 8px; /* 아이템 간격 */
+  background-color: #e2f5f7;
+  text-align: center;
+  font-size: 20px; /* 기본 글씨 크기 */
+  font-weight: 800; /* 글씨체 강하게 */
+  color: #333; /* 텍스트 색상 */
+  border-radius: 30px; /* 둥근 모서리 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
+
+}
+
+
+
+/* 반응형: 작은 화면에서 그리드로 변경 */
+@media (max-width: 768px) {
+  .carousel {
+    width: 100%;
+  }
+
+  .carousel .item {
+    min-width: 90px; /* 작은 화면에서 아이템 크기 조정 */
+    font-size: 12px; /* 기본 글씨 크기 */
+  }
+}

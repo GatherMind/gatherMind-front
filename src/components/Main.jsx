@@ -6,7 +6,6 @@ import Profile from "./Profile";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SerchBar";
 import Slide from "../components/Slide";
-import checkLoginStatus from "../hooks/checkLoginStatus";
 import MyStudyList from "./MyStudyList";
 import {
   getMemberByToken,
@@ -15,11 +14,15 @@ import {
 import { getStudyCategory } from "../services/StudyCategoryApiService";
 import StudyCategoriesComponent from "./StudyCategoriesComponent";
 import { CATEGORY_ALL } from "./../constants/constants";
+import SelectedStudy from "./SelectedStudy";
+import Category from "../components/Category";
 
 export default function Main({ handleLoginStatus }) {
-  const [hasStudy, setHasStudy] = useState(false);
+  const studyStatus = ["OPEN", "CLOSED"];
 
-  const [categoryFilter, setCategoryFilter] = useState(CATEGORY_ALL);
+  const [statusFilter, setStatusFilter] = useState(null);
+
+  const [hasStudy, setHasStudy] = useState(false);
 
   const [searchResult, setSearchResult] = useState([]);
 
@@ -73,11 +76,12 @@ export default function Main({ handleLoginStatus }) {
 
   const navigate = useNavigate();
 
-  function handleStatus(e) {
-    setCategoryFilter(e);
-  }
   function handleMakeClick() {
     navigate("/create-study");
+  }
+
+  function handleStatus(e) {
+    setStatusFilter(e);
   }
 
   return (
@@ -92,9 +96,11 @@ export default function Main({ handleLoginStatus }) {
         <>
           <div className="mytitle">내 스터디</div>
 
-          <MyStudyList categoryFilter={categoryFilter} MyStudies={MyStudies} />
+          <MyStudyList MyStudies={MyStudies} />
         </>
       )}
+
+      <SelectedStudy />
 
       <SearchBar onSearch={handleSearch} />
 
@@ -104,12 +110,33 @@ export default function Main({ handleLoginStatus }) {
         </button>
       </div>
 
+      {/* <Category /> */}
+
+      <StudyCategoriesComponent
+        studyCategories={studyCategories}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
+
       <div className="group">
-        <StudyCategoriesComponent
-          studyCategories={studyCategories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
+        <div className="group-header">
+          {" "}
+          <div className="groupheader-title" onClick={() => handleStatus(null)}>
+            전체
+          </div>
+          <div
+            className="groupheader-title"
+            onClick={() => handleStatus(studyStatus[0])}
+          >
+            모집중
+          </div>{" "}
+          <div
+            className="groupheader-title"
+            onClick={() => handleStatus(studyStatus[1])}
+          >
+            모집완료
+          </div>{" "}
+        </div>
 
         <div className="group-list">
           <Group
@@ -122,13 +149,3 @@ export default function Main({ handleLoginStatus }) {
     </>
   );
 }
-
-// {hasAppointment ? <>
-//   {/* <div className="modal">
-// <Toast isOpen={isModalOpen} onClose={handleCloseModal}>
-// <p>현재 소속된 그룹이없습니다</p>
-// <button className="modal-btn" onClick={modalclick}>그룹생성</button>
-
-// </Toast>
-// </div> */}
-//    <Nogroup/> </>  :  <GroupApi setHasAppointment={setHasAppointment}/>

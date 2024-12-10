@@ -1,6 +1,7 @@
 .study-categories-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -8,6 +9,7 @@
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+  width: 90%;
 
   gap: 16px; /* 아이템 간 간격 추가 */
   padding: 0 16px; /* 컨테이너 내부 여백 추가 */
@@ -33,9 +35,16 @@
   min-width: 100px;
   margin-right: 10px;
   padding: 8px 12px;
-  text-align: center;
   cursor: pointer; /* 클릭할 수 있다는 느낌을 줌 */
   scroll-snap-align: start;
+
+  background-color: #e2f5f7;
+  text-align: center;
+  font-size: 20px; /* 기본 글씨 크기 */
+  font-weight: 800; /* 글씨체 강하게 */
+  color: #333; /* 텍스트 색상 */
+  border-radius: 30px; /* 둥근 모서리 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
 }
 
 .group-header-title.selected {
@@ -52,22 +61,22 @@
 }
 
 .scroll-button {
-  aspect-ratio: 1; /* 항상 정사각형 비율 유지 */
-  background: #f0f0f0; /* 연한 배경 */
-  border: 1px solid #ddd; /* 테두리 */
-  border-radius: 50%; /* 동그란 모양 */
+  background: transparent;
+  border: none;
   font-size: 24px; /* 글자 크기 */
+  color: #333; /* 글씨 색상 */
+  font-weight: 700; /* 강한 글씨체 */
   cursor: pointer; /* 클릭 가능한 커서 */
-  user-select: none; /* 텍스트 선택 방지 */
-  width: 48px; /* 가로 크기 */
-  height: 48px; /* 세로 크기 */
   display: flex; /* 중앙 정렬 */
   align-items: center; /* 수직 중앙 정렬 */
   justify-content: center; /* 수평 중앙 정렬 */
+  height: 40px; /* 버튼 높이를 고정 */
+  width: 40px; /* 버튼 너비 설정 */
+
+  user-select: none; /* 텍스트 선택 방지 */
   padding: 0; /* 내부 여백 제거 */
   margin: 0;
   transition: all 0.3s ease;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 버튼에 그림자 추가 */
   line-height: 1; /* 내부 텍스트로 인한 높이 변화 방지 */
 }
 
@@ -87,4 +96,16 @@
 
 .right {
   margin-left: -16px;
+}
+
+/* 반응형: 작은 화면에서 그리드로 변경 */
+@media (max-width: 768px) {
+  .group-header-container {
+    width: 100%;
+  }
+
+  .group-header-container .group-header-title {
+    min-width: 90px; /* 작은 화면에서 아이템 크기 조정 */
+    font-size: 12px; /* 기본 글씨 크기 */
+  }
 }
