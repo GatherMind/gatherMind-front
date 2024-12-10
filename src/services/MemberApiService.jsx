@@ -38,32 +38,6 @@ export const getMember = async (id) => {
   }
 };
 
-// export const signUp = async (data) => {
-//   try {
-//     const response = await axios.post(`${API_URL}/signup`, data);
-
-//     return response.data;
-//   } catch (error) {
-//     console.error("Network error or server unreachable: ", error);
-//     throw new Error("Network error or server unreachable.");
-//   }
-// };
-
-// // 로그인
-// export const loginMember = async (memberId, password) => {
-//   try {
-//     const response = await axios.post(`${API_URL}/login`, {
-//       memberId,
-//       password,
-//     });
-
-//     return response;
-//   } catch (error) {
-//     console.error("Network error or server unreachable: ", error);
-//     throw new Error("Network error or server unreachable.");
-//   }
-// };
-
 // 토큰으로 내 정보 가져오기
 export const getMemberByToken = async () => {
   try {
@@ -86,20 +60,6 @@ export const getMyStudyByToken = async () => {
     throw new Error("Network error or server unreachable.");
   }
 };
-
-// // 내 정보 조회
-// export const getMyInfo = async (token) => {
-//   try {
-//     const response = await axios.get(`${API_URL}/me`, {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-
-//     return response;
-//   } catch (error) {
-//     console.error("내 정보 조회 실패 : ", error);
-//     throw error;
-//   }
-// };
 
 // 회원 정보 수정
 export const updateMember = async (field, value) => {

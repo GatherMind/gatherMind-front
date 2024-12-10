@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiClient from "./apiClient";
 
 const API_URL = process.env.REACT_APP_API_URL + "/auth";
 
@@ -32,16 +33,15 @@ export const loginMember = async (memberId, password) => {
   }
 };
 
-export const PasswordVerify = async (memberId, password) => {
+export const PasswordVerify = async (password) => {
   try {
-    const respose = await axios.post(`${API_URL}/validate-password`, {
-      memberId,
+    const response = await apiClient.post(`/auth/validate-password`, {
       password,
     });
 
-    return respose;
+    return response;
   } catch (error) {
     console.error("Network error or server unreachabnle: ", error);
-    throw new Error("Network error or server unreachable.")
+    throw new Error("Network error or server unreachable.");
   }
-}
+};

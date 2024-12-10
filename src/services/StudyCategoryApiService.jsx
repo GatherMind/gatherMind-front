@@ -9,7 +9,6 @@ if (!API_URL) {
 export const getStudyCategory = async () => {
   try {
     const response = await axios.get(`${API_URL}`);
-    console.log(response);
 
     return response.data;
   } catch (error) {

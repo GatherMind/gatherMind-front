@@ -50,7 +50,6 @@ export default function Main({ handleLoginStatus }) {
     const fetchCategory = async () => {
       try {
         const studyCategory = await getStudyCategory();
-        console.log(studyCategory);
         setStudyCategories(studyCategory);
       } catch (error) {
         console.error("카테고리 조회 error :", error);

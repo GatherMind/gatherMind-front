@@ -35,7 +35,6 @@ function Group({ categoryFilter, searchResult, loginData }) {
   }
 
   const filteredData = data.filter((e) => {
-    console.log(e);
     if (categoryFilter === CATEGORY_ALL) return true; // 전체
     return e.category === categoryFilter;
   });
