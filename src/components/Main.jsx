@@ -12,6 +12,8 @@ import {
   getMemberByToken,
   getMyStudyByToken,
 } from "../services/MemberApiService";
+import SelectedStudy from "./SelectedStudy";
+import Category from "../components/Category"
 
 export default function Main({ handleLoginStatus }) {
   const studyStatus = ["OPEN", "CLOSED"];
@@ -82,6 +84,11 @@ export default function Main({ handleLoginStatus }) {
         </>
       )}
 
+
+      <SelectedStudy/>
+
+     
+
       <SearchBar onSearch={handleSearch} />
 
       <div className="studymakediv">
@@ -89,6 +96,10 @@ export default function Main({ handleLoginStatus }) {
           스터디 만들기
         </button>
       </div>
+
+      <Category/>
+
+    
 
       <div className="group">
         <div className="group-header">

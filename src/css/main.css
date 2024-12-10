@@ -18,6 +18,18 @@
   font-size: 50px;
 }
 
+.nostudy{
+  background-color: #fbffff; /* 연한 회색 배경 */
+  text-align: left;
+  border-radius: 10px; /* 둥근 모서리 */
+  margin-top: 20px;
+  margin-bottom: 20px; 
+  padding: 10px; /* 내부 여백 */
+  border: 2px solid rgba(162, 237, 240, 0.2); /* 연한 보더 색 (투명도 0.2) */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -97,8 +109,7 @@
 }
 
 .group {
-  border-left: 10px solid #85c7eb;
-  border-right: 10px solid #85c7eb;
+
   padding-left: 20px; /* 왼쪽 내용과 보더 사이 여백 */
   padding-right: 20px; /* 오른쪽 내용과 보더 사이 여백 */
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1), -4px 0 4px rgba(0, 0, 0, 0.1); /* 양쪽에 그림자 추가 */
@@ -161,7 +172,6 @@
     display: inline-block;
     width: 100%;
     height: 70px;
-    background-color: #ffffff;
     color: black;
     padding: 5px;
     font-size: 10px;
@@ -170,6 +180,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
     border-radius: 10px;
+
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
+    transition: box-shadow 0.3s ease; 
   }
 }
 
@@ -283,6 +298,12 @@
 
 /* 웹 화면용 스타일 */
 @media (min-width: 769px) {
+  .container {
+    max-width: 1200px;
+    justify-content: center;
+    margin-left: auto;   /* 왼쪽 여백을 자동으로 */
+    margin-right: auto;  /* 오른쪽 여백을 자동으로 */
+  }
   .group-list {
     display: flex;
     flex-wrap: wrap;
@@ -309,8 +330,22 @@
     height: 100%;
     position: relative;
 
-    background-color: #d6e5f2;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
+    transition: box-shadow 0.3s ease; 
+
   }
+
+  .group-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 확대 */
+  }
+
+  .group-card:active {
+    transform: translateY(5px); /* 클릭 시 카드가 살짝 내려가면서 강조 */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 효과 증가 */
+  }
+
 
   .status.CLOSED {
     position: absolute;
@@ -321,9 +356,9 @@
     border-radius: var(--border-radius);
     font-size: calc(12px + 0.5vw); /* Responsive font size */
     width: auto; /* Adjusts to content */
-    border: 1px solid var(--completed-border-color); /* Use variable */
     background-color: var(--completed-color);
     color: var(--completed-text-color);
+
   }
 
   /* Hover effect for completed badge */
@@ -342,10 +377,11 @@
     margin-top: 5px; /* Fixed typo */
     font-size: calc(12px + 0.5vw); /* Responsive font size */
     width: auto; /* Adjusts to content */
-    border: 1px solid var(--recruiting-border-color); /* Use variable */
     border-radius: var(--border-radius);
     color: var(--recruiting-text-color);
-    background-color: var(--recruiting-color);
+    background-color: #ffffff;
+    color: black;
+
   }
 
   /* Hover effect for recruiting badge */
@@ -354,6 +390,7 @@
     color: var(--recruiting-text-hover);
     transition: background-color var(--transition-speed),
       color var(--transition-speed);
+      color: black;
   }
 
   .status.CLOSED,
@@ -367,12 +404,20 @@
     display: inline-flex; /* Ensures consistent alignment */
     align-items: center;
     justify-content: center;
+    background-color: #ffffff;
+    color: black;
   }
 
   .btn-name {
     position: relative;
     margin-top: 20px;
-    font-size: 20px;
-    text-align: center;
+ 
+
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;               /* 다크 그레이 텍스트 */
+    text-transform: uppercase;  /* 대문자로 */
+
   }
 }

@@ -111,7 +111,7 @@ export const deleteStudy = async (studyId, token) => {
 // 전체 스터디 조회
 export const getAllStudies = async () => {
   try {
-    const response = await axios.get(`${API_URL}`);
+    const response = await axios.get(`${API_URL + '/getallstudies'}`);
     return response;
   } catch (error) {
     console.error("전체 스터디 조회 : ", error);
