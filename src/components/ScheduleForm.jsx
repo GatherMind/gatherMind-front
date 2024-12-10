@@ -79,7 +79,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
       </div>
       <div className="form-group">
         <label>날짜/시간 : </label>
-        <div>
+        <>
           <DatePicker
             selected={dateTime}
             onChange={(date) => setDateTime(date)}
@@ -88,7 +88,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
             dateFormat="yyyy.MM.dd h:mm aa"
             showTimeInput
           />
-        </div>
+        </>
       </div>
       <div className="form-group">
         <label>위치 : </label>
