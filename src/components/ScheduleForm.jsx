@@ -92,16 +92,18 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
       </div>
       <div className="form-group">
         <label>위치 : </label>
-        <input
-          type="text"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          placeholder="자유롭게 입력해주세요. ex) 줌, 학교"
-          required
-        />
-        <button className="button" onClick={onTogglePopup}>
-          정확한 주소가 필요하다면 검색
-        </button>
+        <div className="flex-row">
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="자유롭게 입력해주세요. ex) 줌, 학교"
+            required
+          />
+          <button className="button" onClick={onTogglePopup}>
+            정확한 주소 찾기
+          </button>
+        </div>
         <Modal isOpen={popup} onClose={onTogglePopup} title={"주소 검색하기"}>
           <DaumPostcode onComplete={handleInput} />
         </Modal>
