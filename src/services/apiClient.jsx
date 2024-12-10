@@ -6,12 +6,12 @@ if (!API_URL) {
   throw new Error("API URI: is not defined.");
 }
 
-const api = axios.create({
+const apiClient = axios.create({
   baseURL: API_URL,
 });
 
 // 요청 인터셉터: Authorization 헤더에 JWT 토큰 추가
-api.interceptors.request.use(
+apiClient.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token"); // JWT 토큰 가져오기
     if (token) {
@@ -23,9 +23,10 @@ api.interceptors.request.use(
 );
 
 // 응답 인터셉터: 401 Unauthorized 에러 처리
-api.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log(error);
     if (error.response && error.response.status === 401) {
       localStorage.removeItem("token"); // 토큰 삭제
       alert("Session expired. Please log in again.");
@@ -35,4 +36,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default apiClient;

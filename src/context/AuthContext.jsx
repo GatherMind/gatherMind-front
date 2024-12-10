@@ -7,6 +7,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.getItem("token") || null
   );
 
+  // 로그인 성공 시 호출할 함수
+  const login = (token) => {
+    localStorage.setItem("token", token);
+    setAuthToken(token);
+  };
+
   // 로그아웃 시 토큰 삭제
   const logout = () => {
     localStorage.removeItem("token");
@@ -21,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authToken, setAuthToken, logout }}>
+    <AuthContext.Provider value={{ authToken, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

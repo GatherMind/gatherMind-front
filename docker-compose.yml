@@ -1,0 +1,21 @@
+version: '3'
+services:
+  react:
+    image: node:22.4.1
+    working_dir: /app
+    build:
+      context: ./gatherMind-front  # 리액트 앱 소스 코드가 있는 경로
+    volumes:
+      - ./gatherMind-front/build:/app/build  # 빌드된 파일을 컨테이너에 마운트
+    ports:
+      - "3000:80"  # 리액트 앱이 3000포트에서 실행됨
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    volumes:
+      - ./gatherMind-front/build:/usr/share/nginx/html  # 리액트 빌드 파일을 Nginx에 마운트
+    ports:
+      - "80:80"  # Nginx가 80포트에서 서빙
+    depends_on:
+      - react

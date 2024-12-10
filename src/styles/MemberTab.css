@@ -8,14 +8,40 @@
   margin-top: 20px;
 }
 
+.list-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.list-header-left h3 {
+  margin: 0;
+}
+.member-count {
+  margin-left: 10px;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.pending-count {
+  margin-left: 10px;
+  counter-reset: var(--secondary-color);
+}
+
 .member-list ul {
   list-style-type: none;
   padding: 0;
   text-align: center;
 }
 
-.board-item,
-.member-item {
+.status.pending {
+  color: #ffa500; /* Orange for PENDING */
+}
+
+.status.approved {
+  color: #4caf50; /* Green for APPROVED */
+}
+
+.board-item {
   display: flex;
   justify-content: space-around;
   border: 1px solid var(--border-color);
@@ -24,6 +50,52 @@
   text-align: center;
 
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.member-item {
+  display: flex; /* 플렉스 컨테이너 */
+  align-items: center; /* 세로 정렬 */
+  justify-content: space-between; /* 요소 간 간격 균등 */
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: #ffffff;
+  transition: background-color var(--transition-speed);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  gap: 10px; /* 요소 간 간격 */
+}
+
+.member-item > .nickname {
+  flex: 2; /* 닉네임 영역이 넓게 차지 */
+  text-align: left;
+}
+
+.member-item > .status {
+  flex: 1; /* 상태 텍스트의 영역 크기 */
+  text-align: center;
+}
+
+.member-item > .actions {
+  flex: 1; /* 버튼은 고정 크기 */
+  text-align: right;
+}
+
+.role-member .nickname {
+  text-align: center;
+}
+
+.member-item .button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%; /* 버튼이 부모 영역 내에서 꽉 차도록 설정 */
+}
+
+.resign {
+  background-color: var(--error-color);
+}
+.resign:hover {
+  background-color: var(--error-color-hover);
 }
 
 .board-item div {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { deleteSchedule, getStudySchedule } from "../services/apiService";
 import "../styles/AppointmentTab.css";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
+import { getStudySchedule } from "../services/StudyApiService";
+import { deleteSchedule } from "../services/ScheduleApiService";
 
 const ScheduleTab = ({ studyId }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +30,7 @@ const ScheduleTab = ({ studyId }) => {
   }, [studyId]);
 
   const handleUpdateClick = (scheduleId) => {
-    navigate(`/edit-schedule/${scheduleId}`);
+    navigate(`/edit-schedule/${scheduleId}`, { state: { studyId } });
   };
 
   const handleDeleteClick = (scheduleId) => {
@@ -70,6 +71,9 @@ const ScheduleTab = ({ studyId }) => {
                 </div>
                 <div className="schedule-detail">
                   <strong>장소:</strong> {schedule.location}
+                </div>
+                <div className="schedule-detail">
+                  <strong>주최자:</strong> {schedule.nickname}
                 </div>
               </div>
               <div>

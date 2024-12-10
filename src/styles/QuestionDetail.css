@@ -1,156 +1,199 @@
 /* 게시글 */
-.option {
-    font-size: 0.9rem;
-    color: #888;
-    text-align: left;
-    margin-bottom: 20px;
+.question-container {
+  width: 100%;
+  background-color: var(--background-color-light);
 }
 
-.meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.nickname {
-    font-weight: bold;
-}
-
-.createdAt {
-    font-style: italic;
+.question-container {
+  align-items: unset !important;
+  text-align: left;
 }
 
 .content {
-    font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
+  align-items: normal;
+}
+
+.question-option {
+  font-size: 0.9rem;
+  color: #888;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.question-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.question-nickname {
+  font-weight: bold;
+}
+
+.question-createdAt {
+  font-style: italic;
+}
+.question-file {
+  display: flex;
+}
+
+.question-file a {
+  text-decoration: none;
+}
+
+.question-content {
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .action-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 /* 수정/삭제 버튼 */
 .edit-button {
-    background-color: lightgray;
-    color: #fff;
+  background-color: lightgray;
+  color: #fff;
 }
 
 .delete-button {
-    background-color: lightgray;
-    color: #fff;
+  background-color: lightgray;
+  color: #fff;
 }
 
 .edit-button:hover {
-    background-color: darkgray;
+  background-color: darkgray;
 }
 
 .delete-button:hover {
-    background-color: darkgray;
+  background-color: darkgray;
 }
 
 /* 댓글 작성 */
 .answer-input-section {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  flex-direction: column;
 }
 
 .answer-input {
-    flex: 1;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
+  flex: 1;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: #eee;
+  color: #555;
+  opacity: 1;
 }
 
 /* 댓글 리스트 */
+.answer-container {
+  text-align: left;
+}
+
 .answer-count {
-    font-size: 1rem;
-    margin-top: 20px;
-    font-weight: bold;
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .answer-list {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .answer-nickname {
-    font-weight: bold;
-    margin-bottom: 5px;
+  color: #666;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .answer-content {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    white-space: pre-wrap;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  white-space: pre-wrap;
 }
 
 .answer-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .createdAt {
-    font-size: 0.9rem;
-    color: #666;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .edit-button,
 .delete-button {
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.more-answer {
+  padding: 20px 0;
+  color: #666;
+  cursor: pointer;
 }
 
 /* 댓글 수정 모드 */
 .edit-mode {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .edit-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    line-height: 1.5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .edit-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
-.save-button, .cancel-button {
-    padding: 5px 15px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.save-button,
+.cancel-button {
+  padding: 5px 15px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .cancel-button {
-    background-color: lightgray;
-    color: #fff;
+  background-color: lightgray;
+  color: #fff;
 }
 
 .cancel-button:hover {
-    background-color: darkgray;
+  background-color: darkgray;
 }

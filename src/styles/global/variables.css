@@ -1,6 +1,7 @@
 /* variables.css */
 :root {
   --primary-color: #4a90e2;
+  /* Color palette */
   --primary-color-hover: #357abd;
   --secondary-color: #7a99b4;
   --secondary-color-hover: #506f92;
@@ -12,9 +13,31 @@
   --button-color: #0288b4;
   --button-color-hover: #026f94;
   --pagination-background: #e3f2fd;
+
+  --recruiting-color: #a8e6cf;
+  --recruiting-text-color: #388e3c;
+  --recruiting-border-color: rgb(10, 238, 105);
+  --recruiting-hover-color: #81c784; /* Lighter green for recruiting */
+  --recruiting-text-hover: #2e7d32; /* Darker green for recruiting text */
+
+  --completed-color: #f8bbd0;
+  --completed-text-color: #d32f2f;
+  --completed-border-color: rgb(246, 17, 4);
+  --completed-hover-color: #f48fb1; /* Lighter pink for completed */
+  --completed-text-hover: #c62828; /* Darker red for completed text */
+
+  /* Typography */
   --font-family: Arial, sans-serif;
-  --border-radius: 5px;
+  --font-size-base: 16px;
+
+  /* Border Radius */
+  --border-radius: 8px;
+
+  /* Shadows */
   --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
   --transition-speed: 0.3s;
+
   --container-max-width: 600px;
 }

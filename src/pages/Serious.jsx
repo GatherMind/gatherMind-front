@@ -1,12 +1,11 @@
-import Header from "./Header";
+import Header from "../components/Header";
 
 const Serious = () => {
   return (
     <div className="serious-container">
-      <Header />
       <h1>
         Gather Mind에 대해 불편한 점이 있으신가요?
-        저희에게 알려주시면 서비스 이용에 불편한 점을 최대한 신속하게 개선하겠습니다!
+        더 나은 서비스 이용을 위해 문의해주세요!
       </h1>
     </div>
   );

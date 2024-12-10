@@ -1,18 +1,17 @@
 import axios from "axios";
+import apiClient from "./apiClient";
 
-const API_URL = process.env.REACT_APP_API_URL;
-const getAuthToken = () => localStorage.getItem('token');
+const API_URL = process.env.REACT_APP_API_URL + "/member";
+const getAuthToken = () => localStorage.getItem("token");
 
 if (!API_URL) {
   throw new Error("API URI: is not defined.");
 }
 
 // 현재 아이디 정보 조회
-export const getMyInfoById = async (memberId, studyId) => {
+export const getMyInfoById = async (studyId, token) => {
   try {
-    const response = await axios.get(
-      `${API_URL}/member/role?memberId=${memberId}&studyId=${studyId}`
-    );
+    const response = await apiClient.get(`${API_URL}/role?studyId=${studyId}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch my Info: ", error);
@@ -23,7 +22,7 @@ export const getMyInfoById = async (memberId, studyId) => {
 // 멤버 조회
 export const getMember = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/member/${id}`);
+    const response = await apiClient.get(`${API_URL}/${id}`);
 
     return response.data;
   } catch (error) {
@@ -39,49 +38,36 @@ export const getMember = async (id) => {
   }
 };
 
-// 멤버 생성
-export const createMember = async (memberId, password, email, nickname) => {
-  try {
-    const response = await axios.post(`${API_URL}/member/signup`, {
-      memberId,
-      password,
-      email,
-      nickname,
-    });
+// export const signUp = async (data) => {
+//   try {
+//     const response = await axios.post(`${API_URL}/signup`, data);
 
-    return response.data;
-  } catch (error) {
-    console.error("Network error or server unreachable: ", error);
-    throw new Error("Network error or server unreachable.");
-  }
-};
+//     return response.data;
+//   } catch (error) {
+//     console.error("Network error or server unreachable: ", error);
+//     throw new Error("Network error or server unreachable.");
+//   }
+// };
 
-// 로그인
-export const loginMember = async (memberId, password) => {
-  try {
-    const response = await axios.post(`${API_URL}/member/login`, {
-      memberId,
-      password,
-    });
+// // 로그인
+// export const loginMember = async (memberId, password) => {
+//   try {
+//     const response = await axios.post(`${API_URL}/login`, {
+//       memberId,
+//       password,
+//     });
 
-    return response;
-  } catch (error) {
-    console.error("Network error or server unreachable: ", error);
-    throw new Error("Network error or server unreachable.");
-  }
-};
+//     return response;
+//   } catch (error) {
+//     console.error("Network error or server unreachable: ", error);
+//     throw new Error("Network error or server unreachable.");
+//   }
+// };
 
-// 토큰으로 회원 정보 가져오기
+// 토큰으로 내 정보 가져오기
 export const getMemberByToken = async () => {
-
-
-  console.log(getAuthToken())
   try {
-    const response = await axios.get(`${API_URL}/member/me`, {
-      headers: {  Authorization: `Bearer ${getAuthToken()}`,
-     }, // 헤더에 토큰 추가
-    }
-    );
+    const response = await apiClient.get(`${API_URL}/me`);
 
     return response;
   } catch (error) {
@@ -90,16 +76,9 @@ export const getMemberByToken = async () => {
   }
 };
 
-export const getMystudyByToken = async () => {
-
-
-  console.log(getAuthToken())
+export const getMyStudyByToken = async () => {
   try {
-    const response = await axios.get(`${API_URL}/member/my-studies`, {
-      headers: {  Authorization: `Bearer ${getAuthToken()}`,
-     }, // 헤더에 토큰 추가
-    }
-    );
+    const response = await apiClient.get(`${API_URL}/my-studies`);
 
     return response;
   } catch (error) {
@@ -107,16 +86,32 @@ export const getMystudyByToken = async () => {
     throw new Error("Network error or server unreachable.");
   }
 };
+
+// // 내 정보 조회
+// export const getMyInfo = async (token) => {
+//   try {
+//     const response = await axios.get(`${API_URL}/me`, {
+//       headers: { Authorization: `Bearer ${token}` },
+//     });
+
+//     return response;
+//   } catch (error) {
+//     console.error("내 정보 조회 실패 : ", error);
+//     throw error;
+//   }
+// };
 
 // 회원 정보 수정
-export const updateMember = async (filed, value) => {
+export const updateMember = async (field, value) => {
   try {
+    const requestBody = { [field]: value };
+
     const response = await axios.put(
-      `${API_URL}/member/update`,
-      { filed: value },
+      `${API_URL}/update`, // 올바른 경로 설정
+      requestBody,
       {
         headers: {
-          Authorization: `Bearer ${getAuthToken()}`,
+          Authorization: `Bearer ${getAuthToken()}`, // 인증 헤더 추가
         },
       }
     );
@@ -131,7 +126,7 @@ export const updateMember = async (filed, value) => {
 // 회원 정보 수정
 export const deleteMember = async () => {
   try {
-    const response = await axios.put(`${API_URL}/member/delete-account`, {
+    const response = await axios.delete(`${API_URL}/delete-account`, {
       headers: {
         Authorization: `Bearer ${getAuthToken()}`,
       },
@@ -141,5 +136,89 @@ export const deleteMember = async () => {
   } catch (error) {
     console.error("Network error or server unreachable: ", error);
     throw new Error("Network error or server unreachable.");
+  }
+};
+
+// 가입된 스터디 개수 불러오기
+export const getStudyCount = async () => {
+  const token = localStorage.getItem("token");
+  return axios.get(`${API_URL}/study-count`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// 작성한 질문 개수 불러오기
+export const getQuestionCount = async () => {
+  const token = localStorage.getItem("token");
+  return axios.get(`${API_URL}/question-count`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// 작성한 답변 개수 불러오기
+export const getAnswerCount = async () => {
+  const token = localStorage.getItem("token");
+  return axios.get(`${API_URL}/answer-count`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// 최근 답변 가져오기 (최대 3개)
+export const getRecentAnswerLimit3 = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/recent-answers`, {
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Network error or server unreachable: ", error);
+    throw new Error("Network error or server unreachable.");
+  }
+};
+
+// 최근 질문 가져오기 (최대 3개)
+export const getRecentQuestionLimit3 = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/recent-questions`, {
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Network error or server unreachable: ", error);
+    throw new Error("Network error or server unreachable.");
+  }
+};
+
+// 내 스터디 조회
+export const getMyStudy = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/joined-groups`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response;
+  } catch (error) {
+    console.error("내 스터디 조회 실패 : ", error);
+    throw error;
+  }
+};
+
+// 프로필 사진 가져오기
+export const getProfileImage = () => {
+  try {
+    return;
+  } catch (error) {
+    return;
   }
 };
