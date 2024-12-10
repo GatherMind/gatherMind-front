@@ -1,34 +1,26 @@
 import "../css/main.css";
 import Group from "../components/Group";
-import Nostudy from "./Nostudy";
+import Nostudy from "../components/Nostudy";
 import React, { useEffect, useState } from "react";
-import Profile from "./Profile";
+import Profile from "../components/Profile";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SerchBar";
+import SearchBar from "../components/SerchBar";
 import Slide from "../components/Slide";
-import checkLoginStatus from "../hooks/checkLoginStatus";
-import MyStudyList from "./MyStudyList";
+import MyStudyList from "../components/MyStudyList";
 import {
   getMemberByToken,
   getMyStudyByToken,
 } from "../services/MemberApiService";
 import { getStudyCategory } from "../services/StudyCategoryApiService";
-import StudyCategoriesComponent from "./StudyCategoriesComponent";
+import StudyCategoriesComponent from "../components/StudyCategoriesComponent";
 import { CATEGORY_ALL } from "./../constants/constants";
 
-export default function Main({ handleLoginStatus }) {
+export default function Main() {
   const [hasStudy, setHasStudy] = useState(false);
-
-  const [categoryFilter, setCategoryFilter] = useState(CATEGORY_ALL);
-
   const [searchResult, setSearchResult] = useState([]);
-
   const [loginData, setLoginData] = useState(null);
-
   const [MyStudies, setMyStudies] = useState([]);
-
   const [studyCategories, setStudyCategories] = useState([]);
-
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL);
 
   useEffect(() => {
@@ -40,7 +32,6 @@ export default function Main({ handleLoginStatus }) {
         ]);
 
         setLoginData(memberResponse.data);
-        handleLoginStatus(memberResponse.data);
         setMyStudies(studyResponse.data);
       } catch (error) {
         console.error("에러입니다:", error);
@@ -73,9 +64,6 @@ export default function Main({ handleLoginStatus }) {
 
   const navigate = useNavigate();
 
-  function handleStatus(e) {
-    setCategoryFilter(e);
-  }
   function handleMakeClick() {
     navigate("/create-study");
   }
@@ -92,11 +80,12 @@ export default function Main({ handleLoginStatus }) {
         <>
           <div className="mytitle">내 스터디</div>
 
-          <MyStudyList categoryFilter={categoryFilter} MyStudies={MyStudies} />
+          <MyStudyList MyStudies={MyStudies} />
         </>
       )}
 
       <SearchBar onSearch={handleSearch} />
+      {/* <LoginButton /> */}
 
       <div className="studymakediv">
         <button className="studymakebtn" onClick={handleMakeClick}>

@@ -18,31 +18,24 @@ import StudyFormPage from "./pages/StudyFormPage";
 import JoinedStudy from "./pages/JoinedStudy";
 import WrittenQuestion from "./pages/WrittenQuestion";
 import WrittenAnswer from "./pages/WrittenAnswer";
-import Main from "./components/Main.jsx";
-import { useState } from "react";
+
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Groupid from "./components/Groupid";
+import Dashboard from "./pages/Dashboard.jsx";
+import Main from "./pages/Main.jsx";
 
 function App() {
-  const [loginResult, setLoginresult] = useState(null);
-
-  function handleLoginStatus(e) {
-    setLoginresult(e);
-  }
-
   return (
     <AuthProvider>
       <Router>
         <div className="container">
-          <Header loginResult={loginResult} />
+          <Header />
           <div className="content">
             <Routes>
-              <Route
-                path="/"
-                element={<Main handleLoginStatus={handleLoginStatus} />}
-              ></Route>
+              <Route path="/" element={<Main />}></Route>
               <Route path="main/group/:id" element={<Groupid />}></Route>
               <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />

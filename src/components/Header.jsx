@@ -6,10 +6,9 @@ import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
 import { useAuth } from "../context/AuthContext";
 
-export default function Header({ loginResult }) {
+export default function Header() {
   const navigate = useNavigate();
-
-  const { logout } = useAuth();
+  const { authToken, logout } = useAuth(); // AuthContext에서 authToken와 logout 가져오기
 
   function handleClick() {
     navigate("/");
@@ -21,7 +20,7 @@ export default function Header({ loginResult }) {
 
   function handleLogoutClick() {
     logout();
-    window.location.href = "/";
+    navigate("/");
   }
 
   function handleMyPageClick() {
@@ -40,7 +39,7 @@ export default function Header({ loginResult }) {
         MyPage
       </div>
 
-      {loginResult ? (
+      {authToken ? (
         <button className="header-login" onClick={handleLogoutClick}>
           로그아웃
         </button>
