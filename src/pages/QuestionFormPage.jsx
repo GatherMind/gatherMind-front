@@ -7,6 +7,7 @@ import {
   updateQuestionWithFile,
 } from "../services/QuestionApiService";
 import { useAuth } from "../context/AuthContext";
+import Loading from "../components/Feedback/Loading";
 
 const QuestionFormPage = ({ isModify }) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const QuestionFormPage = ({ isModify }) => {
 
   const [questionInitData, setQuestionInitData] = useState(null);
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -38,7 +40,7 @@ const QuestionFormPage = ({ isModify }) => {
   }, [isModify, id]);
 
   const handleCreateQuestion = async (questionData) => {
-    console.log(questionData);
+    setLoading(true);
     try {
       if (isModify) {
         await updateQuestionWithFile(id, questionData, authToken);
@@ -54,9 +56,12 @@ const QuestionFormPage = ({ isModify }) => {
       setError(
         "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
       );
+    } finally {
+      setLoading(false);
     }
   };
 
+  if (loading) return <Loading />;
   if (error) {
     alert(error);
     setError("");
