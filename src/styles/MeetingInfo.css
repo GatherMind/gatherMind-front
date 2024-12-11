@@ -2,6 +2,8 @@
   position: relative; /* 자식 요소 위치 조정을 위한 설정 */
   margin-bottom: 20px;
   text-align: center;
+  margin:10px;
+  
 }
 
 h2 {
@@ -17,10 +19,15 @@ h2 {
   right: 16px; /* 오른쪽 여백 */
   font-size: 20px;
   cursor: pointer;
+
 }
 
 .tabs {
-  width: 100%;
+  width: 20%;
+
+}
+
+.tab-button{
 }
 
 .tab-content {
@@ -32,4 +39,11 @@ h2 {
   list-style-type: none;
   padding: 0;
   text-align: center;
+}
+
+.list-item board-item board-item{
+
+
+ width: 20%;
+
 }

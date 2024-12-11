@@ -1,10 +1,10 @@
 // src/components/SliderBanner.js
-import React from 'react';
-import Slider from 'react-slick';
-import "../css/Slide.css";
+import React from "react";
+import Slider from "react-slick";
+import "../styles/Slide.css";
 
-import welcomebanner from "../assets/welcomebanner.png"
-import studybanner from "../assets/studybanner.png"
+import welcomebanner from "../assets/welcomebanner.png";
+import studybanner from "../assets/studybanner.png";
 
 const Slide = () => {
   const settings = {
@@ -22,14 +22,16 @@ const Slide = () => {
     <div className="slider-container">
       <Slider {...settings}>
         <div className="slider-item">
-        <img src={studybanner} alt="Banner 3" />
+          <img src={studybanner} alt="Banner 3" />
         </div>
         <div className="slider-item">
           <img src={welcomebanner} alt="Banner 2" />
         </div>
         <div className="slider-item">
-        
-          <img src="https://file.f-lab.kr/blog/0a6704ca-ad5e-43a5-a26c-0fd30eae2326-pvTb3C1HXw01JbHe.jpg" alt="Banner 1" />
+          <img
+            src="https://file.f-lab.kr/blog/0a6704ca-ad5e-43a5-a26c-0fd30eae2326-pvTb3C1HXw01JbHe.jpg"
+            alt="Banner 1"
+          />
         </div>
       </Slider>
     </div>

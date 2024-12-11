@@ -38,10 +38,19 @@ const StudyCategoriesComponent = ({
       }
     };
 
-    // 초기 렌더링 후 강제 크기 확인
-    const timeout = setTimeout(updateScrollState, 1); // 50ms 지연
+    const observer = new ResizeObserver(() => {
+      updateScrollState();
+    });
 
-    return () => clearTimeout(timeout);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -110,7 +119,7 @@ const StudyCategoriesComponent = ({
       {isLeftArrowVisible &&
         isWideScreen && ( // 왼쪽 화살표 표시 조건
           <button className="scroll-button left" onClick={scrollLeft}>
-            ◀
+            &#8592;
           </button>
         )}
       <div className="group-header-container" ref={containerRef}>
@@ -129,7 +138,7 @@ const StudyCategoriesComponent = ({
       {isRightArrowVisible &&
         isWideScreen && ( // 오른쪽 화살표 표시 조건
           <button className="scroll-button right" onClick={scrollRight}>
-            ▶
+            &#8594;
           </button>
         )}
     </div>

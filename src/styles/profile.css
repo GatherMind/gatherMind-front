@@ -1,0 +1,12 @@
+.profile {
+  justify-content: left;
+  margin: 10px;
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.profilename {
+  text-align: left;
+}

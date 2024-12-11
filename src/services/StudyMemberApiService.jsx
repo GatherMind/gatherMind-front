@@ -9,10 +9,6 @@ if (!API_URL) {
 export const applyStudy = async (studyId, token) => {
   if (!token) {
     throw new Error("Token is missing. User is not authenticated.");
-
-    // // Redirect to login or show an error message
-    // window.location.href = "/login"; // Example redirect
-    // return;
   }
 
   try {
@@ -71,11 +67,9 @@ export const resignStudyMember = async ({ studyId, memberId }, token) => {
   }
 };
 
-export const withdrawStudyMember = async ( studyId) => {
+export const withdrawStudyMember = async (studyId) => {
   try {
-    const response = await apiClient.delete(
-      `${API_URL}/${studyId}`
-    );
+    const response = await apiClient.delete(`${API_URL}/${studyId}`);
     return response;
   } catch (error) {
     console.error("스터디 승인 실패 : ", error);

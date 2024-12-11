@@ -83,6 +83,7 @@ function Group({ categoryFilter, searchResult, loginData }) {
                 )}
               </div>
               <div className="btn-name">{data.title}</div>
+              <div className="additional-content">Additional Content</div> 
             </button>
           </div>
         ))
