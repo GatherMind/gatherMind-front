@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import AnswerList from "../components/AnswerList";
+import Loading from "./../components/Feedback/Loading";
 import { dateFormat } from "../services/QuestionService";
 import "../styles/QuestionDetail.css";
 import {
@@ -11,6 +12,7 @@ import {
 import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
 import "../styles/global/ReactQuill.css";
+import "../components/Feedback/ErrorMessage.css";
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -50,7 +52,7 @@ const QuestionDetail = () => {
   useEffect(() => {
     fetchQuestion();
     memberInfo();
-  }, [id, authToken]);
+  }, [id, studyId, authToken]);
 
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
@@ -64,14 +66,12 @@ const QuestionDetail = () => {
     }
   };
 
-  // 로딩 상태
-  if (loading) return <div className="container">Loading...</div>;
-
+  if (loading) return <Loading />;
   if (error)
     return (
-      <div className="container">
+      <div className="error-message">
         <p>{error}</p>
-        <button onClick={() => navigate("/")}>다른 글 보기</button>
+        <button className="retry-button" onClick={() => navigate("/")}>다른 글 보기</button>
       </div>
     );
 

@@ -52,7 +52,6 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
     setPopup(!popup);
   };
   const onTogglePopup = (e) => {
-    e.preventDefault();
     setPopup(!popup);
   };
 
@@ -100,7 +99,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
             placeholder="자유롭게 입력해주세요. ex) 줌, 학교"
             required
           />
-          <button className="button" onClick={onTogglePopup}>
+          <button type="button" className="button" onClick={onTogglePopup}>
             정확한 주소 찾기
           </button>
         </div>

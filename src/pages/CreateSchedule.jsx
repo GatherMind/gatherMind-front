@@ -47,15 +47,15 @@ const CreateSchedule = ({ isModify }) => {
         response = await createSchedule(
           { ...scheduleData, studyId },
           authToken
-        ); // studyId 임시
+        ); 
       }
+      navigate(`/study-info/${studyId}`);
     } catch (error) {
       console.error(`일정 ${isModify ? "수정" : "생성"} 실패`, error);
       setError(
         "저장 실패하였습니다.\n로그인 정보 또는 스터디 가입 정보를 확인해주세요."
       );
     }
-    navigate(`/study-info/${studyId}`);
   };
 
   if (error) {
