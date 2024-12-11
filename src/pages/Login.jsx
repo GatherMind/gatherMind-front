@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import googleLoginImage from "../assets/google-login.svg";
 import "../styles/Login.css";
-
 import { useAuth } from "../context/AuthContext";
 import { loginMember } from "../services/AuthApiService";
+import githubLoginImage from "../assets/github-login.svg";
+import kakaoLoginImage from "../assets/kakao-login.png";
+import naverLoginImage from "../assets/naver-login.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -103,6 +105,18 @@ const Login = () => {
           </button>
         </form>
       </main>
+      <a href="/oauth2/authorization/google">
+        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo"/>
+      </a>
+      <a href="/oauth2/authorization/github">
+        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo"/>
+      </a>
+      <a href="/oauth2/authorization/kakao">
+        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo"/>
+      </a>
+      <a href="/oauth2/authorization/naver">
+        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo"/>
+      </a>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
         <p>

@@ -40,3 +40,8 @@ footer > p > span {
   color: rgb(2, 136, 255);
   font-weight: bold;
 }
+
+.login-logo {
+  width: 50px;
+  margin: 40px 15px 0 15px;
+}

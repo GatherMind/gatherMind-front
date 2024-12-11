@@ -22,6 +22,7 @@ import Main from "./components/Main.jsx";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Groupid from "./components/Groupid";
+import OAuth2Login from "./pages/OAuth2Login.jsx";
 
 function App() {
   const [loginResult, setLoginresult] = useState(null);
@@ -95,6 +96,7 @@ function App() {
                   path="/question-detail/:id"
                   element={<QuestionDetail />}
                 />
+                <Route path="/login-success" element={<OAuth2Login />} />
               </Route>
               {/* PrivateRoute end */}
             </Routes>

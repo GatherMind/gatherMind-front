@@ -44,4 +44,4 @@ export const PasswordVerify = async (memberId, password) => {
     console.error("Network error or server unreachabnle: ", error);
     throw new Error("Network error or server unreachable.")
   }
-}
+};
