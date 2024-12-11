@@ -6,19 +6,16 @@
   margin: 0 auto; /* 가운데 정렬 */
 }
 
-
-.hotstudy{
-
+.hotstudy {
   text-align: left;
   color: block;
-  font-family: 'Arial', sans-serif; /* 글꼴 설정 */
+  font-family: "Arial", sans-serif; /* 글꼴 설정 */
   font-weight: 800; /* 얇은 글꼴 */
   font-size: 1.25rem; /* 적당한 크기 */
   color: #666; /* 중간 회색 */
   line-height: 1.5; /* 줄 간격 조정 */
   letter-spacing: 0.5px; /* 문자 간격 */
 }
-
 
 /* 왼쪽 컨테이너 (4개 박스) */
 .left {

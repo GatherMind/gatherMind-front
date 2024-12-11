@@ -1,4 +1,4 @@
-import "../css/main.css";
+import "../styles/main.css";
 import Group from "../components/Group";
 import Nostudy from "./Nostudy";
 import React, { useEffect, useState } from "react";
