@@ -3,12 +3,14 @@ import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../styles/Editor.css";
 import { ImageResize } from "quill-image-resize-module-ts";
+import { ImageDrop } from "quill-image-drop-module";
 
 if (typeof window !== "undefined" && window.Quill) {
   window.Quill = Quill;
 }
 
 Quill.register("modules/ImageResize", ImageResize);
+Quill.register("modules/ImageDrop", ImageDrop);
 
 const Editor = ({ editorValue, onChangeEditorValue }) => {
   // <p className="question-content"
@@ -43,8 +45,8 @@ const Editor = ({ editorValue, onChangeEditorValue }) => {
       },
       ImageResize: {
         modules: ["Resize", "DisplaySize"],
-        parchment: Quill.import("parchment"),
       },
+      ImageDrop: true,
     }),
     []
   );
