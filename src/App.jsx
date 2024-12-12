@@ -19,10 +19,14 @@ import JoinedStudy from "./pages/JoinedStudy";
 import WrittenQuestion from "./pages/WrittenQuestion";
 import WrittenAnswer from "./pages/WrittenAnswer";
 
+import { SidebarProvider } from "./context/SidebarContext";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Groupid from "./components/Groupid";
 import Dashboard from "./pages/Dashboard.jsx";
 import Main from "./pages/Main.jsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import UserManagement from "./pages/admin/UserManagement.jsx";
+import AdminMain from "./pages/admin/AdminMain";
 
 function App() {
   return (
@@ -39,6 +43,23 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
+              {/* admin page */}
+              {/* 
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/user-management" element={<UserManagement />} />
+              <Route path="/admin/*" element={<AdminMain />} /> */}
+
+              <Route
+                path="/admin/*"
+                element={
+                  <SidebarProvider>
+                    <AdminMain />
+                  </SidebarProvider>
+                }
+              />
+              {/* <Route path="/content-management" element={<ContentManagement />} />
+        <Route path="/role-management" element={<RoleManagement />} /> */}
+
               {/* 비로그인 시 로그인 페이지로 이동 */}
               <Route element={<PrivateRoute />}>
                 <Route path="/mypage" element={<Mypage />} />

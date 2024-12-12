@@ -50,10 +50,4 @@ export default function Header() {
       )}
     </header>
   );
-
-  // return (
-  //   <header>
-  //     <h1 onClick={() => navigate("/")}>GATHER MIND</h1>
-  //   </header>
-  // );
 }
