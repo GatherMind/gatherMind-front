@@ -13,6 +13,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "quill": "^2.0.3",
+    "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module-ts": "^3.0.3",
     "react": "^18.3.1",
     "react-datepicker": "^7.5.0",
