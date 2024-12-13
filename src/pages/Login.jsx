@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import googleLoginImage from "../assets/google-login.svg";
 import "../styles/Login.css";
@@ -7,15 +7,15 @@ import { loginMember } from "../services/AuthApiService";
 import githubLoginImage from "../assets/github-login.svg";
 import kakaoLoginImage from "../assets/kakao-login.png";
 import naverLoginImage from "../assets/naver-login.png";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [userInfo, setUserInfo] = useState(null);
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState(null);
-
   const { login } = useAuth();
 
   // 유효성 검사 함수
@@ -66,6 +66,21 @@ const Login = () => {
     }
   };
 
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/oauth-success", {
+        withCredentials: true,
+      });
+      setUserInfo(response.data);
+    } catch (error) {
+      console.error("Failed to fetch user info:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
+
   return (
     <div className="login-container">
       <main>
@@ -105,17 +120,17 @@ const Login = () => {
           </button>
         </form>
       </main>
-      <a href="/oauth2/authorization/google">
-        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo"/>
+      <a href="http://localhost:8080/oauth2/authorization/google">
+        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo" />
       </a>
-      <a href="/oauth2/authorization/github">
-        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo"/>
+      <a href="http://localhost:8080/oauth2/authorization/github">
+        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
       </a>
-      <a href="/oauth2/authorization/kakao">
-        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo"/>
+      <a href="http://localhost:8080/oauth2/authorization/kakao">
+        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
       </a>
-      <a href="/oauth2/authorization/naver">
-        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo"/>
+      <a href="http://localhost:8080/oauth2/authorization/naver">
+        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
       </a>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>

@@ -22,7 +22,7 @@ import Main from "./components/Main.jsx";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Groupid from "./components/Groupid";
-import OAuth2Login from "./pages/OAuth2Login.jsx";
+import OAuth2Success from "./components/OAuth2Success.jsx";
 
 function App() {
   const [loginResult, setLoginresult] = useState(null);
@@ -49,6 +49,7 @@ function App() {
               <Route path="/serious" element={<Serious />} />
               {/* 비로그인 시 로그인 페이지로 이동 */}
               <Route element={<PrivateRoute />}>
+              <Route path="/oauth2/success" element={<OAuth2Success />} />
                 <Route path="/mypage" element={<Mypage />} />
                 <Route path="/mypage/joined-study" element={<JoinedStudy />} />
                 <Route
@@ -96,7 +97,6 @@ function App() {
                   path="/question-detail/:id"
                   element={<QuestionDetail />}
                 />
-                <Route path="/login-success" element={<OAuth2Login />} />
               </Route>
               {/* PrivateRoute end */}
             </Routes>
