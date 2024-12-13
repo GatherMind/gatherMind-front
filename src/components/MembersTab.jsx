@@ -4,7 +4,7 @@ import "../styles/global/ListComponent.css";
 import "../styles/global/Button.css";
 import { useNavigate } from "react-router-dom";
 import Pagination from "./Pagination";
-import { MEMBER_ROLE, MEMBER_STATUS } from "../constants/constants";
+import { STUDY_ROLE, MEMBER_STATUS } from "../constants/constants";
 
 const MembersTab = ({
   members,
@@ -42,7 +42,7 @@ const MembersTab = ({
           {members.length > 0 && (
             <div className="member-count">({members.length - pendingCnt})</div>
           )}
-          {role === MEMBER_ROLE.ADMIN && pendingCnt > 0 && (
+          {role === STUDY_ROLE.ADMIN && pendingCnt > 0 && (
             <div className="pending-count">승인대기 : {pendingCnt}</div>
           )}
         </div>
@@ -53,7 +53,7 @@ const MembersTab = ({
         <ul>
           {members.map((member) => (
             <React.Fragment key={member.memberId}>
-              {role === MEMBER_ROLE.ADMIN ? (
+              {role === STUDY_ROLE.ADMIN ? (
                 <li className="list-item member-item">
                   <div className="nickname">{member.nickname}</div>
                   <div

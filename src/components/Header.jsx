@@ -1,14 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import homeicon from "../assets/gathermind.png";
 import homeicon from "../assets/gathermind-removebg-preview.png";
 import settingicon from "../assets/settingicon.png";
 import "../css/Header.css";
 import { useAuth } from "../context/AuthContext";
-
+import { jwtDecode } from "jwt-decode";
 export default function Header() {
   const navigate = useNavigate();
   const { authToken, logout } = useAuth(); // AuthContext에서 authToken와 logout 가져오기
+
+  const decoded = authToken ? jwtDecode(authToken) : null;
+  const isAdmin = decoded?.role === "ROLE_ADMIN";
 
   function handleClick() {
     navigate("/");
@@ -33,6 +35,9 @@ export default function Header() {
         {" "}
         <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
+      {isAdmin && (
+        <button onClick={() => navigate("/admin")}>관리자 페이지</button>
+      )}
       <div>
         {" "}
         <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />

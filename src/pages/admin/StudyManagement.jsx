@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/admin/studyManagement.css";
 import { CATEGORY_ALL } from "../../constants/constants";
+import { getAllStudies } from "./../../services/StudyApiService";
+import { getStudyCategory } from "../../services/StudyCategoryApiService";
+import { deleteStudy, modifyStudy } from "../../services/AdminApiService";
 
 const StudyManagement = () => {
   const [studies, setStudies] = useState([]); // 스터디 리스트
@@ -20,30 +23,23 @@ const StudyManagement = () => {
 
   // 카테고리별 필터링
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL);
-  // 스터디 데이터 가져오기 (예제 데이터)
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    const mockData = [
-      {
-        id: 1,
-        name: "스터디 A",
-        description: "화학공학 기초 스터디",
-        category: "기술",
-      },
-      {
-        id: 2,
-        name: "스터디 B",
-        description: "리액터 설계 심화 스터디",
-        category: "학문",
-      },
-      {
-        id: 3,
-        name: "스터디 C",
-        description: "취업 준비를 위한 모임",
-        category: "취업",
-      },
-    ];
-    setStudies(mockData);
-    setFilteredStudies(mockData);
+    const fetchData = async () => {
+      try {
+        const response = await getAllStudies();
+
+        setStudies(response.data);
+        setFilteredStudies(response.data);
+
+        const studyCategory = await getStudyCategory();
+        setCategories(studyCategory);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
   }, []);
 
   // 검색 처리
@@ -53,15 +49,6 @@ const StudyManagement = () => {
       study.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredStudies(filtered);
-  };
-
-  // 스터디 삭제
-  const handleDelete = (id) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      const updatedStudies = studies.filter((study) => study.id !== id);
-      setStudies(updatedStudies);
-      setFilteredStudies(updatedStudies);
-    }
   };
 
   // 새로운 스터디 추가
@@ -88,30 +75,67 @@ const StudyManagement = () => {
   // 스터디 수정
   const handleEditStudy = (study) => {
     setEditStudy(study);
-    setEditStudyName(study.name);
+    setEditStudyName(study.title);
     setEditStudyDescription(study.description);
   };
 
   // 스터디 수정
-  const handleSaveEditStudy = () => {
+  const handleSaveEditStudy = async () => {
     if (!editStudyName.trim() || !editStudyDescription.trim()) {
       alert("스터디 이름과 설명을 입력하세요.");
       return;
     }
 
-    setStudies((prevStudies) => {
-      const updatedStudies = prevStudies.map((study) =>
-        study.id === editStudy.id
-          ? { ...study, name: editStudyName, description: editStudyDescription }
-          : study
-      );
-      setFilteredStudies(updatedStudies);
-      return updatedStudies;
-    });
+    try {
+      // 수정된 스터디 데이터를 새로운 객체로 생성
+      const updatedStudy = {
+        ...editStudy,
+        title: editStudyName,
+        description: editStudyDescription,
+      };
 
-    setEditStudy(null);
-    setEditStudyName("");
-    setEditStudyDescription("");
+      await modifyStudy(updatedStudy);
+
+      setStudies((prevStudies) => {
+        const updatedStudies = prevStudies.map((study) =>
+          study.studyId === editStudy.studyId ? updatedStudy : study
+        );
+        setFilteredStudies(updatedStudies);
+        return updatedStudies;
+      });
+
+      setEditStudy(null);
+      setEditStudyName("");
+      setEditStudyDescription("");
+    } catch (error) {
+      console.error(error);
+      alert("스터디 수정에 실패했습니다.");
+    }
+  };
+
+  // 스터디 삭제
+  const handleDelete = async (id) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      try {
+        await deleteStudy(id);
+        const updatedStudies = studies.filter((study) => study.studyId !== id);
+        setStudies(updatedStudies);
+        setFilteredStudies(updatedStudies);
+      } catch (error) {
+        alert("스터디 삭제를 실패했습니다.");
+      }
+    }
+  };
+
+  //카테고리 별 필터링
+  const handleCategoryChange = (e) => {
+    const newCategory = e.target.value;
+    setSelectedCategory(newCategory);
+
+    const filteredByCategory = studies.filter(
+      (study) => newCategory === CATEGORY_ALL || study.category === newCategory
+    );
+    setFilteredStudies(filteredByCategory);
   };
 
   //스터디 관리
@@ -120,14 +144,14 @@ const StudyManagement = () => {
     setMemberList(study.members || []); // 멤버가 없으면 빈 배열
   };
 
-  // 스터디 멤버 추가
+  // 멤버 추가
   const handleAddMember = () => {
     if (!newMember.trim()) return;
     setMemberList((prev) => [...prev, newMember]);
     setNewMember("");
   };
 
-  //스터디 멤버 삭제
+  // 멤버 삭제
   const handleRemoveMember = (member) => {
     setMemberList((prev) => prev.filter((m) => m !== member));
   };
@@ -142,17 +166,6 @@ const StudyManagement = () => {
       )
     );
     setSelectedStudy(null);
-  };
-
-  //카테고리 별 필터링
-  const handleCategoryChange = (e) => {
-    const newCategory = e.target.value;
-    setSelectedCategory(newCategory);
-
-    const filteredByCategory = studies.filter(
-      (study) => newCategory === CATEGORY_ALL || study.category === newCategory
-    );
-    setFilteredStudies(filteredByCategory);
   };
 
   return (
@@ -176,15 +189,16 @@ const StudyManagement = () => {
           value={selectedCategory}
           onChange={handleCategoryChange}
         >
-          <option value={CATEGORY_ALL}>전체</option>
-          <option value="기술">기술</option>
-          <option value="학문">학문</option>
-          <option value="취업">취업</option>
+          {categories.map((category) => (
+            <option key={category.code} value={category.name}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
 
       {/* 새로운 스터디 추가 */}
-      <div className="add-study">
+      {/* <div className="add-study">
         <input
           type="text"
           placeholder="스터디 이름"
@@ -197,7 +211,7 @@ const StudyManagement = () => {
           onChange={(e) => setNewStudyDescription(e.target.value)}
         />
         <button onClick={handleAddStudy}>추가</button>
-      </div>
+      </div> */}
 
       {/* 스터디 목록 */}
       <table className="study-table">
@@ -210,21 +224,21 @@ const StudyManagement = () => {
         </thead>
         <tbody>
           {filteredStudies.map((study) => (
-            <tr key={study.id}>
+            <tr key={study.studyId}>
               <td>
-                {editStudy && editStudy.id === study.id ? (
+                {editStudy && editStudy.studyId === study.studyId ? (
                   <input
                     type="text"
                     value={editStudyName}
                     onChange={(e) => setEditStudyName(e.target.value)}
                   />
                 ) : (
-                  study.name
+                  study.title
                 )}
               </td>
               <td>
                 {" "}
-                {editStudy && editStudy.id === study.id ? (
+                {editStudy && editStudy.studyId === study.studyId ? (
                   <textarea
                     value={editStudyDescription}
                     onChange={(e) => setEditStudyDescription(e.target.value)}
@@ -234,20 +248,20 @@ const StudyManagement = () => {
                 )}
               </td>
               <td>
-                {editStudy && editStudy.id === study.id ? (
+                {editStudy && editStudy.studyId === study.studyId ? (
                   <button onClick={handleSaveEditStudy}>저장</button>
                 ) : (
                   <button onClick={() => handleEditStudy(study)}>수정</button>
                 )}
                 <button
                   className="delete-button"
-                  onClick={() => handleDelete(study.id)}
+                  onClick={() => handleDelete(study.studyId)}
                 >
                   삭제
                 </button>
-                <button onClick={() => handleManageMembers(study)}>
+                {/* <button onClick={() => handleManageMembers(study)}>
                   멤버 관리
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}

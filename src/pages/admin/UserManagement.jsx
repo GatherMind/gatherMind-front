@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import "../../styles/admin/userManagement.css";
 import UserEditModal from "../../components/Modals/UserEditModal";
 import ResponsiveSidebar from "./../../components/ResponsiveSidebar";
+import {
+  deleteMember,
+  getMembers,
+  modifyMember,
+} from "../../services/AdminApiService";
+import ErrorMessage from "./../../components/Feedback/ErrorMessage";
 
 const UserManagement = () => {
   // State for user data, search term, and filtered users
@@ -22,34 +28,13 @@ const UserManagement = () => {
     setIsSideBarOpen((prev) => !prev); // 사이드바 열고 닫기 토글
   };
 
-  // Fetch user data (mock or API)
   useEffect(() => {
-    // Example data, replace with API call
-    const mockData = [
-      {
-        id: 1,
-        name: "홍길동",
-        email: "hong@example.com",
-        role: "관리자",
-        studies: ["스터디 A", "스터디 B"],
-      },
-      {
-        id: 2,
-        name: "김철수",
-        email: "kim@example.com",
-        role: "일반 사용자",
-        studies: ["스터디 A"],
-      },
-      {
-        id: 3,
-        name: "박영희",
-        email: "park@example.com",
-        role: "일반 사용자",
-        studies: ["스터디 C", "스터디 D", "스터디 E"],
-      },
-    ];
-    setUsers(mockData);
-    setFilteredUsers(mockData);
+    const fetchData = async () => {
+      const response = await getMembers();
+      setUsers(response);
+      setFilteredUsers(response);
+    };
+    fetchData();
   }, []);
 
   // Handle search input
@@ -57,18 +42,23 @@ const UserManagement = () => {
     setSearchTerm(e.target.value);
     const filtered = users.filter(
       (user) =>
-        user.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        user.nickname.toLowerCase().includes(e.target.value.toLowerCase()) ||
         user.email.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredUsers(filtered);
   };
 
   // Handle delete user
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      const updatedUsers = users.filter((user) => user.id !== id);
-      setUsers(updatedUsers);
-      setFilteredUsers(updatedUsers);
+      try {
+        await deleteMember(id);
+        const updatedUsers = users.filter((user) => user.memberId !== id);
+        setUsers(updatedUsers);
+        setFilteredUsers(updatedUsers);
+      } catch (error) {
+        alert("멤버 삭제를 실패했습니다.");
+      }
     }
   };
 
@@ -77,13 +67,27 @@ const UserManagement = () => {
     setEditModalOpen(true);
   };
 
-  const handleSaveUser = (updatedUser) => {
+  const handleSaveUser = async (updatedUser) => {
     // 수정된 사용자 정보로 업데이트 (API 호출 가능)
-    const updatedUsers = users.map((u) =>
-      u.id === updatedUser.id ? updatedUser : u
-    );
-    setUsers(updatedUsers);
-    setFilteredUsers(updatedUsers);
+    try {
+      await modifyMember(updatedUser);
+
+      const updatedUsers = users.map((u) =>
+        u.memberId === updatedUser.memberId ? updatedUser : u
+      );
+      setUsers(updatedUsers);
+      setFilteredUsers(updatedUsers);
+      alert("사용자 정보가 성공적으로 업데이트되었습니다!");
+    } catch (error) {
+      if (typeof error === "object") {
+        // JSON 형태의 에러 메시지를 처리
+        const errorMessages = Object.values(error).join("\n"); // 에러 메시지를 문자열로 변환
+        alert(`수정 실패:\n${errorMessages}`);
+      } else {
+        // 예상치 못한 오류 처리
+        alert("예기치 못한 오류가 발생했습니다.");
+      }
+    }
   };
 
   return (
@@ -110,7 +114,7 @@ const UserManagement = () => {
         <div className="search-bar">
           <input
             type="text"
-            placeholder="사용자 이름 또는 이메일 검색"
+            placeholder="사용자 닉네임 또는 이메일 검색"
             value={searchTerm}
             onChange={handleSearch}
           />
@@ -120,7 +124,8 @@ const UserManagement = () => {
         <table className="user-table">
           <thead>
             <tr>
-              <th>이름</th>
+              <th>아이디</th>
+              <th>닉네임</th>
               <th>이메일</th>
               <th>권한</th>
               <th>소속 스터디</th>
@@ -128,18 +133,13 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
+            {filteredUsers.map((user, index) => (
+              <tr key={index}>
+                <td>{user.memberId}</td>
+                <td>{user.nickname}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td>
-                  {user.studies.length > 0 ? (
-                    user.studies.join(", ")
-                  ) : (
-                    <span>없음</span>
-                  )}
-                </td>
+                <td>{user.title !== null ? user.title : <span>없음</span>}</td>
                 {/* 스터디 이름 클릭하면 스터디 상세 페이지 이동 */}
                 {/* <td>
   {user.studies.length > 0 ? (
@@ -156,7 +156,7 @@ const UserManagement = () => {
                   <button onClick={() => handleEditClick(user)}>수정</button>
                   <button
                     className="delete-button"
-                    onClick={() => handleDelete(user.id)}
+                    onClick={() => handleDelete(user.memberId)}
                   >
                     삭제
                   </button>

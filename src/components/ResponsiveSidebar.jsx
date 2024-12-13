@@ -6,12 +6,6 @@ import { useSidebar } from "../context/SidebarContext";
 const ResponsiveSidebar = () => {
   const { isSideBarOpen, toggleSidebar, handleSidebarClose } = useSidebar();
 
-  console.log("Sidebar State:", {
-    isSideBarOpen,
-    toggleSidebar,
-    handleSidebarClose,
-  });
-
   if (!isSideBarOpen)
     return (
       <button className={`hamburger`} onClick={toggleSidebar}>
@@ -51,17 +45,17 @@ const ResponsiveSidebar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/admin/role-management" onClick={handleSidebarClose}>
-              <span className="dot">•</span>
-              <span className="text">권한 관리</span>
-            </Link>
-          </li>
-          <li>
             <Link to="/admin/study-management" onClick={handleSidebarClose}>
               <span className="dot">•</span>
               <span className="text">스터디 관리</span>
             </Link>
           </li>
+          {/* <li>
+            <Link to="/admin/role-management" onClick={handleSidebarClose}>
+              <span className="dot">•</span>
+              <span className="text">권한 관리</span>
+            </Link>
+          </li> */}
         </ul>
       </div>
     </div>

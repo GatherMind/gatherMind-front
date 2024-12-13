@@ -111,13 +111,3 @@ export default function Main() {
     </>
   );
 }
-
-// {hasAppointment ? <>
-//   {/* <div className="modal">
-// <Toast isOpen={isModalOpen} onClose={handleCloseModal}>
-// <p>현재 소속된 그룹이없습니다</p>
-// <button className="modal-btn" onClick={modalclick}>그룹생성</button>
-
-// </Toast>
-// </div> */}
-//    <Nogroup/> </>  :  <GroupApi setHasAppointment={setHasAppointment}/>

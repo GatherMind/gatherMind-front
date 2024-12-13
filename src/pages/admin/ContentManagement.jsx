@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/admin/contentManagement.css";
+import { deleteContent, getAllContent } from "./../../services/AdminApiService";
+import { dateFormat } from "./../../services/QuestionService";
 
 const ContentManagement = () => {
   const [contentList, setContentList] = useState([]); // 콘텐츠 리스트
@@ -8,31 +10,16 @@ const ContentManagement = () => {
 
   // 콘텐츠 데이터 가져오기 (예제 데이터)
   useEffect(() => {
-    const mockData = [
-      {
-        id: 1,
-        title: "게시글 제목 1",
-        author: "사용자 1",
-        type: "게시글",
-        date: "2024-12-10",
-      },
-      {
-        id: 2,
-        title: "댓글 내용 1",
-        author: "사용자 2",
-        type: "댓글",
-        date: "2024-12-09",
-      },
-      {
-        id: 3,
-        title: "리뷰 제목 1",
-        author: "사용자 3",
-        type: "리뷰",
-        date: "2024-12-08",
-      },
-    ];
-    setContentList(mockData);
-    setFilteredContent(mockData);
+    const fetchData = async () => {
+      try {
+        const response = await getAllContent();
+        setContentList(response);
+        setFilteredContent(response);
+      } catch (error) {
+        console.error("Network error or server unreachable: ", error);
+      }
+    };
+    fetchData();
   }, []);
 
   // 검색 처리
@@ -47,11 +34,19 @@ const ContentManagement = () => {
   };
 
   // 콘텐츠 삭제
-  const handleDelete = (id) => {
+  const handleDelete = async (id, type) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      const updatedContent = contentList.filter((content) => content.id !== id);
-      setContentList(updatedContent);
-      setFilteredContent(updatedContent);
+      try {
+        await deleteContent(id, type);
+
+        const updatedContent = contentList.filter(
+          (content) => content.id !== id
+        );
+        setContentList(updatedContent);
+        setFilteredContent(updatedContent);
+      } catch (error) {
+        console.error("Network error or server unreachable: ", error);
+      }
     }
   };
 
@@ -82,15 +77,15 @@ const ContentManagement = () => {
         </thead>
         <tbody>
           {filteredContent.map((content) => (
-            <tr key={content.id}>
+            <tr key={content.type + content.id}>
               <td>{content.title}</td>
-              <td>{content.author}</td>
+              <td>{content.memberId}</td>
               <td>{content.type}</td>
-              <td>{content.date}</td>
+              <td>{dateFormat(content.createdAt)}</td>
               <td>
                 <button
                   className="delete-button"
-                  onClick={() => handleDelete(content.id)}
+                  onClick={() => handleDelete(content.id, content.type)}
                 >
                   삭제
                 </button>
