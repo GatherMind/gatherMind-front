@@ -22,7 +22,7 @@ import {
   confirmStudyMember,
   resignStudyMember,
 } from "../services/StudyMemberApiService.jsx";
-import { MEMBER_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
+import { STUDY_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
 
 const StudyInfo = () => {
   const { authToken } = useAuth();
@@ -47,7 +47,7 @@ const StudyInfo = () => {
   // 톱니바퀴 버튼
   const [showMenu, setShowMenu] = useState(false);
 
-  const [role, setRole] = useState(MEMBER_ROLE.MEMBER);
+  const [role, setRole] = useState(STUDY_ROLE.MEMBER);
   const [myMemberId, setMyMemberId] = useState("");
 
   // 그룹 정보/멤버 가져오기
@@ -195,7 +195,7 @@ const StudyInfo = () => {
         <h2>{study.title}</h2>
         <p>{study.description} </p>
         <div className="settings-icon" onClick={toggleMenu}>
-          {role === MEMBER_ROLE.ADMIN && (
+          {role === STUDY_ROLE.ADMIN && (
             <>
               <FaCog />
               {showMenu && (

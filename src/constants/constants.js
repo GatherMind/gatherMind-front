@@ -1,4 +1,4 @@
-export const MEMBER_ROLE = {
+export const STUDY_ROLE = {
   ADMIN: "ADMIN",
   MEMBER: "MEMBER",
 };
@@ -16,3 +16,8 @@ export const STUDY_STATE = {
 };
 
 export const CATEGORY_ALL = "ALL";
+
+export const MEMBER_ROLE = {
+  ADMIN: "ADMIN",
+  USERS: "USER",
+};
