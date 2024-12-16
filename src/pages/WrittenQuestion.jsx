@@ -13,7 +13,6 @@ import { deleteQuestion } from "../services/QuestionApiService";
 const WrittenQuestion = () => {
   // State 관리
   const [recentQuestions, setRecentQuestions] = useState([]); // 최근 질문 목록
-  const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
   const navigate = useNavigate();
 
   const [counts, setCounts] = useState({
@@ -26,11 +25,6 @@ const WrittenQuestion = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // 회원 정보 가져오기
-        // const response = await axios.get("/api/members/me", {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-
         // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
         const [studyResponse, questionResponse, answerResponse] =
           await Promise.all([
@@ -45,8 +39,7 @@ const WrittenQuestion = () => {
           answerCount: answerResponse.data || 0,
         });
 
-        const response = await getMemberByToken();
-        setMemberInfo(response.data || {});
+        await getMemberByToken();
 
         // 최근 질문 가져오기 (최대 3개)
         const questionsResponse = await getRecentQuestionLimit3();

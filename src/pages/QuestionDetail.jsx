@@ -30,7 +30,6 @@ const QuestionDetail = () => {
   const fetchQuestion = async () => {
     try {
       const questionData = await getQuestionWithFileUrl(id);
-      console.log(questionData);
       setQuestion(questionData);
     } catch (error) {
       console.error("게시글 정보를 불러오지 못했습니다.", error);
@@ -71,7 +70,9 @@ const QuestionDetail = () => {
     return (
       <div className="error-message">
         <p>{error}</p>
-        <button className="retry-button" onClick={() => navigate("/")}>다른 글 보기</button>
+        <button className="retry-button" onClick={() => navigate("/")}>
+          다른 글 보기
+        </button>
       </div>
     );
 

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import googleLoginImage from "../assets/google-login.svg";
+
 import "../styles/Login.css";
 import { useAuth } from "../context/AuthContext";
 import { loginMember } from "../services/AuthApiService";
-import githubLoginImage from "../assets/github-login.svg";
-import kakaoLoginImage from "../assets/kakao-login.png";
-import naverLoginImage from "../assets/naver-login.png";
+import socialLinks from "../data/socialLinks";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -65,10 +63,6 @@ const Login = () => {
       console.error(error);
     }
   };
-
-  const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
-  };
   return (
     <div className="login-container">
       <main>
@@ -108,18 +102,13 @@ const Login = () => {
           </button>
         </form>
       </main>
-      <a href="http://localhost:8080/oauth2/authorization/google">
-        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/github">
-        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/kakao">
-        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/naver">
-        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
-      </a>
+      <div className="social-login-buttons">
+        {socialLinks.map((link) => (
+          <a key={link.id} href={link.href}>
+            <img src={link.imageSrc} alt={link.alt} className="login-logo" />
+          </a>
+        ))}
+      </div>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
         <p>

@@ -184,15 +184,6 @@ const SignUp = () => {
     }
 
     try {
-      console.log("전송 데이터:", { memberId, password, email, nickname });
-
-      // await axios.post("/api/member/signup", {
-      //   memberId,
-      //   password,
-      //   email,
-      //   nickname,
-      // });
-
       await signUp({
         memberId,
         password,

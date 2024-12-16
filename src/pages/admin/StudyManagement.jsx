@@ -9,17 +9,11 @@ const StudyManagement = () => {
   const [studies, setStudies] = useState([]); // 스터디 리스트
   const [searchTerm, setSearchTerm] = useState(""); // 검색어
   const [filteredStudies, setFilteredStudies] = useState([]); // 필터링된 스터디
-  const [newStudyName, setNewStudyName] = useState(""); // 새로운 스터디 이름
-  const [newStudyDescription, setNewStudyDescription] = useState(""); // 새로운 스터디 설명
 
   // 스터디 수정
   const [editStudy, setEditStudy] = useState(null);
   const [editStudyName, setEditStudyName] = useState("");
   const [editStudyDescription, setEditStudyDescription] = useState("");
-
-  const [selectedStudy, setSelectedStudy] = useState(null);
-  const [memberList, setMemberList] = useState([]);
-  const [newMember, setNewMember] = useState(null);
 
   // 카테고리별 필터링
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL);
@@ -49,27 +43,6 @@ const StudyManagement = () => {
       study.name.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredStudies(filtered);
-  };
-
-  // 새로운 스터디 추가
-  const handleAddStudy = () => {
-    if (!newStudyName.trim() || !newStudyDescription.trim()) {
-      alert("스터디 이름과 설명을 모두 입력하세요.");
-      return;
-    }
-    const newStudy = {
-      id: Date.now(),
-      name: newStudyName,
-      description: newStudyDescription,
-    };
-    setStudies((prevStudies) => [...prevStudies, newStudy]);
-    setFilteredStudies((prevFilteredStudies) => [
-      ...prevFilteredStudies,
-      newStudy,
-    ]);
-
-    setNewStudyName("");
-    setNewStudyDescription("");
   };
 
   // 스터디 수정
@@ -136,36 +109,6 @@ const StudyManagement = () => {
       (study) => newCategory === CATEGORY_ALL || study.category === newCategory
     );
     setFilteredStudies(filteredByCategory);
-  };
-
-  //스터디 관리
-  const handleManageMembers = (study) => {
-    setSelectedStudy(study);
-    setMemberList(study.members || []); // 멤버가 없으면 빈 배열
-  };
-
-  // 멤버 추가
-  const handleAddMember = () => {
-    if (!newMember.trim()) return;
-    setMemberList((prev) => [...prev, newMember]);
-    setNewMember("");
-  };
-
-  // 멤버 삭제
-  const handleRemoveMember = (member) => {
-    setMemberList((prev) => prev.filter((m) => m !== member));
-  };
-
-  // 멤버 저장
-  const handleSaveMembers = () => {
-    setStudies((prevStudies) =>
-      prevStudies.map((study) =>
-        study.id === selectedStudy.id
-          ? { ...study, members: memberList }
-          : study
-      )
-    );
-    setSelectedStudy(null);
   };
 
   return (

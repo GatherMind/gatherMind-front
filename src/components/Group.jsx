@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import greenlighticon from "../assets/greenlighticon.png";
@@ -28,10 +28,6 @@ function Group({ categoryFilter, searchResult, loginData }) {
   function handleclick(data) {
     setGroupInfoData(data);
     handleOpenModal();
-  }
-
-  function handlemakeclick() {
-    navigate("/create-study");
   }
 
   const filteredData = data.filter((e) => {
@@ -83,7 +79,7 @@ function Group({ categoryFilter, searchResult, loginData }) {
                 )}
               </div>
               <div className="btn-name">{data.title}</div>
-              <div className="additional-content">Additional Content</div> 
+              <div className="additional-content">Additional Content</div>
             </button>
           </div>
         ))

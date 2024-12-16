@@ -13,7 +13,6 @@ import { deleteAnswer } from "../services/AnswerApiService";
 const WrittenAnswer = () => {
   // State 관리
   const [recentAnswers, setRecentAnswers] = useState([]); // 최근 답변 목록
-  const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
   const navigate = useNavigate();
 
   const [counts, setCounts] = useState({
@@ -47,8 +46,7 @@ const WrittenAnswer = () => {
           answerCount: answerResponse.data || 0,
         });
 
-        const response = await getMemberByToken();
-        setMemberInfo(response.data || {});
+        await getMemberByToken();
 
         const answersResponse = await getRecentAnswerLimit3();
         setRecentAnswers(answersResponse.data.slice(0, 3));

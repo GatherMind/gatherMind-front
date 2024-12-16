@@ -6,6 +6,7 @@ export const STUDY_ROLE = {
 export const TABS = {
   MEMBER: "members",
   SCHEDULE: "schedules",
+  BOARD: "board",
 };
 
 export const MEMBER_STATUS = { PENDING: "PENDING", APPROVED: "APPROVED" };

@@ -41,7 +41,11 @@ export const getMember = async (id) => {
 // 토큰으로 내 정보 가져오기
 export const getMemberByToken = async () => {
   try {
-    const response = await apiClient.get(`${API_URL}/me`);
+    const response = await axios.get(`${API_URL}/me`, {
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`, // 인증 헤더 추가
+      },
+    });
 
     return response;
   } catch (error) {
@@ -52,8 +56,12 @@ export const getMemberByToken = async () => {
 
 export const getMyStudyByToken = async () => {
   try {
-    const response = await apiClient.get(`${API_URL}/my-studies`);
-
+    const response = await axios.get(`${API_URL}/my-studies`, {
+      headers: {
+        Authorization: `Bearer ${getAuthToken()}`, // 인증 헤더 추가
+      },
+    });
+    console.log(response);
     return response;
   } catch (error) {
     console.error("Network error or server unreachable: ", error);

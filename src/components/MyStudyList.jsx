@@ -11,7 +11,7 @@ export default function MyStudyList({ MyStudies }) {
     navigate(`/study-info/${data.studyId}`);
   }
 
-  const filterdata = MyStudies.filter((e) => e.status);
+  // const filterdata = MyStudies.filter((e) => e.status);
 
   return (
     <div className="mygrouplist">

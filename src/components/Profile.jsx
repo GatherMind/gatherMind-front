@@ -12,7 +12,7 @@ export default function Profile({ loginData }) {
     <div className="profile">
       <div className="profilename">
         <img alt="" src={icon} onClick={handleclick} /> 반가워요{" "}
-        {loginData.memberId}
+        {loginData.nickname}
         님!
       </div>
     </div>

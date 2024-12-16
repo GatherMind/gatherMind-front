@@ -22,7 +22,7 @@ export default function Header() {
 
   function handleLogoutClick() {
     logout();
-    navigate("/");
+    navigate("/", { state: { refresh: true } });
   }
 
   function handleMyPageClick() {

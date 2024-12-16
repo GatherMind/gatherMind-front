@@ -1,41 +1,53 @@
 /* Button.css */
 
 .button {
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: white;
-  background-color: var(--primary-color);
-  border-radius: var(--border-radius);
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background-color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 4px;
 }
 
 .button:hover {
-  background-color: var(--primary-color-hover);
+  /* background-color: var(--primary-color-hover); */
+  background-color: #f0f0f0;
+}
+.button:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+.button.active {
+  background-color: #0078ff;
+  color: white;
+  border-color: #0078ff;
+  cursor: default;
+}
+
+.button:hover {
+  background-color: #0056b3;
 }
 
 .button-error {
-  padding: 10px 15px;
-  font-size: 1rem;
-  color: var(--btn-error-color);
-  background-color: var(--btn-error-background-color);
-  border: 2px solid #ced4da;
-  /* border-radius: var(--btn-error-border); */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #dc3545;
+  color: white;
 }
 
 .button-error:hover {
-  background-color: var(--error-color-hover);
+  background-color: #c82333;
 }
 
-.btn-left {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
+.btn-left,
 .btn-right {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+  font-weight: bold;
+  background-color: #0078ff;
+  color: white;
+}
+
+.btn-left:disabled,
+.btn-right:disabled {
+  background-color: #ccc;
 }
 
 .no-radius {
