@@ -12,6 +12,7 @@
     "dompurify": "^3.2.2",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "jwt-decode": "^4.0.0",
     "quill": "^2.0.3",
     "quill-image-drop-module": "^1.0.3",
     "quill-image-resize-module-ts": "^3.0.3",

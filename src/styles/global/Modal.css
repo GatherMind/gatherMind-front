@@ -9,6 +9,9 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  opacity: 0; /* 시작 상태 */
+  animation: fadeIn 0.3s forwards; /* 나타나는 애니메이션 */
 }
 
 .modal-content {
@@ -20,6 +23,9 @@
   padding: 20px;
   position: relative;
   text-align: center;
+
+  transform: scale(0.9);
+  animation: scaleIn 0.3s forwards;
 }
 
 .modal-header {
@@ -35,6 +41,67 @@
   line-height: 1.6;
   margin-bottom: 10px; /* Spacing before the button */
 }
+
+.modal-body label {
+  display: flex;
+  flex-direction: column; /* 입력 필드를 라벨 아래로 배치 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  margin-bottom: 15px; /* 필드 간 간격 */
+  text-align: left;
+}
+
+.modal-body input,
+.modal-body select {
+  width: 100%;
+  padding: 10px; /* 입력 필드 내부 여백 */
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 16px;
+  box-sizing: border-box; /* 패딩과 너비 포함 */
+  margin-top: 5px;
+}
+
+.modal-body input:focus,
+.modal-body select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.save-button {
+  background: var(--primary-color);
+  color: white;
+  transition: background var(--transition-speed);
+}
+
+.save-button:hover {
+  background: var(--primary-color-hover);
+}
+
+.cancel-button {
+  background: var(--error-color);
+  color: white;
+  transition: background var(--transition-speed);
+}
+
+.cancel-button:hover {
+  background: darkred;
+}
+
 .close-button {
   position: absolute;
   top: 15px;
@@ -51,8 +118,46 @@
   color: var(--error-color);
 }
 
+.close-button:focus {
+  outline: 2px solid var(--primary-color);
+}
+
 .modal img {
   max-width: 100%;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  transform: scale(0.9); /* 시작 크기 */
+  animation: scaleIn 0.3s forwards; /* 크기가 커지는 애니메이션 */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* 완전히 보이도록 설정 */
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    transform: scale(1); /* 원래 크기로 복구 */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .modal-content {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .modal-header {
+    font-size: 20px;
+  }
+
+  .save-button,
+  .cancel-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
 }

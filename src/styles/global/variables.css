@@ -1,17 +1,17 @@
 /* variables.css */
 :root {
-  --primary-color: #4a90e2;
-  /* Color palette */
+  --primary-color: rgb(79, 169, 211);
   --primary-color-hover: #357abd;
-  --secondary-color: #7a99b4;
+  --secondary-color: #119797;
   --secondary-color-hover: #506f92;
   --background-color-light: #fafafa;
   --border-color: #e0e0e0;
   --error-color: #d32f2f;
   --error-color-hover: #a72222;
   --text-color: #4a4a4a;
-  --button-color: #0288b4;
+  --button-color: #6667ab;
   --button-color-hover: #026f94;
+  --button-secondary-color: #e2dada;
   --pagination-background: #e3f2fd;
 
   --recruiting-color: #a8e6cf;
@@ -26,18 +26,29 @@
   --completed-hover-color: #f48fb1; /* Lighter pink for completed */
   --completed-text-hover: #c62828; /* Darker red for completed text */
 
+  /*  */
+
+  --btn-error-background-color: white;
+  --btn-error-color: black;
+  --btn-error-border: 2px solid #ced4da;
+
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  --transition: box-shadow 0.3s ease;
+  --border: 1px solid #e0e0e0;
+  --background-color: #ffffff;
+  --border-radius: 10px;
+  --btn-between-margin: 10px;
+  --btn-border-radius: 5px;
+
   /* Typography */
   --font-family: Arial, sans-serif;
   --font-size-base: 16px;
 
-  /* Border Radius */
-  --border-radius: 8px;
-
-  /* Shadows */
-  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
   /* Transitions */
   --transition-speed: 0.3s;
-
   --container-max-width: 600px;
+  --small-spacing: 8px;
+  --medium-spacing: 16px;
+  --large-spacing: 24px;
+  --extra-large-spacing: 32px;
 }

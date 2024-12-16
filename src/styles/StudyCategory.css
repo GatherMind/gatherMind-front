@@ -90,11 +90,11 @@
   pointer-events: none; /* 클릭 비활성화 */
 }
 
-.left {
+.left-arrow {
   margin-right: -16px;
 }
 
-.right {
+.right-arrow {
   margin-left: -16px;
 }
 

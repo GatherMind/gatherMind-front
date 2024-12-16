@@ -1,0 +1,90 @@
+.study-management-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.add-study {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-study input,
+.add-study textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.add-study button {
+  align-self: flex-end;
+  padding: 10px 15px;
+  background-color: #0288b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-study button:hover {
+  background-color: #026f94;
+}
+
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.study-table th,
+.study-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.study-table th {
+  background-color: #f4f4f4;
+}
+
+.modify-button,
+.delete-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.modify-button {
+  background-color: #3c9ae7;
+}
+.modify-button:hover {
+  background-color: #0288b4;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}

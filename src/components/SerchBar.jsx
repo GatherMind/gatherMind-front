@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "../styles/Searchbar.css";
+import "../styles/global/Button.css";
 
 function Searchbar({ onSearch }) {
   const [query, setQuery] = useState("");
@@ -38,7 +39,7 @@ function Searchbar({ onSearch }) {
       <button className="search-button" onClick={handleSearch}>
         검색
       </button>
-      <button className="reset-button" onClick={handleResetSearch}>
+      <button className="button-error reset-button" onClick={handleResetSearch}>
         초기화
       </button>
     </div>

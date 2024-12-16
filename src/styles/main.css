@@ -99,7 +99,8 @@
   border-radius: 10px;
   padding: 5px;
   width: 100%;
-  min-height: 90px;
+  height: 100%;
+  min-height: 60px;
   position: relative;
   background-color: #f3ffe0;
   text-align: left;
@@ -278,7 +279,7 @@
 .studymakebtn {
   padding: 8px 16px;
   font-size: 14px;
-  border-radius: 20px;
+  border-radius: var(--btn-border-radius);
   border: none;
   background-color: #ff6b6b;
   color: white;
