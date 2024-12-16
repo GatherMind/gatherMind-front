@@ -66,6 +66,7 @@ const Login = () => {
     }
   };
 
+<<<<<<< HEAD
   const fetchUserInfo = async () => {
     try {
       const response = await axios.get("http://localhost:8080/oauth-success", {
@@ -81,6 +82,11 @@ const Login = () => {
     fetchUserInfo();
   }, []);
 
+=======
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+>>>>>>> develop
   return (
     <div className="login-container">
       <main>
@@ -123,6 +129,7 @@ const Login = () => {
       <a href="http://localhost:8080/oauth2/authorization/google">
         <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo" />
       </a>
+<<<<<<< HEAD
       <a href="http://localhost:8080/oauth2/authorization/github">
         <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
       </a>
@@ -130,6 +137,15 @@ const Login = () => {
         <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
       </a>
       <a href="http://localhost:8080/oauth2/authorization/naver">
+=======
+      <a href="/oauth2/authorization/github">
+        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
+      </a>
+      <a href="/oauth2/authorization/kakao">
+        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
+      </a>
+      <a href="/oauth2/authorization/naver">
+>>>>>>> develop
         <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
       </a>
       <footer>

@@ -17,7 +17,6 @@ const StudyCategoriesComponent = ({
   const checkScroll = useCallback(() => {
     if (containerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-      console.log({ scrollLeft, scrollWidth, clientWidth });
 
       // 스크롤 가능한 경우에만 화살표 표시
       const canScroll = scrollWidth > clientWidth;
@@ -30,7 +29,6 @@ const StudyCategoriesComponent = ({
     const updateScrollState = () => {
       if (containerRef.current) {
         const { scrollWidth, clientWidth } = containerRef.current;
-        console.log("Initial Check", { scrollWidth, clientWidth }); // 디버깅
         const canScroll = scrollWidth > clientWidth;
         setRightArrowVisible(canScroll);
         setLeftArrowVisible(false);
@@ -57,7 +55,7 @@ const StudyCategoriesComponent = ({
     const updateScrollState = () => {
       if (containerRef.current) {
         const { scrollWidth, clientWidth } = containerRef.current;
-        console.log("Resize/Scroll Check", { scrollWidth, clientWidth }); // 디버깅
+
         const canScroll = scrollWidth > clientWidth;
         setRightArrowVisible(canScroll);
         setLeftArrowVisible(false);
@@ -111,14 +109,13 @@ const StudyCategoriesComponent = ({
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-    console.log(`Selected category: ${category.name}`);
   };
 
   return (
     <div className="study-categories-wrapper">
       {isLeftArrowVisible &&
         isWideScreen && ( // 왼쪽 화살표 표시 조건
-          <button className="scroll-button left" onClick={scrollLeft}>
+          <button className="scroll-button left-arrow" onClick={scrollLeft}>
             &#8592;
           </button>
         )}
@@ -137,7 +134,7 @@ const StudyCategoriesComponent = ({
       </div>
       {isRightArrowVisible &&
         isWideScreen && ( // 오른쪽 화살표 표시 조건
-          <button className="scroll-button right" onClick={scrollRight}>
+          <button className="scroll-button right-arrow" onClick={scrollRight}>
             &#8594;
           </button>
         )}

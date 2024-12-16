@@ -1,15 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import homeicon from "../assets/gathermind.png";
 import homeicon from "../assets/gathermind-removebg-preview.png";
 import settingicon from "../assets/settingicon.png";
 import "../styles/Header.css";
 import { useAuth } from "../context/AuthContext";
-
-export default function Header({ loginResult }) {
+import { jwtDecode } from "jwt-decode";
+export default function Header() {
   const navigate = useNavigate();
+  const { authToken, logout } = useAuth(); // AuthContext에서 authToken와 logout 가져오기
 
-  const { logout } = useAuth();
+  const decoded = authToken ? jwtDecode(authToken) : null;
+  const isAdmin = decoded?.role === "ROLE_ADMIN";
 
   function handleClick() {
     navigate("/");
@@ -21,7 +22,7 @@ export default function Header({ loginResult }) {
 
   function handleLogoutClick() {
     logout();
-    window.location.href = "/";
+    navigate("/");
   }
 
   function handleMyPageClick() {
@@ -34,13 +35,18 @@ export default function Header({ loginResult }) {
         {" "}
         <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
+      {isAdmin && (
+        <button className="admin-page-btn" onClick={() => navigate("/admin")}>
+          관리자 페이지
+        </button>
+      )}
       <div>
         {" "}
         <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
         MyPage
       </div>
 
-      {loginResult ? (
+      {authToken ? (
         <button className="header-login" onClick={handleLogoutClick}>
           로그아웃
         </button>
@@ -51,10 +57,4 @@ export default function Header({ loginResult }) {
       )}
     </header>
   );
-
-  // return (
-  //   <header>
-  //     <h1 onClick={() => navigate("/")}>GATHER MIND</h1>
-  //   </header>
-  // );
 }

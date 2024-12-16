@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import {
@@ -64,7 +63,9 @@ const JoinedStudy = () => {
       await withdrawStudyMember(studyId);
 
       // 탈퇴 후 스터디 목록 갱신
-      setJoinedGroups(joinedGroups.filter((group) => group.studyId !== studyId));
+      setJoinedGroups(
+        joinedGroups.filter((group) => group.studyId !== studyId)
+      );
       alert("스터디 탈퇴가 완료되었습니다.");
     } catch (error) {
       alert("스터디 탈퇴에 실패했습니다.");

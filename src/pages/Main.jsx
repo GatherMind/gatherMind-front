@@ -1,37 +1,27 @@
 import "../styles/main.css";
 import Group from "../components/Group";
-import Nostudy from "./Nostudy";
+import Nostudy from "../components/Nostudy";
 import React, { useEffect, useState } from "react";
-import Profile from "./Profile";
+import Profile from "../components/Profile";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SerchBar";
+import SearchBar from "../components/SerchBar";
 import Slide from "../components/Slide";
-import MyStudyList from "./MyStudyList";
+import MyStudyList from "../components/MyStudyList";
 import {
   getMemberByToken,
   getMyStudyByToken,
 } from "../services/MemberApiService";
 import { getStudyCategory } from "../services/StudyCategoryApiService";
-import StudyCategoriesComponent from "./StudyCategoriesComponent";
+import StudyCategoriesComponent from "../components/StudyCategoriesComponent";
 import { CATEGORY_ALL } from "./../constants/constants";
-import SelectedStudy from "./SelectedStudy";
-import Category from "../components/Category";
+import SelectedStudy from "./../components/SelectedStudy";
 
-export default function Main({ handleLoginStatus }) {
-  const studyStatus = ["OPEN", "CLOSED"];
-
-  const [statusFilter, setStatusFilter] = useState(null);
-
+export default function Main() {
   const [hasStudy, setHasStudy] = useState(false);
-
   const [searchResult, setSearchResult] = useState([]);
-
   const [loginData, setLoginData] = useState(null);
-
   const [MyStudies, setMyStudies] = useState([]);
-
   const [studyCategories, setStudyCategories] = useState([]);
-
   const [selectedCategory, setSelectedCategory] = useState(CATEGORY_ALL);
 
   useEffect(() => {
@@ -43,7 +33,6 @@ export default function Main({ handleLoginStatus }) {
         ]);
 
         setLoginData(memberResponse.data);
-        handleLoginStatus(memberResponse.data);
         setMyStudies(studyResponse.data);
       } catch (error) {
         console.error("에러입니다:", error);
@@ -80,10 +69,6 @@ export default function Main({ handleLoginStatus }) {
     navigate("/create-study");
   }
 
-  function handleStatus(e) {
-    setStatusFilter(e);
-  }
-
   return (
     <>
       {loginData && <Profile loginData={loginData} />}
@@ -103,6 +88,7 @@ export default function Main({ handleLoginStatus }) {
       <SelectedStudy />
 
       <SearchBar onSearch={handleSearch} />
+      {/* <LoginButton /> */}
 
       <div className="studymakediv">
         <button className="studymakebtn" onClick={handleMakeClick}>
@@ -110,33 +96,12 @@ export default function Main({ handleLoginStatus }) {
         </button>
       </div>
 
-      {/* <Category /> */}
-
-      <StudyCategoriesComponent
-        studyCategories={studyCategories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
-
       <div className="group">
-        <div className="group-header">
-          {" "}
-          <div className="groupheader-title" onClick={() => handleStatus(null)}>
-            전체
-          </div>
-          <div
-            className="groupheader-title"
-            onClick={() => handleStatus(studyStatus[0])}
-          >
-            모집중
-          </div>{" "}
-          <div
-            className="groupheader-title"
-            onClick={() => handleStatus(studyStatus[1])}
-          >
-            모집완료
-          </div>{" "}
-        </div>
+        <StudyCategoriesComponent
+          studyCategories={studyCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
 
         <div className="group-list">
           <Group

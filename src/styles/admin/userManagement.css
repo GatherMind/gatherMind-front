@@ -1,0 +1,89 @@
+.user-management-container {
+  display: flex;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+.user-management-content {
+  width: 100%;
+  margin-left: 30px;
+}
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 검색창에 그림자 추가 */
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #0288b4; /* 포커스 시 테두리 색상 */
+  box-shadow: 0 0 5px rgba(0, 136, 180, 0.5); /* 포커스 시 그림자 */
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 테이블에 그림자 추가 */
+}
+
+.user-table th {
+  background-color: #f4f4f4;
+
+  padding: 15px; /* 헤더 내부 여백 */
+  text-align: left;
+  font-weight: bold;
+}
+
+.user-table td {
+  padding: 12px; /* 데이터 셀 내부 여백 */
+  border-bottom: 1px solid #ddd; /* 행 구분 */
+  text-align: left;
+}
+
+.user-table tr:hover {
+  background-color: #f0f8ff; /* 행 호버 시 색상 변경 */
+  transition: background-color 0.2s;
+}
+
+.user-table td:nth-child(4) {
+  max-width: 200px; /* 스터디 목록 길이를 제한 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 내용이 길 경우 '...'로 표시 */
+}
+
+.user-table td:nth-child(4):hover {
+  white-space: normal; /* 호버 시 모든 스터디 표시 */
+  overflow: visible;
+}
+
+.modify-button,
+.delete-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+.modify-button {
+  background-color: #3c9ae7;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+}
+
+.modify-button:hover {
+  background-color: #026f94;
+}

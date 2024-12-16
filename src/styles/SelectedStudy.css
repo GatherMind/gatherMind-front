@@ -1,9 +1,11 @@
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 왼쪽 4개 칸 (비율로 설정), 오른쪽 1개 칸 */
-  gap: 16px;
-  width: 100%; /* 전체 너비 100% */
-  margin: 0 auto; /* 가운데 정렬 */
+  grid-template-columns: 1fr 1fr; /* 두 개의 열 */
+  gap: 16px; /* 박스 간격 */
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
 }
 
 .hotstudy {
@@ -20,15 +22,19 @@
 /* 왼쪽 컨테이너 (4개 박스) */
 .left {
   display: grid;
+  width: 95%;
   grid-template-rows: repeat(2, 1fr); /* 왼쪽 4개의 정사각형 */
   gap: 16px;
+  margin: 0 auto;
 }
 
 /* 오른쪽 컨테이너 (1개 박스) */
 .right {
   display: grid;
-  grid-template-rows: repeat(1, 1fr); /* 오른쪽에 1개의 정사각형 */
+  width: 95%;
+  grid-template-rows: repeat(4, 1fr); /* 4개의 행 */
   gap: 16px;
+  margin: 0 auto;
 }
 
 /* 각 박스 (정사각형) */
@@ -44,6 +50,9 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
   padding: 20px; /* 내부 여백 */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* 인터렉티브 효과 */
+  flex-grow: 1; /* 박스가 컨테이너 안에서 늘어나도록 설정 */
+  min-width: 0; /* 최소 너비 제한 */
+  max-width: 100%; /* 최대 너비 제한 */
 }
 
 /* 박스의 hover 상태 */
