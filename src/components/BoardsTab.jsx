@@ -60,18 +60,17 @@ const BoardsTab = ({
               );
             })}
           </div>
-
-          <Pagination
-            currentPage={boardsPage}
-            totalPages={boardsTotalPages}
-            onPageChange={onPageChange}
-          />
         </>
       ) : (
         <div className="no-boards">
-          게시판이 없습니다.게시판을 만들어 보세요.
+          게시판이 없습니다. 게시판을 만들어 보세요.
         </div>
       )}
+      <Pagination
+        currentPage={boardsPage}
+        totalPages={boardsTotalPages}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };
