@@ -28,13 +28,14 @@
 /* 버튼 공통 스타일 */
 .search-bar button {
   height: 36px;
-  background-color: var(--primary-color); /* Use secondary color */
-  color: var(--background-color-light); /* Light text color */
+  /* background-color: var(--primary-color);  */
+  /* color: var(--background-color-light);  */
+  border-radius: var(--btn-border-radius); /* Rounded corners */
+  transition: var(--transition-speed);
+  margin-right: var(--btn-between-margin);
   border: none;
-  border-radius: var(--border-radius); /* Rounded corners */
   font-size: 14px;
   cursor: pointer;
-  transition: background-color var(--transition-speed);
   padding: 0 15px; /* Consistent padding */
 }
 
@@ -45,8 +46,7 @@
 
 /* 버튼 여백 */
 .search-bar .reset-button {
-  background-color: var(--error-color);
-  margin-left: 10px; /* Space between buttons */
+  border: var(--btn-error-border);
 }
 
 /* 검색 버튼 active 상태 */
@@ -56,7 +56,7 @@
 
 /* 초기화 버튼 hover 상태 */
 .search-bar .reset-button:hover {
-  background-color: #c62828; /* Slightly lighter error hover color */
+  background-color: var(--error-color); /* Slightly lighter error hover color */
 }
 
 /* 에러 메시지 */

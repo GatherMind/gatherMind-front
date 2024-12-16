@@ -1,4 +1,4 @@
-import "../css/main.css";
+import "../styles/main.css";
 import Group from "../components/Group";
 import Nostudy from "../components/Nostudy";
 import React, { useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import {
 import { getStudyCategory } from "../services/StudyCategoryApiService";
 import StudyCategoriesComponent from "../components/StudyCategoriesComponent";
 import { CATEGORY_ALL } from "./../constants/constants";
+import SelectedStudy from "./../components/SelectedStudy";
 
 export default function Main() {
   const [hasStudy, setHasStudy] = useState(false);
@@ -83,6 +84,8 @@ export default function Main() {
           <MyStudyList MyStudies={MyStudies} />
         </>
       )}
+
+      <SelectedStudy />
 
       <SearchBar onSearch={handleSearch} />
       {/* <LoginButton /> */}

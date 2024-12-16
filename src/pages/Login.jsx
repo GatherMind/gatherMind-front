@@ -66,6 +66,9 @@ const Login = () => {
     }
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
   return (
     <div className="login-container">
       <main>
@@ -105,17 +108,17 @@ const Login = () => {
           </button>
         </form>
       </main>
-      <a href="/oauth2/authorization/google">
-        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo"/>
+      <a href="http://localhost:8080/oauth2/authorization/google">
+        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo" />
       </a>
       <a href="/oauth2/authorization/github">
-        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo"/>
+        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
       </a>
       <a href="/oauth2/authorization/kakao">
-        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo"/>
+        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
       </a>
       <a href="/oauth2/authorization/naver">
-        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo"/>
+        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
       </a>
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>

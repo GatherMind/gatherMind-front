@@ -50,26 +50,28 @@ h1 {
   background-color: #f4f4f4;
 }
 
-button {
-  margin-right: 5px;
+.modify-button,
+.delete-button {
   padding: 5px 10px;
+  margin-right: 5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.2s ease;
 }
 
-button:hover {
+.modify-button {
+  background-color: #3c9ae7;
+}
+.modify-button:hover {
   background-color: #0288b4;
-  color: white;
 }
 
 .delete-button {
   background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
 .delete-button:hover {

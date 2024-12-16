@@ -64,8 +64,9 @@ h1 {
   overflow: visible;
 }
 
-button {
-  padding: 8px 12px;
+.modify-button,
+.delete-button {
+  padding: 5px 10px;
   margin-right: 5px;
   border: none;
   border-radius: 5px;
@@ -73,19 +74,16 @@ button {
   font-size: 14px;
   font-weight: bold;
   color: white;
-  background-color: #3c9ae7;
   transition: background-color 0.2s ease;
+}
+.modify-button {
+  background-color: #3c9ae7;
 }
 
 .delete-button {
   background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #026f94; /* 버튼 호버 시 색상 */
+.modify-button:hover {
+  background-color: #026f94;
 }

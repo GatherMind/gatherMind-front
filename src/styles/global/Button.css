@@ -5,7 +5,6 @@
   font-size: 1rem;
   color: white;
   background-color: var(--primary-color);
-  border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -18,10 +17,10 @@
 .button-error {
   padding: 10px 15px;
   font-size: 1rem;
-  color: white;
-  background-color: var(--error-color);
-  border: none;
-  border-radius: var(--border-radius);
+  color: var(--btn-error-color);
+  background-color: var(--btn-error-background-color);
+  border: 2px solid #ced4da;
+  /* border-radius: var(--btn-error-border); */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

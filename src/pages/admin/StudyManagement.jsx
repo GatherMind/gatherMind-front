@@ -249,9 +249,19 @@ const StudyManagement = () => {
               </td>
               <td>
                 {editStudy && editStudy.studyId === study.studyId ? (
-                  <button onClick={handleSaveEditStudy}>저장</button>
+                  <button
+                    className="modify-button"
+                    onClick={handleSaveEditStudy}
+                  >
+                    저장
+                  </button>
                 ) : (
-                  <button onClick={() => handleEditStudy(study)}>수정</button>
+                  <button
+                    className="modify-button"
+                    onClick={() => handleEditStudy(study)}
+                  >
+                    수정
+                  </button>
                 )}
                 <button
                   className="delete-button"

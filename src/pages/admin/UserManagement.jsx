@@ -153,7 +153,12 @@ const UserManagement = () => {
   )}
 </td> */}
                 <td>
-                  <button onClick={() => handleEditClick(user)}>수정</button>
+                  <button
+                    className="modify-button"
+                    onClick={() => handleEditClick(user)}
+                  >
+                    수정
+                  </button>
                   <button
                     className="delete-button"
                     onClick={() => handleDelete(user.memberId)}
