@@ -79,7 +79,7 @@ function Group({ categoryFilter, searchResult, loginData }) {
                 )}
               </div>
               <div className="btn-name">{data.title}</div>
-              <div className="additional-content">Additional Content</div>
+              <div className="additional-content">{data.createdAt.slice(0, 10)}</div>
             </button>
           </div>
         ))

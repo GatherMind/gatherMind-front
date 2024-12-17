@@ -184,6 +184,12 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
     transition: box-shadow 0.3s ease;
   }
+
+  .additional-content{
+    font-size: 10px; 
+
+    text-align: right;
+  }
 }
 
 .status.false {
@@ -293,6 +299,7 @@
   background-color: #ff4c4c;
   transform: translateY(-4px);
 }
+
 
 /* 웹 화면용 스타일 */
 @media (min-width: 769px) {
@@ -411,5 +418,12 @@
     font-weight: 500;
     color: #333; /* 다크 그레이 텍스트 */
     text-transform: uppercase; /* 대문자로 */
+ 
+  }
+
+  .additional-content{
+    font-size: 10px; 
+
+    text-align: right;
   }
 }
