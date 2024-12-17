@@ -25,7 +25,6 @@ import Groupid from "./components/Groupid";
 import Dashboard from "./pages/Dashboard.jsx";
 import Main from "./pages/Main.jsx";
 import AdminMain from "./pages/admin/AdminMain";
-import OAuth2Success from "./components/OAuth2Success.jsx";
 
 function App() {
   return (
@@ -42,11 +41,8 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
+
               {/* admin page */}
-              {/* 
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/user-management" element={<UserManagement />} />
-              <Route path="/admin/*" element={<AdminMain />} /> */}
 
               <Route
                 path="/admin/*"
@@ -56,21 +52,20 @@ function App() {
                   </SidebarProvider>
                 }
               />
-              {/* <Route path="/content-management" element={<ContentManagement />} />
-        <Route path="/role-management" element={<RoleManagement />} /> */}
 
               {/* 비로그인 시 로그인 페이지로 이동 */}
-              <Route path="/mypage" element={<Mypage />} />
-              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-              <Route
-                path="/mypage/written-question"
-                element={<WrittenQuestion />}
-              />
-              <Route
-                path="/mypage/written-answer"
-                element={<WrittenAnswer />}
-              />
               <Route element={<PrivateRoute />}>
+                <Route path="/mypage" element={<Mypage />} />
+                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+                <Route
+                  path="/mypage/written-question"
+                  element={<WrittenQuestion />}
+                />
+                <Route
+                  path="/mypage/written-answer"
+                  element={<WrittenAnswer />}
+                />
+
                 {/* create study  */}
                 <Route
                   path="/create-study"
@@ -113,7 +108,6 @@ function App() {
             </Routes>
           </div>
         </div>
-        {/* <Footer/> */}
       </Router>
     </AuthProvider>
   );

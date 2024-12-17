@@ -9,7 +9,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-
   opacity: 0; /* 시작 상태 */
   animation: fadeIn 0.3s forwards; /* 나타나는 애니메이션 */
 }

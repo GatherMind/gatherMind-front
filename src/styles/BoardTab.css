@@ -18,6 +18,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  height: 150px;
+
+  overflow: hidden;
+  text-overflow: ellipsis; /* 내용이 길 경우 '...'로 표시 */
 }
 
 .board-card:hover {

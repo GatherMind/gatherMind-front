@@ -12,12 +12,14 @@
 
 .schedule-details {
   flex: 1;
+  text-align: left;
+  padding: 10px;
 }
 
 .schedule-detail {
-  font-size: 14px;
+  font-size: 18px;
   color: #333;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 
 .btn-container {
