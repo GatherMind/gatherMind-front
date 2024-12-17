@@ -123,7 +123,7 @@ const Mypage = () => {
           댓글
         </li>
       </ul>
-      <h1 className="study-page-name">
+      <h1 className="mypage-page-name">
         내 정보 &#45; 성공하겠다는 의지가 강한 사람에게는 결코 실패란 없다.
       </h1>
       <section className="mypage-my-info-box">
@@ -141,7 +141,6 @@ const Mypage = () => {
             <h3>닉네임</h3>
             <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
-
           <ul className="mypage-content-count">
             <li>
               스터디

@@ -44,6 +44,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
+              <Route path="/oauth2/success" element={<OAuth2Success />} />
               {/* admin page */}
               {/* 
               <Route path="/admin" element={<AdminDashboard />} />
@@ -62,6 +63,7 @@ function App() {
         <Route path="/role-management" element={<RoleManagement />} /> */}
 
               {/* 비로그인 시 로그인 페이지로 이동 */}
+              {/* create study  */}
               <Route path="/mypage" element={<Mypage />} />
               <Route path="/mypage/joined-study" element={<JoinedStudy />} />
               <Route
@@ -73,8 +75,6 @@ function App() {
                 element={<WrittenAnswer />}
               />
               <Route element={<PrivateRoute />}>
-                <Route path="/oauth2/success" element={<OAuth2Success />} />
-                {/* create study  */}
                 <Route
                   path="/create-study"
                   element={<StudyFormPage mode="create" />}

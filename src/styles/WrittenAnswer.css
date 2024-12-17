@@ -10,6 +10,79 @@
   .written-answer-container {
     width: 100%;
     margin: 0 auto;
+    font-size: 0.7em;
+  }
+
+  .mypage-answer-nav {
+    display: flex;
+    list-style: none;
+  }
+
+  .mypage-answer-nav > li {
+    width: 25%;
+    margin: 20px auto 30px;
+    padding: 10px;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    cursor: pointer;
+  }
+
+  .mypage-answer-nav > li:nth-child(4) {
+    color: rgb(128, 0, 128);
+    border-bottom: 4px solid rgb(128, 0, 128);
+  }
+
+  .answer-page-name {
+    display: none;
+  }
+
+  .answer-card {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto 30px;
+    text-align: left;
+    border-bottom: 1px solid rgb(74, 74, 74);
+    cursor: pointer;
+  }
+
+  .study-question-title-answer-content:hover .answer-study-title,
+  .study-question-title-answer-content:hover .answer-question-title,
+  .study-question-title-answer-content:hover .answer-answer-content {
+    color: rgb(128, 0, 128);
+  }
+
+  .answer-study-title {
+    margin: 5px 0;
+  }
+
+  .answer-question-title {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+
+  .answer-answer-content {
+    font-size: 17px;
+  }
+
+  .answer-delete-button {
+    width: 60px;
+    height: 30px;
+    margin-top: 15px;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 4px;
+    background: none;
+  }
+
+  .answer-delete-button:hover {
+    color: white;
+    background-color: rgb(128, 0, 128);
+    border: none;
+  }
+
+  .no-answer-message {
+    color: rgb(128, 0, 128);
+    font-size: 1.5em;
+    margin-top: 20px;
   }
 }
 
@@ -18,6 +91,7 @@
 @media (min-width: 768px) {
   .written-answer-container {
     width: 100%;
+    margin: 0 auto;
   }
 
   .mypage-answer-nav {

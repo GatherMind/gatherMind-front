@@ -13,6 +13,73 @@
 @media (max-width: 768px) {
   .joined-study-container {
     width: 100%;
+    margin: 0 auto;
+    font-size: 0.7em;
+  }
+
+  .mypage-study-nav {
+    display: flex;
+    list-style: none;
+  }
+
+  .mypage-study-nav > li {
+    width: 25%;
+    margin: 20px auto 10px;
+    padding: 10px;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    cursor: pointer;
+  }
+
+  .mypage-study-nav > li:nth-child(2) {
+    color: rgb(128, 0, 128);
+    border-bottom: 4px solid rgb(128, 0, 128);
+  }
+
+  .study-page-name {
+    display: none;
+  }
+
+  .study-list {
+    display: flex;
+    flex-wrap: wrap; /* 줄바꿈 허용 */
+    justify-content: center; /* 가로 정렬: 가운데 */
+    margin: 30px 0;
+  }
+
+  .study-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 위와 아래 요소 사이 간격 */
+    width: 70%;
+    height: 100px;
+    margin: 15px 1%;
+    padding: 15px;
+    font-size: 1.5em;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 4px;
+    box-sizing: border-box; /* padding 포함한 너비 설정 */
+  }
+
+  .study-withdraw-button {
+    width: 65%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 4px;
+    background: none;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .study-withdraw-button:hover {
+    border: none;
+    color: white;
+    background-color: rgb(128, 0, 128);
+  }
+
+  .no-study-message {
+    color: rgb(128, 0, 128);
+    font-size: 1.5em;
   }
 }
 

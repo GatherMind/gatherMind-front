@@ -8,6 +8,73 @@
   .written-question-container {
     width: 100%;
     margin: 0 auto;
+    font-size: 0.7em;
+  }
+
+  .mypage-question-nav {
+    display: flex;
+    list-style: none;
+  }
+
+  .mypage-question-nav > li {
+    width: 25%;
+    margin: 20px auto 30px;
+    padding: 10px;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    cursor: pointer;
+  }
+
+  .mypage-question-nav > li:nth-child(3) {
+    color: rgb(128, 0, 128);
+    border-bottom: 4px solid rgb(128, 0, 128);
+  }
+
+  .question-page-name {
+    display: none;
+  }
+
+  .question-card {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto 30px;
+    text-align: left;
+    border-bottom: 1px solid rgb(74, 74, 74);
+    cursor: pointer;
+  }
+
+  .study-question-title:hover .question-study-title,
+  .study-question-title:hover .question-question-title {
+    color: rgb(128, 0, 128);
+  }
+
+  .question-study-title {
+    margin: 5px 0;
+  }
+
+  .question-question-title {
+    font-size: 17px;
+  }
+
+  .question-delete-button {
+    width: 60px;
+    height: 30px;
+    margin-top: 5px;
+    border: 1px solid rgb(74, 74, 74);
+    border-radius: 4px;
+    background: none;
+  }
+
+  .question-delete-button:hover {
+    color: white;
+    background-color: rgb(128, 0, 128);
+    border: none;
+  }
+
+  .no-question-message {
+    color: rgb(128, 0, 128);
+    font-size: 1.5em;
+    margin-top: 20px;
   }
 }
 

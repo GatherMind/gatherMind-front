@@ -14,6 +14,113 @@
   .mypage-container {
     width: 100%;
     margin: 0 auto;
+    font-size: 0.7em;
+  }
+
+  .mypage-main-nav {
+    display: flex;
+    list-style: none;
+  }
+
+  .mypage-main-nav > li {
+    width: 25%;
+    margin: 20px auto 30px;
+    padding: 10px;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    cursor: pointer;
+  }
+
+  .mypage-main-nav > li:nth-child(1) {
+    color: rgb(128, 0, 128);
+    border-bottom: 4px solid rgb(128, 0, 128);
+  }
+
+  .mypage-page-name {
+    display: none;
+  }
+
+  .mypage-my-info-box {
+    margin: 0 auto;
+  }
+
+  .profile-image {
+    flex: 0.3;
+    width: 30%;
+    margin: auto;
+  }
+
+  .mypage-my-info {
+    flex: 0.7;
+    text-align: left;
+    margin: 6% 25% 0;
+  }
+
+  .mypage-joined-info {
+    display: flex;
+    padding: 0 0 5% 5%;
+  }
+
+  .mypage-joined-info > h3 {
+    margin: 0 5% 5px 0;
+    padding: 0 0 0 10px;
+    color: rgb(0, 0, 0);
+    border-left: 3px solid rgb(128, 0, 128);
+  }
+
+  .mypage-joined-info > span {
+    font-size: 1.3em;
+  }
+
+  .mypage-content-count {
+    display: flex;
+    width: 100%;
+    margin: 3% auto;
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  .mypage-content-count > li {
+    width: 33%;
+    list-style: none;
+  }
+
+  .mypage-content-count > li > p {
+    margin-top: 10px;
+  }
+
+  .mypage-edit-button,
+  .mypage-delete-button {
+    width: 48%;
+    height: 40px;
+    margin: 50px 1%;
+    border: none;
+    background: none;
+  }
+
+  .mypage-edit-button {
+    border-radius: 8px;
+    color: white;
+    letter-spacing: 5px;
+    background-color: rgb(128, 0, 128);
+    cursor: pointer;
+  }
+
+  .mypage-edit-button:hover {
+    background-color: rgb(100, 0, 100);
+  }
+
+  .mypage-delete-button {
+    border: 2px solid rgb(74, 74, 74);
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    cursor: pointer;
+  }
+
+  .mypage-delete-button:hover {
+    border: none;
+    color: white;
+    background-color: rgb(128, 0, 128);
   }
 }
 /* ------------------------------------------------------------- */
@@ -40,7 +147,17 @@
     color: rgb(128, 0, 128);
     border-bottom: 4px solid rgb(128, 0, 128);
   }
-  
+
+  .mypage-page-name {
+    width: 100%;
+    margin: 30px auto;
+    padding: 40px 0 40px 50px;
+    color: white;
+    text-align: left;
+    background-color: rgb(74, 74, 74);
+    box-sizing: border-box;
+  }
+
   .mypage-my-info-box {
     display: flex;
   }
@@ -48,6 +165,7 @@
   .profile-image {
     flex: 0.3;
     width: 30%;
+    margin: auto;
   }
 
   .mypage-my-info {
@@ -79,7 +197,7 @@
   .mypage-content-count > li > p {
     margin-top: 10px;
   }
-  
+
   .mypage-edit-button,
   .mypage-delete-button {
     width: 48%;
