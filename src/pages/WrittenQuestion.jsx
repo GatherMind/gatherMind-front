@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   getMemberByToken,
-  getStudyCount,
   getQuestionCount,
-  getAnswerCount,
   getRecentQuestionLimit3,
 } from "../services/MemberApiService";
 import "../styles/WrittenQuestion.css";
@@ -26,23 +24,11 @@ const WrittenQuestion = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // 회원 정보 가져오기
-        // const response = await axios.get("/api/members/me", {
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-
         // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
-        const [studyResponse, questionResponse, answerResponse] =
-          await Promise.all([
-            getStudyCount(),
-            getQuestionCount(),
-            getAnswerCount(),
-          ]);
+        const [questionResponse] = await Promise.all([getQuestionCount()]);
 
         setCounts({
-          studyCount: studyResponse.data || 0,
           questionCount: questionResponse.data || 0,
-          answerCount: answerResponse.data || 0,
         });
 
         const response = await getMemberByToken();
@@ -83,73 +69,65 @@ const WrittenQuestion = () => {
     }
   };
 
+  const truncateText = (text, maxLength) => 
+    text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
+  const maxLength = 20;
+
   return (
     <div className="written-question-container">
-      {/* 헤더 */}
-      <header>
-        <ul className="mypage-written-question-nav">
-          <li onClick={() => navigate("/mypage")}>
-            정보
-            <br />
-            보기
-          </li>
-          <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한
-            <br />
-            스터디
-          </li>
-          <li onClick={() => navigate("/mypage/written-question")}>
-            작성한
-            <br />
-            질문
-          </li>
-          <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한
-            <br />
-            답변
-          </li>
-        </ul>
+      <ul className="mypage-question-nav">
+        <li
+          className="mypage-question-nav-1"
+          onClick={() => navigate("/mypage")}
+        >
+          내 정보
+        </li>
+        <li
+          className="mypage-question-nav-2"
+          onClick={() => navigate("/mypage/joined-study")}
+        >
+          스터디
+        </li>
+        <li
+          className="mypage-question-nav-3"
+          onClick={() => navigate("/mypage/written-question")}
+        >
+          게시글
+        </li>
+        <li
+          className="mypage-question-nav-4"
+          onClick={() => navigate("/mypage/written-answer")}
+        >
+          댓글
+        </li>
+      </ul>
 
-        {/* 통계 정보 */}
-        <ul className="mypage-stats">
-          <li>
-            가입 스터디 수<p>{counts.studyCount}</p>
-          </li>
-          <li>
-            작성 질문 수<p>{counts.questionCount}</p>
-          </li>
-          <li>
-            작성 답변 수<p>{counts.answerCount}</p>
-          </li>
-        </ul>
-      </header>
-
-      {/* 질문 목록 */}
       <main>
-        <h3>작성한 질문 목록</h3>
+        <h1 className="question-page-name">
+          내 게시글 목록 &#40; {counts.questionCount} &#41; &#45; 사람을
+          판단하려면 그의 대답이 아니라 질문을 보라.
+        </h1>
+
         {recentQuestions.length > 0 ? (
           recentQuestions.map((question) => (
-            <div key={question.id} className="question-card">
-              <p className="question-study-title">{question.studyTitle}</p>
-              <div className="question-content-button-box">
-                <p className="mypage-question-title">{question.title}</p>
-                <div className="mypage-question-button-box">
-                  <button
-                    className="mypage-question-edit"
-                    onClick={() =>
-                      handleEditQuestion(question.questionId, question.studyId)
-                    }
-                  >
-                    수정
-                  </button>
-                  <button
-                    className="mypage-question-delete"
-                    onClick={() => handleDeleteQuestion(question.questionId)}
-                  >
-                    삭제
-                  </button>
-                </div>
+            <div
+              className="question-card"
+              key={question.id}
+              onClick={() =>
+                handleEditQuestion(question.questionId, question.studyId)
+              }
+            >
+              <div className="study-question-title">
+                <p className="question-study-title">{truncateText(question.studyTitle, maxLength)}</p>
+                <p className="question-question-title">{truncateText(question.title, maxLength)}</p>
               </div>
+              <button
+                className="question-delete-button"
+                onClick={() => handleDeleteQuestion(question.questionId)}
+              >
+                삭제
+              </button>
             </div>
           ))
         ) : (

@@ -1,7 +1,13 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url(../assets/GmarketSansMedium.otf);
+}
+
 * {
   margin: 0;
   padding: 0;
   color: rgb(74, 74, 74);
+  font-family: GmarketSansMedium, sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -9,228 +15,103 @@
     width: 100%;
     margin: 0 auto;
   }
-<<<<<<< HEAD
-=======
-
-  .mypage-nav {
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    list-style: none;
-  }
-
-  .mypage-nav > li {
-    width: 25%;
-    height: 8vh;
-    align-content: center;
-    font-size: 13px;
-    font-weight: bold;
-    border: 1px solid rgb(2, 136, 255);
-    border-left: none;
-    box-sizing: border-box;
-  }
-
-  .mypage-nav > li:nth-child(1) {
-    width: 25%;
-    font-size: 13px;
-    font-weight: bold;
-    background-color: va rgb(2, 136, 255);
-    color: white;
-    border-radius: 4px 0 0 4px;
-    box-sizing: border-box;
-  }
-
-  .mypage-nav > li:nth-child(4) {
-    width: 25%;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 0 4px 4px 0;
-    box-sizing: border-box;
-  }
-
-  .mypage-stats {
-    display: flex;
-    width: 100%;
-    margin: 3vh auto;
-    list-style: none;
-  }
-
-  .mypage-stats > li {
-    width: 33.39%;
-    height: 7vh;
-    align-content: center;
-    font-size: 13px;
-    font-weight: bold;
-    border: 1px solid rgba(2, 136, 255);
-    border-left: none;
-    box-sizing: border-box;
-  }
-
-  .mypage-stats > li:nth-child(1) {
-    width: 33.39%;
-    border-left: 1px solid rgb(2, 136, 255);
-    border-radius: 4px 0 0 4px;
-    box-sizing: border-box;
-  }
-
-  .mypage-stats > li:nth-child(3) {
-    width: 33.39%;
-    border-radius: 0 4px 4px 0;
-    box-sizing: border-box;
-  }
-
-  .mypage-info-box > .mypage-joined-info {
-    display: flex;
-    height: 70px;
-    margin-top: 2.5vh;
-    padding-top: 4vh;
-    border: 1px solid rgb(2, 136, 255);
-    border-radius: 4px;
-  }
-
-  .mypage-joined-info > h3 {
-    margin-left: 10px;
-  }
-
-  .mypage-joined-info > span {
-    margin-left: 15px;
-    margin-top: 5px;
-  }
-}
-.mypage-edit-button,
-.mypage-delete-button {
-  width: 46%;
-  color: black;
-  margin: 20px auto;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
->>>>>>> develop
-}
-
-.mypage-edit-button {
-  background-color: var(--button-color);
-}
-
-.mypage-edit-button:hover {
-  /* background-color: rgb(0, 86, 179); */
-  background-color: var(--button-color);
-  cursor: pointer;
-}
-
-.mypage-delete-button {
-  background-color: var(--button-secondary-color);
-}
-
-.mypage-delete-button:hover {
-  /* background-color: rgb(218, 0, 0); */
-  cursor: pointer;
 }
 /* ------------------------------------------------------------- */
 
 @media (min-width: 768px) {
   .mypage-container {
-    width: 740px;
-    margin: 0 auto;
-  }
-<<<<<<< HEAD
-=======
-
-  .mypage-nav {
-    display: flex;
     width: 100%;
-    margin: 0 auto;
+  }
+
+  .mypage-main-nav {
+    display: flex;
     list-style: none;
   }
 
-  .mypage-nav > li {
+  .mypage-main-nav > li {
     width: 25%;
-    height: 7vh;
-    align-content: center;
-    font-size: 13px;
-    font-weight: bold;
-    border: 1px solid rgb(2, 136, 255);
-    border-left: none;
-    box-sizing: border-box;
+    margin: 50px auto 0;
+    padding: 10px;
+    border-bottom: 4px solid rgb(0, 0, 0);
+    cursor: pointer;
   }
 
-  .mypage-nav > li:nth-child(1) {
-    width: 25%;
-    font-size: 13px;
-    font-weight: bold;
-    background-color: rgb(2, 136, 255);
-    color: white;
-    border-radius: 4px 0 0 4px;
-    box-sizing: border-box;
+  .mypage-main-nav > li:nth-child(1) {
+    color: rgb(128, 0, 128);
+    border-bottom: 4px solid rgb(128, 0, 128);
   }
-
-  .mypage-nav > li:nth-child(4) {
-    width: 25%;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 0 4px 4px 0;
-    box-sizing: border-box;
-  }
-
-  .mypage-stats {
+  
+  .mypage-my-info-box {
     display: flex;
-    width: 100%;
-    margin: 3vh auto;
-    list-style: none;
   }
 
-  .mypage-stats > li {
-    width: 33.39%;
-    height: 7vh;
-    align-content: center;
-    font-size: 13px;
-    font-weight: bold;
-    border: 1px solid rgba(2, 136, 255);
-    border-left: none;
-    box-sizing: border-box;
+  .profile-image {
+    flex: 0.3;
+    width: 30%;
   }
 
-  .mypage-stats > li:nth-child(1) {
-    width: 33.39%;
-    border-left: 1px solid rgb(2, 136, 255);
-    border-radius: 4px 0 0 4px;
-    box-sizing: border-box;
+  .mypage-my-info {
+    flex: 0.7;
+    text-align: left;
   }
 
-  .mypage-stats > li:nth-child(3) {
-    width: 33.39%;
-    border-radius: 0 4px 4px 0;
-    box-sizing: border-box;
-  }
-
-  .mypage-info-box > .mypage-joined-info {
-    display: flex;
-    height: 70px;
-    margin-top: 2.5vh;
-    padding: 5vh 0 0 3vh;
-    border: 1px solid rgb(2, 136, 255);
-    border-radius: 4px;
+  .mypage-joined-info {
+    padding: 0 0 30px 50px;
   }
 
   .mypage-joined-info > h3 {
-    margin-left: 40px;
+    margin: 0 0 10px 0;
+    padding: 0 0 0 10px;
+    color: rgb(0, 0, 0);
+    border-left: 3px solid rgb(128, 0, 128);
   }
 
-  .mypage-joined-info > span {
-    margin-left: 30px;
+  .mypage-content-count {
+    display: flex;
+    text-align: center;
   }
 
+  .mypage-content-count > li {
+    width: 33%;
+    list-style: none;
+  }
+
+  .mypage-content-count > li > p {
+    margin-top: 10px;
+  }
+  
   .mypage-edit-button,
   .mypage-delete-button {
-    width: 50%;
-    margin: 40px 0;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
+    width: 48%;
+    height: 40px;
+    margin: 50px 1%;
     border: none;
-    border-radius: 4px;
+    background: none;
   }
->>>>>>> develop
+
+  .mypage-edit-button {
+    border-radius: 8px;
+    color: white;
+    letter-spacing: 5px;
+    background-color: rgb(128, 0, 128);
+    cursor: pointer;
+  }
+
+  .mypage-edit-button:hover {
+    background-color: rgb(100, 0, 100);
+  }
+
+  .mypage-delete-button {
+    border: 2px solid rgb(74, 74, 74);
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    cursor: pointer;
+  }
+
+  .mypage-delete-button:hover {
+    border: none;
+    color: white;
+    background-color: rgb(128, 0, 128);
+  }
 }

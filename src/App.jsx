@@ -22,16 +22,12 @@ import WrittenAnswer from "./pages/WrittenAnswer";
 import { SidebarProvider } from "./context/SidebarContext";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Groupid from "./components/Groupid";
-<<<<<<< HEAD
-import OAuth2Success from "./components/OAuth2Success.jsx";
-=======
-import OAuth2Login from "./pages/OAuth2Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Main from "./pages/Main.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import UserManagement from "./pages/admin/UserManagement.jsx";
 import AdminMain from "./pages/admin/AdminMain";
->>>>>>> develop
+import OAuth2Success from "./components/OAuth2Success.jsx";
 
 function App() {
   return (
@@ -66,18 +62,18 @@ function App() {
         <Route path="/role-management" element={<RoleManagement />} /> */}
 
               {/* 비로그인 시 로그인 페이지로 이동 */}
+              <Route path="/mypage" element={<Mypage />} />
+              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+              <Route
+                path="/mypage/written-question"
+                element={<WrittenQuestion />}
+              />
+              <Route
+                path="/mypage/written-answer"
+                element={<WrittenAnswer />}
+              />
               <Route element={<PrivateRoute />}>
-              <Route path="/oauth2/success" element={<OAuth2Success />} />
-                <Route path="/mypage" element={<Mypage />} />
-                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-                <Route
-                  path="/mypage/written-question"
-                  element={<WrittenQuestion />}
-                />
-                <Route
-                  path="/mypage/written-answer"
-                  element={<WrittenAnswer />}
-                />{" "}
+                <Route path="/oauth2/success" element={<OAuth2Success />} />
                 {/* create study  */}
                 <Route
                   path="/create-study"
