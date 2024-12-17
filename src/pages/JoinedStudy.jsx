@@ -103,8 +103,13 @@ const JoinedStudy = () => {
         {joinedGroups.length > 0 ? (
           <div className="study-list">
             {joinedGroups.map((group) => (
-              <div className="study-card" key={group.studyId}>
-                <p className="study-title">{truncateText(group.title, maxLength)}</p>
+              <div className="study-card" 
+              key={group.studyId}
+              >
+                <p className="study-title">
+                  스터디제목인데용
+                  {truncateText(group.title, maxLength)}
+                  </p>
                 <button
                   className="study-withdraw-button"
                   onClick={() => handleWithdrawFromStudy(group.studyId)}

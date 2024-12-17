@@ -69,7 +69,7 @@ const WrittenAnswer = () => {
     }
   };
 
-  const truncateText = (text, maxLength) => 
+  const truncateText = (text, maxLength) =>
     text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 
   const maxLength = 20;
@@ -114,9 +114,15 @@ const WrittenAnswer = () => {
               }
             >
               <div className="study-question-title-answer-content">
-                <p className="answer-study-title">{truncateText(answer.studyTitle, maxLength)}</p>
-                <p className="answer-question-title">{truncateText(answer.questionTitle, maxLength)}</p>
-                <p className="answer-answer-content">{truncateText(answer.content, maxLength)}</p>
+                <p className="answer-study-title">
+                  {truncateText(answer.studyTitle, maxLength)}
+                </p>
+                <p className="answer-question-title">
+                  {truncateText(answer.questionTitle, maxLength)}
+                </p>
+                <p className="answer-answer-content">
+                  {truncateText(answer.content, maxLength)}
+                </p>
               </div>
               <button
                 className="answer-delete-button"
