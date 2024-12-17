@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext";
 import { loginMember } from "../services/AuthApiService";
 import githubLoginImage from "../assets/github-login.svg";
 import kakaoLoginImage from "../assets/kakao-login.png";
-import naverLoginImage from "../assets/naver-login.png";
 import axios from "axios";
 
 const Login = () => {
@@ -125,9 +124,6 @@ const Login = () => {
         </a>
         <a href="/oauth2/authorization/kakao">
           <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
-        </a>
-        <a href="/oauth2/authorization/naver">
-          <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
         </a>
       </main>
       <footer>
