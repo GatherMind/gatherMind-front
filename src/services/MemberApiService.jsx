@@ -61,7 +61,7 @@ export const getMyStudyByToken = async () => {
         Authorization: `Bearer ${getAuthToken()}`, // 인증 헤더 추가
       },
     });
-    console.log(response);
+
     return response;
   } catch (error) {
     console.error("Network error or server unreachable: ", error);

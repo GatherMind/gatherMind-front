@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import AnswerList from "../components/AnswerList";
@@ -13,6 +13,7 @@ import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
 import "../styles/global/ReactQuill.css";
 import "../components/Feedback/ErrorMessage.css";
+import { TABS } from "../constants/constants";
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -65,6 +66,10 @@ const QuestionDetail = () => {
     }
   };
 
+  const handleBackToList = () => {
+    navigate(`/study-info/${studyId}`, { state: { activeTab: TABS.BOARD } }); // 목록 페이지로 이동
+  };
+
   if (loading) return <Loading />;
   if (error)
     return (
@@ -115,6 +120,13 @@ const QuestionDetail = () => {
           </button>
         </div>
       )}
+
+      {/* 목록 버튼 추가 */}
+      <div className="back-to-list">
+        <button className="list-button" onClick={handleBackToList}>
+          목록으로 돌아가기
+        </button>
+      </div>
 
       <hr />
 

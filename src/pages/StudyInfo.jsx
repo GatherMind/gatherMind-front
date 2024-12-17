@@ -3,7 +3,7 @@ import "../styles/MeetingInfo.css";
 import "../styles/global/Tabs.css";
 import "../styles/global/DropdownMenu.css";
 import "../styles/global/Card.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
 import ScheduleTab from "../components/ScheduleTab";
@@ -25,9 +25,12 @@ import { STUDY_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
 import BoardsTab from "../components/BoardsTab.jsx";
 
 const StudyInfo = () => {
+  const location = useLocation();
+  const { activeTab: initialTab } = location.state || {}; // 전달된 state에서 activeTab 가져오기
+
   const { authToken } = useAuth();
 
-  const [activeTab, setActiveTab] = useState(TABS.MEMBER);
+  const [activeTab, setActiveTab] = useState(initialTab || TABS.MEMBER);
   const { studyId } = useParams();
   const navigate = useNavigate();
 
@@ -124,9 +127,6 @@ const StudyInfo = () => {
   // 탭 클릭
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === TABS.MEMBER) {
-      handleFetchMembers();
-    }
   };
 
   const handleStudyDelete = async () => {
@@ -201,12 +201,12 @@ const StudyInfo = () => {
           )}
         </div>
       </div>
-      {/* 멤버 / 약속 탭 */}
+      {/* 탭 */}
       <div className="tabs">
         <button
           className={`tab-button ${activeTab === TABS.MEMBER ? "active" : ""}`}
           onClick={() => {
-            handleTabClick("members");
+            handleTabClick(TABS.MEMBER);
           }}
         >
           멤버
