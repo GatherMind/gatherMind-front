@@ -4,8 +4,6 @@ import { useAuth } from "../context/AuthContext";
 import {
   getMemberByToken,
   getStudyCount,
-  getQuestionCount,
-  getAnswerCount,
   getMyStudy,
 } from "../services/MemberApiService";
 import "../styles/JoinedStudy.css";
@@ -19,8 +17,6 @@ const JoinedStudy = () => {
 
   const [counts, setCounts] = useState({
     studyCount: 0,
-    questionCount: 0,
-    answerCount: 0,
   });
 
   // 데이터 가져오기
@@ -37,17 +33,10 @@ const JoinedStudy = () => {
         setJoinedGroups(groupResponse.data);
 
         // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
-        const [studyResponse, questionResponse, answerResponse] =
-          await Promise.all([
-            getStudyCount(),
-            getQuestionCount(),
-            getAnswerCount(),
-          ]);
+        const [studyResponse] = await Promise.all([getStudyCount()]);
 
         setCounts({
           studyCount: studyResponse.data || 0,
-          questionCount: questionResponse.data || 0,
-          answerCount: answerResponse.data || 0,
         });
       } catch (error) {
         console.error("스터디 정보를 불러오는 중 오류가 발생했습니다.", error);
@@ -72,57 +61,52 @@ const JoinedStudy = () => {
     }
   };
 
+  
+  const truncateText = (text, maxLength) => 
+    text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+
+  const maxLength = 20;
+
   return (
     <div className="joined-study-container">
-      {/* 헤더 */}
-      <header>
-        <ul className="mypage-joined-study-nav">
-          <li onClick={() => navigate("/mypage")}>
-            정보
-            <br />
-            보기
-          </li>
-          <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한
-            <br />
-            스터디
-          </li>
-          <li onClick={() => navigate("/mypage/written-question")}>
-            작성한
-            <br />
-            질문
-          </li>
-          <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한
-            <br />
-            답변
-          </li>
-        </ul>
-
-        {/* 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 */}
-        <ul className="mypage-stats">
-          <li>
-            가입 스터디 수<p>{counts.studyCount}</p>
-          </li>
-          <li>
-            작성 질문 수<p>{counts.questionCount}</p>
-          </li>
-          <li>
-            작성 답변 수<p>{counts.answerCount}</p>
-          </li>
-        </ul>
-      </header>
+      <ul className="mypage-study-nav">
+        <li className="mypage-study-nav-1" onClick={() => navigate("/mypage")}>
+          내 정보
+        </li>
+        <li
+          className="mypage-study-nav-2"
+          onClick={() => navigate("/mypage/joined-study")}
+        >
+          스터디
+        </li>
+        <li
+          className="mypage-study-nav-3"
+          onClick={() => navigate("/mypage/written-question")}
+        >
+          게시글
+        </li>
+        <li
+          className="mypage-study-nav-4"
+          onClick={() => navigate("/mypage/written-answer")}
+        >
+          댓글
+        </li>
+      </ul>
 
       {/* 메인 콘텐츠 */}
       <main>
-        <h3>가입한 스터디 목록</h3>
+        <h1 className="study-page-name">
+          내 스터디 목록 &#40; {counts.studyCount} &#41; &#45; 당신 앞에는
+          어떠한 장애물도 없다. 망설이는 태도가 가장 큰 장애물이다.
+        </h1>
+
         {joinedGroups.length > 0 ? (
           <div className="study-list">
             {joinedGroups.map((group) => (
               <div className="study-card" key={group.studyId}>
-                <p className="study-title">{group.title}</p>
+                <p className="study-title">{truncateText(group.title, maxLength)}</p>
                 <button
-                  className="withdraw-button"
+                  className="study-withdraw-button"
                   onClick={() => handleWithdrawFromStudy(group.studyId)}
                 >
                   탈퇴
@@ -131,9 +115,7 @@ const JoinedStudy = () => {
             ))}
           </div>
         ) : (
-          <p className="no-study-message">
-            현재 가입한 스터디가 없네요. 새로운 스터디에 가입해볼까요?
-          </p>
+          <p className="no-study-message">현재 소속된 스터디가 없어요.</p>
         )}
       </main>
     </div>

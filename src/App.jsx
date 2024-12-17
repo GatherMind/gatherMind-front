@@ -25,6 +25,7 @@ import Groupid from "./components/Groupid";
 import Dashboard from "./pages/Dashboard.jsx";
 import Main from "./pages/Main.jsx";
 import AdminMain from "./pages/admin/AdminMain";
+import OAuth2Success from "./components/OAuth2Success.jsx";
 
 function App() {
   return (
@@ -59,17 +60,17 @@ function App() {
         <Route path="/role-management" element={<RoleManagement />} /> */}
 
               {/* 비로그인 시 로그인 페이지로 이동 */}
+              <Route path="/mypage" element={<Mypage />} />
+              <Route path="/mypage/joined-study" element={<JoinedStudy />} />
+              <Route
+                path="/mypage/written-question"
+                element={<WrittenQuestion />}
+              />
+              <Route
+                path="/mypage/written-answer"
+                element={<WrittenAnswer />}
+              />
               <Route element={<PrivateRoute />}>
-                <Route path="/mypage" element={<Mypage />} />
-                <Route path="/mypage/joined-study" element={<JoinedStudy />} />
-                <Route
-                  path="/mypage/written-question"
-                  element={<WrittenQuestion />}
-                />
-                <Route
-                  path="/mypage/written-answer"
-                  element={<WrittenAnswer />}
-                />{" "}
                 {/* create study  */}
                 <Route
                   path="/create-study"

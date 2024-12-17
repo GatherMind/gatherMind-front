@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../styles/Login.css";
@@ -8,12 +8,11 @@ import socialLinks from "../data/socialLinks";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [userInfo, setUserInfo] = useState(null);
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState(null);
-
   const { login } = useAuth();
 
   // 유효성 검사 함수
