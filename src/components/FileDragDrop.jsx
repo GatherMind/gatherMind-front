@@ -136,7 +136,7 @@ const FileDragDrop = ({ file, setFile, beforeFileName, url }) => {
           <Modal
             isOpen={isModalOpen}
             onClose={handleModalClose}
-            title={file.name || ""}
+            title={file?.name || ""}
             children={
               <img src={preview} alt="미리보기" style={{ maxWidth: "100%" }} />
             }
