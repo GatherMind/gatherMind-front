@@ -84,23 +84,35 @@ const SignUp = () => {
     ) {
       newErrors.nickname =
         "닉네임은 2~20자의 한글, 영문, 숫자만 조합하여 입력해주세요.";
+    } else if (field === "email" && !/\S+@\S+\.\S+/.test(value)) {
+      newErrors.email = "올바른 이메일 형식을 입력해주세요.";
     } else {
       // 유효성 검사를 통과한 경우에만 중복 확인 요청
       try {
         const response = await duplicationCheck(field, value);
         if (response.data.isUnique) {
           newSuccessMessages[field] = `사용할 수 있는 ${
-            field === "memberId" ? "아이디" : "닉네임"
+            field === "memberId"
+              ? "아이디"
+              : field === "nickname"
+              ? "닉네임"
+              : "이메일"
           }입니다.`;
           setValidatedFields((prev) => ({ ...prev, [field]: true }));
         } else {
           newErrors[field] = `이미 사용 중인 ${
-            field === "memberId" ? "아이디" : "닉네임"
+            field === "memberId"
+              ? "아이디"
+              : field === "nickname"
+              ? "닉네임"
+              : "이메일"
           }입니다.`;
           setValidatedFields((prev) => ({ ...prev, [field]: false }));
         }
       } catch (error) {
         console.error("중복 확인 오류:", error);
+        newErrors[field] =
+          "중복 확인 중 문제가 발생했습니다. 다시 시도해주세요.";
       }
     }
 
@@ -109,59 +121,22 @@ const SignUp = () => {
   };
 
   // 입력 값 변경 시 상태 초기화
-  const handleInputChange = async (field, value) => {
+  const handleInputChange = (field, value) => {
     if (field === "memberId") {
       setMemberId(value.toLowerCase());
-      setValidatedFields((prev) => ({ ...prev, memberId: false })); // 중복 검사 초기화
-      setSuccessMessages((prev) => ({ ...prev, memberId: "" })); // 성공 메시지 초기화
     }
-
     if (field === "nickname") {
       setNickname(value);
-      setValidatedFields((prev) => ({ ...prev, nickname: false })); // 중복 검사 초기화
-      setSuccessMessages((prev) => ({ ...prev, nickname: "" })); // 성공 메시지 초기화
     }
-
     if (field === "email") {
       setEmail(value);
-      setErrors((prev) => ({ ...prev, email: "" })); // 에러 초기화
-      setSuccessMessages((prev) => ({ ...prev, email: "" })); // 성공 메시지 초기화
-
-      // 이메일 형식이 유효한 경우에만 중복 확인 실행
-      if (/\S+@\S+\.\S+/.test(value)) {
-        try {
-          const response = await duplicationCheck("email", value);
-          if (response.data.isUnique) {
-            setSuccessMessages((prev) => ({
-              ...prev,
-              email: "사용할 수 있는 이메일입니다.",
-            }));
-            setErrors((prev) => ({ ...prev, email: "" })); // 에러 초기화
-          } else {
-            setErrors((prev) => ({
-              ...prev,
-              email: "이미 사용 중인 이메일입니다.",
-            }));
-            setSuccessMessages((prev) => ({ ...prev, email: "" })); // 성공 메시지 초기화
-          }
-        } catch (error) {
-          console.error("이메일 중복 확인 오류:", error);
-          setErrors((prev) => ({
-            ...prev,
-            email: "중복 확인 중 문제가 발생했습니다. 다시 시도해주세요.",
-          }));
-        }
-      } else {
-        setErrors((prev) => ({
-          ...prev,
-          email: "올바른 이메일 형식을 입력해주세요.",
-        }));
-      }
     }
-
     if (field === "password") setPassword(value);
     if (field === "confirmPassword") setConfirmPassword(value);
 
+    // 상태 초기화
+    setValidatedFields((prev) => ({ ...prev, [field]: false }));
+    setSuccessMessages((prev) => ({ ...prev, [field]: "" }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
@@ -174,7 +149,7 @@ const SignUp = () => {
 
     // 중복 검사 여부 확인
     if (!validatedFields.memberId || !validatedFields.nickname) {
-      alert("아이디와 닉네임 중복 검사를 완료해주세요.");
+      setErrors({ form: "아이디와 닉네임 중복 검사를 완료해주세요." });
       return;
     }
 
@@ -201,7 +176,7 @@ const SignUp = () => {
   return (
     <div className="signup-container">
       <main>
-        <h2>회원가입</h2>
+        <h1 className="signup-page-name">회원가입</h1>
         {signUpSuccess ? (
           <p>
             회원가입이 성공적으로 완료되었습니다! 잠시 후 로그인 페이지로
@@ -266,17 +241,29 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => handleInputChange("email", e.target.value)}
-                autoComplete="off"
-                placeholder="이메일"
-              />
-              {errors.email && <p className="error-message">{errors.email}</p>}
-              {successMessages.email && (
-                <p className="success-message">{successMessages.email}</p>
-              )}
+              <div className="signup-input-wrap">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  autoComplete="off"
+                  placeholder="이메일"
+                  className="option-duplicated"
+                />
+                <button
+                  type="button"
+                  onClick={() => handleDuplicationCheck("email", email)}
+                  className="signup-check-button"
+                >
+                  중복확인
+                </button>
+                {errors.email && (
+                  <p className="error-message">{errors.email}</p>
+                )}
+                {successMessages.email && (
+                  <p className="success-message">{successMessages.email}</p>
+                )}
+              </div>
             </div>
 
             <div className="form-group">
@@ -308,7 +295,7 @@ const SignUp = () => {
             </div>
 
             {errors.form && <p className="error-message">{errors.form}</p>}
-            <button className="signup-button" type="submit">
+            <button id="signup-button" type="submit">
               회원가입
             </button>
           </form>

@@ -62,10 +62,11 @@ const Login = () => {
       console.error(error);
     }
   };
+
   return (
     <div className="login-container">
       <main>
-        <h2>로그인</h2>
+        <h1 className="login-page-name">로그인</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
@@ -74,7 +75,7 @@ const Login = () => {
               onChange={handleMemberIdChange}
               autoComplete="off"
               placeholder="아이디"
-              className="login-input"
+              className="login-input-id"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
@@ -87,7 +88,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
               placeholder="비밀번호"
-              className="login-input"
+              className="login-input-pw"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>
@@ -96,23 +97,24 @@ const Login = () => {
           {loginError && (
             <p className="login-confirm-error-message">{loginError}</p>
           )}
-          <button className="login-button" type="submit">
+          <button id="login-button" type="submit">
             로그인
           </button>
         </form>
+        <div className="social-login-buttons">
+          {socialLinks.map((link) => (
+            <a key={link.id} href={link.href}>
+              <img src={link.imageSrc} alt={link.alt} className="login-logo" />
+            </a>
+          ))}
+        </div>
       </main>
-      <div className="social-login-buttons">
-        {socialLinks.map((link) => (
-          <a key={link.id} href={link.href}>
-            <img src={link.imageSrc} alt={link.alt} className="login-logo" />
-          </a>
-        ))}
-      </div>
+
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
         <p>
-          <span onClick={() => navigate("/signup")}>여기</span>를 눌러 다양한
-          스터디를 둘러보세요!
+          <span onClick={() => navigate("/signup")}>여기</span>를 눌러서
+          회원가입을 진행해보세요!
         </p>
       </footer>
     </div>
