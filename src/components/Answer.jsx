@@ -40,10 +40,10 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
             className="edit-input"
           />
           <div className="edit-buttons">
-            <button onClick={handleUpdate} className="save-button">
+            <button onClick={handleUpdate} className="button">
               저장
             </button>
-            <button onClick={handleEdit} className="cancel-button">
+            <button onClick={handleEdit} className="button-error">
               취소
             </button>
           </div>
@@ -56,10 +56,10 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
             <p className="createdAt">{dateFormat(answer.createdAt)}</p>
             {answer?.memberId === memberId && (
               <div className="action-buttons">
-                <button className="edit-button" onClick={handleEdit}>
+                <button className="button edit-button" onClick={handleEdit}>
                   수정
                 </button>
-                <button className="delete-button" onClick={handleDelete}>
+                <button className="button-error" onClick={handleDelete}>
                   삭제
                 </button>
               </div>

@@ -18,7 +18,7 @@
 }
 
 .schedule-item:hover {
-  background-color: #f0f8ff; /* 호버 시 색상 변화 */
+  background-color: #fdeef1; /* 호버 시 색상 변화 */
 }
 
 .schedule-details {

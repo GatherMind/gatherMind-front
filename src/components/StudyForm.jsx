@@ -42,13 +42,13 @@ const StudyForm = ({ onSubmit, initialData }) => {
   const buttonLabel = isSubmitting
     ? "처리 중..."
     : initialData
-    ? "그룹 수정"
-    : "그룹 생성";
+    ? "스터디 수정"
+    : "스터디 생성";
 
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <div className="form-group">
-        <label htmlFor="status">모집상태 :</label>
+        <label htmlFor="status">모집상태</label>
         <select
           id="status"
           value={status}
@@ -60,23 +60,23 @@ const StudyForm = ({ onSubmit, initialData }) => {
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="studyTitle">스터디 이름 : </label>
+        <label htmlFor="studyTitle">스터디 이름</label>
         <input
           id="title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="그룹 이름"
+          placeholder="스터디 이름"
           required
         />
       </div>
       <div className="form-group">
-        <label htmlFor="description">스터디 소개 :</label>
+        <label htmlFor="description">스터디 소개</label>
         <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="그룹 소개"
+          placeholder="스터디 소개"
           required
         />
         {/* <Editor

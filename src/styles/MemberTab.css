@@ -5,7 +5,6 @@
   background-color: var(--background-color-light);
   border-radius: 10px;
   box-shadow: var(--shadow);
-  margin-top: 20px;
 }
 
 .list-header-left {
@@ -18,7 +17,7 @@
 }
 .member-count {
   margin-left: 10px;
-  color: var(--primary-color);
+  color: var(--main-color);
   font-size: 1.1rem;
 }
 
@@ -34,11 +33,11 @@
 }
 
 .status.pending {
-  color: #ffa500; /* Orange for PENDING */
+  color: #E2F26B;
 }
 
 .status.approved {
-  color: #4caf50; /* Green for APPROVED */
+  color: #B4BF5E;
 }
 
 .board-item {
@@ -91,11 +90,25 @@
   width: 100%; /* 버튼이 부모 영역 내에서 꽉 차도록 설정 */
 }
 
+.actions .button {
+  border-radius: 30px;
+  color: var(--text-color);
+  border: var(--btn-error-border);
+  background-color: var(--button-secondary-color);
+}
+
+.actions .button:hover {
+  border-radius: 30px;
+  background-color: var(--main-color);
+}
+
 .resign {
-  background-color: var(--error-color);
+  background-color: var(--btn-error-background-color) !important;
+  color: var(--btn-error-color);
+  border: var(--btn-error-border);
 }
 .resign:hover {
-  background-color: var(--error-color-hover);
+  background-color: var(--btn-error-background-color-hover) !important;
 }
 
 .board-item div {

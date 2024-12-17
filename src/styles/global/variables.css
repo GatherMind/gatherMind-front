@@ -9,9 +9,10 @@
   --error-color: #d32f2f;
   --error-color-hover: #a72222;
   --text-color: #4a4a4a;
-  --button-color: #6667ab;
-  --button-color-hover: #026f94;
-  --button-secondary-color: #e2dada;
+  --button-color: #F25E7A;
+  --button-color-hover: #f87890;
+  --button-secondary-color: #F8A6B3;
+  --button-secondary-color-hover: #F48B9E;
   --pagination-background: #e3f2fd;
 
   --recruiting-color: #a8e6cf;
@@ -27,10 +28,13 @@
   --completed-text-hover: #c62828; /* Darker red for completed text */
 
   /*  */
+  --main-color: #F25E7A;
+  --main-color-hover: #f87890;
 
   --btn-error-background-color: white;
-  --btn-error-color: black;
-  --btn-error-border: 2px solid #ced4da;
+  --btn-error-background-color-hover: #e0e0e0;
+  --btn-error-color: #4a4a4a;
+  --btn-error-border: 1px solid #ced4da;
 
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   --transition: box-shadow 0.3s ease;

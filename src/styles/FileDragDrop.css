@@ -2,22 +2,23 @@
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
-  border: 2px dashed #ff9800;
+  border: 2px dashed var(--main-color);
   border-radius: 12px;
   padding: 30px;
   text-align: center;
   transition: all 0.3s ease-in-out;
   background-color: #fafafa;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 .drag-container.drag-active {
-  border-color: #ff5722;
-  background-color: #fff4e0;
+  border-color: var(--main-color-hover);
+  background-color: #fdeef1;
 }
 
 .drag-container:hover {
-  background-color: #fffae8;
+  background-color: #fdeef1;
 }
 
 .file-select-container {
@@ -33,16 +34,15 @@
 .file-select-label {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #ff9800;
-  color: white;
-  font-weight: bold;
-  border-radius: 8px;
+  background-color: var(--main-color);
+  color: white !important;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .file-select-label:hover {
-  background-color: #fb8c00;
+  background-color: var(--main-color-hover);
 }
 
 .file-selected-container {
@@ -58,19 +58,19 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;
-  color: #424242;
+  color: var(--text-color);
   text-align: center;
   word-break: break-word; /* 파일명이 너무 길 경우 줄바꿈 처리 */
 }
 
 .file-selected-preview-button,
 .file-selected-cancel-button {
-  background-color: #42a5f5; /* 버튼 색상 */
+  background-color: var(--main-color); /* 버튼 색상 */
   color: white;
   border: none;
   padding: 10px 20px;
   margin: 5px;
-  border-radius: 8px;
+  border-radius: 30px;
   font-size: 16px; /* 버튼 글자 크기 */
   cursor: pointer;
   transition: all 0.3s ease;
@@ -78,20 +78,22 @@
 }
 
 .file-selected-preview-button {
-  background-color: #42a5f5;
+  background-color: var(--main-color);
 }
 
 .file-selected-cancel-button {
-  background-color: #ef5350;
+  background-color: var(--btn-error-background-color);
+  color: var(--btn-error-color);
+  border: var(--btn-error-border);
 }
 
 .file-selected-preview-button:hover {
-  background-color: #1e88e5;
+  background-color: var(--main-color-hover);
   transform: translateY(-2px); /* 미묘한 상단 이동 효과 */
 }
 
 .file-selected-cancel-button:hover {
-  background-color: #d32f2f;
+  background-color: var(--btn-error-background-color-hover);
   transform: translateY(-2px);
 }
 
@@ -109,7 +111,7 @@
 }
 
 .before-file-name a {
-  color: #ff9800;
+  color: var(--main-color);
   font-weight: bold;
   text-decoration: none;
 }

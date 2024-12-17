@@ -60,7 +60,7 @@
 
 /* 공통 제목 스타일 */
 h3 {
-  color: var(--secondary-color);
+  color: var(--main-color);
   margin-bottom: 10px;
 }
 

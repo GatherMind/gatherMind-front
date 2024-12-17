@@ -63,7 +63,7 @@ const ScheduleTab = ({ studyId }) => {
             <div className="schedule-item" key={schedule.scheduleId}>
               <div className="schedule-details">
                 <div className="schedule-detail">
-                  <strong>약속 이름:</strong> {schedule.title}
+                  <strong>일정 이름:</strong> {schedule.title}
                 </div>
                 <div className="schedule-detail">
                   <strong>시간:</strong>{" "}
@@ -95,7 +95,7 @@ const ScheduleTab = ({ studyId }) => {
         </>
       ) : (
         <div className="no-schedules">
-          약속이 없습니다. 약속을 만들어 보세요.
+          일정이 없습니다. 일정을 만들어 보세요.
         </div>
       )}
 

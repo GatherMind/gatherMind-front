@@ -3,6 +3,11 @@
     max-width: 250px;
     height: fit-content;
 }
+
+/* .react-datepicker__week div[class$="--selected"] {
+    background-color: var(--main-color) !important;
+} */
+
 .react-datepicker * {
     display: inline-block !important;
 }
@@ -31,6 +36,10 @@
 
 .form-group .flex-row input {
 flex: 1;
+}
+
+.search-btn {
+    border-radius: 30px !important;
 }
 
 /* 모바일 및 작은 화면용 스타일 */

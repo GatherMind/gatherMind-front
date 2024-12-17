@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ScheduleForm from "../components/ScheduleForm";
 import "../styles/MeetingForm.css";
+import "../styles/global/FormContainer.css";
 import "../styles/CreateSchedule.css";
 import {
   createSchedule,

@@ -1,7 +1,6 @@
-.header {
+/* .header {
   display: flex;
   width: 100%;
-  /* background-color: rgb(253, 253, 253); */
   background-color: var(--background-color-light);
   justify-content: space-between;
   align-items: center;
@@ -24,26 +23,62 @@
   width: 130px;
   height: 50px;
   margin-right: 40px;
-  background-color: var(--background-color); /* 연한 파란색 (불투명도 30%) */
-  color: rgb(7, 7, 7); /* 글자색은 선명한 파란색 */
+  background-color: var(--background-color); 
+  color: rgb(7, 7, 7); 
   border: var(--border);
-  border-radius: 15px; /* 둥근 모서리 */
-  padding: 10px 20px; /* 버튼 안쪽 여백 */
-  font-size: 14px; /* 글자 크기 */
-  font-weight: bold; /* 글자 두껍게 */
-  cursor: pointer; /* 마우스를 올리면 클릭할 수 있음을 시각적으로 표시 */
+  border-radius: 15px; 
+  padding: 10px 20px; 
+  font-size: 14px; 
+  font-weight: bold; 
+  cursor: pointer;
   transition: background-color 0.5s, border-color 0.5s;
-}
-
-.admin-page-btn {
-  width: 130px;
-  height: 50px;
-  background-color: var(--background-color); /* 연한 파란색 (불투명도 30%) */
-  border: var(--border);
-  border-radius: var(--border-radius);
 }
 
 .header-login:hover {
   background-color: rgba(0, 123, 255, 0.5);
   border-color: rgba(0, 123, 255, 1);
+} */
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background-color-light);
+  white-space: nowrap;
+}
+
+.nav-buttons {
+  display: flex;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  transition: background-color 0.5s, border-color 0.5s;
+}
+
+.nav-btn:hover {
+  background-color: #f5f5f5;
+  color: var(--main-color); 
+}
+
+.nav-btn:active {
+  background-color: #eaeaea;
+}
+
+@media (max-width: 768px) {
+  .nav-btn {
+    padding: 4px 5px;
+  }
+}
+
+.admin-page-btn {
+  color: var(--main-color); 
 }

@@ -9,6 +9,7 @@
 }
 
 .form-container div {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -32,7 +33,7 @@ textarea {
 
 input[type="text"]:focus,
 textarea:focus {
-  border-color: #4caf50;
+  border-color: var(--main-color);
 }
 
 textarea {
@@ -40,7 +41,7 @@ textarea {
   min-height: 100px;
 }
 
-button[type="submit"] {
+/* button[type="submit"] {
   padding: 12px;
   font-size: 16px;
   font-weight: bold;
@@ -54,4 +55,4 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #0288b4a1;
-}
+} */

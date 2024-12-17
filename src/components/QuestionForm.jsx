@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/Button.css";
+import "../styles/global/FormContainer.css";
 import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 import FileDragDrop from "./FileDragDrop";
 
@@ -101,7 +102,7 @@ const QuestionForm = ({ onSubmit, question, isModify }) => {
         <Editor editorValue={content} onChangeEditorValue={setContent} />
       </div>
 
-      <button className="button" type="submit">
+      <button className="submit-button" type="submit">
         {question ? "수정" : "저장"}
       </button>
     </form>

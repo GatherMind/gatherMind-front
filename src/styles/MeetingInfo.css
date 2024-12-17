@@ -7,7 +7,7 @@
 }
 
 h2 {
-  color: #007bff; /* 제목 색상 */
+  color: var(--main-color); /* 제목 색상 */
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -22,10 +22,10 @@ h2 {
 
 }
 
-.tabs {
+/* .tabs {
   width: 20%;
 
-}
+} */
 
 .tab-button{
 }
@@ -44,6 +44,6 @@ h2 {
 .list-item board-item board-item{
 
 
- width: 20%;
+  width: 20%;
 
 }

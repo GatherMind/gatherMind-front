@@ -1,17 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import AnswerList from "../components/AnswerList";
 import Loading from "./../components/Feedback/Loading";
 import { dateFormat } from "../services/QuestionService";
-import "../styles/QuestionDetail.css";
 import {
   deleteQuestion,
   getQuestionWithFileUrl,
 } from "../services/QuestionApiService";
 import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
+import "../styles/QuestionDetail.css";
 import "../styles/global/ReactQuill.css";
+import "../styles/global/Button.css"
 import "../components/Feedback/ErrorMessage.css";
 
 const QuestionDetail = () => {
@@ -100,7 +101,7 @@ const QuestionDetail = () => {
       {question?.memberId === memberId && (
         <div className="action-buttons">
           <button
-            className="edit-button"
+            className="button edit-button"
             onClick={() =>
               navigate(`/edit-question/${question?.questionId}`, {
                 state: { studyId },
@@ -109,7 +110,7 @@ const QuestionDetail = () => {
           >
             수정
           </button>
-          <button className="delete-button" onClick={() => handleDelete()}>
+          <button className="button-error" onClick={() => handleDelete()}>
             삭제
           </button>
         </div>

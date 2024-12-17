@@ -67,7 +67,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
   return (
     <form onSubmit={handleSubmit} className="form-container">
       <div className="form-group">
-        <label>일정 이름 : </label>
+        <label>일정 이름</label>
         <input
           type="text"
           value={title}
@@ -77,7 +77,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
         />
       </div>
       <div className="form-group">
-        <label>날짜/시간 : </label>
+        <label>날짜/시간</label>
         <>
           <DatePicker
             selected={dateTime}
@@ -90,7 +90,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
         </>
       </div>
       <div className="form-group">
-        <label>위치 : </label>
+        <label>위치</label>
         <div className="flex-row">
           <input
             type="text"
@@ -99,22 +99,22 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
             placeholder="자유롭게 입력해주세요. ex) 줌, 학교"
             required
           />
-          <button type="button" className="button" onClick={onTogglePopup}>
+          <button type="button" className="button search-btn" onClick={onTogglePopup}>
             정확한 주소 찾기
           </button>
         </div>
-        <Modal isOpen={popup} onClose={onTogglePopup} title={"주소 검색하기"}>
+        <Modal isOpen={popup} onClose={onTogglePopup} title={"주소 찾기"}>
           <DaumPostcode onComplete={handleInput} />
         </Modal>
       </div>
       <div className="form-group">
-        <label>설명 추가 :</label>
+        <label>설명 추가</label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button type="submit">저장</button>
+      <button type="submit" className="submit-button">저장</button>
     </form>
   );
 };
