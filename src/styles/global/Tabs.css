@@ -18,9 +18,12 @@
 
 
 .tab-button.active {
-  font-weight: bold;
-  border-bottom: 3px solid;
-  border-bottom-color: var(--main-color);
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color); /* 활성화된 탭 강조 */
+}
+
+.tab-button:hover {
+  color: var(--main-color-hover);
 }
 
 /* 반응형 디자인 */

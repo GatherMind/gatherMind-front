@@ -36,6 +36,7 @@
   padding: 12px 24px;
   background-color: var(--main-color);
   color: white !important;
+  font-weight: bold;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -93,7 +94,7 @@
 }
 
 .file-selected-cancel-button:hover {
-  background-color: var(--btn-error-background-color-hover);
+  background-color: var(--btn-error-background-color);
   transform: translateY(-2px);
 }
 

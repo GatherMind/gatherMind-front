@@ -60,6 +60,21 @@ const StudyForm = ({ onSubmit, initialData }) => {
         </select>
       </div>
       <div className="form-group">
+        <label htmlFor="status">카테고리</label>
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        >
+          {studyCategories.map((category) => (
+            <option key={category.code} value={category.code}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="form-group">
         <label htmlFor="studyTitle">스터디 이름</label>
         <input
           id="title"

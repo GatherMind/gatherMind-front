@@ -22,14 +22,6 @@ h2 {
 
 }
 
-/* .tabs {
-  width: 20%;
-
-} */
-
-.tab-button{
-}
-
 .tab-content {
   margin-top: 20px;
   width: 100%;
@@ -45,5 +37,37 @@ h2 {
 
 
   width: 20%;
+}
 
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+.create-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--main-color);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-button:hover {
+  background-color: var(--main-color-hover);
+  transform: translateY(-2px);
+}
+
+.create-button .icon {
+  font-size: 16px;
 }

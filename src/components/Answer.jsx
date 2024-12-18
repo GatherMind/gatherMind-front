@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { dateFormat } from "../services/QuestionService";
+import ConfirmModal from "./ConfirmModal";
 
 const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(answer.content);
 
@@ -21,11 +25,13 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
     scrollToRef();
   };
 
-  const handleDelete = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      onDelete(answer.answerId);
-      alert("댓글이 삭제되었습니다.");
-    }
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    onDelete(answer.answerId);
+    setIsModalOpen(false);
   };
 
   return (
@@ -43,7 +49,7 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
             <button onClick={handleUpdate} className="button">
               저장
             </button>
-            <button onClick={handleEdit} className="button-error">
+            <button onClick={handleEdit} className="button button-error">
               취소
             </button>
           </div>
@@ -59,13 +65,20 @@ const Answer = ({ memberId, answer, onDelete, onUpdate, scrollToRef }) => {
                 <button className="button edit-button" onClick={handleEdit}>
                   수정
                 </button>
-                <button className="button-error" onClick={handleDelete}>
+                <button className="button button-error" onClick={handleDeleteClick}>
                   삭제
                 </button>
               </div>
             )}
           </div>
         </>
+      )}
+      {isModalOpen && (
+        <ConfirmModal
+          message="정말 삭제하시겠습니까?"
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setIsModalOpen(false)}
+        />
       )}
     </div>
   );

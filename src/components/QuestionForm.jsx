@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
+import FileDragDrop from "./FileDragDrop";
+import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
 import "../styles/global/Button.css";
 import "../styles/global/FormContainer.css";
-import useQuillImageReplacement from "../hooks/useQuillImageReplacement";
-import FileDragDrop from "./FileDragDrop";
 
 const QuestionForm = ({ onSubmit, question, isModify }) => {
   const options = [

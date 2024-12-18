@@ -55,28 +55,6 @@ export default function Header() {
           </button>
         )}
       </nav>
-
-      {/* {isAdmin && (
-        <div className="admin-page-btn" onClick={() => navigate("/admin")}>
-          관리자 페이지
-        </div>
-      )}
-      <div onClick={() => navigate("/admin")}>
-        관리자 페이지
-      </div>
-      <div>
-        MyPage
-      </div>
-
-      {authToken ? (
-        <div onClick={handleLogoutClick}>
-          로그아웃
-        </div>
-      ) : (
-        <div onClick={handleLoginClick}>
-          로그인{" "}
-        </div>
-      )} */}
     </header>
   );
 }

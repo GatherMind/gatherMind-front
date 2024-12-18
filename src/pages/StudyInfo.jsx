@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "../styles/MeetingInfo.css";
-import "../styles/global/Container.css";
 import "../styles/global/Tabs.css";
-import "../styles/global/FixedButton.css";
 import "../styles/global/DropdownMenu.css";
-import { useNavigate, useParams } from "react-router-dom";
+import "../styles/global/Card.css";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getMyInfoById } from "../services/MemberApiService";
 import MembersTab from "../components/MembersTab";
 import ScheduleTab from "../components/ScheduleTab";
@@ -23,11 +22,15 @@ import {
   resignStudyMember,
 } from "../services/StudyMemberApiService.jsx";
 import { STUDY_ROLE, TABS, MEMBER_STATUS } from "../constants/constants.js";
+import BoardsTab from "../components/BoardsTab.jsx";
 
 const StudyInfo = () => {
+  const location = useLocation();
+  const { activeTab: initialTab } = location.state || {}; // 전달된 state에서 activeTab 가져오기
+
   const { authToken } = useAuth();
 
-  const [activeTab, setActiveTab] = useState(TABS.MEMBER);
+  const [activeTab, setActiveTab] = useState(initialTab || TABS.MEMBER);
   const { studyId } = useParams();
   const navigate = useNavigate();
 
@@ -124,12 +127,8 @@ const StudyInfo = () => {
   // 탭 클릭
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    if (tab === TABS.MEMBER) {
-      handleFetchMembers();
-    }
   };
 
-  // 탭 클릭
   const handleStudyDelete = async () => {
     setError(null);
     setLoading(true);
@@ -142,16 +141,6 @@ const StudyInfo = () => {
       setError("스터디 삭제에 실패했습니다.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  // fixed 버튼 클릭시
-  const handleButtonClick = () => {
-    if (activeTab === TABS.MEMBER) {
-      navigate(`/create-question`, { state: { studyId } });
-    } else {
-      // 일정 생성 페이지로 이동
-      navigate(`/create-schedule`, { state: { studyId } });
     }
   };
 
@@ -212,14 +201,12 @@ const StudyInfo = () => {
           )}
         </div>
       </div>
-
-      {/* 멤버 / 약속 탭 */}
+      {/* 탭 */}
       <div className="tabs">
         <button
           className={`tab-button ${activeTab === TABS.MEMBER ? "active" : ""}`}
           onClick={() => {
-            handleTabClick("members");
-            handleFetchMembers();
+            handleTabClick(TABS.MEMBER);
           }}
         >
           멤버
@@ -234,8 +221,13 @@ const StudyInfo = () => {
         >
           일정
         </button>
+        <button
+          className={`tab-button ${activeTab === TABS.BOARD ? "active" : ""}`}
+          onClick={() => handleTabClick(TABS.BOARD)}
+        >
+          게시판
+        </button>
       </div>
-
       {/* 탭 콘텐츠 */}
       <div className="tab-content">
         {/* 멤버탭 콘텐츠 */}
@@ -260,14 +252,35 @@ const StudyInfo = () => {
 
         {/* 일정탭 콘텐츠 */}
         {activeTab === TABS.SCHEDULE && <ScheduleTab studyId={studyId} />}
-      </div>
 
-      {/* 하단 고정 버튼 */}
-      <div className="fixed-button">
-        <button onClick={handleButtonClick}>
-          {activeTab === TABS.MEMBER ? "글쓰기" : "일정 추가"}
-        </button>
+        {/* 게시판 탭 */}
+        {activeTab === TABS.BOARD && (
+          <BoardsTab
+            boards={boards}
+            boardsPage={boardsPage}
+            boardsTotalPages={boardsTotalPages}
+            boardsTotalElements={boardsTotalElements}
+            onPageChange={handlePageChange}
+            studyId={studyId}
+          />
+        )}
       </div>
+      {/* 하단 고정 버튼
+      <div className="fixed-button-container">
+        <button className="fixed-button" onClick={handleButtonClick}>
+          {activeTab === TABS.MEMBER ? (
+            <>
+              <i className="icon fa fa-pencil-alt" aria-hidden="true"></i>
+              <span>글쓰기</span>
+            </>
+          ) : (
+            <>
+              <i className="icon fa fa-calendar-plus" aria-hidden="true"></i>
+              <span>일정 추가</span>
+            </>
+          )}
+        </button>
+      </div> */}
     </>
   );
 };

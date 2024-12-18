@@ -8,7 +8,7 @@ const ConfirmModal = ({ message, onConfirm, onCancel }) => {
     <div className="modal-overlay">
       <div className="modal">
         <p>{message}</p>
-        <button className="button modal-btn" onClick={onConfirm}>
+        <button className="button-error modal-btn" onClick={onConfirm}>
           확인
         </button>
         <button className="button modal-btn" onClick={onCancel}>

@@ -17,12 +17,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         )
         .map((pageNumber) => (
           <button
-            key={pageNumber}
-            onClick={() => onPageChange(pageNumber)}
-            disabled={currentPage === pageNumber}
-            className={`${
-              currentPage === pageNumber ? "active" : ""
-            } button no-radius`}
+            key={page}
+            onClick={() => onPageChange(page)}
+            disabled={currentPage === page}
+            className={`button no-radius ${
+              currentPage === page ? "active" : "button-secondary"
+            }`}
           >
             {pageNumber + 1}
           </button>

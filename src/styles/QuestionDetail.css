@@ -64,17 +64,13 @@
   gap: 10px;
 }
 
-hr {
-  margin-top: 20px;
-}
-
 /* 수정/삭제 버튼 */
 .edit-button {
   background-color: var(--button-secondary-color) !important;
 }
 
 .edit-button:hover {
-  background-color: var(--button-secondary-color-hover) !important;
+  background-color: var(--button-secondary-color-hover) !important
 }
 
 /* 댓글 작성 */
@@ -167,4 +163,23 @@ hr {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+}
+
+.back-to-list {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.list-button {
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.list-button:hover {
+  background-color: var(--main-color-hover);
 }

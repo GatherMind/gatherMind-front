@@ -14,6 +14,8 @@ import "../styles/QuestionDetail.css";
 import "../styles/global/ReactQuill.css";
 import "../styles/global/Button.css"
 import "../components/Feedback/ErrorMessage.css";
+import { TABS } from "../constants/constants";
+import ConfirmModal from "../components/ConfirmModal";
 
 const QuestionDetail = () => {
   const { id } = useParams();
@@ -27,6 +29,8 @@ const QuestionDetail = () => {
   const [error, setError] = useState("");
   const [question, setQuestion] = useState(null);
   const [memberId, setMemberId] = useState("");
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchQuestion = async () => {
     try {
@@ -55,15 +59,16 @@ const QuestionDetail = () => {
     memberInfo();
   }, [id, studyId, authToken]);
 
-  const handleDelete = async () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      try {
-        deleteQuestion(id, authToken);
-        alert("게시글이 삭제되었습니다.");
-        navigate(`/study-info/${studyId}`); // 스터디 페이지로 이동
-      } catch (error) {
-        console.error("게시글 삭제 실패");
-      }
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      deleteQuestion(id, authToken);
+      navigate(`/study-info/${studyId}`); // 스터디 페이지로 이동
+    } catch (error) {
+      console.error("게시글 삭제 실패", error);
     }
   };
 
@@ -110,7 +115,7 @@ const QuestionDetail = () => {
           >
             수정
           </button>
-          <button className="button-error" onClick={() => handleDelete()}>
+          <button className="button button-error" onClick={() => handleDeleteClick()}>
             삭제
           </button>
         </div>
@@ -119,6 +124,14 @@ const QuestionDetail = () => {
       <hr />
 
       <AnswerList questionId={id} memberId={memberId} />
+
+      {isModalOpen && (
+        <ConfirmModal
+          message="정말 삭제하시겠습니까?"
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
