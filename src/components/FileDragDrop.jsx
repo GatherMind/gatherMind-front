@@ -114,17 +114,6 @@ const FileDragDrop = ({ file, setFile, beforeFileName, url }) => {
               type="file"
               onChange={handleFileChange}
             />
-            <div>
-              {" "}
-              {beforeFileName && (
-                <p>
-                  수정 전 파일:
-                  <a href={url} target="_blank" rel="noopener noreferrer">
-                    {beforeFileName}
-                  </a>
-                </p>
-              )}
-            </div>
           </div>
         )}
       </div>
@@ -147,7 +136,7 @@ const FileDragDrop = ({ file, setFile, beforeFileName, url }) => {
           <Modal
             isOpen={isModalOpen}
             onClose={handleModalClose}
-            title={file.name || ""}
+            title={file?.name || ""}
             children={
               <img src={preview} alt="미리보기" style={{ maxWidth: "100%" }} />
             }

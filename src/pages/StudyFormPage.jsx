@@ -67,7 +67,6 @@ const StudyFormPage = ({ mode }) => {
         alert("성공적으로 스터디가 수정됐습니다.");
       } else {
         response = await createStudy({ ...studyData }, authToken);
-        console.log(response);
         alert("성공적으로 스터디가 생성됐습니다.");
       }
       navigate(`/study-info/${response.studyId}`);

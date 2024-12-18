@@ -1,29 +1,34 @@
-/* Tabs.css */
 .tabs {
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: center; /* 버튼을 중앙에 배치 */
+  background-color: #f9f9f9; /* 탭 배경색 추가 */
+  border-bottom: 1px solid #ddd;
+  position: sticky; /* 상단 고정 */
+  top: 0;
+  z-index: 10;
 }
 
 .tab-button {
-  padding: 12px 20px;
-  flex: 1;
-  cursor: pointer;
+  flex: 1; /* 동일한 너비 */
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+  background-color: transparent;
   border: none;
-  border-bottom: 3px solid;
-  border-bottom-color: var(--text-color);
-  background-color: unset;
-  color: var(--text-color);
-  transition: background-color var(--transition-speed);
-}
-
-
-.tab-button.active {
-  color: var(--main-color);
-  border-bottom: 3px solid var(--main-color); /* 활성화된 탭 강조 */
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .tab-button:hover {
-  color: var(--main-color-hover);
+  background-color: var(--primary-color-hover);
+}
+
+.tab-button.active {
+  font-weight: bold;
+  background-color: var(--primary-color);
 }
 
 /* 반응형 디자인 */

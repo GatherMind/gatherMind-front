@@ -1,21 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import googleLoginImage from "../assets/google-login.svg";
+
 import "../styles/Login.css";
 import { useAuth } from "../context/AuthContext";
 import { loginMember } from "../services/AuthApiService";
-import githubLoginImage from "../assets/github-login.svg";
-import kakaoLoginImage from "../assets/kakao-login.png";
-import naverLoginImage from "../assets/naver-login.png";
+import socialLinks from "../data/socialLinks";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [userInfo, setUserInfo] = useState(null);
   const [memberId, setMemberId] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState(null);
-
   const { login } = useAuth();
 
   // 유효성 검사 함수
@@ -66,13 +63,10 @@ const Login = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
-  };
   return (
     <div className="login-container">
       <main>
-        <h2>로그인</h2>
+        <h1 className="login-page-name">로그인</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
@@ -81,7 +75,7 @@ const Login = () => {
               onChange={handleMemberIdChange}
               autoComplete="off"
               placeholder="아이디"
-              className="login-input"
+              className="login-input-id"
             />
             {errors.memberId && (
               <p className="error-message">{errors.memberId}</p>
@@ -94,7 +88,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
               placeholder="비밀번호"
-              className="login-input"
+              className="login-input-pw"
             />
             {errors.password && (
               <p className="error-message">{errors.password}</p>
@@ -103,28 +97,24 @@ const Login = () => {
           {loginError && (
             <p className="login-confirm-error-message">{loginError}</p>
           )}
-          <button className="login-button" type="submit">
+          <button id="login-button" type="submit">
             로그인
           </button>
         </form>
+        <div className="social-login-buttons">
+          {socialLinks.map((link) => (
+            <a key={link.id} href={link.href}>
+              <img src={link.imageSrc} alt={link.alt} className="login-logo" />
+            </a>
+          ))}
+        </div>
       </main>
-      <a href="http://localhost:8080/oauth2/authorization/google">
-        <img src={googleLoginImage} alt="GOOGLE LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/github">
-        <img src={githubLoginImage} alt="GITHUB LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/kakao">
-        <img src={kakaoLoginImage} alt="KAKAO LOGIN" className="login-logo" />
-      </a>
-      <a href="/oauth2/authorization/naver">
-        <img src={naverLoginImage} alt="NAVER LOGIN" className="login-logo" />
-      </a>
+
       <footer>
         <p>GATHER MIND가 처음이신가요?</p>
         <p>
-          <span onClick={() => navigate("/signup")}>여기</span>를 눌러 다양한
-          스터디를 둘러보세요!
+          <span onClick={() => navigate("/signup")}>여기</span>를 눌러서
+          회원가입을 진행해보세요!
         </p>
       </footer>
     </div>

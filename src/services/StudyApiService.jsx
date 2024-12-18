@@ -10,7 +10,6 @@ if (!API_URL) {
 export const createStudy = async (studyData, token) => {
   try {
     const response = await apiClient.post("/study", studyData);
-    console.log(response);
 
     return response.data;
   } catch (error) {
@@ -35,7 +34,7 @@ export const updateStudy = async (studyId, studyData, token) => {
 export const getStudyInfoAndMembersAndBoards = async (id) => {
   try {
     const response = await apiClient.get(`/study/${id}/members`);
-    console.log(response);
+
     return response.data;
   } catch (error) {
     console.error("Meeting data fetch error : ", error);
@@ -47,7 +46,7 @@ export const getStudyInfoAndMembersAndBoards = async (id) => {
 export const getStudyMembersAndBoards = async (id, pageNumber) => {
   try {
     const response = await apiClient.get(`/study/${id}/members/boards`, {
-      params: { page: pageNumber, size: 5 },
+      params: { page: pageNumber, size: 9 },
     });
 
     return response.data;
@@ -59,13 +58,10 @@ export const getStudyMembersAndBoards = async (id, pageNumber) => {
 
 // 스터디 멤버, 게시판 조회
 export const getBoards = async (id, pageNumber) => {
-  console.log("id", id);
-  console.log("pageNumber", pageNumber);
   try {
     const response = await apiClient.get(`/study/${id}/boards`, {
-      params: { page: pageNumber, size: 5 },
+      params: { page: pageNumber, size: 9 },
     });
-    console.log(response);
 
     return response.data;
   } catch (error) {
@@ -78,7 +74,7 @@ export const getBoards = async (id, pageNumber) => {
 export const getStudySchedule = async (studyId) => {
   try {
     const response = await apiClient.get(`/study/${studyId}/schedules`);
-    console.log(response);
+
     return response.data;
   } catch (error) {
     console.error("Failed to fetch meeting appointments: ", error);

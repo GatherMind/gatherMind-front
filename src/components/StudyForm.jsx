@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Editor from "./Editor";
 import "../styles/global/FormContainer.css";
-import { STUDY_STATE } from "../constants/constants";
+import { CATEGORY_ALL, STUDY_STATE } from "../constants/constants";
+import { getStudyCategory } from "../services/StudyCategoryApiService";
 
 const StudyForm = ({ onSubmit, initialData }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [studyCategories, setStudyCategories] = useState([]);
+
   const [status, setStatus] = useState(
     initialData?.studyHeader || STUDY_STATE.OPEN
   );
+
+  const [category, setCategory] = useState(CATEGORY_ALL);
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -18,6 +23,16 @@ const StudyForm = ({ onSubmit, initialData }) => {
       setDescription(initialData.description);
       setStatus(initialData.status || STUDY_STATE.OPEN);
     }
+
+    const fetchCategory = async () => {
+      try {
+        const studyCategory = await getStudyCategory();
+        setStudyCategories(studyCategory);
+      } catch (error) {
+        console.error("카테고리 조회 error :", error);
+      }
+    };
+    fetchCategory();
   }, [initialData]);
 
   const validateForm = () => {
@@ -36,7 +51,7 @@ const StudyForm = ({ onSubmit, initialData }) => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    onSubmit({ title, description, status });
+    onSubmit({ title, description, status, category });
     setIsSubmitting(false);
   };
   const buttonLabel = isSubmitting

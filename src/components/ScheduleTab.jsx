@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmModal from "./ConfirmModal";
 import { getStudySchedule } from "../services/StudyApiService";
 import { deleteSchedule } from "../services/ScheduleApiService";
+import ScheduleItem from "./ScheduleItem";
 
 const ScheduleTab = ({ studyId }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,10 +30,6 @@ const ScheduleTab = ({ studyId }) => {
     fetchSchedules(studyId);
   }, [studyId]);
 
-  const handleUpdateClick = (scheduleId) => {
-    navigate(`/edit-schedule/${scheduleId}`, { state: { studyId } });
-  };
-
   const handleDeleteClick = (scheduleId) => {
     setScheduleIdToDelete(scheduleId);
     setIsModalOpen(true);
@@ -55,50 +52,35 @@ const ScheduleTab = ({ studyId }) => {
 
   return (
     <div className="schedules">
+      <div className="tab-header">
+        <h3>일정 목록</h3>
+        <button
+          className="create-button"
+          onClick={() => navigate(`/create-schedule`, { state: { studyId } })}
+        >
+          일정 추가
+        </button>
+      </div>
       {isLoading ? (
         <div className="loading">Loading schedules...</div>
       ) : schedules && schedules.length > 0 ? (
-        <>
-          {schedules.map((schedule) => (
-            <div className="schedule-item" key={schedule.scheduleId}>
-              <div className="schedule-details">
-                <div className="schedule-detail">
-                  <strong>일정 이름:</strong> {schedule.title}
-                </div>
-                <div className="schedule-detail">
-                  <strong>시간:</strong>{" "}
-                  {new Date(schedule.dateTime).toLocaleString()}
-                </div>
-                <div className="schedule-detail">
-                  <strong>장소:</strong> {schedule.location}
-                </div>
-                <div className="schedule-detail">
-                  <strong>주최자:</strong> {schedule.nickname}
-                </div>
-              </div>
-              <div className="btn-container">
-                <button
-                  className="button btn"
-                  onClick={() => handleUpdateClick(schedule.scheduleId)}
-                >
-                  수정
-                </button>
-                <button
-                  className="button-error btn"
-                  onClick={() => handleDeleteClick(schedule.scheduleId)}
-                >
-                  삭제
-                </button>
-              </div>
-            </div>
-          ))}
-        </>
+        schedules.map((schedule) => (
+          <ScheduleItem
+            key={schedule.scheduleId}
+            schedule={schedule}
+            onEdit={() =>
+              navigate(`/edit-schedule/${schedule.scheduleId}`, {
+                state: { studyId },
+              })
+            }
+            onDelete={() => handleDeleteClick(schedule.scheduleId)}
+          />
+        ))
       ) : (
         <div className="no-schedules">
           일정이 없습니다. 일정을 만들어 보세요.
         </div>
       )}
-
       {isModalOpen && (
         <ConfirmModal
           message="정말 삭제하시겠습니까?"

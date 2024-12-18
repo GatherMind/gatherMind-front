@@ -2,8 +2,7 @@
   position: relative; /* 자식 요소 위치 조정을 위한 설정 */
   margin-bottom: 20px;
   text-align: center;
-  margin:10px;
-  
+  margin: 10px;
 }
 
 h2 {
@@ -19,12 +18,6 @@ h2 {
   right: 16px; /* 오른쪽 여백 */
   font-size: 20px;
   cursor: pointer;
-
-}
-
-.tab-content {
-  margin-top: 20px;
-  width: 100%;
 }
 
 .members ul {
@@ -34,8 +27,6 @@ h2 {
 }
 
 .list-item board-item board-item{
-
-
   width: 20%;
 }
 

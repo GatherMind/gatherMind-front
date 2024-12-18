@@ -35,7 +35,6 @@ const QuestionDetail = () => {
   const fetchQuestion = async () => {
     try {
       const questionData = await getQuestionWithFileUrl(id);
-      console.log(questionData);
       setQuestion(questionData);
     } catch (error) {
       console.error("게시글 정보를 불러오지 못했습니다.", error);
@@ -72,12 +71,18 @@ const QuestionDetail = () => {
     }
   };
 
+  const handleBackToList = () => {
+    navigate(`/study-info/${studyId}`, { state: { activeTab: TABS.BOARD } }); // 목록 페이지로 이동
+  };
+
   if (loading) return <Loading />;
   if (error)
     return (
       <div className="error-message">
         <p>{error}</p>
-        <button className="retry-button" onClick={() => navigate("/")}>다른 글 보기</button>
+        <button className="retry-button" onClick={() => navigate("/")}>
+          다른 글 보기
+        </button>
       </div>
     );
 
@@ -120,6 +125,13 @@ const QuestionDetail = () => {
           </button>
         </div>
       )}
+
+      {/* 목록 버튼 추가 */}
+      <div className="back-to-list">
+        <button className="list-button" onClick={handleBackToList}>
+          목록으로 돌아가기
+        </button>
+      </div>
 
       <hr />
 

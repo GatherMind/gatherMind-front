@@ -1,0 +1,62 @@
+.board-tab-container {
+  padding: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.board-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.board-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  height: 150px;
+
+  overflow: hidden;
+  text-overflow: ellipsis; /* 내용이 길 경우 '...'로 표시 */
+}
+
+.board-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.board-card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.board-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.board-content {
+  font-size: 14px;
+  color: #666;
+  margin: 8px 0;
+}
+
+.board-date {
+  font-size: 12px;
+  text-align: right;
+  color: #aaa;
+}
+
+.no-boards {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  padding: 20px 0;
+}

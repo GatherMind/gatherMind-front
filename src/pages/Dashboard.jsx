@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     if (token) {
       login(token);
-      console.log("Token stored:", token);
+
       navigate("/"); // 메인 페이지로 이동
     } else {
       console.error("No token found in URL");

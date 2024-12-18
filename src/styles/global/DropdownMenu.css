@@ -9,7 +9,7 @@
   box-shadow: var(--shadow);
   border-radius: var(--border-radius);
   overflow: hidden;
-  z-index: 1;
+  z-index: 100;
 }
 
 .menu button {

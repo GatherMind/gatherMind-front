@@ -12,6 +12,7 @@ import ProfileEditModal from "../components/ProfileEditModal";
 import DeleteMemberModal from "../components/DeleteMemberModal";
 import PasswordVerifyModal from "../components/PasswordVerifyModal";
 import { PasswordVerify } from "../services/AuthApiService";
+import ProfileImage from "../assets/defaultProfile.png";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -99,71 +100,76 @@ const Mypage = () => {
 
   return (
     <div className="mypage-container">
-      <header>
-        <ul className="mypage-nav">
-          <li onClick={() => navigate("/mypage")}>
-            정보
-            <br />
-            보기
-          </li>
-          <li onClick={() => navigate("/mypage/joined-study")}>
-            가입한
-            <br />
-            스터디
-          </li>
-          <li onClick={() => navigate("/mypage/written-question")}>
-            작성한
-            <br />
-            질문
-          </li>
-          <li onClick={() => navigate("/mypage/written-answer")}>
-            작성한
-            <br />
-            답변
-          </li>
-        </ul>
-        <ul className="mypage-stats">
-          <li>
-            가입 스터디 수<p>{counts.studyCount}</p>
-          </li>
-          <li>
-            작성 질문 수<p>{counts.questionCount}</p>
-          </li>
-          <li>
-            작성 답변 수<p>{counts.answerCount}</p>
-          </li>
-        </ul>
-      </header>
-
-      <main>
-        <div className="mypage-info-box">
+      <ul className="mypage-main-nav">
+        <li className="mypage-main-nav-1" onClick={() => navigate("/mypage")}>
+          내 정보
+        </li>
+        <li
+          className="mypage-main-nav-2"
+          onClick={() => navigate("/mypage/joined-study")}
+        >
+          스터디
+        </li>
+        <li
+          className="mypage-main-nav-3"
+          onClick={() => navigate("/mypage/written-question")}
+        >
+          게시글
+        </li>
+        <li
+          className="mypage-main-nav-4"
+          onClick={() => navigate("/mypage/written-answer")}
+        >
+          댓글
+        </li>
+      </ul>
+      <h1 className="study-page-name">
+        내 정보 &#45; 성공하겠다는 의지가 강한 사람에게는 결코 실패란 없다.
+      </h1>
+      <section className="mypage-my-info-box">
+        <img src={ProfileImage} alt="Profile Image" className="profile-image" />
+        <div className="mypage-my-info">
           <p className="mypage-joined-info">
             <h3>아이디</h3>
             <span>{memberInfo.memberId || "Undefined"}</span>
           </p>
           <p className="mypage-joined-info">
-            <h3>닉네임</h3>
-            <span>{memberInfo.nickname || "Undefined"}</span>
-          </p>
-          <p className="mypage-joined-info">
             <h3>이메일</h3>
             <span>{memberInfo.email || "Undefined"}</span>
           </p>
-        </div>
-        <button
-          className="mypage-edit-button"
-          onClick={() => setIsPasswordVerifyModalOpen(true)}
-        >
-          정보 수정
-        </button>
-        <button
-          className="mypage-delete-button"
-          onClick={() => setIsDeleteModalOpen(true)}
-        >
-          회원탈퇴
-        </button>
-      </main>
+          <p className="mypage-joined-info">
+            <h3>닉네임</h3>
+            <span>{memberInfo.nickname || "Undefined"}</span>
+          </p>
 
+          <ul className="mypage-content-count">
+            <li>
+              스터디
+              <p>{counts.studyCount}</p>
+            </li>
+            <li>
+              게시글
+              <p>{counts.questionCount}</p>
+            </li>
+            <li>
+              답변
+              <p>{counts.answerCount}</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <button
+        className="mypage-edit-button"
+        onClick={() => setIsPasswordVerifyModalOpen(true)}
+      >
+        정보 수정
+      </button>
+      <button
+        className="mypage-delete-button"
+        onClick={() => setIsDeleteModalOpen(true)}
+      >
+        회원탈퇴
+      </button>
       {/* 비밀번호 검증 모달 */}
       {isPasswordVerifyModalOpen && (
         <PasswordVerifyModal
@@ -171,7 +177,6 @@ const Mypage = () => {
           onClose={() => setIsPasswordVerifyModalOpen(false)}
         />
       )}
-
       {/* 탈퇴 모달 */}
       {isDeleteModalOpen && (
         <DeleteMemberModal
@@ -179,7 +184,6 @@ const Mypage = () => {
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
-
       {/* 정보 수정 모달 */}
       {isEditModalOpen && (
         <ProfileEditModal
