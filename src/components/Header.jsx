@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import homeicon from "../assets/gathermind-removebg-preview.png";
-import settingicon from "../assets/settingicon.png";
+import homeicon from "../assets/gathermind1_removebg.png";
+import settingicon from "../assets/profile.png";
 import "../styles/Header.css";
 import { useAuth } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
@@ -35,14 +35,27 @@ export default function Header() {
         {" "}
         <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
+      {isAdmin && (
+        <button className="admin-page-btn" onClick={() => navigate("/admin")}>
+          관리자 페이지
+        </button>
+      )}
+      <div> </div>
 
       <nav className="nav-buttons">
         {isAdmin && (
-          <div className="nav-btn admin-page-btn" onClick={() => navigate("/admin")}>
+          <div
+            className="nav-btn admin-page-btn"
+            onClick={() => navigate("/admin")}
+          >
             관리자
           </div>
         )}
-        <button className="nav-btn" onClick={() => navigate("/mypage")}>
+        <button
+          className="nav-btn my-page-btn"
+          onClick={() => navigate("/mypage")}
+        >
+          <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
           마이페이지
         </button>
         {authToken ? (
