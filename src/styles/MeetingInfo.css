@@ -6,8 +6,8 @@
   color: var(--main-color);
 }
 
-.study-intro h2 {
-  color: var(--main-color);
+h2 {
+  color: var(--main-color); /* 제목 색상 */
   font-size: 24px;
   margin-bottom: 10px;
 }

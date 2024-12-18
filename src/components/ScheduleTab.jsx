@@ -78,7 +78,7 @@ const ScheduleTab = ({ studyId }) => {
         ))
       ) : (
         <div className="no-schedules">
-          약속이 없습니다. 약속을 만들어 보세요.
+          일정이 없습니다. 일정을 만들어 보세요.
         </div>
       )}
       {isModalOpen && (

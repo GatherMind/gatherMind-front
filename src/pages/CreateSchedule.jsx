@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ScheduleForm from "../components/ScheduleForm";
-import "../styles/CreateSchedule.css";
 import {
   createSchedule,
   getSchedule,
   updateSchedule,
 } from "../services/ScheduleApiService";
 import { useAuth } from "../context/AuthContext";
+
+import "../styles/global/FormContainer.css";
+import "../styles/CreateSchedule.css";
 
 const CreateSchedule = ({ isModify }) => {
   const navigate = useNavigate();

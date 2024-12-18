@@ -47,8 +47,8 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(2, 136, 180, 0.2); /* 포커스 시 약한 외곽선 효과 */
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 2px rgba(142, 46, 78, 0.2); /* 포커스 시 약한 외곽선 효과 */
   outline: none;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .submit-button:hover {
-  background-color: var(--primary-color-hover);
+  background-color: var(--main-color-hover);
   transform: translateY(-2px); /* 호버 시 살짝 올라가는 효과 */
 }
 

@@ -9,16 +9,16 @@
   transition: all 0.3s ease-in-out;
   background-color: #fafafa;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box; /* padding 포함 */
+  box-sizing: border-box;
 }
 
 .drag-container.drag-active {
   border-color: var(--main-color-hover);
-  background-color: #f199a9;
+  background-color: #fdeef1;
 }
 
 .drag-container:hover {
-  background-color: #f199a9;
+  background-color: #fdeef1;
 }
 
 .file-select-container {
@@ -35,8 +35,9 @@
   display: inline-block;
   padding: 12px 24px;
   background-color: var(--main-color);
+  color: white !important;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   color: white;
@@ -59,17 +60,19 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;
-  color: var(--main-color);
+  color: var(--text-color);
   text-align: center;
   word-break: break-word; /* 파일명이 너무 길 경우 줄바꿈 처리 */
 }
 
 .file-selected-container .button,
 .file-selected-container .button-error {
+  background-color: var(--main-color); /* 버튼 색상 */
+  color: white;
   border: none;
   padding: 10px 20px;
   margin: 5px;
-  border-radius: 8px;
+  border-radius: 30px;
   font-size: 16px; /* 버튼 글자 크기 */
   cursor: pointer;
   transition: all 0.3s ease;
@@ -90,7 +93,7 @@
 }
 
 .before-file-name a {
-  color: #ff9800;
+  color: var(--main-color);
   font-weight: bold;
   text-decoration: none;
 }

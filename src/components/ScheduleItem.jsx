@@ -19,7 +19,7 @@ const ScheduleItem = ({ schedule, onEdit, onDelete }) => {
     <div className="schedule-item">
       <div className="schedule-details">
         <div className="schedule-detail">
-          <strong>약속 이름:</strong> {title}
+          <strong>일정 이름:</strong> {title}
         </div>
         <div className="schedule-detail">
           <strong>날짜:</strong> {formattedDate}

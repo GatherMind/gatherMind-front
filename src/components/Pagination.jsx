@@ -52,7 +52,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
             onClick={() => onPageChange(page)}
             disabled={currentPage === page}
             className={`button no-radius ${
-              currentPage === page ? "active" : ""
+              currentPage === page ? "active" : "button-secondary"
             }`}
           >
             {page + 1}

@@ -35,12 +35,20 @@
 .question-createdAt {
   font-style: italic;
 }
+
 .question-file {
   display: flex;
+  margin-bottom: 10px;
+  color: var(--main-color);
+}
+
+.question-file * {
+  color: var(--main-color);
 }
 
 .question-file a {
   text-decoration: none;
+  font-weight: bold;
 }
 
 .question-content {
@@ -54,26 +62,15 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 /* 수정/삭제 버튼 */
 .edit-button {
-  background-color: lightgray;
-  color: #fff;
-}
-
-.delete-button {
-  background-color: lightgray;
-  color: #fff;
+  background-color: var(--button-secondary-color) !important;
 }
 
 .edit-button:hover {
-  background-color: darkgray;
-}
-
-.delete-button:hover {
-  background-color: darkgray;
+  background-color: var(--button-secondary-color-hover) !important;
 }
 
 /* 댓글 작성 */
@@ -138,15 +135,6 @@
   color: #666;
 }
 
-.edit-button,
-.delete-button {
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 .more-answer {
   padding: 20px 0;
   color: #666;
@@ -177,29 +165,40 @@
   gap: 10px;
 }
 
-.save-button,
-.cancel-button {
-  padding: 5px 15px;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.back-to-list {
+  margin-top: 20px;
+  text-align: right;
 }
 
-.cancel-button {
-  background-color: lightgray;
+.list-button {
+  background-color: var(--main-color);
   color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
-.cancel-button:hover {
-  background-color: darkgray;
+.list-button:hover {
+  background-color: var(--main-color-hover);
 }
 
 .back-to-list {
   margin-top: 20px;
   text-align: right;
 }
-.back-to-list .button {
+
+.list-button {
+  background-color: var(--main-color);
+  color: #fff;
+  border: none;
   padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
   margin-bottom: 20px;
+}
+
+.list-button:hover {
+  background-color: var(--main-color-hover);
 }

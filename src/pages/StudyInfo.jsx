@@ -219,7 +219,7 @@ const StudyInfo = () => {
             handleTabClick(TABS.SCHEDULE);
           }}
         >
-          약속
+          일정
         </button>
         <button
           className={`tab-button ${activeTab === TABS.BOARD ? "active" : ""}`}

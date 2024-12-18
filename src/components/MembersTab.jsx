@@ -45,7 +45,7 @@ const MembersTab = ({
               <div className="member-actions">
                 {member.status === MEMBER_STATUS.PENDING && (
                   <button
-                    className="approve-button"
+                    className="button"
                     onClick={() => handleConfirmClick(member.memberId)}
                   >
                     승인
@@ -53,7 +53,7 @@ const MembersTab = ({
                 )}
                 {member.status === MEMBER_STATUS.APPROVED && (
                   <button
-                    className="resign-button"
+                    className="button-error"
                     onClick={() => handleResignClick(member.memberId)}
                   >
                     강퇴

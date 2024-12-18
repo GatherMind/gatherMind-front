@@ -35,26 +35,26 @@ export default function Header() {
         {" "}
         <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
-      {isAdmin && (
-        <button className="admin-page-btn" onClick={() => navigate("/admin")}>
-          관리자 페이지
-        </button>
-      )}
-      <div>
-        {" "}
-        <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
-        MyPage
-      </div>
 
-      {authToken ? (
-        <button className="header-login" onClick={handleLogoutClick}>
-          로그아웃
+      <nav className="nav-buttons">
+        {isAdmin && (
+          <div className="nav-btn admin-page-btn" onClick={() => navigate("/admin")}>
+            관리자
+          </div>
+        )}
+        <button className="nav-btn" onClick={() => navigate("/mypage")}>
+          마이페이지
         </button>
-      ) : (
-        <button className="header-login" onClick={handleLoginClick}>
-          로그인{" "}
-        </button>
-      )}
+        {authToken ? (
+          <button className="nav-btn" onClick={handleLogoutClick}>
+            로그아웃
+          </button>
+        ) : (
+          <button className="nav-btn" onClick={handleLoginClick}>
+            로그인
+          </button>
+        )}
+      </nav>
     </header>
   );
 }
