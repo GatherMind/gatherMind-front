@@ -19,7 +19,7 @@
 
   font-size: 24px; /* 글자 크기 */
   font-weight: bold; /* 글자 굵기 */
-  color: rgba(169, 169, 169, 0.8); /* 회색과 투명도 조정 */
+  color: var(--main-color);
   text-transform: uppercase; /* 대문자 */
   letter-spacing: 1px; /* 글자 간격 */
 
@@ -38,24 +38,26 @@
   cursor: pointer; /* 클릭할 수 있다는 느낌을 줌 */
   scroll-snap-align: start;
 
-  background-color: #e2f5f7;
+  background-color: var(--main-color);
   text-align: center;
   font-size: 20px; /* 기본 글씨 크기 */
   font-weight: 800; /* 글씨체 강하게 */
-  color: #333; /* 텍스트 색상 */
+  color: white; /* 텍스트 색상 */
   border-radius: 30px; /* 둥근 모서리 */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
 }
 
 .group-header-title.selected {
-  color: #0288d1; /* 선택된 텍스트 색상 (밝은 블루) */
+  color: white; /* 선택된 텍스트 색상 (밝은 블루) */
+  background-color: var(--main-color-hover);
   font-weight: bold; /* 텍스트 강조 */
   border-bottom: none; /* 하단선 대신 배경 강조 */
   transform: scale(1.05); /* 약간 확대 */
 }
 
 .group-header-title:hover {
-  color: #0288d1; /* 호버 시 텍스트 색상 */
+  color: white; /* 호버 시 텍스트 색상 */
+  background-color: var(--main-color-hover);
   transform: translateY(-3px) scale(1.02); /* 위로 살짝 이동 및 확대 */
   text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 텍스트 그림자 */
 }

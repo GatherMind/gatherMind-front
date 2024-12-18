@@ -199,17 +199,7 @@
   margin-top: 20px;
   text-align: right;
 }
-
-.list-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
+.back-to-list .button {
   padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
   margin-bottom: 20px;
-}
-
-.list-button:hover {
-  background-color: #0056b3;
 }

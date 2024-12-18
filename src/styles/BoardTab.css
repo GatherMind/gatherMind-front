@@ -6,8 +6,20 @@
 
 .board-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 기본적으로 3열 */
   gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .board-list {
+    grid-template-columns: repeat(2, 1fr); /* 중간 화면에서는 2열 */
+  }
+}
+
+@media (max-width: 480px) {
+  .board-list {
+    grid-template-columns: 1fr; /* 작은 화면에서는 1열 */
+  }
 }
 
 .board-card {
@@ -25,6 +37,7 @@
 }
 
 .board-card:hover {
+  transform: translateY(-4px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -36,22 +49,38 @@
   margin-bottom: 8px;
 }
 
-.board-title {
-  font-size: 16px;
+.board-number {
   font-weight: bold;
+  color: var(--primary-color);
+}
+
+.board-option {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.board-title {
+  margin: 8px 0;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
   color: #333;
 }
 
 .board-content {
-  font-size: 14px;
-  color: #666;
   margin: 8px 0;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 내용이 길 경우 '...'로 표시 */
 }
 
 .board-date {
   font-size: 12px;
+  color: #999;
   text-align: right;
-  color: #aaa;
 }
 
 .no-boards {

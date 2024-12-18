@@ -124,7 +124,7 @@ const StudyCategoriesComponent = ({
           <div
             key={category.code}
             className={`group-header-title ${
-              selectedCategory === category.code ? "selected" : ""
+              selectedCategory === category.name ? "selected" : ""
             }`}
             onClick={() => handleCategoryClick(category)}
           >

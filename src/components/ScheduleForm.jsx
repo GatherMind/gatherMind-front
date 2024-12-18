@@ -5,6 +5,7 @@ import DaumPostcode from "react-daum-postcode";
 import { subDays } from "date-fns";
 import Modal from "./Modal";
 import "../styles/global/Modal.css";
+import "../styles/global/FormContainer.css";
 
 const ScheduleForm = ({ onSubmit, scheduleData }) => {
   const [title, setTitle] = useState("");
@@ -114,7 +115,9 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button type="submit">저장</button>
+      <button className="button" type="submit">
+        저장
+      </button>
     </form>
   );
 };

@@ -2,47 +2,48 @@
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
-  border: 2px dashed #ff9800;
+  border: 2px dashed var(--main-color);
   border-radius: 12px;
   padding: 30px;
   text-align: center;
   transition: all 0.3s ease-in-out;
   background-color: #fafafa;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* padding 포함 */
 }
 
 .drag-container.drag-active {
-  border-color: #ff5722;
-  background-color: #fff4e0;
+  border-color: var(--main-color-hover);
+  background-color: #f199a9;
 }
 
 .drag-container:hover {
-  background-color: #fffae8;
+  background-color: #f199a9;
 }
 
 .file-select-container {
   margin-top: 20px;
 }
 
-.file-select-description {
+.file-select-container .file-select-description {
   font-size: 14px;
-  color: #757575;
+  color: var(--main-color);
   margin-bottom: 10px;
 }
 
-.file-select-label {
+.file-select-container .file-select-label {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #ff9800;
-  color: white;
+  background-color: var(--main-color);
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color: white;
 }
 
 .file-select-label:hover {
-  background-color: #fb8c00;
+  background-color: var(--main-color-hover);
 }
 
 .file-selected-container {
@@ -58,15 +59,13 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 12px;
-  color: #424242;
+  color: var(--main-color);
   text-align: center;
   word-break: break-word; /* 파일명이 너무 길 경우 줄바꿈 처리 */
 }
 
-.file-selected-preview-button,
-.file-selected-cancel-button {
-  background-color: #42a5f5; /* 버튼 색상 */
-  color: white;
+.file-selected-container .button,
+.file-selected-container .button-error {
   border: none;
   padding: 10px 20px;
   margin: 5px;
@@ -75,24 +74,6 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.file-selected-preview-button {
-  background-color: #42a5f5;
-}
-
-.file-selected-cancel-button {
-  background-color: #ef5350;
-}
-
-.file-selected-preview-button:hover {
-  background-color: #1e88e5;
-  transform: translateY(-2px); /* 미묘한 상단 이동 효과 */
-}
-
-.file-selected-cancel-button:hover {
-  background-color: #d32f2f;
-  transform: translateY(-2px);
 }
 
 .before-file-container {

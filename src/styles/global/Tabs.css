@@ -23,12 +23,12 @@
 }
 
 .tab-button.active {
-  color: #0078ff;
-  border-bottom: 3px solid #0078ff; /* 활성화된 탭 강조 */
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color); /* 활성화된 탭 강조 */
 }
 
 .tab-button:hover {
-  color: #0056b3;
+  color: var(--main-color);
 }
 
 /* 반응형 디자인 */

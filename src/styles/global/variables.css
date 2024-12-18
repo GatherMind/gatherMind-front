@@ -28,9 +28,16 @@
 
   /*  */
 
+  --main-color: #f25e7a;
+  --main-color-hover: #f87890;
+
+  --secondary-color: #f8a6b3;
+  --secondary-color-hover: #f48b9e;
+
   --btn-error-background-color: white;
-  --btn-error-color: black;
-  --btn-error-border: 2px solid #ced4da;
+  --btn-error-background-color-hover: #e0e0e0;
+  --btn-error-color: #4a4a4a;
+  --btn-error-border: 1px solid #ced4da;
 
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   --transition: box-shadow 0.3s ease;

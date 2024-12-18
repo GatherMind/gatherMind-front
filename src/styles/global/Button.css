@@ -2,8 +2,9 @@
 
 .button {
   padding: 8px 12px;
+  color: white;
   border: 1px solid #ddd;
-  background-color: #fff;
+  background-color: var(--main-color);
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 4px;
@@ -26,16 +27,17 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color: var(--main-color-hover);
 }
 
 .button-error {
-  background-color: #dc3545;
-  color: white;
+  background-color: var(--btn-error-background-color);
+  color: var(--btn-error-color);
+  border: var(--btn-error-border);
 }
 
 .button-error:hover {
-  background-color: #c82333;
+  background-color: var(--btn-error-background-color-hover);
 }
 
 .btn-left,

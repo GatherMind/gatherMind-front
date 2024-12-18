@@ -6,12 +6,6 @@ import { STUDY_ROLE, MEMBER_STATUS } from "../constants/constants";
 
 const MembersTab = ({
   members,
-  boards,
-  boardsPage,
-  boardsTotalPages,
-  boardsTotalElements,
-  onPageChange,
-  studyId,
   role,
   myMemberId,
   pendingCnt,

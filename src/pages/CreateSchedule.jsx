@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ScheduleForm from "../components/ScheduleForm";
-import "../styles/MeetingForm.css";
 import "../styles/CreateSchedule.css";
 import {
   createSchedule,
@@ -47,7 +46,7 @@ const CreateSchedule = ({ isModify }) => {
         response = await createSchedule(
           { ...scheduleData, studyId },
           authToken
-        ); 
+        );
       }
       navigate(`/study-info/${studyId}`);
     } catch (error) {
@@ -64,13 +63,13 @@ const CreateSchedule = ({ isModify }) => {
   }
 
   return (
-    <div>
+    <>
       <h1>{isModify ? "일정 수정하기" : "새로운 일정 생성"}</h1>
       <ScheduleForm
         onSubmit={handleSaveSchedule}
         scheduleData={scheduleInitData}
       />
-    </div>
+    </>
   );
 };
 

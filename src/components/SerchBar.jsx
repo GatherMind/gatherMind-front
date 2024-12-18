@@ -36,12 +36,14 @@ function Searchbar({ onSearch }) {
         onChange={handleChange}
         onKeyDown={handleKeyDown} // 입력값이 변경될 때마다 상태 업데이트
       />
-      <button className="search-button" onClick={handleSearch}>
-        검색
-      </button>
-      <button className="button-error reset-button" onClick={handleResetSearch}>
-        초기화
-      </button>
+      <div className="search-btn-container">
+        <button className="button" onClick={handleSearch}>
+          검색
+        </button>
+        <button className="button-error" onClick={handleResetSearch}>
+          초기화
+        </button>
+      </div>
     </div>
   );
 }

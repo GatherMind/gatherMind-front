@@ -1,5 +1,4 @@
 .search-bar {
-  display: flex;
   width: 100%;
   max-width: var(--container-max-width); /* Use a variable for max width */
   display: flex;
@@ -9,8 +8,7 @@
   box-sizing: border-box;
   gap: 0px;
   margin: 0 auto;
-  margin-top: 10px; 
-
+  margin-top: 10px;
 }
 
 /* 검색 입력창 */
@@ -30,38 +28,34 @@
   border: 2px solid var(--primary-color-hover); /* Focus color aligned with buttons */
 }
 
+.search-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-left: 20px;
+}
+
 /* 버튼 공통 스타일 */
-.search-bar button {
-  width: 10%;
+.search-btn-container button {
   height: 36px;
-  /* background-color: var(--primary-color);  */
-  /* color: var(--background-color-light);  */
+  min-width: 80px;
   border-radius: var(--btn-border-radius); /* Rounded corners */
   transition: var(--transition-speed);
   margin-right: var(--btn-between-margin);
-  border: none;
   font-size: 14px;
   cursor: pointer;
 }
 
-/* 검색 버튼 hover 상태 */
-.search-bar .search-button:hover {
-  background-color: var(--primary-color-hover); /* Use hover color */
-}
-
-/* 버튼 여백 */
-.search-bar .reset-button {
-  border: var(--btn-error-border);
-}
-
 /* 검색 버튼 active 상태 */
-.search-bar .search-button:active {
+.search-bar .button:active {
   transform: translateY(2px); /* Click effect */
 }
 
-/* 초기화 버튼 hover 상태 */
-.search-bar .reset-button:hover {
-  background-color: var(--error-color); /* Slightly lighter error hover color */
+@media (max-width: 480px) {
+  .search-bar {
+    flex-direction: column;
+  }
 }
 
 /* 에러 메시지 */

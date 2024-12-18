@@ -35,7 +35,7 @@ const ScheduleItem = ({ schedule, onEdit, onDelete }) => {
         </div>
       </div>
       <div className="btn-container">
-        <button className="button btn" onClick={onEdit}>
+        <button className="button" onClick={onEdit}>
           수정
         </button>
         <button className="button-error button" onClick={onDelete}>

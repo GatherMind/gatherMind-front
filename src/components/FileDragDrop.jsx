@@ -85,17 +85,11 @@ const FileDragDrop = ({ file, setFile, beforeFileName, url }) => {
           <div className="file-selected-container">
             <div className="file-selected-name">{file.name}</div>
             {file.type.includes("image") && (
-              <button
-                className="file-selected-preview-button"
-                onClick={handlePreviewButton}
-              >
+              <button className="button" onClick={handlePreviewButton}>
                 미리보기
               </button>
             )}
-            <button
-              className="file-selected-cancel-button"
-              onClick={handleCancelButton}
-            >
+            <button className="button-error" onClick={handleCancelButton}>
               취소
             </button>
           </div>

@@ -5,14 +5,15 @@ import AnswerList from "../components/AnswerList";
 import Loading from "./../components/Feedback/Loading";
 import { dateFormat } from "../services/QuestionService";
 import "../styles/QuestionDetail.css";
+import "../styles/global/ReactQuill.css";
+import "../components/Feedback/ErrorMessage.css";
 import {
   deleteQuestion,
   getQuestionWithFileUrl,
 } from "../services/QuestionApiService";
 import { getMyInfoById } from "../services/MemberApiService";
 import { useAuth } from "../context/AuthContext";
-import "../styles/global/ReactQuill.css";
-import "../components/Feedback/ErrorMessage.css";
+
 import { TABS } from "../constants/constants";
 
 const QuestionDetail = () => {
@@ -123,7 +124,7 @@ const QuestionDetail = () => {
 
       {/* 목록 버튼 추가 */}
       <div className="back-to-list">
-        <button className="list-button" onClick={handleBackToList}>
+        <button className="button" onClick={handleBackToList}>
           목록으로 돌아가기
         </button>
       </div>
