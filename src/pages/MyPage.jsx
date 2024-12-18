@@ -8,11 +8,13 @@ import {
   deleteMember,
 } from "../services/MemberApiService";
 import "../styles/Mypage.css";
-import ProfileEditModal from "../components/ProfileEditModal";
+import NicknameEditModal from "../components/NicknameEditModal.jsx";
 import DeleteMemberModal from "../components/DeleteMemberModal";
 import PasswordVerifyModal from "../components/PasswordVerifyModal";
 import { PasswordVerify } from "../services/AuthApiService";
 import ProfileImage from "../assets/defaultProfile.png";
+import editIcon from "../assets/edit.png";
+import PasswordEditModal from "../components/PasswordEditModal";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -30,13 +32,14 @@ const Mypage = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 탈퇴 모달 상태
   const [isPasswordVerifyModalOpen, setIsPasswordVerifyModalOpen] =
     useState(false); // 비밀번호 검증 모달 상태
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // 정보 수정 모달 상태
-  const [isPasswordVerified, setIsPasswordVerified] = useState(false); // 비밀번호 검증 상태
+  const [isNicknameEditModalOpen, setIsNicknameEditModalOpen] = useState(false);
+  const [isPasswordEditModalOpen, setIsPasswordEditModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  // 회원 정보 및 통계 가져오기
   useEffect(() => {
     const fetchMemberInfo = async () => {
-      const token = localStorage.getItem("token"); // 저장된 토큰 가져오기
+      const token = localStorage.getItem("token");
       if (!token) {
         alert("로그인이 필요합니다.");
         navigate("/login");
@@ -44,8 +47,12 @@ const Mypage = () => {
       }
 
       try {
-        const memberResponse = await getMemberByToken();
-        setMemberInfo(memberResponse.data || {});
+        const memberResponse = await getMemberByToken(token);
+        setMemberInfo({
+          memberId: memberResponse.data.memberId || "정보 없음",
+          email: memberResponse.data.email || "정보 없음",
+          nickname: memberResponse.data.nickname || "정보 없음",
+        });
 
         const [studyResponse, questionResponse, answerResponse] =
           await Promise.all([
@@ -60,8 +67,8 @@ const Mypage = () => {
           answerCount: answerResponse.data || 0,
         });
       } catch (error) {
-        console.error("회원 정보를 가져오는 중 오류가 발생했습니다.", error);
-        alert("로그인이 필요합니다");
+        console.error("회원 정보를 가져오는 중 오류 발생:", error);
+        alert("로그인이 필요합니다.");
         navigate("/login");
       }
     };
@@ -86,9 +93,8 @@ const Mypage = () => {
     try {
       const isValid = await PasswordVerify(password); // 검증 API 호출
       if (isValid) {
-        alert("비밀번호가 확인되었습니다.");
         setIsPasswordVerifyModalOpen(false); // 비밀번호 검증 모달 닫기
-        setIsEditModalOpen(true); // 정보 수정 모달 열기
+        setIsPasswordEditModalOpen(true);
       } else {
         alert("비밀번호가 일치하지 않습니다.");
       }
@@ -139,6 +145,12 @@ const Mypage = () => {
           </p>
           <p className="mypage-joined-info">
             <h3>닉네임</h3>
+            <img
+              src={editIcon}
+              alt="edit-icon"
+              className="nick-name-edit-icon"
+              onClick={() => setIsNicknameEditModalOpen(true)}
+            />
             <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
           <ul className="mypage-content-count">
@@ -161,7 +173,7 @@ const Mypage = () => {
         className="mypage-edit-button"
         onClick={() => setIsPasswordVerifyModalOpen(true)}
       >
-        정보 수정
+        비밀번호 변경
       </button>
       <button
         className="mypage-delete-button"
@@ -169,6 +181,13 @@ const Mypage = () => {
       >
         회원탈퇴
       </button>
+      {/* 닉네임 수정 모달 */}
+      {isNicknameEditModalOpen && (
+        <NicknameEditModal
+          currentNickname={memberInfo.nickname}
+          onClose={() => setIsNicknameEditModalOpen(false)}
+        />
+      )}
       {/* 비밀번호 검증 모달 */}
       {isPasswordVerifyModalOpen && (
         <PasswordVerifyModal
@@ -183,12 +202,9 @@ const Mypage = () => {
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
-      {/* 정보 수정 모달 */}
-      {isEditModalOpen && (
-        <ProfileEditModal
-          onClose={() => setIsEditModalOpen(false)}
-          nickname={memberInfo.nickname}
-        />
+      {/* 비밀번호 수정 모달 */}
+      {isPasswordEditModalOpen && (
+        <PasswordEditModal onClose={() => setIsPasswordEditModalOpen(false)} />
       )}
     </div>
   );

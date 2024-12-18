@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { updateMember } from "../services/MemberApiService";
+import "../styles/PasswordEditModal.css";
 
 const PasswordEditModal = ({ onClose }) => {
   const [newPassword, setNewPassword] = useState("");
@@ -41,10 +42,11 @@ const PasswordEditModal = ({ onClose }) => {
   };
 
   return (
-    <div className="modal-container">
-      <h2>비밀번호 변경</h2>
-      <div className="password-edit-box">
-        <label>새 비밀번호</label>
+    <div className="password-edit-modal-container">
+      <div className="password-edit-modal-content">
+        <h2>비밀번호 변경</h2>
+
+        <label className="password-edit-modal-label">새 비밀번호</label>
         <input
           type="password"
           value={newPassword}
@@ -53,12 +55,13 @@ const PasswordEditModal = ({ onClose }) => {
             setErrors({}); // 입력 시 에러 초기화
           }}
           placeholder="새 비밀번호 입력"
+          className="change-password-input"
         />
         {errors.newPassword && (
           <p className="error-message">{errors.newPassword}</p>
         )}
 
-        <label>비밀번호 재확인</label>
+        <label className="password-edit-modal-label">비밀번호 재확인</label>
         <input
           type="password"
           value={confirmPassword}
@@ -67,14 +70,24 @@ const PasswordEditModal = ({ onClose }) => {
             setErrors({}); // 입력 시 에러 초기화
           }}
           placeholder="비밀번호 재입력"
+          className="change-password-input"
         />
         {errors.confirmPassword && (
           <p className="error-message">{errors.confirmPassword}</p>
         )}
+        {errors.general && <p className="error-message">{errors.general}</p>}
+        <div className="password-modal-button-box">
+          <button
+            onClick={handlePasswordSubmit}
+            className="password-modal-confirm-button"
+          >
+            비밀번호 변경
+          </button>
+          <button onClick={onClose} className="password-modal-cancel-button">
+            취소
+          </button>
+        </div>
       </div>
-      <button onClick={handlePasswordSubmit}>비밀번호 변경</button>
-      <button onClick={onClose}>취소</button>
-      {errors.general && <p className="error-message">{errors.general}</p>}
     </div>
   );
 };
