@@ -23,12 +23,13 @@
 }
 
 .tab-button:hover {
-  background-color: var(--primary-color-hover);
+  border-bottom: 3px solid var(--main-color-hover);
 }
 
 .tab-button.active {
   font-weight: bold;
-  background-color: var(--primary-color);
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color);
 }
 
 /* 반응형 디자인 */

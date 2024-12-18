@@ -227,12 +227,6 @@ const StudyInfo = () => {
         >
           게시판
         </button>
-        <button
-          className={`tab-button ${activeTab === TABS.BOARD ? "active" : ""}`}
-          onClick={() => handleTabClick(TABS.BOARD)}
-        >
-          게시판
-        </button>
       </div>
       {/* 탭 콘텐츠 */}
       <div className="tab-content">
