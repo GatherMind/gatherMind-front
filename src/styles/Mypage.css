@@ -31,8 +31,8 @@
   }
 
   .mypage-main-nav > li:nth-child(1) {
-    color: rgb(128, 0, 128);
-    border-bottom: 4px solid rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
+    border-bottom: 4px solid rgb(242, 94, 122);
   }
 
   .mypage-page-name {
@@ -52,7 +52,7 @@
   .mypage-my-info {
     flex: 0.7;
     text-align: left;
-    margin: 6% 25% 0;
+    margin: 6% 5% 0;
   }
 
   .mypage-joined-info {
@@ -67,7 +67,7 @@
     margin: 0 5% 5px 0;
     padding: 0 0 0 10px;
     color: rgb(0, 0, 0);
-    border-left: 3px solid rgb(128, 0, 128);
+    border-left: 3px solid rgb(242, 94, 122);
   }
 
   .mypage-joined-info > span:nth-child(3) {
@@ -84,7 +84,7 @@
   }
 
   .nick-name-edit-icon:hover {
-    background-color: rgb(164, 53, 240);
+    background-color: rgb(248, 120, 144);
     outline: none;
     border-radius: 50%;
   }
@@ -119,27 +119,25 @@
   .mypage-edit-button {
     border-radius: 8px;
     color: white;
-    letter-spacing: 5px;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
     cursor: pointer;
   }
 
   .mypage-edit-button:hover {
-    background-color: rgb(100, 0, 100);
+    background-color: rgb(248, 120, 144);
   }
 
   .mypage-delete-button {
-    border: 2px solid rgb(74, 74, 74);
+    border: 1px solid rgb(110, 110, 110);
     border-radius: 8px;
     font-weight: bold;
-    letter-spacing: 5px;
     cursor: pointer;
   }
 
   .mypage-delete-button:hover {
     border: none;
     color: white;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
   }
 }
 /* ------------------------------------------------------------- */
@@ -163,8 +161,8 @@
   }
 
   .mypage-main-nav > li:nth-child(1) {
-    color: rgb(128, 0, 128);
-    border-bottom: 4px solid rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
+    border-bottom: 4px solid rgb(242, 94, 122);
   }
 
   .mypage-page-name {
@@ -204,7 +202,7 @@
     margin: 0 0 10px 0;
     padding: 0 0 0 10px;
     color: rgb(0, 0, 0);
-    border-left: 3px solid rgb(128, 0, 128);
+    border-left: 3px solid rgb(242, 94, 122);
   }
 
   .mypage-joined-info > span:nth-child(3) {
@@ -221,7 +219,7 @@
   }
 
   .nick-name-edit-icon:hover {
-    background-color: rgb(164, 53, 240);
+    background-color: rgb(248, 120, 144);
     outline: none;
     border-radius: 50%;
   }
@@ -254,16 +252,16 @@
     border-radius: 8px;
     color: white;
     letter-spacing: 5px;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
     cursor: pointer;
   }
 
   .mypage-edit-button:hover {
-    background-color: rgb(100, 0, 100);
+    background-color: rgb(248, 120, 144);
   }
 
   .mypage-delete-button {
-    border: 2px solid rgb(74, 74, 74);
+    border: 1px solid rgb(110, 110, 110);
     border-radius: 8px;
     font-weight: bold;
     letter-spacing: 5px;
@@ -273,6 +271,6 @@
   .mypage-delete-button:hover {
     border: none;
     color: white;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
   }
 }

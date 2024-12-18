@@ -27,8 +27,8 @@
   }
 
   .mypage-answer-nav > li:nth-child(4) {
-    color: rgb(128, 0, 128);
-    border-bottom: 4px solid rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
+    border-bottom: 4px solid rgb(242, 94, 122);
   }
 
   .answer-page-name {
@@ -48,7 +48,7 @@
   .study-question-title-answer-content:hover .answer-study-title,
   .study-question-title-answer-content:hover .answer-question-title,
   .study-question-title-answer-content:hover .answer-answer-content {
-    color: rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
   }
 
   .answer-study-title {
@@ -75,12 +75,12 @@
 
   .answer-delete-button:hover {
     color: white;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
     border: none;
   }
 
   .no-answer-message {
-    color: rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
     font-size: 1.5em;
     margin-top: 20px;
   }
@@ -108,8 +108,8 @@
   }
 
   .mypage-answer-nav > li:nth-child(4) {
-    color: rgb(128, 0, 128);
-    border-bottom: 4px solid rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
+    border-bottom: 4px solid rgb(242, 94, 122);
   }
 
   .answer-page-name {
@@ -135,7 +135,7 @@
   .study-question-title-answer-content:hover .answer-study-title,
   .study-question-title-answer-content:hover .answer-question-title,
   .study-question-title-answer-content:hover .answer-answer-content {
-    color: rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
   }
 
   .answer-study-title {
@@ -162,11 +162,11 @@
 
   .answer-delete-button:hover {
     color: white;
-    background-color: rgb(128, 0, 128);
+    background-color: rgb(242, 94, 122);
     border: none;
   }
 
   .no-answer-message {
-    color: rgb(128, 0, 128);
+    color: rgb(242, 94, 122);
   }
 }

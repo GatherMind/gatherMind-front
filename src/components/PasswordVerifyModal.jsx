@@ -14,24 +14,27 @@ const PasswordVerifyModal = ({ onVerify, onClose }) => {
   };
 
   return (
-    <div className="passwordVerifyModal-container">
-      <div className="password-edit-box">
-        <button className="modal-back-button" onClick={onClose}>
-          X
-        </button>
+    <div className="password-verify-modal-container">
+      <div className="password-verify-modal-content">
         <h2>현재 비밀번호 확인</h2>
         <input
           type="password"
           placeholder="현재 비밀번호 입력"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="current-password-input"
         />
-        <button
-          className="modal-edit-profile-modify"
-          onClick={handleVerifyClick}
-        >
-          확인
-        </button>
+        <div className="password-modal-button-box">
+          <button
+            className="password-modal-conform-button"
+            onClick={handleVerifyClick}
+          >
+            확인
+          </button>
+          <button className="password-modal-cancel-button" onClick={onClose}>
+            취소
+          </button>
+        </div>
       </div>
     </div>
   );

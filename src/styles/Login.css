@@ -19,21 +19,21 @@ form > .form-group {
 
 .form-group .login-input-id:focus,
 .form-group .login-input-pw:focus {
-  outline: 1px solid rgb(128, 0, 128);
-  box-shadow: 0px 0px 3px 3px rgba(128, 0, 128, 0.5);
+  outline: 1px solid rgb(242, 94, 122);
+  box-shadow: 0px 0px 3px 3px rgba(242, 94, 122, 0.5);
 }
 
 #login-button {
   width: 100%;
   margin-top: 3vh;
   color: white;
-  background-color: rgb(164, 53, 240);
+  background-color: rgb(248, 120, 144);
 }
 
 #login-button:hover {
   width: 100%;
   color: white;
-  background-color: rgb(128, 0, 128);
+  background-color: rgb(242, 94, 122);
 }
 
 footer {
@@ -45,7 +45,7 @@ footer > p:nth-child(1) {
 }
 
 footer > p > span {
-  color: rgb(128, 0, 128);
+  color: rgb(242, 94, 122);
   font-weight: bold;
   cursor: pointer;
 }
