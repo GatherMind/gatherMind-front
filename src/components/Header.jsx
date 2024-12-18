@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import homeicon from "../assets/gathermind-removebg-preview.png";
-import settingicon from "../assets/settingicon.png";
+import homeicon from "../assets/gathermind1.png";
+import settingicon from "../assets/profile.png";
 import "../styles/Header.css";
 import { useAuth } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
@@ -43,7 +43,6 @@ export default function Header() {
       <div>
         {" "}
         <img src={settingicon} alt="MyPageIcon" onClick={handleMyPageClick} />
-        MyPage
       </div>
 
       {authToken ? (
