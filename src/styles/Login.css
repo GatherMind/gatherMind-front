@@ -52,12 +52,12 @@ footer > p > span {
 
 .login-logo {
   width: 50px;
-  margin: 40px 10px 0 10px;
+  margin: 40px 25px 0 25px;
 }
 
 .form-group > .error-message,
 .login-confirm-error-message {
   margin: 0 auto;
   color: rgb(211, 47, 47);
-  background: none;
+  background: rgb(253, 236, 234);
 }

@@ -13,6 +13,7 @@ import DeleteMemberModal from "../components/DeleteMemberModal";
 import PasswordVerifyModal from "../components/PasswordVerifyModal";
 import { PasswordVerify } from "../services/AuthApiService";
 import ProfileImage from "../assets/defaultProfile.png";
+import editIcon from "../assets/edit.png";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({
@@ -139,6 +140,11 @@ const Mypage = () => {
           </p>
           <p className="mypage-joined-info">
             <h3>닉네임</h3>
+            <img
+              src={editIcon}
+              alt="edit-icon"
+              className="nick-name-edit-icon"
+            />
             <span>{memberInfo.nickname || "Undefined"}</span>
           </p>
           <ul className="mypage-content-count">
@@ -161,7 +167,7 @@ const Mypage = () => {
         className="mypage-edit-button"
         onClick={() => setIsPasswordVerifyModalOpen(true)}
       >
-        정보 수정
+        비밀번호 변경
       </button>
       <button
         className="mypage-delete-button"

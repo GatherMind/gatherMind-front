@@ -56,8 +56,11 @@
   }
 
   .mypage-joined-info {
+    padding: 5% 0;
+  }
+
+  .mypage-joined-info:nth-child(3) {
     display: flex;
-    padding: 0 0 5% 5%;
   }
 
   .mypage-joined-info > h3 {
@@ -67,8 +70,23 @@
     border-left: 3px solid rgb(128, 0, 128);
   }
 
-  .mypage-joined-info > span {
-    font-size: 1.3em;
+  .mypage-joined-info > span:nth-child(3) {
+    position: absolute;
+    margin-top: 25px;
+  }
+
+  .nick-name-edit-icon {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    margin-left: 1vh;
+  }
+
+  .nick-name-edit-icon:hover {
+    background-color: rgb(164, 53, 240);
+    outline: none;
+    border-radius: 50%;
   }
 
   .mypage-content-count {
@@ -81,6 +99,7 @@
 
   .mypage-content-count > li {
     width: 33%;
+    margin-top: 20px;
     list-style: none;
   }
 
@@ -151,7 +170,7 @@
   .mypage-page-name {
     width: 100%;
     margin: 30px auto;
-    padding: 40px 0 40px 50px;
+    padding: 40px 50px;
     color: white;
     text-align: left;
     background-color: rgb(74, 74, 74);
@@ -177,11 +196,34 @@
     padding: 0 0 30px 50px;
   }
 
+  .mypage-joined-info:nth-child(3) {
+    display: flex;
+  }
+
   .mypage-joined-info > h3 {
     margin: 0 0 10px 0;
     padding: 0 0 0 10px;
     color: rgb(0, 0, 0);
     border-left: 3px solid rgb(128, 0, 128);
+  }
+
+  .mypage-joined-info > span:nth-child(3) {
+    position: absolute;
+    margin-top: 30px;
+  }
+
+  .nick-name-edit-icon {
+    display: flex;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-left: 1vh;
+  }
+
+  .nick-name-edit-icon:hover {
+    background-color: rgb(164, 53, 240);
+    outline: none;
+    border-radius: 50%;
   }
 
   .mypage-content-count {
@@ -191,6 +233,7 @@
 
   .mypage-content-count > li {
     width: 33%;
+    margin-top: 30px;
     list-style: none;
   }
 

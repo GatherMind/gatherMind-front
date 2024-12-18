@@ -4,68 +4,145 @@
   color: rgb(74, 74, 74);
 }
 
-.signup-container > main {
-  width: 300px;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  .signup-container > main {
+    width: 300px;
+    margin: 0 auto;
+    font-size: 0.7em;
+  }
+
+  form > .form-group {
+    margin: 1vh auto;
+  }
+
+  .signup-page-name {
+    margin-bottom: 3vh;
+  }
+
+  .singup-input-wrap {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .signup-input-wrap > .option-duplicated {
+    display: inline-block;
+    width: 73%;
+    margin-right: 13px; /* 간격 추가 */
+  }
+
+  .success-message {
+    margin-top: 10px;
+    padding: 16px;
+    font-size: 14px;
+    color: rgb(2, 136, 255);
+    background-color: rgb(234, 236, 253);
+    border-radius: 5px;
+  }
+
+  .signup-check-button {
+    display: inline-block;
+    height: 44px;
+    padding: 0 4px;
+    background: white;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .signup-check-button:hover {
+    color: white;
+    background-color: rgb(164, 53, 240);
+    border: 1px solid rgb(164, 53, 240);
+  }
+
+  #signup-button {
+    width: 100%;
+    margin-top: 3vh;
+    height: 5vh;
+    padding: 0;
+    background-color: rgb(164, 53, 240);
+  }
+
+  #signup-button:hover {
+    width: 100%;
+    color: white;
+    background-color: rgb(134, 23, 210);
+  }
+
+  .error-message {
+    background: none;
+  }
 }
 
-form > .form-group {
-  margin: 1vh auto;
-}
+@media (min-width: 768px) {
+  .signup-container > main {
+    width: 300px;
+    margin: 0 auto;
+  }
 
-.signup-page-name {
-  margin-bottom: 3vh;
-}
+  form > .form-group {
+    margin: 1vh auto;
+  }
 
-.singup-input-wrap {
-  display: flex;
-  width: 100%;
-  gap: 10px;
-}
+  .signup-page-name {
+    margin-bottom: 3vh;
+  }
 
-.signup-input-wrap > .option-duplicated {
-  display: inline-block;
-  width: 75%;
-  margin-right: 13px; /* 간격 추가 */
-}
+  .singup-input-wrap {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
 
-.success-message {
-  font-size: 14px;
-  color: rgb(2, 136, 255);
-  margin: 0 auto;
-}
+  .signup-input-wrap > .option-duplicated {
+    display: inline-block;
+    width: 75%;
+    margin-right: 13px; /* 간격 추가 */
+  }
 
-.signup-check-button {
-  display: inline-block;
-  height: 44px;
-  padding: 0 4px;
-  background: white;
-  border: 1px solid rgb(210, 210, 210);
-  border-radius: 10px;
-  vertical-align: middle;
-  cursor: pointer;
-}
+  .success-message {
+    margin-top: 10px;
+    padding: 16px;
+    font-size: 14px;
+    color: rgb(2, 136, 255);
+    background-color: rgb(234, 236, 253);
+    border-radius: 5px;
+  }
 
-.signup-check-button:hover {
-  color: white;
-  background-color: rgb(164, 53, 240);
-  border: 1px solid rgb(164, 53, 240);
-}
+  .signup-check-button {
+    display: inline-block;
+    height: 44px;
+    padding: 0 4px;
+    background: white;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
 
-#signup-button {
-  width: 100%;
-  margin-top: 3vh;
-  height: 5vh;
-  padding: 0;
-  background-color: rgb(164, 53, 240);
-}
+  .signup-check-button:hover {
+    color: white;
+    background-color: rgb(164, 53, 240);
+    border: 1px solid rgb(164, 53, 240);
+  }
 
-#signup-button:hover {
-  width: 100%;
-  color: white;
-  background-color: rgb(134, 23, 210);
-}
+  #signup-button {
+    width: 100%;
+    margin-top: 3vh;
+    height: 5vh;
+    padding: 0;
+    background-color: rgb(164, 53, 240);
+  }
 
-.error-message {
-  background: none;
+  #signup-button:hover {
+    width: 100%;
+    color: white;
+    background-color: rgb(134, 23, 210);
+  }
+
+  .error-message {
+    background: none;
+  }
 }
