@@ -4,10 +4,6 @@
     height: fit-content;
 }
 
-/* .react-datepicker__week div[class$="--selected"] {
-    background-color: var(--main-color) !important;
-} */
-
 .react-datepicker * {
     display: inline-block !important;
 }
@@ -42,10 +38,6 @@
     border-radius: 30px !important;
 }
 
-.search-btn {
-    border-radius: 30px !important;
-}
-
 /* 모바일 및 작은 화면용 스타일 */
 @media (max-width: 768px) {
     .form-group .flex-row .button {
@@ -57,6 +49,7 @@
 /* 웹 화면용 스타일 */
 @media (min-width: 769px) {
     .form-group .flex-row {
+        display: flex;
         flex-direction: row;
     }
 

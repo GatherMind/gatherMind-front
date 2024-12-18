@@ -67,8 +67,6 @@
 
 .file-selected-container .button,
 .file-selected-container .button-error {
-  background-color: var(--main-color); /* 버튼 색상 */
-  color: white;
   border: none;
   padding: 10px 20px;
   margin: 5px;

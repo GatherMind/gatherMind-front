@@ -40,13 +40,13 @@
 }
 
 .button-error {
-  background-color: var(--button-secondary-color-hover);
+  color: var(--btn-error-color);
+  background-color: var(--btn-error-background-color);  
+  border: var(--btn-error-border);
 }
 
 .button-error:hover {
-  color: var(--btn-error-color);
-  background-color: var(--btn-error-background-color);
-  border: var(--btn-error-border);
+  background-color: var(--btn-error-background-color-hover);
 }
 
 .btn-left,

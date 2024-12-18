@@ -147,7 +147,7 @@ const AnswerList = ({ questionId, memberId }) => {
           더보기 ...
         </div>
       )}
-      <div className="answer-input-section">
+      <div className="answer-input-section form-group">
         <textarea
           placeholder="댓글을 남겨보세요"
           className="answer-input"

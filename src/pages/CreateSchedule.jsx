@@ -65,13 +65,13 @@ const CreateSchedule = ({ isModify }) => {
   }
 
   return (
-    <>
+    <div>
       <h1>{isModify ? "일정 수정하기" : "새로운 일정 생성"}</h1>
       <ScheduleForm
         onSubmit={handleSaveSchedule}
         scheduleData={scheduleInitData}
       />
-    </>
+    </div>
   );
 };
 

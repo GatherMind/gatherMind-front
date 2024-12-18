@@ -120,7 +120,7 @@ const ScheduleForm = ({ onSubmit, scheduleData }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button className="button" type="submit">
+      <button className="submit-button" type="submit">
         저장
       </button>
     </form>

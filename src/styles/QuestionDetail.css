@@ -159,29 +159,16 @@
   box-sizing: border-box;
 }
 
+.edit-input:focus {
+  border-color: var(--main-color);
+  box-shadow: 0 0 0 2px rgba(142, 46, 78, 0.2); /* 포커스 시 약한 외곽선 효과 */
+  outline: none;
+}
+
 .edit-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-}
-
-.back-to-list {
-  margin-top: 20px;
-  text-align: right;
-}
-
-.list-button {
-  background-color: var(--main-color);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.list-button:hover {
-  background-color: var(--main-color-hover);
 }
 
 .back-to-list {
