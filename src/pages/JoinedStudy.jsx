@@ -61,8 +61,7 @@ const JoinedStudy = () => {
     }
   };
 
-  
-  const truncateText = (text, maxLength) => 
+  const truncateText = (text, maxLength) =>
     text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 
   const maxLength = 20;
@@ -103,13 +102,10 @@ const JoinedStudy = () => {
         {joinedGroups.length > 0 ? (
           <div className="study-list">
             {joinedGroups.map((group) => (
-              <div className="study-card" 
-              key={group.studyId}
-              >
+              <div className="study-card" key={group.studyId}>
                 <p className="study-title">
-                  스터디제목인데용
                   {truncateText(group.title, maxLength)}
-                  </p>
+                </p>
                 <button
                   className="study-withdraw-button"
                   onClick={() => handleWithdrawFromStudy(group.studyId)}

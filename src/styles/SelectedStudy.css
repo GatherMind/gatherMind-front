@@ -53,6 +53,8 @@
   flex-grow: 1; /* 박스가 컨테이너 안에서 늘어나도록 설정 */
   min-width: 0; /* 최소 너비 제한 */
   max-width: 100%; /* 최대 너비 제한 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 내용이 길 경우 '...'로 표시 */
 }
 
 /* 박스의 hover 상태 */

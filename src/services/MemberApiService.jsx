@@ -145,7 +145,6 @@ export const getRecentAnswerLimit3 = async () => {
         Authorization: `Bearer ${getAuthToken()}`,
       },
     });
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Network error or server unreachable: ", error);
