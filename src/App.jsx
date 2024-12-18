@@ -41,7 +41,6 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               <Route path="/goodbye" element={<Goodbye />} />
               <Route path="/serious" element={<Serious />} />
-
               {/* admin page */}
 
               <Route

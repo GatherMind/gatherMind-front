@@ -32,6 +32,14 @@
   font-weight: bold;
   color: var(--text-color);
   margin-bottom: 20px; /* Add spacing */
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-header:hover {
+  white-space: normal; /* 호버 시 모든 스터디 표시 */
+  overflow: visible;
 }
 
 .modal-body {
