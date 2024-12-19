@@ -51,7 +51,7 @@
 
 .board-number {
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--main-color);
 }
 
 .board-option {

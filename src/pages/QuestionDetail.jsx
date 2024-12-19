@@ -131,7 +131,7 @@ const QuestionDetail = () => {
 
       {/* 목록 버튼 추가 */}
       <div className="back-to-list">
-        <button className="button" onClick={handleBackToList}>
+        <button className="list-button" onClick={handleBackToList}>
           목록으로 돌아가기
         </button>
       </div>
