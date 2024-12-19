@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getAnswerCount,
   getMemberByToken,
-  getAnswerList,
+  getMyAnswerList,
 } from "../services/MemberApiService";
 import "../styles/WrittenAnswer.css";
 import { deleteAnswer } from "../services/AnswerApiService";
@@ -29,7 +29,7 @@ const WrittenAnswer = () => {
 
         await getMemberByToken();
 
-        const answersResponse = await getAnswerList();
+        const answersResponse = await getMyAnswerList();
         setRecentAnswers(answersResponse.data);
 
       } catch (error) {

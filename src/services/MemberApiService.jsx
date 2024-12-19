@@ -137,8 +137,8 @@ export const getAnswerCount = async () => {
   });
 };
 
-// 최근 답변 가져오기 (최대 3개)
-export const getAnswerList = async () => {
+// 본인 작성 답변 가져오기
+export const getMyAnswerList = async () => {
   try {
     const response = await axios.get(`${API_URL}/recent-answers`, {
       headers: {
@@ -152,8 +152,8 @@ export const getAnswerList = async () => {
   }
 };
 
-// 최근 질문 가져오기 (최대 3개)
-export const getQuestionList = async () => {
+// 본인 작성 질문 가져오기
+export const getMyQuestionList = async () => {
   try {
     const response = await axios.get(`${API_URL}/recent-questions`, {
       headers: {
