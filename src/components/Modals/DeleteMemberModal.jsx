@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/DeleteMemberModal.css";
+import "../../styles/DeleteMemberModal.css";
 
 const DeleteAccountModal = ({ onDelete, onCancel }) => {
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/PasswordVerifyModal.css";
+import "../../styles/PasswordVerifyModal.css";
 
 const PasswordVerifyModal = ({ onVerify, onClose }) => {
   const [password, setPassword] = useState("");

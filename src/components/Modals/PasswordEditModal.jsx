@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { updateMember } from "../services/MemberApiService";
-import "../styles/PasswordEditModal.css";
+import { updateMember } from "../../services/MemberApiService";
+import "../../styles/PasswordEditModal.css";
 
 const PasswordEditModal = ({ onClose }) => {
   const [newPassword, setNewPassword] = useState("");

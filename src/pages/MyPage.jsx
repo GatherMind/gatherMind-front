@@ -8,13 +8,13 @@ import {
   deleteMember,
 } from "../services/MemberApiService";
 import "../styles/Mypage.css";
-import NicknameEditModal from "../components/NicknameEditModal.jsx";
-import DeleteMemberModal from "../components/DeleteMemberModal";
-import PasswordVerifyModal from "../components/PasswordVerifyModal";
+import NicknameEditModal from "../components/Modals/NicknameEditModal.jsx";
+import DeleteMemberModal from "../components/Modals/DeleteMemberModal.jsx";
+import PasswordVerifyModal from "../components/Modals/PasswordVerifyModal.jsx";
 import { PasswordVerify } from "../services/AuthApiService";
 import ProfileImage from "../assets/defaultProfile.png";
 import editIcon from "../assets/edit.png";
-import PasswordEditModal from "../components/PasswordEditModal";
+import PasswordEditModal from "../components/Modals/PasswordEditModal.jsx";
 
 const Mypage = () => {
   const [memberInfo, setMemberInfo] = useState({

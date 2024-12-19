@@ -28,7 +28,7 @@ form > .form-group {
   height: 4vh;
   margin-top: 3vh;
   color: white;
-  background-color: rgb(248, 120, 144);
+  background-color: rgb(242, 94, 122);
   border: none;
   border-radius: 4px;
 }
@@ -36,7 +36,7 @@ form > .form-group {
 #login-button:hover {
   width: 100%;
   color: white;
-  background-color: rgb(242, 94, 122);
+  background-color: rgb(248, 120, 144);
 }
 
 footer {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { updateMember } from "../services/MemberApiService";
-import { duplicationCheck } from "../services/ValidateApiService";
-import "../styles/NicknameEditModal.css";
+import { updateMember } from "../../services/MemberApiService";
+import { duplicationCheck } from "../../services/ValidateApiService";
+import "../../styles/NicknameEditModal.css";
 
 const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
   const [newNickname, setNewNickname] = useState("");
