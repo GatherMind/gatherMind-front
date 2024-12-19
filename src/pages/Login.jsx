@@ -95,9 +95,9 @@ const Login = () => {
             )}
           </div>
           {loginError && (
-            <p className="login-confirm-error-message">{loginError}</p>
+            <p className="error-message login-confirm-error-message">{loginError}</p>
           )}
-          <button id="login-button" type="submit">
+          <button id="login-button" className="submit-button" type="submit">
             로그인
           </button>
         </form>

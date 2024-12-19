@@ -295,7 +295,7 @@ const SignUp = () => {
             </div>
 
             {errors.form && <p className="error-message">{errors.form}</p>}
-            <button id="signup-button" type="submit">
+            <button id="signup-button" className="submit-button" type="submit">
               회원가입
             </button>
           </form>

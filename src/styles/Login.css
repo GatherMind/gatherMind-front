@@ -57,6 +57,8 @@ footer > p > span {
 
 .form-group > .error-message,
 .login-confirm-error-message {
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   color: rgb(211, 47, 47);
   background: rgb(253, 236, 234);

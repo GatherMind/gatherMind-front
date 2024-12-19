@@ -59,11 +59,12 @@
 }
 
 .mygrouplist {
-  margin: 10px;
+  margin: 10px 0px;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  box-sizing: border-box;
   gap: 5px;
   width: 100%;
   align-items: flex-start;
@@ -109,6 +110,7 @@
   background-color: #ffffff;
   text-align: left;
   justify-content: left;
+  border: var(--btn-error-border);
 }
 
 .group {
@@ -241,6 +243,7 @@
 }
 
 .btn-component {
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   color: var(--main-color);
@@ -366,13 +369,13 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 확대 */
   }
 
-  .status.CLOSED {
+  .status.CLOSED, .status.OPEN {
     position: absolute;
     top: 0;
     left: 0;
     margin: 5px;
     margin-top: 5px; /* Fixed typo */
-    border-radius: var(--border-radius);
+    border-radius: 30px;
     font-size: calc(12px + 0.5vw); /* Responsive font size */
     width: auto; /* Adjusts to content */
     background-color: var(--completed-color);
@@ -385,20 +388,6 @@
     color: var(--completed-text-hover);
     transition: background-color var(--transition-speed),
       color var(--transition-speed);
-  }
-
-  .status.OPEN {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 5px;
-    margin-top: 5px; /* Fixed typo */
-    font-size: calc(12px + 0.5vw); /* Responsive font size */
-    width: auto; /* Adjusts to content */
-    border-radius: var(--border-radius);
-    color: var(--recruiting-text-color);
-    background-color: #ffffff;
-    color: var(--main-color);
   }
 
   /* Hover effect for recruiting badge */
@@ -415,6 +404,7 @@
     padding: 2px 8px;
     font-size: 14px;
     width: auto;
+    height: 20px;
     min-width: 90px; /* Ensures it doesn’t shrink too much */
     text-align: center;
     letter-spacing: 0.5px;
