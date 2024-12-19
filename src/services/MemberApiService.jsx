@@ -138,7 +138,7 @@ export const getAnswerCount = async () => {
 };
 
 // 최근 답변 가져오기 (최대 3개)
-export const getRecentAnswerLimit3 = async () => {
+export const getAnswerList = async () => {
   try {
     const response = await axios.get(`${API_URL}/recent-answers`, {
       headers: {
@@ -153,7 +153,7 @@ export const getRecentAnswerLimit3 = async () => {
 };
 
 // 최근 질문 가져오기 (최대 3개)
-export const getRecentQuestionLimit3 = async () => {
+export const getQuestionList = async () => {
   try {
     const response = await axios.get(`${API_URL}/recent-questions`, {
       headers: {

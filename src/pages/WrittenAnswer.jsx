@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   getAnswerCount,
   getMemberByToken,
-  getRecentAnswerLimit3,
+  getAnswerList,
 } from "../services/MemberApiService";
 import "../styles/WrittenAnswer.css";
 import { deleteAnswer } from "../services/AnswerApiService";
@@ -29,8 +29,8 @@ const WrittenAnswer = () => {
 
         await getMemberByToken();
 
-        const answersResponse = await getRecentAnswerLimit3();
-        setRecentAnswers(answersResponse.data.slice(0, 3));
+        const answersResponse = await getAnswerList();
+        setRecentAnswers(answersResponse.data);
 
       } catch (error) {
         console.error("답변 데이터를 불러오는 중 오류가 발생했습니다.", error);
