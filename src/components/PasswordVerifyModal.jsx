@@ -10,7 +10,7 @@ const PasswordVerifyModal = ({ onVerify, onClose }) => {
       alert("비밀번호를 입력해주세요.");
       return;
     }
-    onVerify(password); // 상위 컴포넌트에 비밀번호 전달
+    onVerify(password);
   };
 
   return (

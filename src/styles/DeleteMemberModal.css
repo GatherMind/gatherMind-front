@@ -1,30 +1,83 @@
-.delete-question-message {
-  font-weight: bold;
-  color: rgb(74, 74, 74);
+.delete-check-message {
   margin: 10px 0 20px;
+  color: rgb(74, 74, 74);
+  font-weight: bold;
 }
 
-.modal-actions > button {
-  width: 40%;
-  height: 30px;
-  margin: 0 1%;
+.member-delete-button-box {
+  display: flex;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.member-delete-confirm-button {
+  flex: 0.48;
+  height: 3vh;
+  margin: 0 auto;
   color: white;
-  border: none;
+  background-color: rgb(242, 94, 122);
+  border: 1px solid rgb(242, 94, 122);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.member-delete-confirm-button:hover {
+  background-color: rgb(248, 120, 144);
+  outline: none;
+}
+
+.member-delete-cancel-button {
+  flex: 0.48;
+  height: 3vh;
+  margin: 0 auto;
+  color: rgb(74, 74, 74);
+  background: none;
+  border: 1px solid rgb(221, 221, 221);
   border-radius: 4px;
 }
 
-.modal-actions > button:nth-child(1) {
-  background-color: rgb(255, 0, 0);
+.member-delete-cancel-button:hover {
+  color: white;
+  background-color: rgb(242, 94, 122);
+  outline: none;
+  box-sizing: border-box;
 }
 
-.modal-actions > button:nth-child(1):hover {
-    background-color: rgb(218, 0, 0);
+@media (max-width: 768px) {
+  .delete-check-message {
+    font-size: 16px;
   }
 
-.modal-actions > button:nth-child(2) {
-  background-color: rgb(0, 123, 255);
+  .member-delete-confirm-button {
+    flex: 0.48;
+    height: 4vh;
+    margin: 0 auto;
+    color: white;
+    background-color: rgb(242, 94, 122);
+    border: 1px solid rgb(242, 94, 122);
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .member-delete-confirm-button:hover {
+    background-color: rgb(248, 120, 144);
+    outline: none;
+  }
+  
+  .member-delete-cancel-button {
+    flex: 0.48;
+    height: 4vh;
+    margin: 0 auto;
+    color: rgb(74, 74, 74);
+    background: none;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px;
+  }
+  
+  .member-delete-cancel-button:hover {
+    color: white;
+    background-color: rgb(242, 94, 122);
+    outline: none;
+    box-sizing: border-box;
+  }
 }
-
-.modal-actions > button:nth-child(2):hover {
-    background-color: rgb(0, 86, 179);
-  }

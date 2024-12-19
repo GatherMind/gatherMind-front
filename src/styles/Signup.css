@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -62,7 +63,10 @@
     margin-top: 3vh;
     height: 5vh;
     padding: 0;
+    color: white;
     background-color: rgb(242, 94, 122);
+    border: none;
+    border-radius: 4px;
   }
 
   #signup-button:hover {
@@ -133,7 +137,10 @@
     margin-top: 3vh;
     height: 5vh;
     padding: 0;
+    color: white;
     background-color: rgb(242, 94, 122);
+    border: none;
+    border-radius: 4px;
   }
 
   #signup-button:hover {

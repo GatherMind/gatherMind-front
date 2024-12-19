@@ -24,7 +24,7 @@
 
   .mypage-study-nav > li {
     width: 25%;
-    margin: 20px auto 10px;
+    margin: 20px auto 30px;
     padding: 10px;
     border-bottom: 4px solid rgb(0, 0, 0);
     cursor: pointer;
@@ -35,7 +35,7 @@
     border-bottom: 4px solid rgb(242, 94, 122);
   }
 
-  .study-page-name {
+  #study-page-name {
     display: none;
   }
 
@@ -110,9 +110,9 @@
     border-bottom: 4px solid rgb(242, 94, 122);
   }
 
-  .study-page-name {
+  #study-page-name {
     width: 100%;
-    margin: 30px auto;
+    margin: 30px auto 60px;
     padding: 40px 50px;
     color: white;
     text-align: left;

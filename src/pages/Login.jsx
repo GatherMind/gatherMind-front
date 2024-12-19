@@ -15,11 +15,9 @@ const Login = () => {
   const [loginError, setLoginError] = useState(null);
   const { login } = useAuth();
 
-  // 유효성 검사 함수
   const validate = () => {
     const newErrors = {};
 
-    // memberId 유효성 검사
     if (!memberId) {
       newErrors.memberId = "아이디를 입력해주세요.";
     } else if (!/^[a-z0-9]{8,30}$/.test(memberId)) {
@@ -27,7 +25,6 @@ const Login = () => {
         "아이디는 8~30자 이내의 영문 소문자와 숫자만 조합하여 입력해주세요.";
     }
 
-    // password 유효성 검사
     if (!password) {
       newErrors.password = "비밀번호를 입력해주세요.";
     } else if (password.length < 8 || password.length > 255) {
@@ -40,13 +37,11 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // memberId를 소문자로 변환하는 함수
   const handleMemberIdChange = (e) => {
     const lowercaseValue = e.target.value.toLowerCase();
     setMemberId(lowercaseValue);
   };
 
-  // 로그인 요청 함수
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validate()) return;
@@ -54,9 +49,8 @@ const Login = () => {
     try {
       const response = await loginMember(memberId, password);
 
-      // localStorage.setItem("token", response.data.token); // 토큰 저장
       login(response.data.token);
-      navigate("/"); // 로그인 후 메인페이지로 이동
+      navigate("/"); 
     } catch (error) {
       setLoginError("로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.");
       console.error(error);

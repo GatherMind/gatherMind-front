@@ -7,7 +7,6 @@ const PasswordEditModal = ({ onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
-  // 비밀번호 검증
   const validatePassword = (password, confirmPassword) => {
     const error = {};
     if (!password || password.length < 8 || password.length > 255) {
@@ -23,7 +22,6 @@ const PasswordEditModal = ({ onClose }) => {
     return error;
   };
 
-  // 비밀번호 제출
   const handlePasswordSubmit = async () => {
     const error = validatePassword(newPassword, confirmPassword);
     if (Object.keys(error).length > 0) {
@@ -32,7 +30,7 @@ const PasswordEditModal = ({ onClose }) => {
     }
 
     try {
-      await updateMember("password", newPassword); // 새 비밀번호 전송
+      await updateMember("password", newPassword);
       alert("비밀번호가 성공적으로 변경되었습니다.");
       onClose();
     } catch (error) {
@@ -52,7 +50,7 @@ const PasswordEditModal = ({ onClose }) => {
           value={newPassword}
           onChange={(e) => {
             setNewPassword(e.target.value);
-            setErrors({}); // 입력 시 에러 초기화
+            setErrors({}); 
           }}
           placeholder="새 비밀번호 입력"
           className="change-password-input"
@@ -67,7 +65,7 @@ const PasswordEditModal = ({ onClose }) => {
           value={confirmPassword}
           onChange={(e) => {
             setConfirmPassword(e.target.value);
-            setErrors({}); // 입력 시 에러 초기화
+            setErrors({});
           }}
           placeholder="비밀번호 재입력"
           className="change-password-input"

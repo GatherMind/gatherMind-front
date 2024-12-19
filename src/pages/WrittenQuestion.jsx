@@ -9,8 +9,7 @@ import "../styles/WrittenQuestion.css";
 import { deleteQuestion } from "../services/QuestionApiService";
 
 const WrittenQuestion = () => {
-  // State 관리
-  const [recentQuestions, setRecentQuestions] = useState([]); // 최근 질문 목록
+  const [recentQuestions, setRecentQuestions] = useState([]);
   const navigate = useNavigate();
 
   const [counts, setCounts] = useState({
@@ -19,11 +18,9 @@ const WrittenQuestion = () => {
     answerCount: 0,
   });
 
-  // 데이터 가져오기
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
         const [questionResponse] = await Promise.all([getQuestionCount()]);
 
         setCounts({
@@ -32,7 +29,6 @@ const WrittenQuestion = () => {
 
         await getMemberByToken();
 
-        // 최근 질문 가져오기 (최대 3개)
         const questionsResponse = await getRecentQuestionLimit3();
         setRecentQuestions(questionsResponse.data.slice(0, 3));
       } catch (error) {
@@ -43,18 +39,15 @@ const WrittenQuestion = () => {
     fetchQuestions();
   }, []);
 
-  // 질문 수정
   const handleEditQuestion = (questionId, studyId) => {
     navigate(`/edit-question/${questionId}`, { state: { studyId } });
   };
 
-  // 질문 삭제
   const handleDeleteQuestion = async (questionId) => {
     if (window.confirm("정말로 게시글을 삭제하시겠습니까?")) {
       try {
         await deleteQuestion(questionId);
 
-        // 삭제 후 상태 갱신
         setRecentQuestions(
           recentQuestions.filter(
             (question) => question.questionId !== questionId
@@ -102,7 +95,7 @@ const WrittenQuestion = () => {
       </ul>
 
       <main>
-        <h1 className="question-page-name">
+        <h1 id="question-page-name">
           내 게시글 목록 &#40; {counts.questionCount} &#41; &#45; 사람을
           판단하려면 그의 대답이 아니라 질문을 보라.
         </h1>

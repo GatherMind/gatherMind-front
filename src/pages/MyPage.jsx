@@ -29,14 +29,13 @@ const Mypage = () => {
     answerCount: 0,
   });
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 탈퇴 모달 상태
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isPasswordVerifyModalOpen, setIsPasswordVerifyModalOpen] =
-    useState(false); // 비밀번호 검증 모달 상태
+    useState(false);
   const [isNicknameEditModalOpen, setIsNicknameEditModalOpen] = useState(false);
   const [isPasswordEditModalOpen, setIsPasswordEditModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  // 회원 정보 및 통계 가져오기
   useEffect(() => {
     const fetchMemberInfo = async () => {
       const token = localStorage.getItem("token");
@@ -85,15 +84,15 @@ const Mypage = () => {
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
     } finally {
-      setIsDeleteModalOpen(false); // 모달 닫기
+      setIsDeleteModalOpen(false); 
     }
   };
 
   const handlePasswordVerify = async (password) => {
     try {
-      const isValid = await PasswordVerify(password); // 검증 API 호출
+      const isValid = await PasswordVerify(password); 
       if (isValid) {
-        setIsPasswordVerifyModalOpen(false); // 비밀번호 검증 모달 닫기
+        setIsPasswordVerifyModalOpen(false); 
         setIsPasswordEditModalOpen(true);
       } else {
         alert("비밀번호가 일치하지 않습니다.");
@@ -129,7 +128,7 @@ const Mypage = () => {
           댓글
         </li>
       </ul>
-      <h1 className="mypage-page-name">
+      <h1 id="mypage-page-name">
         내 정보 &#45; 성공하겠다는 의지가 강한 사람에게는 결코 실패란 없다.
       </h1>
       <section className="mypage-my-info-box">
@@ -181,28 +180,24 @@ const Mypage = () => {
       >
         회원탈퇴
       </button>
-      {/* 닉네임 수정 모달 */}
       {isNicknameEditModalOpen && (
         <NicknameEditModal
           currentNickname={memberInfo.nickname}
           onClose={() => setIsNicknameEditModalOpen(false)}
         />
       )}
-      {/* 비밀번호 검증 모달 */}
       {isPasswordVerifyModalOpen && (
         <PasswordVerifyModal
           onVerify={handlePasswordVerify}
           onClose={() => setIsPasswordVerifyModalOpen(false)}
         />
       )}
-      {/* 탈퇴 모달 */}
       {isDeleteModalOpen && (
         <DeleteMemberModal
           onDelete={handleDeleteAccount}
           onCancel={() => setIsDeleteModalOpen(false)}
         />
       )}
-      {/* 비밀번호 수정 모달 */}
       {isPasswordEditModalOpen && (
         <PasswordEditModal onClose={() => setIsPasswordEditModalOpen(false)} />
       )}

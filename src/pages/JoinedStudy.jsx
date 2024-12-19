@@ -10,29 +10,23 @@ import "../styles/JoinedStudy.css";
 import { withdrawStudyMember } from "../services/StudyMemberApiService";
 
 const JoinedStudy = () => {
-  const [joinedGroups, setJoinedGroups] = useState([]); // 가입한 스터디 목록
-  const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" }); // 회원 정보
+  const [joinedGroups, setJoinedGroups] = useState([]);
+  const [memberInfo, setMemberInfo] = useState({ nickname: "Undefined" });
   const navigate = useNavigate();
-  const { authToken } = useAuth(); // 인증 토큰
+  const { authToken } = useAuth();
 
   const [counts, setCounts] = useState({
     studyCount: 0,
   });
-
-  // 데이터 가져오기
   useEffect(() => {
     const fetchActivityData = async () => {
       try {
-        // API 호출
         const groupResponse = await getMyStudy(authToken);
-        // const response = await getMyInfo(authToken);
         const response = await getMemberByToken();
 
-        // 상태 업데이트
         setMemberInfo(response.data || {});
         setJoinedGroups(groupResponse.data);
 
-        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
         const [studyResponse] = await Promise.all([getStudyCount()]);
 
         setCounts({
@@ -46,12 +40,10 @@ const JoinedStudy = () => {
     fetchActivityData();
   }, [authToken]);
 
-  // 스터디 탈퇴
   const handleWithdrawFromStudy = async (studyId) => {
     try {
       await withdrawStudyMember(studyId);
 
-      // 탈퇴 후 스터디 목록 갱신
       setJoinedGroups(
         joinedGroups.filter((group) => group.studyId !== studyId)
       );
@@ -92,9 +84,8 @@ const JoinedStudy = () => {
         </li>
       </ul>
 
-      {/* 메인 콘텐츠 */}
       <main>
-        <h1 className="study-page-name">
+        <h1 id="study-page-name">
           내 스터디 목록 &#40; {counts.studyCount} &#41; &#45; 당신 앞에는
           어떠한 장애물도 없다. 망설이는 태도가 가장 큰 장애물이다.
         </h1>

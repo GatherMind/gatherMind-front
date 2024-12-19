@@ -7,9 +7,8 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
   const [newNickname, setNewNickname] = useState("");
   const [errors, setErrors] = useState({});
   const [isNicknameUnique, setIsNicknameUnique] = useState(null);
-  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false); // 닉네임 변경 성공 여부
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
 
-  // 닉네임 검증
   const validateNickname = (value) => {
     if (!value || value.length < 2 || value.length > 20) {
       return "닉네임은 2~20자의 한글, 영문, 숫자만 입력 가능합니다.";
@@ -17,7 +16,6 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
     return null;
   };
 
-  // 닉네임 중복 확인
   const handleNicknameCheck = async () => {
     const error = validateNickname(newNickname);
     if (error) {
@@ -39,7 +37,6 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
     }
   };
 
-  // 닉네임 제출
   const handleNicknameSubmit = async () => {
     const error = validateNickname(newNickname);
     if (error) {
@@ -54,7 +51,7 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
 
     try {
       await updateMember("nickname", newNickname);
-      setIsSubmitSuccess(true); // 닉네임 변경 성공 표시
+      setIsSubmitSuccess(true);
     } catch (error) {
       console.error("닉네임 변경 중 오류 발생:", error);
     }
@@ -63,7 +60,6 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
   return (
     <div className="nickname-edit-modal-container">
       {isSubmitSuccess ? (
-        // 닉네임 변경 성공 모달
         <div className="nickname-edit-modal-content">
           <h2>닉네임 변경 완료</h2>
           <p>
@@ -72,14 +68,13 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
           <button
             onClick={() => {
               onClose();
-              window.location.reload(); // 모달 닫기 및 새로고침
+              window.location.reload(); 
             }}
           >
             확인
           </button>
         </div>
       ) : (
-        // 닉네임 변경 입력 모달
         <div className="nickname-edit-modal-content">
           <h2>닉네임 수정</h2>
           <label className="nickname-edit-modal-label">현재 닉네임</label>

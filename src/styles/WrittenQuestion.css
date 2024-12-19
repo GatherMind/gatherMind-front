@@ -29,7 +29,7 @@
     border-bottom: 4px solid rgb(242, 94, 122);
   }
 
-  .question-page-name {
+  #question-page-name {
     display: none;
   }
 
@@ -104,7 +104,7 @@
     border-bottom: 4px solid rgb(242, 94, 122);
   }
 
-  .question-page-name {
+  #question-page-name {
     width: 100%;
     margin: 30px auto 60px;
     padding: 40px 50px;

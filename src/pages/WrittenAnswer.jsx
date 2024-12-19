@@ -9,8 +9,7 @@ import "../styles/WrittenAnswer.css";
 import { deleteAnswer } from "../services/AnswerApiService";
 
 const WrittenAnswer = () => {
-  // State 관리
-  const [recentAnswers, setRecentAnswers] = useState([]); // 최근 답변 목록
+  const [recentAnswers, setRecentAnswers] = useState([]);
   const navigate = useNavigate();
 
   const [counts, setCounts] = useState({
@@ -19,11 +18,9 @@ const WrittenAnswer = () => {
     answerCount: 0,
   });
 
-  // 데이터 가져오기
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
-        // 가입한 스터디 수, 작성한 질문 수, 작성한 답변 수 가져오기
         const [answerResponse] = await Promise.all([getAnswerCount()]);
 
         setCounts({
@@ -35,10 +32,6 @@ const WrittenAnswer = () => {
         const answersResponse = await getRecentAnswerLimit3();
         setRecentAnswers(answersResponse.data.slice(0, 3));
 
-        // const [response, answersResponse] = await Promise.all([
-        //   getMemberByToken(),
-        //   answersResponse(),
-        // ]);
       } catch (error) {
         console.error("답변 데이터를 불러오는 중 오류가 발생했습니다.", error);
       }
@@ -47,18 +40,15 @@ const WrittenAnswer = () => {
     fetchAnswers();
   }, []);
 
-  // 답변 수정
   const handleEditAnswer = (questionId, studyId) => {
     navigate(`/question-detail/${questionId}`, { state: { studyId } });
   };
 
-  // 답변 삭제
   const handleDeleteAnswer = async (answerId) => {
     if (window.confirm("정말로 답변을 삭제하시겠습니까?")) {
       try {
         await deleteAnswer(answerId);
 
-        // 삭제 후 상태 갱신
         setRecentAnswers(
           recentAnswers.filter((answer) => answer.answerId !== answerId)
         );
@@ -100,7 +90,7 @@ const WrittenAnswer = () => {
         </li>
       </ul>
       <main>
-        <h1 className="answer-page-name">
+        <h1 id="answer-page-name">
           내 댓글 목록 &#40; {counts.answerCount} &#41; &#45; 친구들에게서
           기대하는 것을 친구들에게 베풀어야 한다.
         </h1>
