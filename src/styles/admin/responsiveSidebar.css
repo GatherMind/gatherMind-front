@@ -12,7 +12,7 @@
 /* 사이드바 */
 .sidebar {
   width: 250px; /* 고정된 너비 */
-  background: #0bb5ee; /* 사이드바 배경색 */
+  background: var(--main-color); /* 사이드바 배경색 */
   color: white;
   padding: 20px;
   height: 100vh;
@@ -78,7 +78,7 @@
   top: 100px;
   left: 20px;
   z-index: 1100;
-  background: #0bb5ee;
+  background: var(--main-color);
   color: white;
   border: none;
   padding: 10px 15px;

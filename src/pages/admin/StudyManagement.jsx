@@ -39,9 +39,10 @@ const StudyManagement = () => {
   // 검색 처리
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    const filtered = studies.filter((study) =>
-      study.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
+    const filtered = studies.filter((study) => {
+      const title = study.title?.toLowerCase() || ""; // Fallback to empty string if undefined
+      return title.includes(searchTerm);
+    });
     setFilteredStudies(filtered);
   };
 
@@ -190,24 +191,21 @@ const StudyManagement = () => {
                   study.description
                 )}
               </td>
-              <td>
+              <td className="button-container">
                 {editStudy && editStudy.studyId === study.studyId ? (
-                  <button
-                    className="modify-button"
-                    onClick={handleSaveEditStudy}
-                  >
+                  <button className="button" onClick={handleSaveEditStudy}>
                     저장
                   </button>
                 ) : (
                   <button
-                    className="modify-button"
+                    className="button"
                     onClick={() => handleEditStudy(study)}
                   >
                     수정
                   </button>
                 )}
                 <button
-                  className="delete-button"
+                  className="button-error"
                   onClick={() => handleDelete(study.studyId)}
                 >
                   삭제

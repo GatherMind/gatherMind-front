@@ -39,7 +39,7 @@
 }
 
 .notification-button {
-  background-color: #0288b4;
+  background-color: var(--main-color);
   color: white;
   border: none;
   padding: 10px 15px;
@@ -48,7 +48,7 @@
 }
 
 .notification-button:hover {
-  background-color: #026f94;
+  background-color: var(--main-color-hover);
 }
 
 /* 주요 통계 */
@@ -146,7 +146,7 @@
 
 .action-card button {
   padding: 10px 20px;
-  background-color: #0288b4;
+  background-color: var(--main-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -154,7 +154,7 @@
 }
 
 .action-card button:hover {
-  background-color: #026f94;
+  background-color: var(--main-color-hover);
 }
 
 /* 좁은 화면에서 조정 */

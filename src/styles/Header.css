@@ -37,11 +37,14 @@
 }
 
 .admin-page-btn {
-  width: 130px;
+  width: 80px;
   height: 50px;
   background-color: var(--background-color);
   border: var(--border);
   border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-page-btn {

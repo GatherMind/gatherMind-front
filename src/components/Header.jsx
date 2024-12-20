@@ -35,12 +35,6 @@ export default function Header() {
         {" "}
         <img src={homeicon} alt="HomeIcon" width={130} onClick={handleClick} />
       </div>
-      {isAdmin && (
-        <button className="admin-page-btn" onClick={() => navigate("/admin")}>
-          관리자 페이지
-        </button>
-      )}
-      <div> </div>
 
       <nav className="nav-buttons">
         {isAdmin && (

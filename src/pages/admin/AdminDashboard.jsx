@@ -65,10 +65,10 @@ const AdminDashboard = () => {
       </section>
 
       {/* 그래프 영역 */}
-      <section className="dashboard-charts">
+      {/* <section className="dashboard-charts">
         <h2>사용자 증가 추이</h2>
         <div className="chart-placeholder">[그래프 자리]</div>
-      </section>
+      </section> */}
 
       {/* 빠른 액세스 카드 */}
       <section className="quick-actions">

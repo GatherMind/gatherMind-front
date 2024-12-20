@@ -25,11 +25,16 @@ const ContentManagement = () => {
   // 검색 처리
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    const filtered = contentList.filter(
-      (content) =>
-        content.title.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        content.author.toLowerCase().includes(e.target.value.toLowerCase())
-    );
+
+    const filtered = contentList.filter((content) => {
+      // Ensure content.title and content.author are defined before accessing toLowerCase()
+      const title = content.title?.toLowerCase() || ""; // Fallback to empty string if undefined
+      const author = content.memberId?.toLowerCase() || ""; // Fallback to empty string if undefined
+      const searchTerm = e.target.value.toLowerCase();
+
+      return title.includes(searchTerm) || author.includes(searchTerm);
+    });
+
     setFilteredContent(filtered);
   };
 
@@ -82,9 +87,9 @@ const ContentManagement = () => {
               <td>{content.memberId}</td>
               <td>{content.type}</td>
               <td>{dateFormat(content.createdAt)}</td>
-              <td>
+              <td className="button-container">
                 <button
-                  className="delete-button"
+                  className="button"
                   onClick={() => handleDelete(content.id, content.type)}
                 >
                   삭제

@@ -32,15 +32,11 @@ h1 {
   background-color: #f4f4f4;
 }
 
-.delete-button {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
+tbody .button-container {
+  display: flex;
+  justify-content: center;
 }
 
-.delete-button:hover {
-  background-color: #c0392b;
+tbody .button-container .button {
+  margin: auto;
 }

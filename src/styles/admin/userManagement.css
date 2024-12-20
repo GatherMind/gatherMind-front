@@ -63,20 +63,11 @@ h1 {
   white-space: normal; /* 호버 시 모든 스터디 표시 */
   overflow: visible;
 }
-
-.modify-button,
-.delete-button {
-  padding: 5px 10px;
-  margin-right: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-  transition: background-color 0.2s ease;
+.user-table tbody .button-container {
+  min-width: 120px;
 }
-.modify-button {
+
+/* .modify-button {
   background-color: #3c9ae7;
 }
 
@@ -86,4 +77,4 @@ h1 {
 
 .modify-button:hover {
   background-color: #026f94;
-}
+} */
