@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import greenlighticon from "../assets/greenlighticon.png";
 import redlighticon from "../assets/redlighticon.png";
 
+
 export default function MyStudyList({ MyStudies }) {
   const navigate = useNavigate();
 
