@@ -1,4 +1,3 @@
-
 .mygrouplist{
   margin: 10px;
   padding: 10px;
@@ -9,26 +8,26 @@
   flex-wrap: wrap; 
    width: 100%;
   align-items: flex-start; 
-  border-top: 2px solid rgb(121, 218, 186);
+  border-top: 2px solid rgb(77, 193, 154);
   border-bottom: 2px solid rgb(121, 218, 186);
   height: auto;
 
 }
 .mygroup-card{
 
-  margin:5px; 
-  padding: 5px; 
-  height: auto;
-  width: 30%; 
-
-  display: flex;
-  box-sizing: border-box;
-
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* 두 개의 열 */
+  gap: 16px; /* 박스 간격 */
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
 
   
 
 
-  }
+  
 
   .my-card{
     border-radius: 10px;
