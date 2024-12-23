@@ -5,12 +5,12 @@ import kakaoLoginImage from "../assets/kakao-login.png";
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 const socialLinks = [
-  {
-    id: "google",
-    href: `${API_BASE_URL}/oauth2/authorization/google`,
-    imageSrc: googleLoginImage,
-    alt: "GOOGLE LOGIN",
-  },
+  // {
+  //   id: "google",
+  //   href: `${API_BASE_URL}/oauth2/authorization/google`,
+  //   imageSrc: googleLoginImage,
+  //   alt: "GOOGLE LOGIN",
+  // },
   {
     id: "github",
     href: `${API_BASE_URL}/oauth2/authorization/github`,

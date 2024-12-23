@@ -200,7 +200,6 @@
   font-size: 14px;
   margin-left: 10px;
   text-align: left;
-  height: 100%;
 
   white-space: nowrap; /* 한 줄로 표시 */
   overflow: hidden;
@@ -310,6 +309,7 @@
     margin-right: auto; /* 오른쪽 여백을 자동으로 */
   }
   .group-list {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
