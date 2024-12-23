@@ -31,7 +31,6 @@ const WrittenAnswer = () => {
 
         const answersResponse = await getMyAnswerList();
         setRecentAnswers(answersResponse.data);
-
       } catch (error) {
         console.error("답변 데이터를 불러오는 중 오류가 발생했습니다.", error);
       }
@@ -104,15 +103,17 @@ const WrittenAnswer = () => {
               }
             >
               <div className="study-question-title-answer-content">
-                <p className="answer-study-title">
-                  {truncateText(answer.studyTitle, maxLength)}
-                </p>
-                <p className="answer-question-title">
-                  {truncateText(answer.questionTitle, maxLength)}
-                </p>
                 <p className="answer-answer-content">
                   {truncateText(answer.content, maxLength)}
                 </p>
+                <div className="answer-content-subtitle">
+                  <p className="answer-study-title">
+                    &#91;{truncateText(answer.studyTitle, maxLength)}&#93;
+                  </p>
+                  <p className="answer-question-title">
+                  &#91;{truncateText(answer.questionTitle, maxLength)}&#93;
+                  </p>
+                </div>
               </div>
               <button
                 className="answer-delete-button"

@@ -10,8 +10,6 @@ import {
 import "../styles/Mypage.css";
 import NicknameEditModal from "../components/Modals/NicknameEditModal.jsx";
 import DeleteMemberModal from "../components/Modals/DeleteMemberModal.jsx";
-import PasswordVerifyModal from "../components/Modals/PasswordVerifyModal.jsx";
-import { PasswordVerify } from "../services/AuthApiService";
 import ProfileImage from "../assets/defaultProfile.png";
 import editIcon from "../assets/edit.png";
 import PasswordEditModal from "../components/Modals/PasswordEditModal.jsx";
@@ -30,8 +28,6 @@ const Mypage = () => {
   });
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isPasswordVerifyModalOpen, setIsPasswordVerifyModalOpen] =
-    useState(false);
   const [isNicknameEditModalOpen, setIsNicknameEditModalOpen] = useState(false);
   const [isPasswordEditModalOpen, setIsPasswordEditModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -78,28 +74,12 @@ const Mypage = () => {
   const handleDeleteAccount = async () => {
     try {
       await deleteMember();
-      alert("회원 탈퇴가 완료되었습니다.");
       localStorage.removeItem("token");
       navigate("/goodbye");
     } catch (error) {
       alert("회원 탈퇴에 실패했습니다.");
     } finally {
       setIsDeleteModalOpen(false); 
-    }
-  };
-
-  const handlePasswordVerify = async (password) => {
-    try {
-      const isValid = await PasswordVerify(password); 
-      if (isValid) {
-        setIsPasswordVerifyModalOpen(false); 
-        setIsPasswordEditModalOpen(true);
-      } else {
-        alert("비밀번호가 일치하지 않습니다.");
-      }
-    } catch (error) {
-      console.error(error.message);
-      alert("비밀번호 확인 중 오류가 발생했습니다.");
     }
   };
 
@@ -170,7 +150,7 @@ const Mypage = () => {
       </section>
       <button
         className="mypage-edit-button"
-        onClick={() => setIsPasswordVerifyModalOpen(true)}
+        onClick={() => setIsPasswordEditModalOpen(true)}
       >
         비밀번호 변경
       </button>
@@ -184,12 +164,6 @@ const Mypage = () => {
         <NicknameEditModal
           currentNickname={memberInfo.nickname}
           onClose={() => setIsNicknameEditModalOpen(false)}
-        />
-      )}
-      {isPasswordVerifyModalOpen && (
-        <PasswordVerifyModal
-          onVerify={handlePasswordVerify}
-          onClose={() => setIsPasswordVerifyModalOpen(false)}
         />
       )}
       {isDeleteModalOpen && (

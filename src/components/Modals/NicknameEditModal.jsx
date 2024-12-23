@@ -65,7 +65,7 @@ const NicknameEditModal = ({ currentNickname, onBack, onClose }) => {
           <p>
             <span>{newNickname}</span>님! 닉네임이 성공적으로 변경됐어요!
           </p>
-          <button className="button"
+          <button className="nick-modal-change-complete-button"
             onClick={() => {
               onClose();
               window.location.reload(); 

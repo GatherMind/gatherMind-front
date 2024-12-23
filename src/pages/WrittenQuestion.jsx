@@ -110,11 +110,11 @@ const WrittenQuestion = () => {
               }
             >
               <div className="study-question-title">
-                <p className="question-study-title">
-                  {truncateText(question.studyTitle, maxLength)}
-                </p>
                 <p className="question-question-title">
                   {truncateText(question.title, maxLength)}
+                </p>
+                <p className="question-study-title">
+                  &#91;{truncateText(question.studyTitle, maxLength)}&#93;
                 </p>
               </div>
               <button
