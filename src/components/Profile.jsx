@@ -1,4 +1,4 @@
-import icon from "../assets/profileicon.png";
+import icon from "../assets/defaultProfile.png";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile({ loginData }) {
@@ -11,8 +11,13 @@ export default function Profile({ loginData }) {
   return (
     <div className="profile">
       <div className="profilename">
-        <img alt="" src={icon} onClick={handleclick} /> 반가워요{" "}
-        {loginData.nickname}
+        <img
+          alt=""
+          src={icon}
+          onClick={handleclick}
+          style={{ width: "48px" }}
+        />{" "}
+        반가워요 {loginData.nickname}
         님!
       </div>
     </div>

@@ -91,7 +91,7 @@ export const updateMember = async (field, value) => {
   }
 };
 
-// 회원 정보 수정
+// 회원 정보 삭제
 export const deleteMember = async () => {
   try {
     const response = await axios.delete(`${API_URL}/delete-account`, {

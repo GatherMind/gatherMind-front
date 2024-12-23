@@ -1,20 +1,18 @@
-.mygrouplist{
+.mygrouplist {
   margin: 10px;
   padding: 10px;
-  display: flex; 
+  display: flex;
   flex-direction: row;
-  
-  gap: 5px; 
-  flex-wrap: wrap; 
-   width: 100%;
-  align-items: flex-start; 
+
+  gap: 5px;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: flex-start;
   border-top: 2px solid rgb(77, 193, 154);
   border-bottom: 2px solid rgb(121, 218, 186);
   height: auto;
-
 }
-.mygroup-card{
-
+.mygroup-card {
   display: grid;
   grid-template-columns: 1fr 3fr; /* 두 개의 열 */
   gap: 16px; /* 박스 간격 */
@@ -24,32 +22,21 @@
   border-bottom: 1px solid gray;
 }
 
-  
+.my-card {
+  border-radius: 10px;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+  position: relative;
+  text-align: left;
+  justify-content: left;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
+  transition: box-shadow 0.3s ease;
+}
 
-
-  
-
-  .my-card{
-    border-radius: 10px;
-    padding: 5px;
-    width: 100%;
-    height: 100%;
-    min-height: 60px;
-    position: relative;
-    text-align: left;
-    justify-content: left;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* 미세한 그림자 */
-    transition: box-shadow 0.3s ease;
-     }
-
-
-
-     
-  .btn-name{
-
-
-    margin-top: 30px;
-  }
-  
+.btn-name {
+  margin-top: 30px;
+}

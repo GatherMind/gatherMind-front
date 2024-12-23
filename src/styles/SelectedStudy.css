@@ -11,7 +11,6 @@
 .hotstudy {
   text-align: left;
   color: block;
-  font-family: "Arial", sans-serif; /* 글꼴 설정 */
   font-weight: 800; /* 얇은 글꼴 */
   font-size: 1.25rem; /* 적당한 크기 */
   color: #666; /* 중간 회색 */
@@ -62,6 +61,4 @@
   transform: translateY(-5px); /* 살짝 위로 떠오르는 효과 */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 그림자 강하게 */
   border: 2px solid #f87890;
-
-  
 }

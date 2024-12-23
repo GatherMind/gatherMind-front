@@ -13,7 +13,7 @@
 }
 
 .title {
-  font-family: "Black Han Sans", serif;
+  /* font-family: "Black Han Sans", serif; */
   font-weight: 500;
   font-style: normal;
   font-size: 50px;
@@ -50,7 +50,7 @@
 
   text-align: left;
 
-  font-family: "Black Han Sans", serif;
+  /* font-family: "Black Han Sans", serif; */
   font-weight: 500;
   font-style: normal;
   font-size: 45px;
@@ -213,7 +213,6 @@
 }
 
 .bounce {
-  font-family: "Arial Black", sans-serif;
   font-size: 15px;
   color: var(--main-color);
   text-align: center;
@@ -348,7 +347,8 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1); /* 호버 시 그림자 확대 */
   }
 
-  .status.CLOSED, .status.OPEN {
+  .status.CLOSED,
+  .status.OPEN {
     position: absolute;
     top: 0;
     left: 0;

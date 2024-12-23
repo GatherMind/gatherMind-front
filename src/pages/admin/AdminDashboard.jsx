@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Link를 import
+import { Link, useNavigate } from "react-router-dom"; // Link를 import
 import "../../styles/admin/adminDashboard.css";
 import {
   getContentCount,
   getMemberCount,
   getMemberCount7Day,
 } from "../../services/AdminApiService";
+import { useAuth } from "../../context/AuthContext";
+import { jwtDecode } from "jwt-decode";
 
 const AdminDashboard = () => {
   const [memberCount, setMemberCount] = useState(0);
   const [memberCount7Day, setMemberCount7Day] = useState(0);
   const [contentCount, setContentCount] = useState(0);
 
+  const { authToken } = useAuth();
+
+  const decoded = authToken ? jwtDecode(authToken) : null;
+  const isAdmin = decoded?.role === "ROLE_ADMIN";
+
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!isAdmin) {
+      navigate("/");
+    }
+
     const fetchData = async () => {
       try {
         const [
@@ -34,7 +47,7 @@ const AdminDashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isAdmin, navigate]);
 
   return (
     <>

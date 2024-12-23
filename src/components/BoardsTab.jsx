@@ -49,7 +49,9 @@ const BoardsTab = ({
                 >
                   <div className="board-card-header">
                     <span className="board-number">{boardNumber}</span>
-                    <span className="board-option">[{board.option}]</span>
+                    <span className="board-option">
+                      [{board.questionOption}]
+                    </span>
                   </div>
                   <div className="board-title">{board.title}</div>
                   <div className="board-content">

@@ -161,6 +161,7 @@ const StudyManagement = () => {
       <table className="study-table">
         <thead>
           <tr>
+            <th>카테고리</th>
             <th>스터디 이름</th>
             <th>설명</th>
             <th>작업</th>
@@ -169,9 +170,11 @@ const StudyManagement = () => {
         <tbody>
           {filteredStudies.map((study) => (
             <tr key={study.studyId}>
+              <td>{study.category}</td>
               <td>
                 {editStudy && editStudy.studyId === study.studyId ? (
                   <input
+                    className="modify-title-input"
                     type="text"
                     value={editStudyName}
                     onChange={(e) => setEditStudyName(e.target.value)}
@@ -184,6 +187,7 @@ const StudyManagement = () => {
                 {" "}
                 {editStudy && editStudy.studyId === study.studyId ? (
                   <textarea
+                    className="modify-textarea"
                     value={editStudyDescription}
                     onChange={(e) => setEditStudyDescription(e.target.value)}
                   />
@@ -218,7 +222,7 @@ const StudyManagement = () => {
           ))}
           {filteredStudies.length === 0 && (
             <tr>
-              <td colSpan="3">검색 결과가 없습니다.</td>
+              <td colSpan="4">검색 결과가 없습니다.</td>
             </tr>
           )}
         </tbody>

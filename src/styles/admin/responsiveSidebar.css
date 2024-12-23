@@ -53,7 +53,7 @@
 }
 
 .sidebar ul li a {
-  color: #e0f7fa;
+  color: #ffffff;
   text-decoration: none; /* 기본 상태에서 밑줄 제거 */
   display: flex;
   align-items: center;
@@ -62,7 +62,7 @@
 }
 
 .sidebar ul li a .text {
-  color: #e0f7fa;
+  color: #ffffff;
   font-size: 25px;
 }
 
@@ -99,7 +99,7 @@
   }
 
   .sidebar ul li a .text {
-    color: #e0f7fa;
+    color: #ffffff;
     font-size: 15px;
   }
 
