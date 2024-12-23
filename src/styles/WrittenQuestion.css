@@ -36,7 +36,7 @@
   .question-card {
     display: flex;
     justify-content: space-between;
-    width: 70%;
+    width: 90%;
     margin: 0 auto 30px;
     text-align: left;
     border-bottom: 1px solid rgb(74, 74, 74);
@@ -49,7 +49,8 @@
   }
 
   .question-study-title {
-    margin: 5px 0;
+    margin: 5px 0 0 2px;
+    color: rgb(242, 94, 122);
   }
 
   .question-question-title {
@@ -59,7 +60,7 @@
   .question-delete-button {
     width: 60px;
     height: 30px;
-    margin-top: 5px;
+    margin: 7px 0;
     border: 1px solid rgb(74, 74, 74);
     border-radius: 4px;
     background: none;
@@ -130,7 +131,8 @@
   }
 
   .question-study-title {
-    margin: 5px 0;
+    margin: 5px 0 5px 2px;
+    color: rgb(242, 94, 122);
   }
 
   .question-question-title {
@@ -140,7 +142,7 @@
   .question-delete-button {
     width: 50px;
     height: 40px;
-    margin-top: 5px;
+    margin: 5px 0;
     border: 1px solid rgb(74, 74, 74);
     border-radius: 4px;
     background: none;

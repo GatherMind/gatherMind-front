@@ -1,7 +1,13 @@
 import React from "react";
 import "../../styles/DeleteMemberModal.css";
+import { useNavigate } from "react-router-dom";
 
 const DeleteAccountModal = ({ onDelete, onCancel }) => {
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate("/serious");
+  };
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -10,7 +16,7 @@ const DeleteAccountModal = ({ onDelete, onCancel }) => {
         </p>
         <div className="member-delete-button-box">
           <button className="member-delete-confirm-button" onClick={onDelete}>탈퇴</button>
-          <button className="member-delete-cancel-button" onClick={onCancel}>취소</button>
+          <button className="member-delete-cancel-button" onClick={handleCancel}>취소</button>
         </div>
       </div>
     </div>
